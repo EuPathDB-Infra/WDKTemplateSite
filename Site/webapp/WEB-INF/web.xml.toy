@@ -20,7 +20,7 @@
 
   <context-param>
     <param-name>wdkModelConfigXml_param</param-name>
-    <param-value>/WEB-INF/wdk-model/config/toyModelConfig.xml</param-value>
+    <param-value>/WEB-INF/wdk-model/config/toyModel-config.xml</param-value>
   </context-param>
   <context-param>
     <param-name>wdkModelProps_param</param-name>
@@ -37,6 +37,10 @@
   <context-param>
     <param-name>wdkModelParser_param</param-name>
     <param-value>org.gusdb.wdk.model.implementation.ModelXmlParser</param-value>
+  </context-param>
+  <context-param>
+    <param-name>wdkCustomViewDir_param</param-name>
+    <param-value>/customPages/</param-value>
   </context-param>
   <listener>
     <listener-class>org.gusdb.wdk.controller.ApplicationInitListener</listener-class>
@@ -63,7 +67,15 @@
 
   <!-- Error Page Mappings -->
   <error-page>
-    <exception-type>java.lang.Exception</exception-type>
+    <exception-type>java.lang.RuntimeException</exception-type>
+    <location>/error.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.lang.IOException</exception-type>
+    <location>/error.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>javax.servlet.ServletException</exception-type>
     <location>/error.jsp</location>
   </error-page>
 

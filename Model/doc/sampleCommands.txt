@@ -1,31 +1,10 @@
-wdkXml $GUS_HOME/lib/xml/toyModel.xml $GUS_HOME/config/toyModel.prop $GUS_HOME/lib/xml/toyModelConfig.xml
+wdkXml -model toyModel
 
-wdkCache -configFile $GUS_HOME/lib/xml/toyModelConfig.xml -reset
+wdkQuery -model toyModel -query RnaIds.ByDbESTLib 
 
-wdkRecord -configFile $GUS_HOME/lib/xml/toyModelConfig.xml \
--modelXmlFile $GUS_HOME/lib/xml/toyModel.xml \
--modelPropFile $GUS_HOME/config/toyModel.prop \
--recordSetName RnaRecordClasses -recordName RnaRecordClass -primaryKey 92484673
+wdkQuery -model toyModel -query RnaIds.ByDbESTLib -params NumEstLibs 6 ApiTaxon "Neospora caninum"
 
-wdkSummary -configFile $GUS_HOME/lib/xml/toyModelConfig.xml \
--modelXmlFile $GUS_HOME/lib/xml/toyModel.xml \
--modelPropFile $GUS_HOME/config/toyModel.prop \
--summarySetName RnaQuestions -summaryName ByNumSeqs -rows 1 3 \
--params ApiTaxon "Neospora caninum" NumSeqs 50
+wdkRecord -model toyModel -record RnaRecordClasses.RnaRecordClass -primaryKey 92484673
 
-wdkQuery -configFile $GUS_HOME/lib/xml/toyModelConfig.xml \
--modelXmlFile $GUS_HOME/lib/xml/toyModel.xml \
--modelPropFile $GUS_HOME/config/toyModel.prop \
--querySetName RnaRecordTableQueries -queryName ConstituentEsts \
--params primaryKey 92484673    (or 100004)
+wdkSummary -model toyModel -question RnaQuestions.ByNumSeqs -rows 1 20 -params NumSeqs 10 ApiTaxon "Neospora caninum"
 
-wdkQuery -configFile $GUS_HOME/lib/xml/toyModelConfig.xml \
--modelXmlFile $GUS_HOME/lib/xml/toyModel.xml \
--modelPropFile $GUS_HOME/config/toyModel.prop \
--querySetName RnaQueries -queryName ByDbESTLib \
--params NumEstLibs 6 ApiTaxon "Neospora caninum"
-
-wdkSanityTest -configFile $GUS_HOME/lib/xml/toyModelConfig.xml \
--modelPropFile $GUS_HOME/config/toyModel.prop \
--sanityXmlFile $GUS_HOME/lib/xml/toySanityTest.xml \
--modelXmlFile $GUS_HOME/lib/xml/toyModel.xml
