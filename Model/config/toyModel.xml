@@ -115,19 +115,22 @@
     <!-- RNA recordClasses -->
     <recordClassSet name="RnaRecordClasses">
 
-        <recordClass idPrefix="DT." name="RnaRecordClass" type="DoTS Transcript">
+        <recordClass idPrefix="TR." name="RnaRecordClass" type="Toy RNA">
             <attributeQueryRef ref="RnaAttributes.GeneAttrs"/>  
             <attributeQueryRef ref="RnaAttributes.AssemblyAttrs"/>
 
             <tableQueryRef ref="RnaTables.ConstituentEsts"/>
 
             <linkAttribute name="taxonLink" displayName="Taxon"
-                           visible="$$taxon_name$$"
-                           url="http://Taxon.org/taxon_id=$$taxon_name$$"/>
+                           visible="$$taxon_name$$">
+                 <url>
+                    <![CDATA[@TAXON_URL@]]>
+                 </url>
+            </linkAttribute>
 
             <textAttribute name="overview" displayName="Overview">
                 <text>
-                    Transcript $$primaryKey$$ is from $$taxon_name$$.
+                    RNA $$primaryKey$$ is from $$taxon_name$$.
                 </text>
             </textAttribute>
         </recordClass>
@@ -256,17 +259,21 @@
     <querySet name="RnaTables">
         <sqlQuery name="ConstituentEsts" displayName="Constituent ESTs">
             <paramRef ref="params.primaryKey"/>
-            <linkColumn displayName="EST" name="EST" 
-                        visible="$$na_sequence_id$$"
-                        url="@EST_URL@"/>
-            <column displayName="EST Id" name="na_sequence_id" isInternal="true"/>
-            <column displayName="Assembly Sequence Id" name="assembly_sequence_id"/>
+            <column displayName="EST Id" name="est_id"/>
+            <linkColumn displayName="DoTS RNA" name="DoTS" 
+                        visible="$$source_id$$">
+                 <url>
+                    <![CDATA[@DOTS_URL@]]>
+                 </url>
+            </linkColumn>
+            <column displayName="DoTS RNA Id" name="source_id" isInternal="true"/>
             <column displayName="Sequence Start" name="sequence_start"/>
             <column displayName="Sequence End" name="sequence_end"/>
             <column displayName="Quality Start" name="quality_start"/>
             <column displayName="Quality End" name="quality_end" />
             <sql>
-                select aseq.na_sequence_id, aseq.assembly_sequence_id, aseq.sequence_start,
+                select aseq.na_sequence_id as est_id,
+                       'DT.' || a.na_sequence_id as source_id, aseq.sequence_start,
                        aseq.sequence_end, aseq.quality_start, aseq.quality_end
                 from WDKTestAssemblySequence aseq, WDKTestAssembly a
                 where a.na_sequence_id = $$primaryKey$$
@@ -282,10 +289,16 @@
 
         <sqlQuery name="EstAttrs">
             <paramRef ref="params.primaryKey"/>
-            <column displayName="Accession" name="accession"/>
+            <linkColumn displayName="EST" name="EST" 
+                        visible="$$source_id$$">
+                 <url>
+                    <![CDATA[@EST_URL@]]>
+                 </url>
+            </linkColumn>
+            <column displayName="Accession" name="source_id" isInternal="true"/>
             <column displayName="Clone Id" name="clone_id"/>
             <sql>
-                select e.accession, e.clone_id
+                select e.accession as source_id, e.clone_id
                 from WDKTestEst e
                 where e.est_id = $$primaryKey$$
             </sql>
@@ -361,12 +374,11 @@
         <flatVocabParam name="ApiTaxon" 
                         prompt="Organism" 
                         help="Apicomplexon taxons" 
-                        multipick="yes"
+                        multipick="true"
                         queryRef="VocabQueries.ApiTaxon"/>
         <flatVocabParam name="EstLib" 
                         prompt="EST Library" 
                         help="Library from which EST originate" 
-                        multipick="no"
                         queryRef="VocabQueries.EstLib"/>
     </paramSet>
 

@@ -1,9 +1,10 @@
 BODY {
 	background: white;
 	color: black;
+        {font-family:Arial, helvetica, sans-serif; font-size:12pt}
 }
 
-H1 { color: #ec0a0c }
+H1 { color: darkblue }
 
 EM {
     color: red;
