@@ -20,7 +20,7 @@
 
   <context-param>
     <param-name>wdkModelConfigXml_param</param-name>
-    <param-value>/WEB-INF/wdk-model/config/toyModelConfig.xml</param-value>
+    <param-value>/WEB-INF/wdk-model/config/toyModel-config.xml</param-value>
   </context-param>
   <context-param>
     <param-name>wdkModelProps_param</param-name>
