@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wdkModel name="toyModel">
+<wdkModel name="toyModel" displayName="GUS Web Development Kit Demo">
 
     <!-- ******************* -->
     <!-- model introduction  -->
@@ -36,7 +36,7 @@
         </description>
 
         <question name="ByNumSeqs" 
-                  displayName="RNAs by number of assembly sequences" 
+                  displayName="Find RNAs by number of assembly sequences" 
                   queryRef="RnaIds.ByNumSeqs" 
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
@@ -46,7 +46,7 @@
         </question>
 
         <question name="ByDbESTLib" 
-                  displayName="RNAs by number of EST libs"
+                  displayName="Find RNAs by number of EST libs"
                   queryRef="RnaIds.ByDbESTLib" 
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
