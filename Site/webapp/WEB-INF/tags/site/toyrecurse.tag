@@ -13,5 +13,5 @@
   <b>${current_depth}</b><br>
   <c:set var="current_depth" value="${current_depth-1}"/>
   <c:set var="current_indent" value="${current_indent+2}"/>
-  <site:toyrecurse current_depth="${current_depth}" current_indent="${current_indent}"/>
+  <!-- site:toyrecurse current_depth="${current_depth}" current_indent="${current_indent}"/ -->
 </c:if>

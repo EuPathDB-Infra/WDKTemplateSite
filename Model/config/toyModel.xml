@@ -37,7 +37,8 @@
 
         <question name="ByNumSeqs" 
                   displayName="Find RNAs by number of assembly sequences" 
-                  queryRef="RnaIds.ByNumSeqs" 
+                  queryRef="RnaIds.ByNumSeqs"
+                  summaryAttributesRef="assembly_consistency,contains_mrna,taxon_name"
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
                 Find RNAs from a given organism that contain more than a 
@@ -115,7 +116,8 @@
     <!-- RNA recordClasses -->
     <recordClassSet name="RnaRecordClasses">
 
-        <recordClass idPrefix="TR." name="RnaRecordClass" type="Toy RNA">
+        <recordClass idPrefix="TR." name="RnaRecordClass" type="Toy RNA"
+            attributeOrdering="assembly_consistency,contains_mrna,taxon_name">
             <attributeQueryRef ref="RnaAttributes.GeneAttrs"/>  
             <attributeQueryRef ref="RnaAttributes.AssemblyAttrs"/>
 
@@ -247,7 +249,7 @@
                        a.contains_mrna,
                        a.number_of_contained_sequences
                 from WDKTestAssembly a, WDKTestTaxonName tn 
-                where a.na_sequence_id = $$primaryKey$$ 
+                where a.na_sequence_id = '$$primaryKey$$' 
                 and a.taxon_id = tn.taxon_id 
             </sql>
         </sqlQuery>
@@ -271,10 +273,11 @@
             <column displayName="Sequence End" name="sequence_end"/>
             <column displayName="Quality Start" name="quality_start"/>
             <column displayName="Quality End" name="quality_end" />
+            <!-- column displayName= "Sequence" name="sequence" / -->
             <sql>
                 select aseq.na_sequence_id as est_id,
                        'DT.' || a.na_sequence_id as source_id, aseq.sequence_start,
-                       aseq.sequence_end, aseq.quality_start, aseq.quality_end
+                       aseq.sequence_end, aseq.quality_start, aseq.quality_end 
                 from WDKTestAssemblySequence aseq, WDKTestAssembly a
                 where a.na_sequence_id = $$primaryKey$$
                 and a.na_sequence_id = aseq.assembly_na_sequence_id
