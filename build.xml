@@ -4,12 +4,26 @@
   <!-- oooooooooooooooooooooooooo  Dependencies  oooooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
 
+  <target name="WDK-Installation">
+    <ant antfile="../WDK/build.xml" target="WDK-Installation">
+      <property name="project" value="WDK"/>
+      <property name="version" value="2.1.2"/>
+    </ant>
+  </target>  
+
+  <target name="WDK-WebInstallation">
+    <ant antfile="../WDK/build.xml" target="WDK-WebInstallation">
+      <property name="project" value="WDK"/>
+      <property name="version" value="2.1.2"/>
+    </ant>
+  </target>  
+
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooooo  Installation  oooooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
 
-  <target name="WDKToySite-Installation" depends="WDKToySite/Model-Installation,
-                                                  WDKToySite/Site-Installation" >
+  <target name="WDKToySite-Installation" depends="WDK-Installation,
+                                                  WDKToySite/Model-Installation" >
 
     <ant target="defaultProjectInstall"/>
   </target>
@@ -24,27 +38,14 @@
     </ant>
   </target>
 
-  <target name="WDKToySite/Site-Installation" depends="ProjectTree">
-    <ant target="defaultComponentInstall">
-      <property name="project" value="WDKToySite"/>
-      <property name="component" value="Site"/>
-    </ant>
-  </target>
-
-
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooo  Web Installation  oooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
 
-  <target name="WDKToySite-WebInstallation" depends="WebitePlusGusHome">
+  <target name="WDKToySite-WebInstallation" depends="WDKToySite-Installation,
+                                                     WDK-WebInstallation,
+                                                     WDKToySite/Site-WebInstallation">
  </target>
-
-  <target name="WDKToySite/Model-WebInstallation" depends="ProjectTree">
-    <ant target="defaultWebComponentInstall">
-      <property name="project" value="WDKToySite"/>
-      <property name="component" value="Model"/>
-    </ant>
-  </target>
 
   <target name="WDKToySite/Site-WebInstallation" depends="ProjectTree">
     <ant target="defaultWebComponentInstall">
@@ -53,28 +54,6 @@
     </ant>
   </target>
 
-  <target name="WebitePlusGusHome" depends="WDKToySite-Installation,WDKToySite/Model-WebInstallation,WDKToySite/Site-WebInstallation,checkLinks,libLink,configLink,rngLink"/>
-
-  <target name="checkLinks">
-     <available file="${webappTargetDir}/WEB-INF/lib" property="libLinkExists"/>
-     <available file="${webappTargetDir}/WEB-INF/wdk-model/config" property="configLinkExists"/>
-     <available file="${webappTargetDir}/WEB-INF/wdk-model/lib/rng" property="rngLinkExists"/>
-  </target>
-
-  <target name="libLink" unless="libLinkExists">
-    <symlink link="${webappTargetDir}/WEB-INF/lib" resource="${targetDir}/lib/java"/>
-  </target>
-  
-  <target name="configLink" unless="configLinkExists">
-    <mkdir dir="${webappTargetDir}/WEB-INF/wdk-model"/>    
-    <symlink link="${webappTargetDir}/WEB-INF/wdk-model/config" resource="${targetDir}/config"/>
-  </target>
-  
-  <target name="rngLink" unless="rngLinkExists">
-    <mkdir dir="${webappTargetDir}/WEB-INF/wdk-model/lib"/>    
-    <symlink link="${webappTargetDir}/WEB-INF/wdk-model/lib/rng" resource="${targetDir}/lib/rng"/>
-  </target>
-  
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooooooo  Release  ooooooooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
