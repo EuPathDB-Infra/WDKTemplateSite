@@ -38,7 +38,7 @@
         <question name="ByNumSeqs" 
                   displayName="Find RNAs by number of assembly sequences" 
                   queryRef="RnaIds.ByNumSeqs"
-                  summaryAttributesRef="assembly_consistency,contains_mrna,taxon_name"
+                  summaryAttributesRef="assembly_consistency,contains_mrna,taxon_name,sequence"
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
                 Find RNAs from a given organism that contain more than a 
