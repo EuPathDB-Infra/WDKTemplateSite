@@ -38,6 +38,10 @@
     <param-name>wdkModelParser_param</param-name>
     <param-value>org.gusdb.wdk.model.implementation.ModelXmlParser</param-value>
   </context-param>
+  <context-param>
+    <param-name>wdkCustomViewDir_param</param-name>
+    <param-value>/custom_view/</param-value>
+  </context-param>
   <listener>
     <listener-class>org.gusdb.wdk.controller.ApplicationInitListener</listener-class>
   </listener>
