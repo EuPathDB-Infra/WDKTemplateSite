@@ -1,7 +1,8 @@
 BODY {
 	background: white;
 	color: black;
-        {font-family:Arial, helvetica, sans-serif; font-size:12pt}
+        font-family:Arial, helvetica, sans-serif;
+        font-size:12pt
 }
 
 H1 { color: darkblue }
