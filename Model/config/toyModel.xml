@@ -50,13 +50,31 @@
                   queryRef="RnaIds.ByDbESTLib" 
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
-                Find RNAs from a given organism that contain ESTs from more than a specified number of libraries.
+                Find RNAs with required assembly consistency score that
+                contain ESTs from more than a specified number of libraries.
             </description>
         </question>
 
-
     </questionSet>
 
+    <!-- questions that return EST records -->
+    <questionSet name="EstQuestions"
+                 displayName="Queries to find ESTs">
+
+        <description>
+          These queries find ESTs
+        </description>
+
+        <question name="ByEstLib" 
+                  displayName="Find ESTs by originating library" 
+                  queryRef="EstIds.ByEstLib" 
+                  recordClassRef="EstRecordClasses.EstRecordClass">
+            <description>
+                Find ESTs from a given library
+            </description>
+        </question>
+
+    </questionSet>
 
     <!-- *************** -->
     <!-- recordClassSets -->
@@ -115,6 +133,13 @@
         </recordClass>
     </recordClassSet>
 
+    <!-- EST recordClasses -->
+    <recordClassSet name="EstRecordClasses">
+        <recordClass idPrefix="EST." name="EstRecordClass" type="EST">
+            <attributeQueryRef ref="EstAttributes.EstAttrs"/>  
+            <attributeQueryRef ref="EstAttributes.LibAttrs"/>
+        </recordClass>
+    </recordClassSet>
 
     <!-- *************** -->
     <!-- model querySets -->
@@ -157,7 +182,7 @@
       
         <sqlQuery name="ByDbESTLib">
             <paramRef ref="params.NumEstLibs"/>
-            <paramRef ref="params.ApiTaxon"/>
+            <paramRef ref="params.AssemblyConsistency"/>
             <column name="na_sequence_id"/>
             <sql>
                 <!-- use CDATA because query includes angle brackets -->
@@ -169,7 +194,7 @@
                     and est.na_sequence_id = aseq.na_sequence_id 
                     and aseq.assembly_na_sequence_id = a.na_sequence_id
                     and aseq.assembly_na_sequence_id is not NULL 
-                    and a.taxon_id in ($$ApiTaxon$$)
+                    and a.assembly_consistency > $$AssemblyConsistency$$
                     group by aseq.assembly_na_sequence_id 
                     having count (distinct lib.dbest_id) >= $$NumEstLibs$$
                 ]]>
@@ -178,6 +203,20 @@
 
     </querySet>
 
+
+    <!-- Queries that return EST primary keys (for use in questions). -->
+
+    <querySet name="EstIds">
+        <sqlQuery name="ByEstLib">
+            <paramRef ref="params.EstLib"/>
+            <column name="est_id"/>
+            <sql>
+               select distinct e.est_id
+               from WDKTestEst e, WDkTestLibrary l
+               where l.library_id in ($$EstLib$$)
+            </sql>
+        </sqlQuery>  
+    </querySet>
 
     <!-- Queries that retrieve attributes of RNAs -->
     
@@ -237,6 +276,34 @@
     </querySet>
     
 
+    <!-- Queries that retrieve attributes of ESTs -->
+    
+    <querySet name="EstAttributes">
+
+        <sqlQuery name="EstAttrs">
+            <paramRef ref="params.primaryKey"/>
+            <column displayName="Accession" name="accession"/>
+            <column displayName="Clone Id" name="clone_id"/>
+            <sql>
+                select e.accession, e.clone_id
+                from WDKTestEst e
+                where e.est_id = $$primaryKey$$
+            </sql>
+        </sqlQuery>
+
+
+        <sqlQuery name="LibAttrs">
+            <paramRef ref="params.primaryKey"/>
+            <column displayName="DBEST name" name="dbest_name"/>
+            <column displayName="Anatomy Id" name="anatomy_id"/>
+            <sql>
+                select l.dbest_name, l.anatomy_id 
+                from WDKTestEst e, WDKTestLibrary l 
+                where e.est_id = $$primaryKey$$ 
+                and e.library_id = l.library_id 
+            </sql>
+        </sqlQuery>
+    </querySet>
 
     <!-- queries that return controlled vocabulary terms -->
 
@@ -250,6 +317,16 @@
                 from WDKTestTaxonName
                 where name in ('Neospora caninum', 'Plasmodium falciparum', 'Eimeria tenella',
                                'Plasmodium yoelii', 'Sarcocystis neurona', 'Toxoplasma gondii')
+            </sql>
+        </sqlQuery>
+
+        <!-- a query that returns a list of EST Libraries -->
+        <sqlQuery name="EstLib">
+            <column name="term"/>
+            <column name="internal"/>
+            <sql>
+                select distinct dbest_name as term, library_id as internal
+                from WDKTestLibrary
             </sql>
         </sqlQuery>
     </querySet>
@@ -272,13 +349,25 @@
         <stringParam name="NumEstLibs" 
                      prompt="Number of EST Libs" 
                      help="number of distinct libs" 
+                     regex="\d+"
                      sample="3"/>
+
+        <stringParam name="AssemblyConsistency" 
+                     prompt="Assembly consistency score" 
+                     help="on the scale of 0-100" 
+                     regex="100|\d|\d{2}"
+                     sample="95"/>
 
         <flatVocabParam name="ApiTaxon" 
                         prompt="Organism" 
                         help="Apicomplexon taxons" 
                         multipick="yes"
                         queryRef="VocabQueries.ApiTaxon"/>
+        <flatVocabParam name="EstLib" 
+                        prompt="EST Library" 
+                        help="Library from which EST originate" 
+                        multipick="no"
+                        queryRef="VocabQueries.EstLib"/>
     </paramSet>
 
 </wdkModel>
