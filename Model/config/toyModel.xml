@@ -38,7 +38,7 @@
         <question name="ByNumSeqs" 
                   displayName="Find RNAs by number of assembly sequences" 
                   queryRef="RnaIds.ByNumSeqs"
-                  summaryAttributesRef="assembly_consistency,contains_mrna,taxon_name,sequence"
+                  summaryAttributesRef="assembly_consistency,contains_mrna,overview,sequence,taxonLink"
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
                 Find RNAs from a given organism that contain more than a 
@@ -123,14 +123,14 @@
 
             <tableQueryRef ref="RnaTables.ConstituentEsts"/>
 
-            <linkAttribute name="taxonLink" displayName="Taxon"
+            <linkAttribute name="taxonLink" displayName="Taxon" 
                            visible="$$taxon_name$$">
                  <url>
                     <![CDATA[@TAXON_URL@]]>
                  </url>
             </linkAttribute>
 
-            <textAttribute name="overview" displayName="Overview">
+            <textAttribute name="overview" displayName="Overview" truncateToRef="80">
                 <text>
                     RNA $$primaryKey$$ is from $$taxon_name$$.
                 </text>
@@ -244,7 +244,7 @@
             <column displayName="Contains mRNA" name="contains_mrna"/>
             <column displayName="Number contained sequences" name="number_of_contained_sequences"/>
             <textColumn displayName="Nice Num" name="numseqs" text="number of contained seqs is $$number_of_contained_sequences$$"/>
-            <column displayName= "Sequence" name="sequence" />
+            <column displayName="Sequence" truncateToRef="8" name="sequence"/>
             <sql>
                 select a.assembly_consistency, 
                        a.contains_mrna,
