@@ -374,7 +374,7 @@
         <flatVocabParam name="ApiTaxon" 
                         prompt="Organism" 
                         help="Apicomplexon taxons" 
-                        multipick="true"
+                        multiPick="true"
                         queryRef="VocabQueries.ApiTaxon"/>
         <flatVocabParam name="EstLib" 
                         prompt="EST Library" 
