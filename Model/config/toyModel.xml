@@ -244,10 +244,12 @@
             <column displayName="Contains mRNA" name="contains_mrna"/>
             <column displayName="Number contained sequences" name="number_of_contained_sequences"/>
             <textColumn displayName="Nice Num" name="numseqs" text="number of contained seqs is $$number_of_contained_sequences$$"/>
+            <column displayName= "Sequence" name="sequence" />
             <sql>
                 select a.assembly_consistency, 
                        a.contains_mrna,
-                       a.number_of_contained_sequences
+                       a.number_of_contained_sequences,
+                       a.sequence
                 from WDKTestAssembly a, WDKTestTaxonName tn 
                 where a.na_sequence_id = '$$primaryKey$$' 
                 and a.taxon_id = tn.taxon_id 
@@ -273,7 +275,6 @@
             <column displayName="Sequence End" name="sequence_end"/>
             <column displayName="Quality Start" name="quality_start"/>
             <column displayName="Quality End" name="quality_end" />
-            <!-- column displayName= "Sequence" name="sequence" / -->
             <sql>
                 select aseq.na_sequence_id as est_id,
                        'DT.' || a.na_sequence_id as source_id, aseq.sequence_start,
