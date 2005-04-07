@@ -75,7 +75,29 @@
             </description>
         </question>
 
+        <question name="EstNullAttributes" displayName="Question that will return some controversial ESTs!"
+                  queryRef="EstIds.NullAttributeEsts" recordClassRef="EstRecordClasses.EstRecordClass">
+
+             <description>
+                  Question that will return ESTs, some of which have null values for their atttributes
+             </description>
+        </question>
+
     </questionSet>
+
+    <!-- questions for use in nestedRecords and nestedRecordLists -->
+    <questionSet name="NestedRecordQuestions" displayName="Questions for use in NestedRecords" isInternal="true">
+        
+         <question name="RNA" queryRef="RnaIds.EstParent" recordClassRef="RnaRecordClasses.RnaRecordClass" displayName="Nested Record RNA">
+              <description> Question that returns the RNA that belongs to the given EST; for use in a Nested Record </description>
+         </question>
+
+         <question name="ESTs" queryRef="RnaTables.SimpleEstIds" recordClassRef="EstRecordClasses.EstRecordClass" displayName="Nested Record ESTs">
+              <description> Question that returns ESTs that belong to the given RNA; for use in a Nested Record List </description>
+         </question>
+
+    </questionSet>
+
 
     <!-- *************** -->
     <!-- recordClassSets -->
@@ -135,7 +157,10 @@
                     RNA $$primaryKey$$ is from $$taxon_name$$.
                 </text>
             </textAttribute>
-        </recordClass>
+
+            <nestedRecordList questionRef="NestedRecordQuestions.ESTs"/>
+
+         </recordClass>
     </recordClassSet>
 
     <!-- EST recordClasses -->
@@ -143,7 +168,11 @@
         <recordClass idPrefix="EST." name="EstRecordClass" type="EST">
             <attributeQueryRef ref="EstAttributes.EstAttrs"/>  
             <attributeQueryRef ref="EstAttributes.LibAttrs"/>
+            <attributeQueryRef ref="EstAttributes.NullAttrs"/>
+        
+            <nestedRecord questionRef="NestedRecordQuestions.RNA"/>
         </recordClass>
+
     </recordClassSet>
 
     <!-- *************** -->
@@ -166,7 +195,7 @@
     -->
 
 
-    <!-- Queries that return RNA primary keys (for use in questions). -->
+    <!-- Queries that return RNA primary keys (for use in questions and nested records.). -->
 
     <querySet name="RnaIds">
 
@@ -206,6 +235,17 @@
             </sql>
         </sqlQuery>
 
+        <sqlQuery name="EstParent">
+            <paramRef ref="params.na_sequence_id"/>
+            <column name="na_sequence_id"/>
+            <sql>
+                   select a.na_sequence_id
+                   from WDKTestAssembly a, WDKTestAssemblySequence aseq
+                        where aseq.assembly_na_sequence_id = a.na_sequence_id
+                        and aseq.na_sequence_id = $$na_sequence_id$$
+            </sql>
+        </sqlQuery>
+
     </querySet>
 
 
@@ -221,7 +261,20 @@
                where l.library_id in ($$EstLib$$)
             </sql>
         </sqlQuery>  
+    
+        <sqlQuery name="NullAttributeEsts">
+
+            <column name="est_id"/>
+            <sql>
+              <![CDATA[
+               select est_id from WdkTestEst e 
+               where e.est_id > 9244737 and est_id < 9244750
+              ]]>
+            </sql>
+         </sqlQuery>
     </querySet>
+
+    
 
     <!-- Queries that retrieve attributes of RNAs -->
     
@@ -284,6 +337,20 @@
                 and a.na_sequence_id = aseq.assembly_na_sequence_id
             </sql>
         </sqlQuery>
+
+        <sqlQuery name="SimpleEstIds">
+             <paramRef ref="params.primaryKey"/>
+             <column displayName="EST Id" name="est_id"/>
+             
+             <sql>
+                select est.est_id
+                from WDKTestAssemblySequence aseq, WDKTestAssembly a, WDKTestEst est
+                where a.na_sequence_id = $$primaryKey$$
+                and a.na_sequence_id = aseq.assembly_na_sequence_id
+                and est.na_sequence_id = aseq.na_sequence_id
+             </sql>
+        </sqlQuery>
+
     </querySet>
     
 
@@ -299,12 +366,23 @@
                     <![CDATA[@EST_URL@]]>
                  </url>
             </linkColumn>
+            <column displayName="AssemblySeqId" name="na_sequence_id" isInternal="true"/>
             <column displayName="Accession" name="source_id" isInternal="true"/>
-            <column displayName="Clone Id" name="clone_id"/>
             <sql>
-                select e.accession as source_id, e.clone_id
+                select e.accession as source_id, e.na_sequence_id
                 from WDKTestEst e
                 where e.est_id = $$primaryKey$$
+            </sql>
+        </sqlQuery>
+
+        <sqlQuery name="NullAttrs">
+            <paramRef ref="params.primaryKey"/>
+            <column displayName="AssemblyId" name="assembly_id"/>
+            <sql>
+                select a.na_sequence_id as assembly_id
+                from WDKTestEst e, WDKTestAssemblySequence aseq, WdkTestAssembly a
+                where e.est_id = $$primaryKey$$ and e.na_sequence_id = aseq.na_sequence_id
+                and aseq.assembly_na_sequence_id = a.na_sequence_id
             </sql>
         </sqlQuery>
 
@@ -362,6 +440,10 @@
                      prompt="Number of Contained Sequences" 
                      help="number of seqs" 
                      regex="\d+"/>
+
+        <stringParam name="na_sequence_id"
+                     prompt="NestedRecord Param"
+                     help="Only used in a nested record"/>
 
         <stringParam name="NumEstLibs" 
                      prompt="Number of EST Libs" 
