@@ -1,15 +1,13 @@
-WDKToySite Version 1.2
+WDKToySite Version 1.3
 
 Model - Fixed Bugs
 
+   * added questions to test behavior where attribute query return no result
+
 Model - Features
 
-   * Added genetic sequence attributes to a table in the ToyDatabase; toyModel.xml has incorporated it into its queries.
+   * added nested record and nested record list related elements.
    
-   * Revamped regression test data and created new expected result.
-
 Site - Fixed Bugs
 
 Site - Features
-
-   * Added message to the Expanded Query Page reminding user not to use the back button for site navigation
