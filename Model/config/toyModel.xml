@@ -258,7 +258,8 @@
             <sql>
                select distinct e.est_id
                from WDKTestEst e, WDkTestLibrary l
-               where l.library_id in ($$EstLib$$)
+               where e.library_id = l.library_id
+               and l.library_id in ($$EstLib$$)
             </sql>
         </sqlQuery>  
     
