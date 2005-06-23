@@ -27,6 +27,10 @@ tr.rowLight {
 	
 }
 
+tr.rowMedium {
+	background-color: #ffcccc;
+}
+
 tr.rowDark {
 	background-color: #fcd624;
 }
