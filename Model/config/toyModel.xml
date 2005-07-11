@@ -269,7 +269,7 @@
             <sql>
               <![CDATA[
                select est_id from WdkTestEst e 
-               where e.est_id > 9244737 and est_id < 9244750
+               where e.est_id >= 9644231 and est_id <= 9669294
               ]]>
             </sql>
          </sqlQuery>
