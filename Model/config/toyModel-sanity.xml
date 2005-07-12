@@ -4,7 +4,7 @@
 
       <sanityQuery ref="RnaIds.ByDbESTLib" minOutputLength="1" maxOutputLength="100">
            <sanityParam name="NumEstLibs" value="6"/>
-           <sanityParam name="AssemblyConsistency" value="95"/>
+           <sanityParam name="AssemblyConsistency" value="80"/>
       </sanityQuery>
 
       <sanityQuery ref="RnaIds.ByNumSeqs" minOutputLength="1" maxOutputLength="100">
