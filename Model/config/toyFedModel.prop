@@ -2,7 +2,7 @@ PROTEIN_TABLE=180
 DOTS_URL=http://www.allgenes.org/allgenes/servlet?page=rna&id=\\$\\$source_id\\$\\$
 EST_URL=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=nucleotide&term=\\$\\$source_id\\$\\$
 TAXON_URL=http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?name=\\$\\$taxon_name\\$\\$
-DB_LINK_A=
-DB_LINK_B=@test.ctegd.uga.edu
-SCHEMA_A=apicore.
-SCHEMA_B=cryptodots.
+DB_LINK_A=@dblinka.host1.domain.org
+DB_LINK_B=@dblinkb.host2.domain.org
+SCHEMA_A=schema_name_a.
+SCHEMA_B=schema_name_b.
