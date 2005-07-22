@@ -2,11 +2,15 @@ WDKToySite Version 1.3
 
 Model - Fixed Bugs
 
-   * added questions to test behavior where attribute query return no result
+   * fixed bugs of sanity test model, and it now includes all queries defined in toyModel.xml.
+     (However, the null parameter query, EstIds.NullAttributeEsts, will fail in any case
 
 Model - Features
 
-   * added nested record and nested record list related elements.
+   * added one column, row_project_id, into each of thea test table data file
+
+   * provided a new set of configuration files, toyFedModel, which demonstrate the use of
+     federated primary key
    
 Site - Fixed Bugs
 
