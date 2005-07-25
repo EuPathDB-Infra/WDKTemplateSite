@@ -12,10 +12,6 @@
            <sanityParam name="ApiTaxon" value="Neospora caninum"/>
       </sanityQuery>
 
-      <sanityQuery ref="EstIds.ByEstLib" minOutputLength="20000" maxOutputLength="30000">
-           <sanityParam name="EstLib" value="EtH1"/>
-      </sanityQuery>
-
       <sanityQuery ref="EstIds.ByEstLib" minOutputLength="1" maxOutputLength="1000">
            <sanityParam name="EstLib" value="Nc-1 pZ Tachyzoite cDNA Library"/>
       </sanityQuery>

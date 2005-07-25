@@ -422,7 +422,7 @@
             <column name="internal"/>
             <sql>
                 select distinct dbest_name as term, library_id as internal
-                from WDKTestLibrary
+                from WDKTestLibrary where dbest_name like 'N%'
             </sql>
         </sqlQuery>
     </querySet>
