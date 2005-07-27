@@ -284,13 +284,17 @@
         <sqlQuery name="GeneAttrs">
             <paramRef ref="params.primaryKey"/>
             <column displayName="Organism" name="taxon_name"/>
+            <column displayName="Isoform Count" name="isoform_count"/>
             <sql>
-                select tn.name as taxon_name
-                from WDKTestAssembly a, WDKTestTaxonName tn
-                where a.na_sequence_id = $$primaryKey$$ and a.taxon_id = tn.taxon_id
+                select taxon_name, isoform_count
+                from (select a.na_sequence_id, tn.name as taxon_name, count(*) as isoform_count
+                      from WDKTestAssembly a, WDKTestTaxonName tn, WDKTestAssemblySequence aseq
+                      where a.taxon_id = tn.taxon_id
+                      and a.na_sequence_id = aseq.assembly_na_sequence_id
+                      group by a.na_sequence_id, tn.name) tmp
+                where tmp.na_sequence_id = $$primaryKey$$ 
             </sql>
         </sqlQuery>
-
 
         <sqlQuery name="AssemblyAttrs">
             <paramRef ref="params.primaryKey"/>
