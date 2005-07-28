@@ -1,13 +1,14 @@
-WDKToySite Version 1.3
+WDKToySite Version 1.5
 
 Model - Fixed Bugs
 
-   * fixed bugs of sanity test model, and it now includes all queries defined in toyModel.xml.
-     (However, the null parameter query, EstIds.NullAttributeEsts, will fail in any case
+   * fixed bugs of sanity test model, and it now includes all queries (except
+     special cases) defined in toyModel.xml.
+     
 
 Model - Features
 
-   * added one column, row_project_id, into each of thea test table data file
+   * added one column, row_project_id, into each of the test table data file
 
    * provided a new set of configuration files, toyFedModel, which demonstrate the use of
      federated primary key
