@@ -199,7 +199,7 @@
 
     <querySet name="RnaIds">
 
-        <sqlQuery name="ByNumSeqs">
+        <sqlQuery name="ByNumSeqs" isCacheable="true">
             <paramRef ref="params.NumSeqs"/>
             <paramRef ref="params.ApiTaxon"/>
             <column name="na_sequence_id"/>
@@ -281,7 +281,7 @@
     
     <querySet name="RnaAttributes">
 
-        <sqlQuery name="GeneAttrs">
+        <sqlQuery name="GeneAttrs" isCacheable="false">
             <paramRef ref="params.primaryKey"/>
             <column displayName="Organism" name="taxon_name"/>
             <column displayName="Isoform Count" name="isoform_count"/>
