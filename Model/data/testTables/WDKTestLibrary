@@ -1,4 +1,0 @@
-row_project_id number(10) not null,	library_id number(5) not null,	anatomy_id number(4),	dbest_id number(12),	dbest_name varchar(120),	normalized varchar(1)
-10	9602		1699	Nc-1Tachyzoite cDNA	
-10	9603		2487	Neospora caninum Lambda Zap cDNA library	
-10	9605		12342	Nc-1 pZ Tachyzoite cDNA Library	
