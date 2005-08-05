@@ -21,27 +21,27 @@
       <sanityQuery ref="VocabQueries.EstLib" minOutputLength="3" maxOutputLength="30"/>
 
       <sanityQuery ref="RnaAttributes.GeneAttrs" minOutputLength="1" maxOutputLength="1">
-           <sanityParam name="primaryKey" value="92484673"/>
+           <sanityParam name="primaryKey" value="91618406"/>
       </sanityQuery>
 
       <sanityQuery ref="EstAttributes.EstAttrs" minOutputLength="1" maxOutputLength="1">
-           <sanityParam name="primaryKey" value="9644232"/>
+           <sanityParam name="primaryKey" value="9645058"/>
       </sanityQuery>
 
       <sanityQuery ref="RnaAttributes.AssemblyAttrs" minOutputLength="1" maxOutputLength="1">
-           <sanityParam name="primaryKey" value="92484673"/>
+           <sanityParam name="primaryKey" value="91618406"/>
       </sanityQuery>
 
       <sanityQuery ref="EstAttributes.LibAttrs" minOutputLength="1" maxOutputLength="1">
-           <sanityParam name="primaryKey" value="9644232"/>
+           <sanityParam name="primaryKey" value="9645058"/>
       </sanityQuery>
 
       <sanityQuery ref="RnaTables.ConstituentEsts" minOutputLength="1" maxOutputLength="100">
-           <sanityParam name="primaryKey" value="92484673"/>
+           <sanityParam name="primaryKey" value="91618406"/>
       </sanityQuery>
 
-      <sanityRecord ref="RnaRecordClasses.RnaRecordClass" primaryKey="92484673" />
+      <sanityRecord ref="RnaRecordClasses.RnaRecordClass" primaryKey="91618406" />
 
-      <sanityRecord ref="EstRecordClasses.EstRecordClass" primaryKey="9644232" />
+      <sanityRecord ref="EstRecordClasses.EstRecordClass" primaryKey="9645058" />
 
 </sanityModel>

@@ -281,7 +281,7 @@
     
     <querySet name="RnaAttributes">
 
-        <sqlQuery name="GeneAttrs" isCacheable="false">
+        <sqlQuery name="GeneAttrs">
             <paramRef ref="params.primaryKey"/>
             <column displayName="Organism" name="taxon_name"/>
             <column displayName="Isoform Count" name="isoform_count"/>
