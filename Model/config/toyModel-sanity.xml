@@ -12,8 +12,15 @@
            <sanityParam name="ApiTaxon" value="Neospora caninum"/>
       </sanityQuery>
 
+      <sanityQuery ref="RnaIds.EstParent" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="na_sequence_id" value="20271566"/>
+      </sanityQuery>
+
       <sanityQuery ref="EstIds.ByEstLib" minOutputLength="1" maxOutputLength="1000">
            <sanityParam name="EstLib" value="Nc-1 pZ Tachyzoite cDNA Library"/>
+      </sanityQuery>
+
+      <sanityQuery ref="EstIds.NullAttributeEsts" minOutputLength="1" maxOutputLength="10">
       </sanityQuery>
 
       <sanityQuery ref="VocabQueries.ApiTaxon" minOutputLength="3" maxOutputLength="3"/>
@@ -28,6 +35,10 @@
            <sanityParam name="primaryKey" value="9645058"/>
       </sanityQuery>
 
+      <sanityQuery ref="EstAttributes.NullAttrs" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="primaryKey" value="9645058"/>
+      </sanityQuery>
+
       <sanityQuery ref="RnaAttributes.AssemblyAttrs" minOutputLength="1" maxOutputLength="1">
            <sanityParam name="primaryKey" value="91618406"/>
       </sanityQuery>
@@ -38,6 +49,10 @@
 
       <sanityQuery ref="RnaTables.ConstituentEsts" minOutputLength="1" maxOutputLength="100">
            <sanityParam name="primaryKey" value="91618406"/>
+      </sanityQuery>
+
+      <sanityQuery ref="RnaTables.SimpleEstIds" minOutputLength="1" maxOutputLength="100">
+           <sanityParam name="primaryKey" value="92484486"/>
       </sanityQuery>
 
       <sanityRecord ref="RnaRecordClasses.RnaRecordClass" primaryKey="91618406" />
