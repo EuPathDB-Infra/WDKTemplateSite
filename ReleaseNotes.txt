@@ -14,6 +14,8 @@ oooooooooooooooooooooooo  WDKToySite Version 1.6  oooooooooooooooooooooooooooo
 * modified toyModel.xml to reflect test data trimming
   (note: need to re-create cache after installing this version)
 
+* added test cases for all Questions defined (testing summary)
+
 ===================== Site - Fixed Bugs =========================
 
 
