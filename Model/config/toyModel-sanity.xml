@@ -59,28 +59,40 @@
 
       <sanityRecord ref="EstRecordClasses.EstRecordClass" primaryKey="9645058" />
 
-      <sanityQuestion ref="RnaQuestions.ByNumSeqs" minOutputLength="1" maxOutputLength="100">
+      <sanityQuestion ref="RnaQuestions.ByNumSeqs" pageStart="1" pageEnd="20"
+          minOutputLength="1" maxOutputLength="100">
            <sanityParam name="NumSeqs" value="50"/>
            <sanityParam name="ApiTaxon" value="Neospora caninum"/>           
       </sanityQuestion>
 
-      <sanityQuestion ref="RnaQuestions.ByDbESTLib" minOutputLength="1" maxOutputLength="100">
+      <sanityQuestion ref="RnaQuestions.ByNumSeqs" pageStart="18" pageEnd="25"
+          minOutputLength="1" maxOutputLength="100">
+           <sanityParam name="NumSeqs" value="50"/>
+           <sanityParam name="ApiTaxon" value="Neospora caninum"/>           
+      </sanityQuestion>
+
+      <sanityQuestion ref="RnaQuestions.ByDbESTLib" pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="100">
            <sanityParam name="NumEstLibs" value="6"/>
            <sanityParam name="AssemblyConsistency" value="95"/>
       </sanityQuestion>
 
-      <sanityQuestion ref="EstQuestions.ByEstLib" minOutputLength="1" maxOutputLength="1000">
+      <sanityQuestion ref="EstQuestions.ByEstLib" pageStart="2" pageEnd="20"
+         minOutputLength="1" maxOutputLength="1000">
           <sanityParam name="EstLib" value="Nc-1 pZ Tachyzoite cDNA Library"/>
       </sanityQuestion>
 
-      <sanityQuestion ref="EstQuestions.EstNullAttributes" minOutputLength="1" maxOutputLength="10">
+      <sanityQuestion ref="EstQuestions.EstNullAttributes" pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="10">
       </sanityQuestion>
 
-      <sanityQuestion ref="NestedRecordQuestions.RNA" minOutputLength="1" maxOutputLength="1">
+      <sanityQuestion ref="NestedRecordQuestions.RNA" pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="1">
           <sanityParam name="na_sequence_id" value="20271566"/>
       </sanityQuestion>
 
-      <sanityQuestion ref="NestedRecordQuestions.ESTs" minOutputLength="1" maxOutputLength="100">
+      <sanityQuestion ref="NestedRecordQuestions.ESTs" pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="100">
            <sanityParam name="primaryKey" value="92484486"/>
       </sanityQuestion>
 
