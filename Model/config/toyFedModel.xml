@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wdkModel name="toyModel" displayName="GUS Web Development Kit Federation Demo">
+<wdkModel name="toyFedModel" displayName="GUS Web Development Kit Federation Demo">
 
     <!-- ******************* -->
     <!-- model introduction  -->
