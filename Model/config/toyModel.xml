@@ -256,10 +256,16 @@
             <paramRef ref="params.EstLib"/>
             <column name="est_id"/>
             <sql>
-               select distinct e.est_id
+               <!-- union with self for federation simulation -->
+               (select distinct e.est_id
                from WDKTestEst e, WDkTestLibrary l
                where e.library_id = l.library_id
-               and l.library_id in ($$EstLib$$)
+               and l.library_id in ($$EstLib$$))
+               UNION
+               (select distinct e.est_id
+               from WDKTestEst e, WDkTestLibrary l
+               where e.library_id = l.library_id
+               and l.library_id in ($$EstLib$$))
             </sql>
         </sqlQuery>  
     
@@ -374,9 +380,14 @@
             <column displayName="AssemblySeqId" name="na_sequence_id" isInternal="true"/>
             <column displayName="Accession" name="source_id" isInternal="true"/>
             <sql>
-                select e.accession as source_id, e.na_sequence_id
+                <!-- union with self for federation simulation -->
+                (select e.accession as source_id, e.na_sequence_id
                 from WDKTestEst e
-                where e.est_id = $$primaryKey$$
+                where e.est_id = $$primaryKey$$)
+                  UNION
+                (select e.accession as source_id, e.na_sequence_id
+                from WDKTestEst e
+                where e.est_id = $$primaryKey$$)
             </sql>
         </sqlQuery>
 
