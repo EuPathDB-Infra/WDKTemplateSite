@@ -1,0 +1,131 @@
+#!/usr/bin/perl
+
+use strict;
+
+my $testTablesDir = shift;
+
+if (!$testTablesDir) {
+  print STDERR "\n\nusage: trimTestData <testTablesFilesDir>\n\n";
+  exit(1);
+}
+
+# by taxon
+my %downTo = (1124=>500, 2892=>500, 12996=>500);
+
+my $testA = "$testTablesDir/WDKTestAssembly";
+my $testA_tmp = $testA . ".tmp";
+my $testAS = "$testTablesDir/WDKTestAssemblySequence";
+my $testAS_tmp = $testAS . ".tmp";
+my $testENS = "$testTablesDir/WDKTestExternalNaSequence";
+my $testENS_tmp = $testENS . ".tmp";
+my $testEST = "$testTablesDir/WDKTestEst";
+my $testEST_tmp = $testEST . ".tmp";
+my $testLIB = "$testTablesDir/WDKTestLibrary";
+my $testLIB_tmp = $testLIB . ".tmp";
+
+system("mv $testA $testA_tmp");
+system("mv $testAS $testAS_tmp");
+system("mv $testENS $testENS_tmp");
+system("mv $testEST $testEST_tmp");
+system("mv $testLIB $testLIB_tmp");
+
+open(AT, $testA_tmp) or die "could not open $testA_tmp for read: $!";
+open(A, ">$testA") or die "could not open $testA for write: $!";
+my $counter = 0;
+my %countDowns = %downTo;
+my %a_ids;
+while (<AT>) {
+  if ($counter++ == 0) {
+    print A $_;
+  } else {
+    my @fields = split /\t/;
+    my $taxonId = $fields[2];
+    if ($countDowns{$taxonId}) {
+      $countDowns{$taxonId}--;
+      $a_ids{$fields[1]} = 1;
+      print A $_;
+    }
+  }
+}
+close A;
+close AT;
+
+
+open(AST, $testAS_tmp) or die "could not open $testAS_tmp for read: $!";
+open(AS, ">$testAS") or die "could not open $testAS for write: $!";
+$counter = 0;
+my %ens_ids;
+my %as_ids;
+while (<AST>) {
+  if ($counter++ == 0) {
+    print AS $_; 
+  } else {
+    my @fields = split /\t/;
+    if ($a_ids{$fields[2]}) {
+      print AS $_;
+      $ens_ids{$fields[3]} = 1;
+    }
+  }
+}
+close AS;
+close AST;
+
+
+open(ENST, $testENS_tmp) or die "could not open $testENS_tmp for read: $!";
+open(ENS, ">$testENS") or die "could not open $testENS for write: $!";
+$counter = 0;
+while (<ENST>) {
+  if ($counter++ == 0) { 
+    print ENS $_; 
+  } else {
+    my @fields = split /\t/;
+    if ($ens_ids{$fields[1]}) {
+      print ENS $_;
+    }
+  }
+}
+close ENS;
+close ENST;
+
+
+open(ESTT, $testEST_tmp) or die "could not open $testEST_tmp for read: $!";
+open(EST, ">$testEST") or die "could not open $testEST for write: $!";
+$counter = 0;
+my %lib_ids;
+while (<ESTT>) {
+  if ($counter++ == 0) { 
+    print EST $_; 
+  } else {
+    my @fields = split /\t/;
+    if ($ens_ids{$fields[2]}) {
+      print EST $_;
+      $lib_ids{$fields[4]} = 1;
+    }
+  }
+}
+close EST;
+close ESTT;
+
+
+open(LIBT, $testLIB_tmp) or die "could not open $testLIB_tmp for read: $!";
+open(LIB, ">$testLIB") or die "could not open $testLIB for write: $!";
+$counter = 0;
+while (<LIBT>) {
+  if ($counter++ == 0) { 
+    print LIB $_;
+  } else {
+    my @fields = split /\t/;
+    if ($lib_ids{$fields[1]}) {
+      print LIB $_;
+    }
+  }
+}
+close LIB;
+close LIBT;
+
+
+system("rm $testA_tmp");
+system("rm $testAS_tmp");
+system("rm $testENS_tmp");
+system("rm $testEST_tmp");
+system("rm $testLIB_tmp"); 
