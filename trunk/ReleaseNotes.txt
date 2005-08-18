@@ -1,0 +1,44 @@
+------------------------------------------------------------------------------
+oooooooooooooooooooooooo  WDKToySite Version 1.6  oooooooooooooooooooooooooooo
+------------------------------------------------------------------------------
+
+====================  Model - Fixed Bugs ========================
+
+* included some previously missed out query tests
+
+===================== Model - Features ==========================
+
+* trimmed test data so that it now takes about 15 minutes to load test database
+  instead of hours (note: need to re-create test database after installing this version)
+
+* modified toyModel.xml to reflect test data trimming
+  (note: need to re-create cache after installing this version)
+
+* added test cases for all Questions defined (testing summary)
+
+===================== Site - Fixed Bugs =========================
+
+
+===================== Site - Features ===========================
+
+
+------------------------------------------------------------------------------
+oooooooooooooooooooooooo  WDKToySite Version 1.5  oooooooooooooooooooooooooooo
+------------------------------------------------------------------------------
+
+Model - Fixed Bugs
+
+   * fixed bugs of sanity test model, and it now includes all queries (except
+     special cases) defined in toyModel.xml.
+     
+
+Model - Features
+
+   * added one column, row_project_id, into each of the test table data file
+
+   * provided a new set of configuration files, toyFedModel, which demonstrate the use of
+     federated primary key
+   
+Site - Fixed Bugs
+
+Site - Features
