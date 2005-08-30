@@ -15,7 +15,9 @@
 <link rel="StyleSheet" href="<c:url value="/misc/style.css" />" type="text/css">
 </head>
 <body>
-<table width="100%"><tr>
-<td><a href="<c:url value="/" />"><img src="<c:url value="/images/wdkToySiteLogo.gif" />" border="0" alt="Site logo"></a></td>
-<td><h1>${banner}</h1></td></tr></table>
+<table width="100%">
+<tr><td><a href="<c:url value="/" />"><img src="<c:url value="/images/wdkToySiteLogo.gif" />" border="0" alt="Site logo"></a></td>
+    <td><h1>${banner}</h1></td>
+    <td align="right" valign="bottom"><a href='<c:url value="/queryHistory.jsp" />'>Query History</a></td></tr>
+</table>
 <hr>
