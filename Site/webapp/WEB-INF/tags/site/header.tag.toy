@@ -16,8 +16,20 @@
 </head>
 <body>
 <table width="100%">
-<tr><td><a href="<c:url value="/" />"><img src="<c:url value="/images/wdkToySiteLogo.gif" />" border="0" alt="Site logo"></a></td>
-    <td><h1>${banner}</h1></td>
-    <td align="right" valign="bottom"><a href='<c:url value="/queryHistory.jsp" />'>Query History</a></td></tr>
+<tr><td width="15%">
+       <a href="<c:url value="/" />"><img src="<c:url value="/images/wdkToySiteLogo.gif" />"
+          border="0" alt="Site logo"></a></td>
+    <td width="85%">
+       <table border="0" cellpadding="3" width="100%">
+         <tr><td colspan="2" align="center"><h1>${banner}</h1></td></tr>
+         <tr valign="bottom" align="right">
+            <td align="right" valign="bottom">
+              [<a href='<c:url value="/" />'> Questions</a>]
+              [<a href='<c:url value="/queryHistory.jsp" />'>Query History</a>]
+            </td>
+          </tr>
+        </table>
+    </td>
+</tr>
 </table>
 <hr>

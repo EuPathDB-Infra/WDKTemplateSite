@@ -1,4 +1,21 @@
 ------------------------------------------------------------------------------
+oooooooooooooooooooooooo  WDKToySite Version 1.7  oooooooooooooooooooooooooooo
+------------------------------------------------------------------------------
+
+====================  Model - Fixed Bugs ========================
+
+===================== Model - Features ==========================
+
+* Added history sanity test cases (toyModel-history.xml)
+
+===================== Site - Fixed Bugs =========================
+
+* Modified header to add link to query history page
+
+===================== Site - Features ===========================
+
+
+------------------------------------------------------------------------------
 oooooooooooooooooooooooo  WDKToySite Version 1.6  oooooooooooooooooooooooooooo
 ------------------------------------------------------------------------------
 
