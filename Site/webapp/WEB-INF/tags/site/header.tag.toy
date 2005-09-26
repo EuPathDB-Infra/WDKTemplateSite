@@ -25,7 +25,7 @@
          <tr valign="bottom" align="right">
             <td align="right" valign="bottom">
               [<a href='<c:url value="/" />'> Questions</a>]
-              [<a href='<c:url value="/queryHistory.jsp" />'>Query History</a>]
+              [<a href='<c:url value="/showQueryHistory.do" />'>Query History</a>]
             </td>
           </tr>
         </table>
