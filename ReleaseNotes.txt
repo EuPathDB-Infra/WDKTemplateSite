@@ -12,6 +12,8 @@ oooooooooooooooooooooooo  WDKToySite Version 1.7  oooooooooooooooooooooooooooo
 
 * Modified header to add link to query history page
 
+* Also added link to questions page from the header
+
 ===================== Site - Features ===========================
 
 
