@@ -55,9 +55,22 @@
            <sanityParam name="primaryKey" value="92484486"/>
       </sanityQuery>
 
+      <sanityQuery ref="DataDumpQueries.RnaGff" minOutputLength="1000" maxOutputLength="2000">
+      </sanityQuery>
+
+      <sanityQuery ref="DataDumpQueries.RnaGffAttrs" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="primaryKey" value="91618406"/>
+      </sanityQuery>
+
+      <sanityQuery ref="DataDumpQueries.RnaEsts" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="primaryKey" value="91618406"/>
+      </sanityQuery>
+
       <sanityRecord ref="RnaRecordClasses.RnaRecordClass" primaryKey="91618406" />
 
       <sanityRecord ref="EstRecordClasses.EstRecordClass" primaryKey="9645058" />
+
+      <sanityRecord ref="DataDumpRecordClasses.RnaGff" primaryKey="91618406" />
 
       <sanityQuestion ref="RnaQuestions.ByNumSeqs" pageStart="1" pageEnd="20"
           minOutputLength="1" maxOutputLength="100">
@@ -94,6 +107,10 @@
       <sanityQuestion ref="NestedRecordQuestions.ESTs" pageStart="1" pageEnd="20"
          minOutputLength="1" maxOutputLength="100">
            <sanityParam name="primaryKey" value="92484486"/>
+      </sanityQuestion>
+
+      <sanityQuestion ref="DataDumpQuestions.RnaGff" pageStart="1" pageEnd="20"
+         minOutputLength="1000" maxOutputLength="2000">
       </sanityQuestion>
 
 </sanityModel>

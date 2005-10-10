@@ -98,6 +98,19 @@
 
     </questionSet>
 
+    <!-- questions for use in data dumps -->
+    <questionSet displayName="Questions for use in data dumps" isInternal="true" name="DataDumpQuestions">
+
+        <description>
+            These questions are for data dumps
+        </description>
+
+        <question displayName="Find all RNAs" name="RnaGff" queryRef="DataDumpQueries.RnaGff" recordClassRef="DataDumpRecordClasses.RnaGff">
+            <description>This question find all RNAs to dump in GFF format</description>
+        </question>
+
+    </questionSet>
+
 
     <!-- *************** -->
     <!-- recordClassSets -->
@@ -173,6 +186,19 @@
             <nestedRecord questionRef="NestedRecordQuestions.RNA"/>
         </recordClass>
 
+    </recordClassSet>
+
+    <!-- recordClasses for data dumping -->
+    <recordClassSet name="DataDumpRecordClasses">
+
+        <recordClass attributeOrdering="seqid,source,type,fstart,fend,score,strand,phase,attr_id" idPrefix="TR." name="RnaGff" type="Toy RNA">
+
+            <attributeQueryRef ref="DataDumpQueries.RnaGffAttrs"/>
+
+            <tableQueryRef ref="DataDumpQueries.RnaEsts"/>
+
+         </recordClass>
+        
     </recordClassSet>
 
     <!-- *************** -->
@@ -442,6 +468,82 @@
         </sqlQuery>
     </querySet>
 
+
+    <!-- Queries that retrieve attributes or tables for data dumping records -->
+    
+    <querySet name="DataDumpQueries">
+
+        <sqlQuery name="RnaGff" isCacheable="true">
+            <column name="na_sequence_id"/>
+            <sql>
+                <!-- use CDATA because query includes angle brackets -->
+                <![CDATA[
+                    select distinct a.na_sequence_id
+                    from WDKTestAssembly a
+                ]]>
+            </sql>
+        </sqlQuery>  
+
+        <sqlQuery name="RnaGffAttrs">
+            <paramRef ref="params.primaryKey"/>
+            <column displayName="SeqId" name="seqid"/>
+            <column displayName="Data Source" name="source"/>
+            <column displayName="Feature Type" name="type"/>
+            <column displayName="Start" name="fstart"/>
+            <column displayName="Start" name="fend"/>
+            <column displayName="Score" name="score"/>
+            <column displayName="Strand" name="strand"/>
+            <column displayName="Reading Frame" name="phase"/>
+            <column displayName="ID" name="attr_id"/>
+            <column displayName="Name" name="attr_name"/>
+            <column displayName="description" name="attr_description"/>
+            <sql>
+                select 'ChrNNN' as seqid,
+                       'WDKToy' as source,
+                       'toyRNA' as type,
+                       10 * rownum as fstart,
+                       10 * rownum + 5 as fend,
+                       '.' as score, '.' as strand, '.' as phase,
+                       a.na_sequence_id as attr_id,
+                       'aToyRna' as attr_name,
+                       'Rna of taxon ' || taxon_id as attr_description
+                from WDKTestAssembly a
+                where a.na_sequence_id = $$primaryKey$$
+            </sql>
+        </sqlQuery>
+
+        <sqlQuery name="RnaEsts" displayName="Constituent ESTs">
+            <paramRef ref="params.primaryKey"/>
+            <column displayName="SeqId" name="seqid"/>
+            <column displayName="Data Source" name="source"/>
+            <column displayName="Feature Type" name="type"/>
+            <column displayName="Start" name="fstart"/>
+            <column displayName="End" name="fend"/>
+            <column displayName="Score" name="score"/>
+            <column displayName="Strand" name="strand"/>
+            <column displayName="Reading Frame" name="phase"/>
+            <column displayName="ID" name="attr_id"/>
+            <column displayName="Name" name="attr_name"/>
+            <column displayName="Parent" name="attr_parent"/>
+            <column displayName="description" name="attr_description"/>
+            <sql>
+                select 'ChrNNN' as seqid,
+                       'WDKToy' as source,
+                       'toyRNA' as type,
+                       10 * rownum as fstart,
+                       10 * rownum + 5 as fend,
+                       '.' as score, '.' as strand, '.' as phase,
+                       aseq.na_sequence_id as attr_id,
+                       'aToyEst' as attr_name,
+                       a.na_sequence_id as attr_parent,
+                       aseq.sequence_start || ':' || aseq.sequence_end as attr_description
+                from WDKTestAssemblySequence aseq, WDKTestAssembly a
+                where a.na_sequence_id = $$primaryKey$$
+                and a.na_sequence_id = aseq.assembly_na_sequence_id
+            </sql>
+        </sqlQuery>
+
+    </querySet>
 
 
     <!-- parameters used by queries -->
