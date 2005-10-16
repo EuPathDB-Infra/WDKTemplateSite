@@ -113,4 +113,13 @@
          minOutputLength="1000" maxOutputLength="2000">
       </sanityQuestion>
 
+      <sanityXmlQuestion ref="XmlQuestions.NewsQuestion" 
+         pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="100" />
+
+      <sanityXmlQuestion ref="XmlQuestions.NewsQuestion" 
+         pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="100" 
+         xmlData="http://lime.ctegd.uga.edu:8888/news.xml" />
+
 </sanityModel>

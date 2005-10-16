@@ -282,16 +282,10 @@
             <paramRef ref="params.EstLib"/>
             <column name="est_id"/>
             <sql>
-               <!-- union with self for federation simulation -->
-               (select distinct e.est_id
+               select distinct e.est_id
                from WDKTestEst e, WDkTestLibrary l
                where e.library_id = l.library_id
-               and l.library_id in ($$EstLib$$))
-               UNION
-               (select distinct e.est_id
-               from WDKTestEst e, WDkTestLibrary l
-               where e.library_id = l.library_id
-               and l.library_id in ($$EstLib$$))
+               and l.library_id in ($$EstLib$$)
             </sql>
         </sqlQuery>  
     
@@ -406,14 +400,9 @@
             <column displayName="AssemblySeqId" name="na_sequence_id" isInternal="true"/>
             <column displayName="Accession" name="source_id" isInternal="true"/>
             <sql>
-                <!-- union with self for federation simulation -->
-                (select e.accession as source_id, e.na_sequence_id
+                select e.accession as source_id, e.na_sequence_id
                 from WDKTestEst e
-                where e.est_id = $$primaryKey$$)
-                  UNION
-                (select e.accession as source_id, e.na_sequence_id
-                from WDKTestEst e
-                where e.est_id = $$primaryKey$$)
+                where e.est_id = $$primaryKey$$
             </sql>
         </sqlQuery>
 
@@ -585,5 +574,44 @@
                         help="Library from which EST originate" 
                         queryRef="VocabQueries.EstLib"/>
     </paramSet>
+    
+    <!-- Definitions of Xml sources -->
+    
+    <!-- xml question sets -->
+    <xmlQuestionSet name="XmlQuestions"
+                 displayName="Questions that retrieve data from XML data sources">
+
+        <description>
+          These questions retrieve data from XML data sources
+        </description>
+
+        <xmlQuestion name="NewsQuestion" 
+                  displayName="Retrieve news from XML data source" 
+                  recordClassRef="XmlRecordClasses.NewsRecord"
+                  xmlDataURL="http://lime.ctegd.uga.edu:8888/news.xml">
+            <description>
+                Retrieve news from XML data source
+            </description>
+        </xmlQuestion>
+
+    </xmlQuestionSet>
+
+    <!-- xml record class set -->
+    <xmlRecordClassSet name="XmlRecordClasses">
+
+        <xmlRecordClass 
+        	name="NewsRecord" 
+        	type="Toy News"
+        	idPrefix="NEWS."
+        	delimiter="@"
+            	attributeOrdering="date">
+            <xmlAttributeField name="date"/>  
+            <xmlTableField name="people">
+	       <xmlAttributeField name="age"/>
+	       <xmlAttributeField name="size"/>
+	    </xmlTableField>
+         </xmlRecordClass>
+
+    </xmlRecordClassSet>
 
 </wdkModel>

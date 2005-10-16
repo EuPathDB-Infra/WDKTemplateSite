@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xmlAnswer>
+
+   <xmlRecord recordID="1">
+       <xmlAttribute attributeFieldRef="date" value="July 1"/>
+       <xmlTable tableFieldRef="people">
+           <xmlRow>
+             <xmlAttribute attributeFieldRef="age" value="32"/>
+             <xmlAttribute attributeFieldRef="size" value="large" />
+           </xmlRow>
+           <xmlRow>
+             <xmlAttribute attributeFieldRef="age" value="19" />
+             <xmlAttribute attributeFieldRef="size" value="small" />
+           </xmlRow>
+        </xmlTable>
+    </xmlRecord>
+
+   <xmlRecord recordID="2">
+       <xmlAttribute attributeFieldRef="date" value="January 12" />
+       <xmlTable tableFieldRef="people">
+           <xmlRow>
+             <xmlAttribute attributeFieldRef="age" value="32" />
+             <xmlAttribute attributeFieldRef="size" value="large" />
+           </xmlRow>
+           <xmlRow>
+             <xmlAttribute attributeFieldRef="age" value="19" />
+             <xmlAttribute attributeFieldRef="size" value="small" />
+           </xmlRow>
+        </xmlTable>
+    </xmlRecord>
+
+</xmlAnswer>
