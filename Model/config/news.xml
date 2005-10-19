@@ -2,32 +2,32 @@
 
 <xmlAnswer>
 
-   <xmlRecord recordID="1">
-       <xmlAttribute attributeFieldRef="date" value="July 1"/>
-       <xmlTable tableFieldRef="people">
-           <xmlRow>
-             <xmlAttribute attributeFieldRef="age" value="32"/>
-             <xmlAttribute attributeFieldRef="size" value="large" />
-           </xmlRow>
-           <xmlRow>
-             <xmlAttribute attributeFieldRef="age" value="19" />
-             <xmlAttribute attributeFieldRef="size" value="small" />
-           </xmlRow>
-        </xmlTable>
+   <record recordID="1">
+       <attribute attributeFieldRef="date" value="July 1"/>
+       <table tableFieldRef="people">
+           <row>
+             <attribute attributeFieldRef="age" value="32"/>
+             <attribute attributeFieldRef="size" value="large" />
+           </row>
+           <row>
+             <attribute attributeFieldRef="age" value="19" />
+             <attribute attributeFieldRef="size" value="small" />
+           </row>
+        </table>
     </xmlRecord>
 
    <xmlRecord recordID="2">
-       <xmlAttribute attributeFieldRef="date" value="January 12" />
-       <xmlTable tableFieldRef="people">
-           <xmlRow>
-             <xmlAttribute attributeFieldRef="age" value="32" />
-             <xmlAttribute attributeFieldRef="size" value="large" />
-           </xmlRow>
-           <xmlRow>
-             <xmlAttribute attributeFieldRef="age" value="19" />
-             <xmlAttribute attributeFieldRef="size" value="small" />
-           </xmlRow>
-        </xmlTable>
-    </xmlRecord>
+       <attribute attributeFieldRef="date" value="January 12" />
+       <table tableFieldRef="people">
+           <row>
+             <attribute attributeFieldRef="age" value="32" />
+             <attribute attributeFieldRef="size" value="large" />
+           </row>
+           <row>
+             <attribute attributeFieldRef="age" value="19" />
+             <attribute attributeFieldRef="size" value="small" />
+           </row>
+        </table>
+    </record>
 
 </xmlAnswer>
