@@ -129,6 +129,15 @@
                 Retrieve news from XML data source
             </description>
         </xmlQuestion>
+ 
+        <xmlQuestion name="ResourceQuestion" 
+                  displayName="Retrieve resource of PlasmoDB analysis pipeline" 
+                  recordClassRef="XmlRecordClasses.ResourceRecord"
+                  xmlDataURL="resource.xml">
+            <description>
+                Retrieve resource of PlasmoDB analysis pipeline
+            </description>
+        </xmlQuestion>
 
     </xmlQuestionSet>
 
@@ -136,16 +145,24 @@
     <xmlRecordClassSet name="XmlRecordClasses">
 
         <xmlRecordClass 
-              name="NewsRecord" 
-              type="Toy News"
-              idPrefix="NEWS."
-              delimiter="@"
-              attributeOrdering="date">
+        	name="NewsRecord" 
+        	type="Toy News"
+        	idPrefix="NEWS."
+        	delimiter="@">
+            <attributeField name="title"/>  
+            <attributeField name="link"/>  
+            <attributeField name="description"/>  
             <attributeField name="date"/>  
-            <tableField name="people">
-             <attributeField name="age"/>
-             <attributeField name="size"/>
-          </tableField>
+         </xmlRecordClass>
+
+
+        <xmlRecordClass name="ResourceRecord" 
+        	type="PlasmoDB Analysis Pipeline Resource"
+        	idPrefix="RESOURCE."
+        	delimiter="@">
+            <attributeField name="resource"/>  
+            <attributeField name="version"/>  
+            <attributeField name="url"/>  
          </xmlRecordClass>
 
     </xmlRecordClassSet>

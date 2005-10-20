@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xmlAnswer>
+<record recordID="taxonomy">
+<attribute attributeFieldRef="resource" value="taxonomy"/>
+<attribute attributeFieldRef="version" value="2005-10-11"/>
+<attribute attributeFieldRef="url" value="ftp://ftp.ncbi.nih.gov/pub/taxonomy/"/>
+</record>
+<record recordID="SO">
+<attribute attributeFieldRef="resource" value="SO"/>
+<attribute attributeFieldRef="version" value="1.34"/>
+<attribute attributeFieldRef="url" value="http://cvs.sourceforge.net/viewcvs.py/*checkout*/song/ontology/so.obo?rev=1.34"/>
+</record>
+<record recordID="enzymeDB">
+<attribute attributeFieldRef="resource" value="enzymeDB"/>
+<attribute attributeFieldRef="version" value="2005-10-11"/>
+<attribute attributeFieldRef="url" value="ftp://us.expasy.org/databases/enzyme/release_with_updates/"/>
+</record>
+<record recordID="P.falciparum_chromosomes">
+<attribute attributeFieldRef="resource" value="P.falciparum_chromosomes"/>
+<attribute attributeFieldRef="version" value="2005-09-26"/>
+<attribute attributeFieldRef="url" value="ftp://ftp.sanger.ac.uk/pub/pathogens/Plasmodium/falciparum/3D7/3D7.version2.1/"/>
+</record>
+<record recordID="P.vivax_wholeGenomeShotgunSequence">
+<attribute attributeFieldRef="resource" value="P.vivax_wholeGenomeShotgunSequence"/>
+<attribute attributeFieldRef="version" value="2005-09-01"/>
+<attribute attributeFieldRef="url" value="ftp://roos-compbio.bio.upenn.edu/amackey/Pvivax.nt"/>
+</record>
+<record recordID="P.vivax_firstAnnotationSalvador">
+<attribute attributeFieldRef="resource" value="P.vivax_firstAnnotationSalvador"/>
+<attribute attributeFieldRef="version" value="2005-10-18"/>
+<attribute attributeFieldRef="url" value="ftp://roos-compbio2.bio.upenn.edu/amackey/Pvivax.gff2"/>
+</record>
+<record recordID="P.yoelii_wholeGenomeShotgunSequence">
+<attribute attributeFieldRef="resource" value="P.yoelii_wholeGenomeShotgunSequence"/>
+<attribute attributeFieldRef="version" value="2005-10-19"/>
+<attribute attributeFieldRef="url" value="ftp://roos-compbio.bio.upenn.edu/amackey/Pyoelii.nt"/>
+</record>
+<record recordID="P.yoelii_Annotation">
+<attribute attributeFieldRef="resource" value="P.yoelii_Annotation"/>
+<attribute attributeFieldRef="version" value="2005-10-19"/>
+<attribute attributeFieldRef="url" value="ftp://roos-compbio2.bio.upenn.edu/amackey/Pyoelii.gff2"/>
+</record>
+<record recordID="NRDB">
+<attribute attributeFieldRef="resource" value="NRDB"/>
+<attribute attributeFieldRef="version" value="2005-09-29"/>
+<attribute attributeFieldRef="url" value="ftp://ftp.ncbi.nih.gov/blast/db/FASTA/"/>
+</record>
+</xmlAnswer>
