@@ -122,4 +122,8 @@
          minOutputLength="1" maxOutputLength="100" 
          xmlData="news.xml" />
 
+      <sanityXmlQuestion ref="XmlQuestions.ResourceQuestion" 
+         pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="100" />
+
 </sanityModel>
