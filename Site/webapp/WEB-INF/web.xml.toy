@@ -44,7 +44,7 @@
   </context-param>
   <context-param>
     <param-name>wdkXmlDataDir_param</param-name>
-    <param-value>/data/</param-value>
+    <param-value>/WEB-INF/wdk-model/lib/xml/</param-value>
   </context-param>
   <listener>
     <listener-class>org.gusdb.wdk.controller.ApplicationInitListener</listener-class>
