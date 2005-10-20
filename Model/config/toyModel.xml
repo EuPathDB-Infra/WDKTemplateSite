@@ -486,7 +486,7 @@
         <xmlQuestion name="NewsQuestion" 
                   displayName="Retrieve news from XML data source" 
                   recordClassRef="XmlRecordClasses.NewsRecord"
-                  xmlDataURL="http://lime.ctegd.uga.edu:8888/news.xml">
+                  xmlDataURL="news.xml">
             <description>
                 Retrieve news from XML data source
             </description>

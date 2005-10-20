@@ -42,6 +42,10 @@
     <param-name>wdkCustomViewDir_param</param-name>
     <param-value>/customPages/</param-value>
   </context-param>
+  <context-param>
+    <param-name>wdkXmlDataDir_param</param-name>
+    <param-value>/data/</param-value>
+  </context-param>
   <listener>
     <listener-class>org.gusdb.wdk.controller.ApplicationInitListener</listener-class>
   </listener>

@@ -14,9 +14,9 @@
              <attribute attributeFieldRef="size" value="small" />
            </row>
         </table>
-    </xmlRecord>
+    </record>
 
-   <xmlRecord recordID="2">
+   <record recordID="2">
        <attribute attributeFieldRef="date" value="January 12" />
        <table tableFieldRef="people">
            <row>
