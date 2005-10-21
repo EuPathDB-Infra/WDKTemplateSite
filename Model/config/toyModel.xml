@@ -115,14 +115,14 @@
 
     <!-- xml question sets -->
     <xmlQuestionSet name="XmlQuestions"
-                 displayName="Questions that retrieve data from XML data sources">
+                 displayName="Data contents from XML data sources">
 
         <description>
-          These questions retrieve data from XML data sources
+          Data contents from XML data sources
         </description>
 
         <xmlQuestion name="NewsQuestion" 
-                  displayName="Retrieve news from XML data source" 
+                  displayName="News about PlasmoDB" 
                   recordClassRef="XmlRecordClasses.NewsRecord"
                   xmlDataURL="news.xml">
             <description>
@@ -131,11 +131,11 @@
         </xmlQuestion>
  
         <xmlQuestion name="ResourceQuestion" 
-                  displayName="Retrieve resource of PlasmoDB analysis pipeline" 
+                  displayName="Resource of PlasmoDB analysis pipeline" 
                   recordClassRef="XmlRecordClasses.ResourceRecord"
                   xmlDataURL="resource.xml">
             <description>
-                Retrieve resource of PlasmoDB analysis pipeline
+                Resource of PlasmoDB analysis pipeline
             </description>
         </xmlQuestion>
 
