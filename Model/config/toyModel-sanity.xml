@@ -126,4 +126,8 @@
          pageStart="1" pageEnd="20"
          minOutputLength="1" maxOutputLength="100" />
 
+      <sanityXmlQuestion ref="XmlQuestions.CNNNewsQuestion" 
+         pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="100" />
+
 </sanityModel>

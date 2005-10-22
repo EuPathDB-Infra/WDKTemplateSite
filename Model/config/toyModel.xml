@@ -122,18 +122,29 @@
         </description>
 
         <xmlQuestion name="NewsQuestion" 
-                  displayName="News about PlasmoDB" 
+                  displayName="News about CryptoDB" 
                   recordClassRef="XmlRecordClasses.NewsRecord"
                   xmlDataURL="news.xml">
             <description>
                 Retrieve news from XML data source
             </description>
         </xmlQuestion>
+
+        <xmlQuestion name="CNNNewsQuestion" 
+                  displayName="News about PlasmoDB" 
+                  recordClassRef="XmlRecordClasses.NewsRecord"
+                  xmlDataURL="http://rss.cnn.com/rss/cnn_topstories.rss"
+                  xslURL="rss.xsl">
+            <description>
+                Retrieve CNN headline news from XML data source, and converted it on the fly
+            </description>
+        </xmlQuestion>
  
         <xmlQuestion name="ResourceQuestion" 
                   displayName="Resource of PlasmoDB analysis pipeline" 
                   recordClassRef="XmlRecordClasses.ResourceRecord"
-                  xmlDataURL="resource.xml">
+                  xmlDataURL="plasmoResources.xml"
+                  xslURL="short_resource.xsl">
             <description>
                 Resource of PlasmoDB analysis pipeline
             </description>
