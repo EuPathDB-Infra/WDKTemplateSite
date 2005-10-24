@@ -1,3 +1,24 @@
+
+------------------------------------------------------------------------------
+oooooooooooooooooooooooo  WDKToySite Version 1.8  oooooooooooooooooooooooooooo
+------------------------------------------------------------------------------
+
+====================  Model - Fixed Bugs ========================
+
+===================== Model - Features ==========================
+
+* Added GFF3 data dump questions, queries, and sanity test cases
+
+* Added XmlQuestion test data and sanity test cases
+
+===================== Site - Fixed Bugs =========================
+
+
+===================== Site - Features ===========================
+
+* Added link to data content listing page from the header
+
+
 ------------------------------------------------------------------------------
 oooooooooooooooooooooooo  WDKToySite Version 1.7  oooooooooooooooooooooooooooo
 ------------------------------------------------------------------------------
