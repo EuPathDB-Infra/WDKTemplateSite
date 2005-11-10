@@ -38,12 +38,28 @@
         <question name="ByNumSeqs" 
                   displayName="Find RNAs by number of assembly sequences" 
                   queryRef="RnaIds.ByNumSeqs"
-                  summaryAttributesRef="assembly_consistency,contains_mrna,overview,sequence,taxonLink"
+                  summaryAttributes="assembly_consistency,contains_mrna,overview,sequence,taxonLink,score"
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
                 Find RNAs from a given organism that contain more than a 
                 specified number of ESTs in their assembly.
             </description>
+            <dynamicAttributes>
+              <attribute name="score" displayName="Blast score"/>
+              <linkAttribute name="taxonLink2" displayName="Taxon2" 
+                            visible="$$taxon_name$$">
+                 <url>
+                    <![CDATA[@TAXON_URL@]]>
+                 </url>
+              </linkAttribute>
+
+              <textAttribute name="overview2" displayName="Overview2" truncateTo="80">
+                <text>
+                    RNA $$primaryKey$$ is from $$taxon_name$$.
+                </text>
+              </textAttribute>
+
+            </dynamicAttributes>
         </question>
 
         <question name="ByDbESTLib" 
@@ -231,7 +247,7 @@
                  </url>
             </linkAttribute>
 
-            <textAttribute name="overview" displayName="Overview" truncateToRef="80">
+            <textAttribute name="overview" displayName="Overview" truncateTo="80">
                 <text>
                     RNA $$primaryKey$$ is from $$taxon_name$$.
                 </text>
@@ -295,10 +311,11 @@
             <paramRef ref="params.NumSeqs"/>
             <paramRef ref="params.ApiTaxon"/>
             <column name="na_sequence_id"/>
+            <column name="score"/>
             <sql>
                 <!-- use CDATA because query includes angle brackets -->
                 <![CDATA[
-                    select distinct a.na_sequence_id
+                    select distinct a.na_sequence_id, a.number_of_contained_sequences as score
                     from WDKTestAssembly a
                     where a.number_of_contained_sequences > $$NumSeqs$$
                     and a.taxon_id in ($$ApiTaxon$$)
@@ -313,7 +330,7 @@
             <sql>
                 <!-- use CDATA because query includes angle brackets -->
                 <![CDATA[
-                    select distinct aseq.assembly_na_sequence_id as na_sequence_id 
+                    select distinct aseq.assembly_na_sequence_id as na_sequence_id
                     from WDKTestEst est, WDKTestLibrary lib,
                          WDKTestAssemblySequence aseq, WDKTestAssembly a
                     where lib.library_id = est.library_id 
@@ -350,7 +367,7 @@
             <sql>
                <!-- union with self for federation simulation -->
                (select distinct e.est_id
-               from WDKTestEst e, WDkTestLibrary l
+                  from WDKTestEst e, WDkTestLibrary l
                where e.library_id = l.library_id
                and l.library_id in ($$EstLib$$))
                UNION
@@ -400,7 +417,7 @@
             <column displayName="Contains mRNA" name="contains_mrna"/>
             <column displayName="Number contained sequences" name="number_of_contained_sequences"/>
             <textColumn displayName="Nice Num" name="numseqs" text="number of contained seqs is $$number_of_contained_sequences$$"/>
-            <column displayName="Sequence" truncateToRef="8" name="sequence"/>
+            <column displayName="Sequence" truncateTo="8" name="sequence"/>
             <sql>
                 select a.assembly_consistency, 
                        a.contains_mrna,
