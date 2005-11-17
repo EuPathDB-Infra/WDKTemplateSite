@@ -435,7 +435,7 @@
     
     <querySet name="RnaTables">
         <wsQuery name="wsQueryTest" displayName="WS Test" 
-                 serviceUrl="http://plasmodb.org" processName="blast">
+                 processName="NcbiBlastProcessor">
              <wsColumn displayName="EST Id" name="est_id" width="20"/>
              <wsColumn displayName="Score" name="score" width="10"/>
        </wsQuery>
