@@ -434,6 +434,12 @@
     <!-- Queries that retrieve tables belonging to RNAs  -->
     
     <querySet name="RnaTables">
+        <wsQuery name="wsQueryTest" displayName="WS Test" 
+                 serviceUrl="http://plasmodb.org" processName="blast">
+             <wsColumn displayName="EST Id" name="est_id" width="20"/>
+             <wsColumn displayName="Score" name="score" width="10"/>
+       </wsQuery>
+
         <sqlQuery name="ConstituentEsts" displayName="Constituent ESTs">
             <paramRef ref="params.primaryKey"/>
             <column displayName="EST Id" name="est_id"/>
