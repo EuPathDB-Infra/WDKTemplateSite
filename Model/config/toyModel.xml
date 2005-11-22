@@ -28,12 +28,30 @@
 
 
     <!-- questions that return RNA records -->
+
+
     <questionSet name="RnaQuestions"
                  displayName="Queries to find RNAs">
 
         <description>
           These queries find RNAs
         </description>
+
+        <question name="BySimilarity" 
+                  displayName="Find RNAs by blast similarity to input sequences" 
+                  queryRef="RnaIds.BySimilarity"
+                  recordClassRef="RnaRecordClasses.RnaRecordClass">
+            <description>
+                Find RNAs by similarity to input sequence.
+            </description>
+            <dynamicAttributes>
+              <attribute name="Id" displayName="RNA Id"/>
+              <attribute name="TabularRow" displayName="Blast summary"/>
+              <attribute name="Alignment" displayName="Blast alignment"/>
+              <attribute name="Header" displayName="Blast header"/>
+              <attribute name="Footer" displayName="Blast footer"/>
+            </dynamicAttributes>
+        </question>
 
         <question name="ByNumSeqs" 
                   displayName="Find RNAs by number of assembly sequences" 
@@ -306,6 +324,16 @@
     <!-- Queries that return RNA primary keys (for use in questions and nested records.). -->
 
     <querySet name="RnaIds">
+        <wsQuery name="BySimilarity" displayName="WS Test" 
+                 processName="NcbiBlastProcessor">
+             <paramRef ref="params.RnaBlastDatabase"/>
+             <paramRef ref="params.BlastInputSequence"/>             
+             <wsColumn displayName="RNA Id" name="Id" width="20"/>
+             <wsColumn displayName="Blast summary" name="TabularRow" width="1000"/>
+             <wsColumn displayName="Blast alignment" name="Alignment" width="100000"/>
+             <wsColumn displayName="Blast header" name="Header" width="1000"/>
+             <wsColumn displayName="Blast footer" name="Footer" width="1000"/>
+       </wsQuery>
 
         <sqlQuery name="ByNumSeqs" isCacheable="true">
             <paramRef ref="params.NumSeqs"/>
@@ -434,12 +462,6 @@
     <!-- Queries that retrieve tables belonging to RNAs  -->
     
     <querySet name="RnaTables">
-        <wsQuery name="wsQueryTest" displayName="WS Test" 
-                 processName="NcbiBlastProcessor">
-             <wsColumn displayName="EST Id" name="est_id" width="20"/>
-             <wsColumn displayName="Score" name="score" width="10"/>
-       </wsQuery>
-
         <sqlQuery name="ConstituentEsts" displayName="Constituent ESTs">
             <paramRef ref="params.primaryKey"/>
             <column displayName="EST Id" name="est_id"/>
@@ -663,6 +685,16 @@
                      help="on the scale of 0-100" 
                      regex="100|\d|\d{2}"
                      sample="95"/>
+
+        <stringParam name="RnaBlastDatabase" 
+                     prompt="Rna Blast Database" 
+                     help="Rna Blast Database" 
+                     sample="RNAs"/>
+
+        <stringParam name="BlastInputSequence" 
+                     prompt="Blast Input Sequence" 
+                     help="Blast Input Sequence" 
+                     sample=""/>
 
         <flatVocabParam name="ApiTaxon" 
                         prompt="Organism" 
