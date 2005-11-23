@@ -326,8 +326,8 @@
     <querySet name="RnaIds">
         <wsQuery name="BySimilarity" displayName="WS Test" 
                  processName="NcbiBlastProcessor">
-             <paramRef ref="params.RnaBlastDatabase"/>
-             <paramRef ref="params.BlastInputSequence"/>             
+             <paramRef ref="params.Application"/>
+             <paramRef ref="params.Sequence"/>             
              <wsColumn displayName="RNA Id" name="Id" width="20"/>
              <wsColumn displayName="Blast summary" name="TabularRow" width="1000"/>
              <wsColumn displayName="Blast alignment" name="Alignment" width="100000"/>
@@ -686,12 +686,12 @@
                      regex="100|\d|\d{2}"
                      sample="95"/>
 
-        <stringParam name="RnaBlastDatabase" 
+        <stringParam name="Application" 
                      prompt="Rna Blast Database" 
                      help="Rna Blast Database" 
                      sample="RNAs"/>
 
-        <stringParam name="BlastInputSequence" 
+        <stringParam name="Sequence" 
                      prompt="Blast Input Sequence" 
                      help="Blast Input Sequence" 
                      sample=""/>
