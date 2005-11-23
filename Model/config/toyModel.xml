@@ -327,10 +327,11 @@
         <wsQuery name="BySimilarity" displayName="WS Test" 
                  processName="NcbiBlastProcessor">
              <paramRef ref="params.Application"/>
+             <paramRef ref="params.Database"/>             
              <paramRef ref="params.Sequence"/>             
              <wsColumn displayName="RNA Id" name="Id" width="20"/>
              <wsColumn displayName="Blast summary" name="TabularRow" width="1000"/>
-             <wsColumn displayName="Blast alignment" name="Alignment" width="100000"/>
+             <wsColumn displayName="Blast alignment" name="Alignment" width="3000"/>
              <wsColumn displayName="Blast header" name="Header" width="1000"/>
              <wsColumn displayName="Blast footer" name="Footer" width="1000"/>
        </wsQuery>
@@ -687,6 +688,11 @@
                      sample="95"/>
 
         <stringParam name="Application" 
+                     prompt="flavors of blast application" 
+                     help="flavors of blast application" 
+                     sample="blastn"/>
+
+        <stringParam name="Database" 
                      prompt="Rna Blast Database" 
                      help="Rna Blast Database" 
                      sample="RNAs"/>
