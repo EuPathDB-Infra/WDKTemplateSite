@@ -157,7 +157,7 @@
         </description>
 
         <xmlQuestion name="NewsQuestion" 
-                  displayName="News about CryptoDB" 
+                  displayName="Sample News" 
                   recordClassRef="XmlRecordClasses.NewsRecord"
                   xmlDataURL="news.xml">
             <description>
@@ -176,12 +176,12 @@
         </xmlQuestion>
  
         <xmlQuestion name="ResourceQuestion" 
-                  displayName="Resource of PlasmoDB analysis pipeline" 
+                  displayName="Sample Data Sources" 
                   recordClassRef="XmlRecordClasses.ResourceRecord"
-                  xmlDataURL="plasmoResources.xml"
-                  xslURL="short_resource.xsl">
+                  xmlDataURL="sampleResources.xml"
+                  xslURL="resources2records.xsl">
             <description>
-                Resource of PlasmoDB analysis pipeline
+                Sample Data Sources
             </description>
         </xmlQuestion>
 
@@ -195,20 +195,28 @@
         	type="Toy News"
         	idPrefix="NEWS."
         	delimiter="@">
-            <attributeField name="title"/>  
-            <attributeField name="link"/>  
-            <attributeField name="description"/>  
-            <attributeField name="date"/>  
+            <attribute name="headline"/>  
+            <attribute name="date"/>  
+            <attribute name="item"/>
+            <table name="relatedLinks">
+                <column name="displayName"/>
+                <column name="url"/>
+            </table>
          </xmlRecordClass>
 
 
         <xmlRecordClass name="ResourceRecord" 
-        	type="PlasmoDB Analysis Pipeline Resource"
+        	type="PlasmoDB Pipeline Resource"
         	idPrefix="RESOURCE."
         	delimiter="@">
-            <attributeField name="resource"/>  
-            <attributeField name="version"/>  
-            <attributeField name="url"/>  
+            <attribute name="resource"/>  
+            <attribute name="version"/>  
+            <attribute name="publicUrl"/>  
+            <attribute name="category"/>  
+            <attribute name="description"/>
+            <table name="publications">
+               <column name="pmid"/>
+            </table>  
          </xmlRecordClass>
 
     </xmlRecordClassSet>
