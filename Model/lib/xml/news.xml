@@ -3,24 +3,16 @@
 <xmlAnswer>
 
    <record>
-       <attribute attributeFieldRef="title" value="Welcome"/>
-       <attribute attributeFieldRef="link" value="http://cryptodb.org/news/welcome.html"/>
-       <attribute attributeFieldRef="description" value="CryptoDB is now part of an NIH/NIAID funded Bioinformatics Resource Center to provide Apicomplexan Database Resources. This release represents a major upgrade of the database software and as a result we can provide greater search power. We now offer searches by gene and contig name in addition to key word and protein features. Results are displayed graphically and provide additional useful information for each gene or contig. We have added a GBrowse display that allows you to zoom in to the nucleotide level and we have added a comparative GBrowse view comparing C. parvum and C. hominis contigs. Please explore the site and provide feedback and suggestions to help@cryptodb.org."/>
-       <attribute attributeFieldRef="date" value="15:30 Mon, 01 Aug 2005 "/>
+       <attribute name="headline">Girl Eaten by Shark</attribute>
+       <attribute name="date">today</attribute>
+       <attribute name="item">
+       A girl was eaten by a shark today.  However, rescuers were able to save her after causing the shark to regurgitate by showing it a picture of George and Laura Bush kissing.
+       </attribute>
+       <table name="relatedLinks">
+          <row>
+             <attribute name="displayName">CNN</attribute>
+             <attribute name="url">http://www.cnn.com/sharkgirl</attribute>
+          </row>
+       </table>
     </record>
-
-   <record>
-       <attribute attributeFieldRef="title" value="GFF3 Files of Cryptosporidium Genome Features are Available"/>
-       <attribute attributeFieldRef="link" value="http://cryptodb.org/news/gff.html"/>
-       <attribute attributeFieldRef="description" value="CryptoDB is one of NIAID's Bioinformatics Resource Centers (BRC) for Biodefense and Emerging or Re-Emerging Infectious Diseases. As part of our efforts for interoperability among the other BRCs and the research community in general we have released the published Cryptosporidium genome features in standardized GFF3 format. The files may be downloaded via FTP from ftp://ftp.tigr.org/pub/brc/ApiDB/Cryptosporidium/."/>
-       <attribute attributeFieldRef="date" value="15:59 Tue, 16 Aug 2005"/>
-    </record>
-
-   <record>
-       <attribute attributeFieldRef="title" value="Erratum: Chro.rrn021 missing from exon query"/>
-       <attribute attributeFieldRef="link" value="http://cryptodb.org/news/missingexon.html"/>
-       <attribute attributeFieldRef="description" value="C. hominis gene Chro.rrn021 is annotated as having two exons but in CryptoDB release 3.0 this gene is not returned in the query 'Genes With Exon Count'. This error will be fixed in the next release."/>
-       <attribute attributeFieldRef="date" value="12:27 Fri, 30 Sep 2005"/>
-    </record>
-
 </xmlAnswer>

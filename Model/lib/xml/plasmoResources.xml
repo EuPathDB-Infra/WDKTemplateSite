@@ -4,6 +4,9 @@
                    downloadDir="@downloadDir@">
 
   <resource resource="taxonomy" version="2005-10-11" 
+            displayName="NCBI Taxonomy"
+            publicUrl="ftp://ftp.ncbi.nih.gov/pub/taxonomy/"
+            category="Ontology"
             url="ftp://ftp.ncbi.nih.gov/pub/taxonomy/"
             plugin="GUS::Supported::Plugin::LoadTaxon"
             dbCommit="@dbcommit@">
@@ -13,86 +16,12 @@
      <unpack>tar -xf @downloadDir@/taxonomy/taxdump.tar -C @downloadDir@/taxonomy/</unpack>
      <unpack>rm -f @downloadDir@/taxonomy/taxdump.tar</unpack>
      <pluginArgs>--names @downloadDir@/taxonomy/names.dmp --nodes @downloadDir@/taxonomy/nodes.dmp --gencode @downloadDir@/taxonomy/gencode.dmp --merged @downloadDir@/taxonomy/merged.dmp --restart @taxonomy.restart@ --verbose @commit@</pluginArgs>
-  </resource>
-
-  <resource resource="SO" version="1.34"
-            url="http://cvs.sourceforge.net/viewcvs.py/*checkout*/song/ontology/so.obo?rev=1.34"
-            plugin="GUS::Supported::Plugin::InsertSequenceOntologyOBO"
-            dbCommit="@dbcommit@">
-     <wgetArgs>--tries=5 --output-document=so.obo</wgetArgs>
-     <pluginArgs>--inputFile @downloadDir@/SO/so.obo --soVersion 1.34 --soCvsVersion 1.34</pluginArgs>
-  </resource>
-
-  <resource resource="enzymeDB" version="2005-10-11" 
-            url="ftp://us.expasy.org/databases/enzyme/release_with_updates/"
-            plugin="GUS::Community::Plugin::LoadEnzymeDatabase"
-            extDbName="enzymeDB"
-            extDbRlsVer="2005-10-11"
-            dbCommit="@dbcommit@">
-     <wgetArgs>--tries=5 --mirror --no-parent --no-directories --no-host-directories --cut-dirs=3 --accept=enzclass.txt,enzyme.dat</wgetArgs>
-     <pluginArgs>--InPath @downloadDir@/enzymeDB/ --enzymeDbName %EXT_DB_NAME% --enzymeDbRlsVer %EXT_DB_RLS_VER% @commit@</pluginArgs>
-  </resource>
-
-  <resource resource="P.falciparum_chromosomes" version="2005-09-26"
-            url="ftp://ftp.sanger.ac.uk/pub/pathogens/Plasmodium/falciparum/3D7/3D7.version2.1/"
-            plugin="GUS::Supported::Plugin::InsertSequenceFeatures"
-            extDbName="Sanger P. falciparum chromosomes"
-            extDbRlsVer="2005-09-26"
-            extDbRlsDescrip="chromosome version 2.1, 2005-09-26"
-            dbCommit="@dbcommit@">
-     <wgetArgs>--tries=5 --mirror --no-parent --no-directories --no-host-directories --cut-dirs=6 --reject=*.fasta,GeneDB*,*.txt</wgetArgs>
-     <unpack>mkdir @downloadDir@/P.falciparum_chromosomes_fixed</unpack>
-     <unpack>for f in `ls @downloadDir@/P.falciparum_chromosomes`; do cat @downloadDir@/P.falciparum_chromosomes/$f | adjustPlasmoEmblFile > @downloadDir@/P.falciparum_chromosomes_fixed/$f.fixed; done</unpack>
-     <pluginArgs>--extDbName %EXT_DB_NAME% --extDbRlsVer %EXT_DB_RLS_VER% --mapFile /home/jldommer/gus35/gus_home/config/sangerFeatures2gus.xml --inputFileOrDir @downloadDir@/P.falciparum_chromosomes_fixed --fileFormat embl --soCvsVersion 1.34 --defaultOrganism "Plasmodium falciparum" --handlerExternalDbs "enzyme:enzymeDB:2005-10-11" --seqSoTerm "supercontig"</pluginArgs>
-  </resource>
-
-  <resource resource="P.vivax_wholeGenomeShotgunSequence" version="2005-09-01"
-            url="ftp://roos-compbio.bio.upenn.edu/amackey/Pvivax.nt"
-            plugin="GUS::Supported::Plugin::LoadFastaSequences"
-            extDbName="Jane Carlton P. vivax chromosomes"
-            extDbRlsVer="2005-09-01"
-            extDbRlsDescrip="whole genome shotgun sequence from Jane Carlton, 2005-09-01"
-            dbCommit="@dbcommit@">
-     <wgetArgs>--tries=5 --mirror --no-parent --no-directories --no-host-directories --cut-dirs=1 --output-document=Pvivax.nt</wgetArgs>
-     <pluginArgs>--externalDatabaseName %EXT_DB_NAME% --externalDatabaseVersion %EXT_DB_RLS_VER% --sequenceFile @downloadDir@/P.vivax_wholeGenomeShotgunSequence/Pvivax.nt --soTermName "contig" --regexSourceId "(ctg_\d+)" --tableName "DoTS::ExternalNASequence"</pluginArgs>
-  </resource>
-
-  <resource resource="P.vivax_firstAnnotationSalvador" version="2005-10-18"
-            url="ftp://roos-compbio2.bio.upenn.edu/amackey/Pvivax.gff2"
-            plugin="GUS::Supported::Plugin::InsertSequenceFeatures"
-            extDbName="Jane Carlton P. vivax chromosomes"
-            extDbRlsVer="2005-09-01"
-            extDbRlsDescrip="first annotation of the P. vivax Salvador strain from Jane Carlton, 2005-09-01"
-            dbCommit="@dbcommit@">
-     <wgetArgs>--tries=5 --mirror --no-parent --no-directories --no-host-directories --cut-dirs=1 --output-document=Pvivax.gff2</wgetArgs>
-     <pluginArgs>--extDbName %EXT_DB_NAME% --extDbRlsVer %EXT_DB_RLS_VER% --mapFile /home/jldommer/gus35/gus_home/config/vivaxFeatures2gus.xml --inputFileOrDir @downloadDir@/P.vivax_firstAnnotationSalvador/Pvivax.gff2 --fileFormat gff2 --gff2GroupTag "GenePrediction" --soCvsVersion 1.34 --defaultOrganism "Plasmodium vivax" --naSequenceSubclass ExternalNASequence --seqIdColumn source_id</pluginArgs>
-  </resource>
-
-  <resource resource="P.yoelii_wholeGenomeShotgunSequence" version="2005-10-19"
-            url="ftp://roos-compbio.bio.upenn.edu/amackey/Pyoelii.nt"
-            plugin="GUS::Supported::Plugin::LoadFastaSequences"
-            extDbName="Jane Carlton P. yoelii chromosomes"
-            extDbRlsVer="2002-09-10"
-            extDbRlsDescrip="whole genome shotgun sequence for P. yoelii from Jane Carlton, 2002-09-10"
-            dbCommit="@dbcommit@">
-     <wgetArgs>--tries=5 --mirror --no-parent --no-directories --no-host-directories --cut-dirs=1 --output-document=Pyoelii.nt</wgetArgs>
-     <pluginArgs>--externalDatabaseName %EXT_DB_NAME% --externalDatabaseVersion %EXT_DB_RLS_VER% --sequenceFile @downloadDir@/P.yoelii_wholeGenomeShotgunSequence/Pyoelii.nt --soTermName "contig" --regexSourceId "(ctg_\d+)" --tableName "DoTS::ExternalNASequence"</pluginArgs>
-  </resource>
-
-  <resource resource="P.yoelii_Annotation" version="2005-10-19"
-            url="ftp://roos-compbio2.bio.upenn.edu/amackey/Pyoelii.gff2"
-            plugin="GUS::Supported::Plugin::InsertSequenceFeatures"
-            extDbName="Jane Carlton P. yoelii chromosomes"
-            extDbRlsVer="2002-09-10"
-            extDbRlsDescrip="annotation for P. yoelii from Jane Carlton, 2002-09-10"
-            dbCommit="@dbcommit@">
-     <wgetArgs>--tries=5 --mirror --no-parent --no-directories --no-host-directories --cut-dirs=1 --output-document=Pyoelii.gff2</wgetArgs>
-     <pluginArgs>--extDbName %EXT_DB_NAME% --extDbRlsVer %EXT_DB_RLS_VER% --mapFile /home/jldommer/gus35/gus_home/config/yoeliiFeatures2gus.xml --inputFileOrDir @downloadDir@/P.yoelii_Annotation/Pyoelii.gff2 --fileFormat gff2 --gff2GroupTag "GenePrediction" --soCvsVersion 1.34 --defaultOrganism "Plasmodium yoelii" --naSequenceSubclass ExternalNASequence --seqIdColumn source_id</pluginArgs>
-  </resource>
-
-  <resource resource="NRDB" version="2005-09-29"
-            url="ftp://ftp.ncbi.nih.gov/blast/db/FASTA/">
-      <wgetArgs>--tries=5 --mirror --no-parent --no-directories --no-host-directories --cut-dirs=3 --accept=nr.gz </wgetArgs>
+     <publication pmid="11738710"/>
+     <publication pmid="12368864"/>
+     <description>
+     A really nice taxonomy from the folks at NCBI
+     </description>
+     
   </resource>
 
 </resourcesPipeline>
