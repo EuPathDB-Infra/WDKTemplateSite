@@ -39,7 +39,7 @@
 
         <question name="BySimilarity" 
                   displayName="Find RNAs by blast similarity to input sequences" 
-                  summaryAttributes="Id,overview,sequence,Header,TabularRow,Alignment,Footer"
+                  summaryAttributesList="Id,overview,sequence,Header,TabularRow,Alignment,Footer"
                   queryRef="RnaIds.BySimilarity"
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
@@ -57,7 +57,7 @@
         <question name="ByNumSeqs" 
                   displayName="Find RNAs by number of assembly sequences" 
                   queryRef="RnaIds.ByNumSeqs"
-                  summaryAttributes="assembly_consistency,contains_mrna,overview,sequence,taxonLink,score"
+                  summaryAttributesList="assembly_consistency,contains_mrna,overview,sequence,taxonLink,score"
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
                 Find RNAs from a given organism that contain more than a 
