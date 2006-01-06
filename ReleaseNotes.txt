@@ -1,3 +1,20 @@
+------------------------------------------------------------------------------
+oooooooooooooooooooooooo  WDKToySite Version 1.9  oooooooooooooooooooooooooooo
+------------------------------------------------------------------------------
+
+====================  Model - Fixed Bugs ========================
+
+===================== Model - Features ==========================
+
+* Added internal question set for testing dynamic attributes 
+  (eg blast score of similarity search, which can vary with query sequence
+   against the same sequence for a toy RNA record)
+
+===================== Site - Fixed Bugs =========================
+
+
+===================== Site - Features ===========================
+
 
 ------------------------------------------------------------------------------
 oooooooooooooooooooooooo  WDKToySite Version 1.8  oooooooooooooooooooooooooooo
