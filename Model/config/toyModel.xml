@@ -37,23 +37,6 @@
           These queries find RNAs
         </description>
 
-        <question name="BySimilarity" 
-                  displayName="Find RNAs by blast similarity to input sequences" 
-                  summaryAttributesList="Id,overview,sequence,Header,TabularRow,Alignment,Footer"
-                  queryRef="RnaIds.BySimilarity"
-                  recordClassRef="RnaRecordClasses.RnaRecordClass">
-            <description>
-                Find RNAs by similarity to input sequence.
-            </description>
-            <dynamicAttributes>
-              <attribute name="Id" displayName="RNA Id"/>
-              <attribute name="TabularRow" displayName="Blast summary"/>
-              <attribute name="Alignment" displayName="Blast alignment"/>
-              <attribute name="Header" displayName="Blast header"/>
-              <attribute name="Footer" displayName="Blast footer"/>
-            </dynamicAttributes>
-        </question>
-
         <question name="ByNumSeqs" 
                   displayName="Find RNAs by number of assembly sequences" 
                   queryRef="RnaIds.ByNumSeqs"
@@ -118,6 +101,26 @@
              </description>
         </question>
 
+    </questionSet>
+
+    <!-- questions for testing dynamic attributes -->
+    <questionSet name="DynamicAttributeQuestions" displayName="Questions for use in Dynamic Attributes test" isInternal="true">
+        <question name="BySimilarity"
+                  displayName="Find RNAs by blast similarity to input sequences" 
+                  summaryAttributesList="Id,overview,sequence,Header,TabularRow,Alignment,Footer"
+                  queryRef="RnaIds.BySimilarity"
+                  recordClassRef="RnaRecordClasses.RnaRecordClass">
+            <description>
+                Find RNAs by similarity to input sequence.
+            </description>
+            <dynamicAttributes>
+              <attribute name="Id" displayName="RNA Id"/>
+              <attribute name="TabularRow" displayName="Blast summary"/>
+              <attribute name="Alignment" displayName="Blast alignment"/>
+              <attribute name="Header" displayName="Blast header"/>
+              <attribute name="Footer" displayName="Blast footer"/>
+            </dynamicAttributes>
+        </question>
     </questionSet>
 
     <!-- questions for use in nestedRecords and nestedRecordLists -->
