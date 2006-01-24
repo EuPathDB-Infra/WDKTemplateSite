@@ -8,28 +8,31 @@
       <xsl:for-each select="channel/item">
         <record>
           <xsl:element name="attribute">
-            <xsl:attribute name="attributeFieldRef">title</xsl:attribute>
-            <xsl:attribute name="value">
-              <xsl:value-of select="title"/>
-            </xsl:attribute>
+            <xsl:attribute name="name">headline</xsl:attribute>
+            <xsl:value-of select="title"/>
+          </xsl:element>
+          <xsl:element name="table">
+            <xsl:attribute name="name">relatedLinks</xsl:attribute>
+            
+            <xsl:element name="row">
+              <xsl:attribute name="name">headline</xsl:attribute>
+              <xsl:element name="attribute">
+                <xsl:attribute name="name">displayName</xsl:attribute>
+                <xsl:value-of select="description"/>
+              </xsl:element>
+              <xsl:element name="attribute">
+                <xsl:attribute name="name">url</xsl:attribute>
+                <xsl:value-of select="link"/>
+              </xsl:element>
+            </xsl:element>
           </xsl:element>
           <xsl:element name="attribute">
-            <xsl:attribute name="attributeFieldRef">link</xsl:attribute>
-            <xsl:attribute name="value">
-              <xsl:value-of select="link"/>
-            </xsl:attribute>
+            <xsl:attribute name="name">item</xsl:attribute>
+            <xsl:value-of select="description"/>
           </xsl:element>
           <xsl:element name="attribute">
-            <xsl:attribute name="attributeFieldRef">description</xsl:attribute>
-            <xsl:attribute name="value">
-              <xsl:value-of select="description"/>
-            </xsl:attribute>
-          </xsl:element>
-          <xsl:element name="attribute">
-            <xsl:attribute name="attributeFieldRef">date</xsl:attribute>
-            <xsl:attribute name="value">
-              <xsl:value-of select="pubDate"/>
-            </xsl:attribute>
+            <xsl:attribute name="name">date</xsl:attribute>
+            <xsl:value-of select="pubDate"/>
           </xsl:element>
         </record>
       </xsl:for-each>
