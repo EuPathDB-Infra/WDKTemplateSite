@@ -47,7 +47,8 @@
                 specified number of ESTs in their assembly.
             </description>
             <dynamicAttributes>
-              <attribute name="score" displayName="Blast score"/>
+              <columnAttribute name="na_sequence_id" displayName="NA Sequence ID" internal="true"/>
+              <columnAttribute name="score" displayName="Blast score"/>
               <linkAttribute name="taxonLink2" displayName="Taxon2" 
                             visible="$$taxon_name$$">
                  <url>
@@ -93,8 +94,10 @@
             </description>
         </question>
 
-        <question name="EstNullAttributes" displayName="Question that will return some controversial ESTs!"
-                  queryRef="EstIds.NullAttributeEsts" recordClassRef="EstRecordClasses.EstRecordClass">
+        <question name="EstNullAttributes" 
+                  displayName="Question that will return some controversial ESTs!"
+                  queryRef="EstIds.NullAttributeEsts" 
+                  recordClassRef="EstRecordClasses.EstRecordClass">
 
              <description>
                   Question that will return ESTs, some of which have null values for their atttributes
@@ -104,7 +107,10 @@
     </questionSet>
 
     <!-- questions for testing dynamic attributes -->
-    <questionSet name="DynamicAttributeQuestions" displayName="Questions for use in Dynamic Attributes test" isInternal="true">
+    <questionSet name="DynamicAttributeQuestions" 
+                 displayName="Questions for use in Dynamic Attributes test" 
+                 internal="true">
+                 
         <question name="BySimilarity"
                   displayName="Find RNAs by blast similarity to input sequences" 
                   summaryAttributesList="Id,overview,sequence,Header,TabularRow,Alignment,Footer"
@@ -114,19 +120,24 @@
                 Find RNAs by similarity to input sequence.
             </description>
             <dynamicAttributes>
-              <attribute name="Id" displayName="RNA Id"/>
-              <attribute name="TabularRow" displayName="Blast summary"/>
-              <attribute name="Alignment" displayName="Blast alignment"/>
-              <attribute name="Header" displayName="Blast header"/>
-              <attribute name="Footer" displayName="Blast footer"/>
+              <columnAttribute name="Id" displayName="RNA Id"/>
+              <columnAttribute name="TabularRow" displayName="Blast summary"/>
+              <columnAttribute name="Alignment" displayName="Blast alignment"/>
+              <columnAttribute name="Header" displayName="Blast header"/>
+              <columnAttribute name="Footer" displayName="Blast footer"/>
             </dynamicAttributes>
         </question>
     </questionSet>
 
     <!-- questions for use in nestedRecords and nestedRecordLists -->
-    <questionSet name="NestedRecordQuestions" displayName="Questions for use in NestedRecords" isInternal="true">
+    <questionSet name="NestedRecordQuestions" 
+                 displayName="Questions for use in NestedRecords" 
+                 internal="true">
         
-         <question name="RNA" queryRef="RnaIds.EstParent" recordClassRef="RnaRecordClasses.RnaRecordClass" displayName="Nested Record RNA">
+         <question name="RNA" 
+                   queryRef="RnaIds.EstParent" 
+                   recordClassRef="RnaRecordClasses.RnaRecordClass" 
+                   displayName="Nested Record RNA">
               <description> Question that returns the RNA that belongs to the given EST; for use in a Nested Record </description>
          </question>
 
@@ -137,13 +148,18 @@
     </questionSet>
 
     <!-- questions for use in data dumps -->
-    <questionSet displayName="Questions for use in data dumps" isInternal="true" name="DataDumpQuestions">
+    <questionSet displayName="Questions for use in data dumps" 
+                 internal="true" 
+                 name="DataDumpQuestions">
 
         <description>
             These questions are for data dumps
         </description>
 
-        <question displayName="Find all RNAs" name="RnaGff" queryRef="DataDumpQueries.RnaGff" recordClassRef="DataDumpRecordClasses.RnaGff">
+        <question displayName="Find all RNAs" 
+                  name="RnaGff" 
+                  queryRef="DataDumpQueries.RnaGff" 
+                  recordClassRef="DataDumpRecordClasses.RnaGff">
             <description>This question find all RNAs to dump in GFF format</description>
         </question>
 
@@ -153,16 +169,16 @@
 
     <!-- xml question sets -->
     <xmlQuestionSet name="XmlQuestions"
-                 displayName="Data contents from XML data sources">
+                    displayName="Data contents from XML data sources">
 
         <description>
           Data contents from XML data sources
         </description>
 
         <xmlQuestion name="NewsQuestion" 
-                  displayName="Sample News" 
-                  recordClassRef="XmlRecordClasses.NewsRecord"
-                  xmlDataURL="news.xml">
+                     displayName="Sample News" 
+                     recordClassRef="XmlRecordClasses.NewsRecord"
+                     xmlDataURL="news.xml">
             <description>
                 Retrieve news from XML data source
             </description>
@@ -198,13 +214,13 @@
         	type="Toy News"
         	idPrefix="NEWS."
         	delimiter="@">
-            <attribute name="headline"/>  
-            <attribute name="date"/>  
-            <attribute name="item"/>
-            <table name="relatedLinks">
-                <column name="displayName"/>
-                <column name="url"/>
-            </table>
+            <xmlAttribute name="headline"/>  
+            <xmlAttribute name="date"/>  
+            <xmlAttribute name="item"/>
+            <xmlTable name="relatedLinks">
+                <xmlAttribute name="displayName"/>
+                <xmlAttribute name="url"/>
+            </xmlTable>
          </xmlRecordClass>
 
 
@@ -212,14 +228,14 @@
         	type="PlasmoDB Pipeline Resource"
         	idPrefix="RESOURCE."
         	delimiter="@">
-            <attribute name="resource"/>  
-            <attribute name="version"/>  
-            <attribute name="publicUrl"/>  
-            <attribute name="category"/>  
-            <attribute name="description"/>
-            <table name="publications">
-               <column name="pmid"/>
-            </table>  
+            <xmlAttribute name="resource"/>  
+            <xmlAttribute name="version"/>  
+            <xmlAttribute name="publicUrl"/>  
+            <xmlAttribute name="category"/>  
+            <xmlAttribute name="description"/>
+            <xmlTable name="publications">
+               <xmlAttribute name="pmid"/>
+            </xmlTable>  
          </xmlRecordClass>
 
     </xmlRecordClassSet>
@@ -265,19 +281,72 @@
 
         <recordClass idPrefix="TR." name="RnaRecordClass" type="Toy RNA"
             attributeOrdering="assembly_consistency,contains_mrna,taxon_name">
-            <attributeQueryRef ref="RnaAttributes.GeneAttrs"/>  
-            <attributeQueryRef ref="RnaAttributes.AssemblyAttrs"/>
+            
+            <attributeQueryRef ref="RnaAttributes.GeneAttrs">
+                <columnAttribute name="taxon_name" 
+                                 displayName="Organism"  
+                                 help="The name of the organism" 
+                                 type="String"
+                                 truncateTo="20"
+                                 internal="false" />
+                <columnAttribute name="isoform_count" 
+                                 displayName="Isoform Count" />
+            </attributeQueryRef>  
+            
+            <attributeQueryRef ref="RnaAttributes.AssemblyAttrs">
+                <columnAttribute name="assembly_consistency" 
+                                 displayName="Assembly consistency" />
+                <columnAttribute name="contains_mrna"
+                                 displayName="Contains mRNA" />
+                <columnAttribute name="number_of_contained_sequences"
+                                 displayName="Number contained sequences" />
+                <columnAttribute name="sequence" 
+                                 displayName="Sequence" 
+                                 truncateTo="8" />
+                <textAttribute name="numseqs" 
+                               displayName="Nice Num">
+                    <text>
+                        number of contained seqs is $$number_of_contained_sequences$$.
+                    </text>
+                </textAttribute>
+            </attributeQueryRef>
+            
+            <table name="ConstituentEsts"
+                   displayName="Constituent Ests"
+                   queryRef="RnaTables.ConstituentEsts">
+                <columnAttribute name="est_id"
+                                 displayName="EST Id" />
+                <columnAttribute name="source_id"
+                                 displayName="DoTS RNA Id"
+                                 internal="true" />
+                <columnAttribute name="sequence_start"
+                                 displayName="Sequence Start" />
+                <columnAttribute name="sequence_end"
+                                 displayName="Sequence End" />
+                <columnAttribute name="quality_start"
+                                 displayName="Quality Start" />
+                <columnAttribute name="quality_end"
+                                 displayName="Quality End" />
+                <linkAttribute name="DoTS"
+                               displayName="DoTS RNA" 
+                               visible="$$source_id$$">
+                     <url>
+                         <![CDATA[@DOTS_URL@]]>
+                     </url>
+                </linkAttribute>
+            </table>
 
-            <tableQueryRef ref="RnaTables.ConstituentEsts"/>
-
-            <linkAttribute name="taxonLink" displayName="Taxon" 
+            <linkAttribute name="taxonLink" 
+                           displayName="Taxon" 
                            visible="$$taxon_name$$">
                  <url>
                     <![CDATA[@TAXON_URL@]]>
                  </url>
             </linkAttribute>
 
-            <textAttribute name="overview" displayName="Overview" truncateTo="80">
+            <textAttribute name="overview" 
+                           displayName="Overview" 
+                           truncateTo="80">
                 <text>
                     RNA $$primaryKey$$ is from $$taxon_name$$.
                 </text>
@@ -290,12 +359,41 @@
 
     <!-- EST recordClasses -->
     <recordClassSet name="EstRecordClasses">
-        <recordClass idPrefix="EST." name="EstRecordClass" type="EST">
-            <attributeQueryRef ref="EstAttributes.EstAttrs"/>  
-            <attributeQueryRef ref="EstAttributes.LibAttrs"/>
-            <attributeQueryRef ref="EstAttributes.NullAttrs"/>
+    
+        <recordClass name="EstRecordClass"
+                     idPrefix="EST." 
+                     type="EST">
+                     
+            <attributeQueryRef ref="EstAttributes.EstAttrs">  
+                <columnAttribute name="na_sequence_id"
+                                 displayName="AssemblySeqId" 
+                                 internal="true" />
+                <columnAttribute name="source_id" 
+                                 displayName="Accession" 
+                                 internal="true" />
+                <linkAttribute name="EST"
+                               displayName="EST" 
+                               visible="$$source_id$$">
+                    <url>
+                        <![CDATA[@EST_URL@]]>
+                    </url>
+                </linkAttribute>
+            </attributeQueryRef>
+            
+            <attributeQueryRef ref="EstAttributes.LibAttrs">
+                <columnAttribute name="dbest_name"
+                                 displayName="DBEST name" />
+                <columnAttribute name="anatomy_id"
+                                 displayName="Anatomy Id" />
+            </attributeQueryRef>
+            
+            <attributeQueryRef ref="EstAttributes.NullAttrs">
+                <columnAttribute name="assembly_id"
+                                 displayName="AssemblyId" />
+            </attributeQueryRef>
         
             <nestedRecord questionRef="NestedRecordQuestions.RNA"/>
+            
         </recordClass>
 
     </recordClassSet>
@@ -303,11 +401,66 @@
     <!-- recordClasses for data dumping -->
     <recordClassSet name="DataDumpRecordClasses">
 
-        <recordClass attributeOrdering="seqid,source,type,fstart,fend,score,strand,phase,attr_id" idPrefix="TR." name="RnaGff" type="Toy RNA">
+        <recordClass name="RnaGff" 
+                     attributeOrdering="seqid,source,type,fstart,fend,score,strand,phase,attr_id" 
+                     idPrefix="TR." 
+                     type="Toy RNA">
 
-            <attributeQueryRef ref="DataDumpQueries.RnaGffAttrs"/>
+            <attributeQueryRef ref="DataDumpQueries.RnaGffAttrs">
+                <columnAttribute name="seqid" 
+                                 displayName="SeqId" />
+                <columnAttribute name="source" 
+                                 displayName="Data Source" />
+                <columnAttribute name="type" 
+                                 displayName="Feature Type" />
+                <columnAttribute name="fstart" 
+                                 displayName="Start" />
+                <columnAttribute name="fend" 
+                                 displayName="Start" />
+                <columnAttribute name="score" 
+                                 displayName="Score" />
+                <columnAttribute name="strand" 
+                                 displayName="Strand" />
+                <columnAttribute name="phase" 
+                                 displayName="Reading Frame" />
+                <columnAttribute name="attr_id" 
+                                 displayName="ID" />
+                <columnAttribute name="attr_name" 
+                                 displayName="Name" />
+                <columnAttribute name="attr_description" 
+                                 displayName="description" />
+            </attributeQueryRef>
 
-            <tableQueryRef ref="DataDumpQueries.RnaEsts"/>
+            <table name="RnaEsts"
+                   displayName="RNA Ests"
+                   queryRef="DataDumpQueries.RnaEsts">
+            
+                <columnAttribute name="seqid" 
+                                 displayName="SeqId" />
+                <columnAttribute name="source" 
+                                 displayName="Data Source" />
+                <columnAttribute name="type" 
+                                 displayName="Feature Type" />
+                <columnAttribute name="fstart" 
+                                 displayName="Start" />
+                <columnAttribute name="fend" 
+                                 displayName="End" />
+                <columnAttribute name="score" 
+                                 displayName="Score" />
+                <columnAttribute name="strand" 
+                                 displayName="Strand" />
+                <columnAttribute name="phase" 
+                                 displayName="Reading Frame" />
+                <columnAttribute name="attr_id" 
+                                 displayName="ID" />
+                <columnAttribute name="attr_name" 
+                                 displayName="Name" />
+                <columnAttribute name="attr_parent" 
+                                 displayName="Parent" />
+                <columnAttribute name="attr_description" 
+                                 displayName="description" />
+            
+            </table>
 
          </recordClass>
         
@@ -341,11 +494,12 @@
              <paramRef ref="params.Application"/>
              <paramRef ref="params.Database"/>
              <paramRef ref="params.Sequence"/>
-             <wsColumn displayName="RNA Id" name="Id" width="20"/>
-             <wsColumn displayName="Blast summary" name="TabularRow" width="1000"/>
-             <wsColumn displayName="Blast alignment" name="Alignment" width="3000"/>
-             <wsColumn displayName="Blast header" name="Header" width="1000"/>
-             <wsColumn displayName="Blast footer" name="Footer" width="1000"/>
+             <wsColumn name="Id" width="20"/>
+             <wsColumn name="TabularRow" width="1000"/>
+             <wsColumn name="Alignment" width="3000"/>
+             <wsColumn name="Header" width="1000"/>
+             <wsColumn name="Footer" width="1000"/>
+
        </wsQuery>
 
         <sqlQuery name="ByNumSeqs" isCacheable="true">
@@ -439,8 +593,8 @@
 
         <sqlQuery name="GeneAttrs">
             <paramRef ref="params.primaryKey"/>
-            <column displayName="Organism" name="taxon_name"/>
-            <column displayName="Isoform Count" name="isoform_count"/>
+            <column name="taxon_name"/>
+            <column name="isoform_count"/>
             <sql>
                 select taxon_name, isoform_count
                 from (select a.na_sequence_id, tn.name as taxon_name, count(*) as isoform_count
@@ -454,11 +608,10 @@
 
         <sqlQuery name="AssemblyAttrs">
             <paramRef ref="params.primaryKey"/>
-            <column displayName="Assembly consistency" name="assembly_consistency"/>
-            <column displayName="Contains mRNA" name="contains_mrna"/>
-            <column displayName="Number contained sequences" name="number_of_contained_sequences"/>
-            <textColumn displayName="Nice Num" name="numseqs" text="number of contained seqs is $$number_of_contained_sequences$$"/>
-            <column displayName="Sequence" truncateTo="8" name="sequence"/>
+            <column name="assembly_consistency"/>
+            <column name="contains_mrna"/>
+            <column name="number_of_contained_sequences"/>
+            <column name="sequence"/>
             <sql>
                 select a.assembly_consistency, 
                        a.contains_mrna,
@@ -477,18 +630,12 @@
     <querySet name="RnaTables">
         <sqlQuery name="ConstituentEsts" displayName="Constituent ESTs">
             <paramRef ref="params.primaryKey"/>
-            <column displayName="EST Id" name="est_id"/>
-            <linkColumn displayName="DoTS RNA" name="DoTS" 
-                        visible="$$source_id$$">
-                 <url>
-                    <![CDATA[@DOTS_URL@]]>
-                 </url>
-            </linkColumn>
-            <column displayName="DoTS RNA Id" name="source_id" isInternal="true"/>
-            <column displayName="Sequence Start" name="sequence_start"/>
-            <column displayName="Sequence End" name="sequence_end"/>
-            <column displayName="Quality Start" name="quality_start"/>
-            <column displayName="Quality End" name="quality_end" />
+            <column name="est_id"/>
+            <column name="source_id"/>
+            <column name="sequence_start"/>
+            <column name="sequence_end"/>
+            <column name="quality_start"/>
+            <column name="quality_end" />
             <sql>
                 select aseq.na_sequence_id as est_id,
                        'DT.' || a.na_sequence_id as source_id, aseq.sequence_start,
@@ -501,7 +648,7 @@
 
         <sqlQuery name="SimpleEstIds">
              <paramRef ref="params.primaryKey"/>
-             <column displayName="EST Id" name="est_id"/>
+             <column name="est_id"/>
              
              <sql>
                 select est.est_id
@@ -521,14 +668,8 @@
 
         <sqlQuery name="EstAttrs">
             <paramRef ref="params.primaryKey"/>
-            <linkColumn displayName="EST" name="EST" 
-                        visible="$$source_id$$">
-                 <url>
-                    <![CDATA[@EST_URL@]]>
-                 </url>
-            </linkColumn>
-            <column displayName="AssemblySeqId" name="na_sequence_id" isInternal="true"/>
-            <column displayName="Accession" name="source_id" isInternal="true"/>
+            <column name="na_sequence_id"/>
+            <column name="source_id"/>
             <sql>
                 <!-- union with self for federation simulation -->
                 (select e.accession as source_id, e.na_sequence_id
@@ -543,7 +684,7 @@
 
         <sqlQuery name="NullAttrs">
             <paramRef ref="params.primaryKey"/>
-            <column displayName="AssemblyId" name="assembly_id"/>
+            <column name="assembly_id"/>
             <sql>
                 select a.na_sequence_id as assembly_id
                 from WDKTestEst e, WDKTestAssemblySequence aseq, WdkTestAssembly a
@@ -555,8 +696,8 @@
 
         <sqlQuery name="LibAttrs">
             <paramRef ref="params.primaryKey"/>
-            <column displayName="DBEST name" name="dbest_name"/>
-            <column displayName="Anatomy Id" name="anatomy_id"/>
+            <column name="dbest_name"/>
+            <column name="anatomy_id"/>
             <sql>
                 select l.dbest_name, l.anatomy_id 
                 from WDKTestEst e, WDKTestLibrary l 
@@ -610,17 +751,17 @@
 
         <sqlQuery name="RnaGffAttrs">
             <paramRef ref="params.primaryKey"/>
-            <column displayName="SeqId" name="seqid"/>
-            <column displayName="Data Source" name="source"/>
-            <column displayName="Feature Type" name="type"/>
-            <column displayName="Start" name="fstart"/>
-            <column displayName="Start" name="fend"/>
-            <column displayName="Score" name="score"/>
-            <column displayName="Strand" name="strand"/>
-            <column displayName="Reading Frame" name="phase"/>
-            <column displayName="ID" name="attr_id"/>
-            <column displayName="Name" name="attr_name"/>
-            <column displayName="description" name="attr_description"/>
+            <column name="seqid"/>
+            <column name="source"/>
+            <column name="type"/>
+            <column name="fstart"/>
+            <column name="fend"/>
+            <column name="score"/>
+            <column name="strand"/>
+            <column name="phase"/>
+            <column name="attr_id"/>
+            <column name="attr_name"/>
+            <column name="attr_description"/>
             <sql>
                 select 'ChrNNN' as seqid,
                        'WDKToy' as source,
@@ -638,18 +779,18 @@
 
         <sqlQuery name="RnaEsts" displayName="Constituent ESTs">
             <paramRef ref="params.primaryKey"/>
-            <column displayName="SeqId" name="seqid"/>
-            <column displayName="Data Source" name="source"/>
-            <column displayName="Feature Type" name="type"/>
-            <column displayName="Start" name="fstart"/>
-            <column displayName="End" name="fend"/>
-            <column displayName="Score" name="score"/>
-            <column displayName="Strand" name="strand"/>
-            <column displayName="Reading Frame" name="phase"/>
-            <column displayName="ID" name="attr_id"/>
-            <column displayName="Name" name="attr_name"/>
-            <column displayName="Parent" name="attr_parent"/>
-            <column displayName="description" name="attr_description"/>
+            <column name="seqid"/>
+            <column name="source"/>
+            <column name="type"/>
+            <column name="fstart"/>
+            <column name="fend"/>
+            <column name="score"/>
+            <column name="strand"/>
+            <column name="phase"/>
+            <column name="attr_id"/>
+            <column name="attr_name"/>
+            <column name="attr_parent"/>
+            <column name="attr_description"/>
             <sql>
                 select 'ChrNNN' as seqid,
                        'WDKToy' as source,
