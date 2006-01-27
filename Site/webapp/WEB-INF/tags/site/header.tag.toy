@@ -13,6 +13,26 @@
 <c:out value="${title}" default="${banner}" />
 </title>
 <link rel="StyleSheet" href="<c:url value="/misc/style.css" />" type="text/css">
+
+<SCRIPT TYPE="text/javascript" lang="JavaScript">
+<!--
+
+function uncheck(notFirst) {
+    var form = document.downloadConfigForm;
+    var cb = form.selectedFields;
+    if (notFirst) {
+        for (var i=1; i<cb.length; i++) {
+            cb[i].checked = null;
+        }
+    } else {
+        cb[0].checked = null;
+    }
+}
+
+-->
+</SCRIPT>
+
+
 </head>
 <body>
 <table width="100%">
