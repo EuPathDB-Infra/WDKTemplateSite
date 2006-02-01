@@ -29,6 +29,15 @@ function uncheck(notFirst) {
     }
 }
 
+function check(all) {
+    var form = document.downloadConfigForm;
+    var cb = form.selectedFields;
+    cb[0].checked = (all > 0 ? null : 'checked');
+    for (var i=1; i<cb.length; i++) {
+        cb[i].checked = (all > 0 ? 'checked' : null);
+    }
+}
+
 -->
 </SCRIPT>
 
