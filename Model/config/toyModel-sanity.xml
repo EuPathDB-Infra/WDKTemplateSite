@@ -20,6 +20,14 @@
            <sanityParam name="EstLib" value="Nc-1 pZ Tachyzoite cDNA Library"/>
       </sanityQuery>
 
+      <sanityQuery ref="ZipIds.ByZipCode" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="ZipCode" value="19104"/>
+      </sanityQuery>
+
+      <sanityQuery ref="ZipIds.ByAreaCode" minOutputLength="100" maxOutputLength="200">
+           <sanityParam name="AreaCode" value="215"/>
+      </sanityQuery>
+
       <sanityQuery ref="EstIds.NullAttributeEsts" minOutputLength="1" maxOutputLength="10">
       </sanityQuery>
 
@@ -33,6 +41,10 @@
 
       <sanityQuery ref="EstAttributes.EstAttrs" minOutputLength="1" maxOutputLength="1">
            <sanityParam name="primaryKey" value="9645058"/>
+      </sanityQuery>
+
+      <sanityQuery ref="ZipAttributes.ZipAttrs" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="primaryKey" value="19104"/>
       </sanityQuery>
 
       <sanityQuery ref="EstAttributes.NullAttrs" minOutputLength="1" maxOutputLength="1">
@@ -70,6 +82,8 @@
 
       <sanityRecord ref="EstRecordClasses.EstRecordClass" primaryKey="9645058" />
 
+      <sanityRecord ref="ZipRecordClasses.ZipRecordClass" primaryKey="19104" />
+
       <sanityRecord ref="DataDumpRecordClasses.RnaGff" primaryKey="91618406" />
 
       <sanityQuestion ref="RnaQuestions.ByNumSeqs" pageStart="1" pageEnd="20"
@@ -97,6 +111,16 @@
 
       <sanityQuestion ref="EstQuestions.EstNullAttributes" pageStart="1" pageEnd="20"
          minOutputLength="1" maxOutputLength="10">
+      </sanityQuestion>
+
+      <sanityQuestion ref="ZipQuestions.ZipByZipCode" pageStart="1" pageEnd="1"
+         minOutputLength="1" maxOutputLength="1">
+          <sanityParam name="ZipCode" value="19104"/>
+      </sanityQuestion>
+
+      <sanityQuestion ref="ZipQuestions.ZipsByAreaCode" pageStart="2" pageEnd="4"
+         minOutputLength="100" maxOutputLength="200">
+          <sanityParam name="AreaCode" value="215"/>
       </sanityQuestion>
 
       <sanityQuestion ref="NestedRecordQuestions.RNA" pageStart="1" pageEnd="20"
