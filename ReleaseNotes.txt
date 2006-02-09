@@ -1,4 +1,25 @@
 ------------------------------------------------------------------------------
+oooooooooooooooooooooooo  WDKToySite Version 1.10  oooooooooooooooooooooooooooo
+------------------------------------------------------------------------------
+
+====================  Model - Fixed Bugs ========================
+
+===================== Model - Features ==========================
+
+* removed extraneous dynamic attributes from RnaQuestions.ByNumSeqs
+
+* updated model file to reflect the move of the definition of
+  record attributes from attribute queries up to record itself
+
+* added javascript to be used on reportMaker (aka download) config page
+
+===================== Site - Fixed Bugs =========================
+
+
+===================== Site - Features ===========================
+
+
+------------------------------------------------------------------------------
 oooooooooooooooooooooooo  WDKToySite Version 1.9  oooooooooooooooooooooooooooo
 ------------------------------------------------------------------------------
 
