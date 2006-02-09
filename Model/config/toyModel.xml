@@ -40,29 +40,12 @@
         <question name="ByNumSeqs" 
                   displayName="Find RNAs by number of assembly sequences" 
                   queryRef="RnaIds.ByNumSeqs"
-                  summaryAttributesList="assembly_consistency,contains_mrna,overview,sequence,taxonLink,score"
+                  summaryAttributesList="assembly_consistency,contains_mrna,overview,sequence,taxonLink"
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
                 Find RNAs from a given organism that contain more than a 
                 specified number of ESTs in their assembly.
             </description>
-            <dynamicAttributes>
-              <columnAttribute name="na_sequence_id" displayName="NA Sequence ID" internal="true"/>
-              <columnAttribute name="score" displayName="Blast score"/>
-              <linkAttribute name="taxonLink2" displayName="Taxon2" 
-                            visible="$$taxon_name$$">
-                 <url>
-                    <![CDATA[@TAXON_URL@]]>
-                 </url>
-              </linkAttribute>
-
-              <textAttribute name="overview2" displayName="Overview2" truncateTo="80">
-                <text>
-                    RNA $$primaryKey$$ is from $$taxon_name$$.
-                </text>
-              </textAttribute>
-
-            </dynamicAttributes>
         </question>
 
         <question name="ByDbESTLib" 
