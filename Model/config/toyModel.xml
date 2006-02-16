@@ -537,7 +537,7 @@
        </wsQuery>
 
         <sqlQuery name="ByNumSeqs" isCacheable="true">
-            <paramRef ref="params.NumSeqs"/>
+            <paramRef ref="params.NumSeqs" defaultValue="10"/>
             <paramRef ref="params.ApiTaxon"/>
             <column name="na_sequence_id"/>
             <column name="score"/>
@@ -553,7 +553,7 @@
         </sqlQuery>  
       
         <sqlQuery name="ByDbESTLib">
-            <paramRef ref="params.NumEstLibs"/>
+            <paramRef ref="params.NumEstLibs" defaultValue="10"/>
             <paramRef ref="params.AssemblyConsistency"/>
             <column name="na_sequence_id"/>
             <sql>
