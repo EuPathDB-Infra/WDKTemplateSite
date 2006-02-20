@@ -40,12 +40,29 @@
         <question name="ByNumSeqs" 
                   displayName="Find RNAs by number of assembly sequences" 
                   queryRef="RnaIds.ByNumSeqs"
-                  summaryAttributesList="assembly_consistency,contains_mrna,overview,sequence,taxonLink"
+                  summaryAttributesList="assembly_consistency,contains_mrna,overview,sequence,taxonLink,score"
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
                 Find RNAs from a given organism that contain more than a 
                 specified number of ESTs in their assembly.
             </description>
+            <dynamicAttributes>
+              <columnAttribute name="na_sequence_id" displayName="NA Sequence ID" internal="true"/>
+              <columnAttribute name="score" displayName="Blast score"/>
+              <linkAttribute name="taxonLink2" displayName="Taxon2" 
+                            visible="$$taxon_name$$">
+                 <url>
+                    <![CDATA[@TAXON_URL@]]>
+                 </url>
+              </linkAttribute>
+
+              <textAttribute name="overview2" displayName="Overview2" truncateTo="80">
+                <text>
+                    RNA $$primaryKey$$ is from $$taxon_name$$.
+                </text>
+              </textAttribute>
+
+            </dynamicAttributes>
         </question>
 
         <question name="ByDbESTLib" 
@@ -146,34 +163,6 @@
             <description>This question find all RNAs to dump in GFF format</description>
         </question>
 
-    </questionSet>
-
-    <!-- questions that return Zip records -->
-    <questionSet name="ZipQuestions"
-                 displayName="Queries to find Zips"
-                 internal="true">
-
-        <description>
-          These queries find Zips (City, State).
-        </description>
-
-        <question name="ZipByZipCode" 
-                  displayName="Look up Zip by zip code" 
-                  queryRef="ZipIds.ByZipCode" 
-                  recordClassRef="ZipRecordClasses.ZipRecordClass">
-            <description>
-                Look up a zip addresses by their zip code.
-            </description>
-        </question>
-
-        <question name="ZipsByAreaCode" 
-                  displayName="Look up Zips by area code" 
-                  queryRef="ZipIds.ByAreaCode" 
-                  recordClassRef="ZipRecordClasses.ZipRecordClass">
-            <description>
-                Find zip addresses by their area code.
-            </description>
-        </question>
     </questionSet>
 
     <!-- Definitions of Xml sources -->
@@ -477,29 +466,6 @@
         
     </recordClassSet>
 
-    <!-- Zip recordClasses -->
-    <recordClassSet name="ZipRecordClasses">
-    
-        <recordClass name="ZipRecordClass"
-                     idPrefix="ZIP." 
-                     type="ZIP">
-                     
-            <attributeQueryRef ref="ZipAttributes.ZipAttrs">  
-                <columnAttribute name="zip_code"
-                                 displayName="Zip Code" 
-                                 internal="true" />
-                <columnAttribute name="city" 
-                                 displayName="City" />
-                <columnAttribute name="state" 
-                                 displayName="State" />
-                <columnAttribute name="area_code" 
-                                 displayName="Area Code" />
-            </attributeQueryRef>
-            
-        </recordClass>
-
-    </recordClassSet>
-
     <!-- *************** -->
     <!-- model querySets -->
     <!-- *************** -->
@@ -537,7 +503,7 @@
        </wsQuery>
 
         <sqlQuery name="ByNumSeqs" isCacheable="true">
-            <paramRef ref="params.NumSeqs" defaultValue="10"/>
+            <paramRef ref="params.NumSeqs" default="10"/>
             <paramRef ref="params.ApiTaxon"/>
             <column name="na_sequence_id"/>
             <column name="score"/>
@@ -553,7 +519,7 @@
         </sqlQuery>  
       
         <sqlQuery name="ByDbESTLib">
-            <paramRef ref="params.NumEstLibs" defaultValue="10"/>
+            <paramRef ref="params.NumEstLibs" default="10"/>
             <paramRef ref="params.AssemblyConsistency"/>
             <column name="na_sequence_id"/>
             <sql>
@@ -619,30 +585,7 @@
          </sqlQuery>
     </querySet>
 
-
-    <!-- Queries that return ZIP primary keys (for use in questions). -->
-
-    <querySet name="ZipIds">
-        <sqlQuery name="ByZipCode">
-            <paramRef ref="params.ZipCode"/>
-            <column name="zip_code"/>
-            <sql>
-               select z.zip_code
-               from WDKTestZipCode z
-               where z.zip_code = $$ZipCode$$
-            </sql>
-        </sqlQuery>  
-
-        <sqlQuery name="ByAreaCode">
-            <paramRef ref="params.AreaCode"/>
-            <column name="zip_code"/>
-            <sql>
-               select z.zip_code
-               from WDKTestZipCode z
-               where z.area_code = $$AreaCode$$
-            </sql>
-        </sqlQuery>  
-    </querySet>
+    
 
     <!-- Queries that retrieve attributes of RNAs -->
     
@@ -763,24 +706,6 @@
             </sql>
         </sqlQuery>
     </querySet>
-
-    <!-- Queries that retrieve attributes of ESTs -->
-    
-    <querySet name="ZipAttributes">
-        <sqlQuery name="ZipAttrs">
-            <paramRef ref="params.primaryKey"/>
-            <column name="zip_code"/>
-            <column name="city"/>
-            <column name="state"/>
-            <column name="area_code"/>
-            <sql>
-                select z.zip_code, z.city, z.state, z.area_code 
-                from WDKTestZipCode z
-                where z.zip_code = $$primaryKey$$
-            </sql>
-        </sqlQuery>
-    </querySet>
-
 
     <!-- queries that return controlled vocabulary terms -->
 
@@ -939,16 +864,6 @@
                         prompt="EST Library" 
                         help="Library from which EST originate" 
                         queryRef="VocabQueries.EstLib"/>
-
-        <stringParam name="ZipCode" 
-                     prompt="Zip code" 
-                     help="Zip code" 
-                     sample="19104"/>
-
-        <stringParam name="AreaCode"
-                     prompt="Area code" 
-                     help="Area code" 
-                     sample="215"/>
     </paramSet>
 
 </wdkModel>
