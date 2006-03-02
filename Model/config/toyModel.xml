@@ -686,7 +686,7 @@
                         e.accession as source_id, 
                         e.na_sequence_id
                 from WDKTestEst e
-                where  = $$primaryKey$$)
+                where e.est_id = $$primaryKey$$)
             </sql>
         </sqlQuery>
 
