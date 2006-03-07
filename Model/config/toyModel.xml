@@ -47,7 +47,6 @@
                 specified number of ESTs in their assembly.
             </description>
             <dynamicAttributes>
-              <columnAttribute name="na_sequence_id" displayName="NA Sequence ID" internal="true"/>
               <columnAttribute name="score" displayName="Blast score"/>
               <linkAttribute name="taxonLink2" displayName="Taxon2" 
                             visible="$$taxon_name$$">
@@ -519,8 +518,8 @@
         </sqlQuery>  
       
         <sqlQuery name="ByDbESTLib">
-            <paramRef ref="params.NumEstLibs" default="10"/>
-            <paramRef ref="params.AssemblyConsistency"/>
+            <paramRef ref="params.NumEstLibs" default="2"/>
+            <paramRef ref="params.AssemblyConsistency" default="85"/>
             <column name="na_sequence_id"/>
             <sql>
                 <!-- use CDATA because query includes angle brackets -->
@@ -732,6 +731,7 @@
                 from WDKTestTaxonName
                 where name in ('Neospora caninum', 'Plasmodium falciparum', 'Eimeria tenella',
                                'Plasmodium yoelii', 'Sarcocystis neurona', 'Toxoplasma gondii')
+                order by internal desc
             </sql>
         </sqlQuery>
 
