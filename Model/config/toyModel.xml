@@ -107,19 +107,22 @@
 
     <!-- questions for testing dynamic attributes -->
     <questionSet name="DynamicAttributeQuestions" 
-                 displayName="Questions for use in Dynamic Attributes test" 
-                 internal="true">
+                 displayName="Questions for use in Dynamic Attributes test">
+
+        <description>
+          These queries find RNAs by BLAST similarities
+        </description>
                  
         <question name="BySimilarity"
                   displayName="Find RNAs by blast similarity to input sequences" 
-                  summaryAttributesList="Id,overview,sequence,Header,TabularRow,Alignment,Footer"
+                  summaryAttributesList="na_sequence_id,overview,sequence,Header,TabularRow,Alignment,Footer,taxon_name"
                   queryRef="RnaIds.BySimilarity"
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
                 Find RNAs by similarity to input sequence.
             </description>
             <dynamicAttributes>
-              <columnAttribute name="Id" displayName="RNA Id"/>
+              <columnAttribute name="na_sequence_id" displayName="RNA Id"/>
               <columnAttribute name="TabularRow" displayName="Blast summary"/>
               <columnAttribute name="Alignment" displayName="Blast alignment"/>
               <columnAttribute name="Header" displayName="Blast header"/>
@@ -489,11 +492,11 @@
 
     <querySet name="RnaIds">
         <wsQuery name="BySimilarity" displayName="WS Test" 
-                 processName="NcbiBlastProcessor">
+                 processName="org.apidb.apicomplexa.wsfplugin.ncbiblast.NcbiBlastPlugin">
              <paramRef ref="params.Application"/>
              <paramRef ref="params.Database"/>
              <paramRef ref="params.Sequence"/>
-             <wsColumn name="Id" width="20"/>
+             <wsColumn name="na_sequence_id" width="100" wsName="Identifier"/>
              <wsColumn name="TabularRow" width="1000"/>
              <wsColumn name="Alignment" width="3000"/>
              <wsColumn name="Header" width="1000"/>
@@ -744,6 +747,7 @@
                 from WDKTestLibrary where dbest_name like 'N%'
             </sql>
         </sqlQuery>
+
     </querySet>
 
 
@@ -877,6 +881,7 @@
                         prompt="EST Library" 
                         help="Library from which EST originate" 
                         queryRef="VocabQueries.EstLib"/>
+
     </paramSet>
 
 </wdkModel>
