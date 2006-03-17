@@ -768,6 +768,7 @@
 
         <sqlQuery name="RnaGffAttrs">
             <paramRef ref="params.primaryKey"/>
+            <column name="na_sequence_id"/>
             <column name="seqid"/>
             <column name="source"/>
             <column name="type"/>
@@ -780,11 +781,12 @@
             <column name="attr_name"/>
             <column name="attr_description"/>
             <sql>
-                select 'ChrNNN' as seqid,
+                select a.na_sequence_id,
+                       'ChrNNN' as seqid,
                        'WDKToy' as source,
                        'toyRNA' as type,
-                       10 * rownum as fstart,
-                       10 * rownum + 5 as fend,
+                       10  as fstart,
+                       10  + 5 as fend,
                        '.' as score, '.' as strand, '.' as phase,
                        a.na_sequence_id as attr_id,
                        'aToyRna' as attr_name,
@@ -812,8 +814,8 @@
                 select 'ChrNNN' as seqid,
                        'WDKToy' as source,
                        'toyRNA' as type,
-                       10 * rownum as fstart,
-                       10 * rownum + 5 as fend,
+                       10  as fstart,
+                       10 + 5 as fend,
                        '.' as score, '.' as strand, '.' as phase,
                        aseq.na_sequence_id as attr_id,
                        'aToyEst' as attr_name,

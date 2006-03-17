@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>The configuration file toyModel Stress Test.</comment>
+<entry key="QuestionUrl"><![CDATA[http://localhost:8080/wdktoysite/processQuestionSetsFlat.do?questionFullName=]]></entry>
+<entry key="XmlQuestionUrl"><![CDATA[http://localhost:8080/wdktoysite/showXmlDataContent.do?name=]]></entry>
+<entry key="RecordUrl"><![CDATA[http://localhost:8080/wdktoysite/showRecord.do?name=]]></entry>
+<entry key="HomeUrl"><![CDATA[http://localhost:8080/wdktoysite/]]></entry>
+<entry key="MaxDelayTime">1</entry>
+</properties>
