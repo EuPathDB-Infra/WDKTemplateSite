@@ -167,6 +167,35 @@
 
     </questionSet>
 
+
+    <!-- questions that return Zip records -->
+    <questionSet name="ZipQuestions"
+                 displayName="Queries to find Zips"
+                 internal="true">
+
+        <description>
+          These queries find Zips (City, State).
+        </description>
+
+        <question name="ZipByZipCode" 
+                  displayName="Look up Zip by zip code" 
+                  queryRef="ZipIds.ByZipCode" 
+                  recordClassRef="ZipRecordClasses.ZipRecordClass">
+            <description>
+                Look up a zip addresses by their zip code.
+            </description>
+        </question>
+
+        <question name="ZipsByAreaCode" 
+                  displayName="Look up Zips by area code" 
+                  queryRef="ZipIds.ByAreaCode" 
+                  recordClassRef="ZipRecordClasses.ZipRecordClass">
+            <description>
+                Find zip addresses by their area code.
+            </description>
+        </question>
+    </questionSet>
+
     <!-- Definitions of Xml sources -->
 
     <!-- xml question sets -->
@@ -468,6 +497,29 @@
         
     </recordClassSet>
 
+    <!-- Zip recordClasses -->
+    <recordClassSet name="ZipRecordClasses">
+    
+        <recordClass name="ZipRecordClass"
+                     idPrefix="ZIP." 
+                     type="ZIP">
+                     
+            <attributeQueryRef ref="ZipAttributes.ZipAttrs">  
+                <columnAttribute name="zip_code"
+                                 displayName="Zip Code" 
+                                 internal="true" />
+                <columnAttribute name="city" 
+                                 displayName="City" />
+                <columnAttribute name="state" 
+                                 displayName="State" />
+                <columnAttribute name="area_code" 
+                                 displayName="Area Code" />
+            </attributeQueryRef>
+            
+        </recordClass>
+
+    </recordClassSet>
+
     <!-- *************** -->
     <!-- model querySets -->
     <!-- *************** -->
@@ -587,6 +639,30 @@
          </sqlQuery>
     </querySet>
 
+
+    <!-- Queries that return ZIP primary keys (for use in questions). -->
+
+    <querySet name="ZipIds">
+        <sqlQuery name="ByZipCode">
+            <paramRef ref="params.ZipCode"/>
+            <column name="zip_code"/>
+            <sql>
+               select z.zip_code
+               from WDKTestZipCode z
+               where z.zip_code = $$ZipCode$$
+            </sql>
+        </sqlQuery>  
+
+        <sqlQuery name="ByAreaCode">
+            <paramRef ref="params.AreaCode"/>
+            <column name="zip_code"/>
+            <sql>
+               select z.zip_code
+               from WDKTestZipCode z
+               where z.area_code = $$AreaCode$$
+            </sql>
+        </sqlQuery>  
+    </querySet>
     
 
     <!-- Queries that retrieve attributes of RNAs -->
@@ -718,6 +794,23 @@
                 from WDKTestEst e, WDKTestLibrary l 
                 where e.est_id = $$primaryKey$$ 
                 and e.library_id = l.library_id 
+            </sql>
+        </sqlQuery>
+    </querySet>
+
+    <!-- Queries that retrieve attributes of ESTs -->
+    
+    <querySet name="ZipAttributes">
+        <sqlQuery name="ZipAttrs">
+            <paramRef ref="params.primaryKey"/>
+            <column name="zip_code"/>
+            <column name="city"/>
+            <column name="state"/>
+            <column name="area_code"/>
+            <sql>
+                select z.zip_code, z.city, z.state, z.area_code 
+                from WDKTestZipCode z
+                where z.zip_code = $$primaryKey$$
             </sql>
         </sqlQuery>
     </querySet>
@@ -883,6 +976,16 @@
                         prompt="EST Library" 
                         help="Library from which EST originate" 
                         queryRef="VocabQueries.EstLib"/>
+
+        <stringParam name="ZipCode" 
+                     prompt="Zip code" 
+                     help="Zip code" 
+                     sample="19104"/>
+
+        <stringParam name="AreaCode"
+                     prompt="Area code" 
+                     help="Area code" 
+                     sample="215"/>
 
     </paramSet>
 
