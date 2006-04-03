@@ -43,6 +43,10 @@
     <param-value>/customPages/</param-value>
   </context-param>
   <context-param>
+    <param-name>wdkAlwaysGoToSummary_param</param-name>
+    <param-value>no</param-value>
+  </context-param>
+  <context-param>
     <param-name>wdkXmlSchema_param</param-name>
     <param-value>/WEB-INF/wdk-model/lib/rng/xmlAnswer.rng</param-value>
   </context-param>
