@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="site" tagdir="/WEB-INF/tags/site" %>
 
 <%@ attribute name="title"
               description="Value to appear in page's title"
@@ -58,6 +59,11 @@ function check(all) {
               [<a href='<c:url value="/showQueryHistory.do" />'>Query History</a>]
             </td>
           </tr>
+	  <tr>
+	    <td>
+		<site:login/>
+	    </td>
+	  </tr>
         </table>
     </td>
 </tr>
