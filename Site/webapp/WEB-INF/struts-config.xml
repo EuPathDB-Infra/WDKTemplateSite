@@ -45,7 +45,7 @@
       type="org.gusdb.wdk.controller.action.ShowQuestionAction"
       scope="request"
       name="questionSetForm"
-      input="/questionSets.jsp">
+      input="/showQuestionSets.do">
       <forward name="show_question" path="/question.jsp"/>
       <forward name="skip_to_summary" path="/showSummary.do"/>
     </action>
@@ -68,7 +68,7 @@
       type="org.gusdb.wdk.controller.action.ProcessQuestionSetsFlatAction"
       scope="request"
       name="questionSetForm"
-      input="/question.jsp">
+      input="/showQuestion.do">
       <forward name="process_questionsetsflat" path="/processQuestion.do?fromQuestionSet=1"/>
     </action>
     <action
@@ -76,7 +76,7 @@
        type="org.gusdb.wdk.controller.action.ProcessQuestionAction"
        scope="request"
        name="questionForm"
-       input="/question.jsp">
+       input="/showQuestion.do">
        <forward name="pq_show_summary" path="/showSummary.do"/>
        <forward name="pq_start_boolean" path="/startBoolean.do"/>
     </action>
@@ -85,7 +85,7 @@
       type="org.gusdb.wdk.controller.action.ShowSummaryAction"
       scope="request"
       name="questionForm"
-      input="/question.jsp">
+      input="/showQuestion.do">
       <forward name="show_summary" path="/summary.jsp"/>
       <forward name="skip_to_record" path="/showRecord.do"/>
     </action>
@@ -94,7 +94,7 @@
       type="org.gusdb.wdk.controller.action.StartBooleanAction"
       scope="session"
       name="questionForm"
-      input="/question.jsp">
+      input="/showQuestion.do">
       <forward name="grow_boolean" path="/booleanQuestion.jsp"/>
     </action>    
     <action
@@ -102,7 +102,7 @@
        type="org.gusdb.wdk.controller.action.ProcessBooleanQuestionAction"
        scope="session"
        name="booleanQuestionForm"
-       input="/booleanQuestion.jsp">
+       input="/startBoolean.do">
        <forward name="pbq_get_boolean_answer" path="/getBooleanAnswer.do"/>
        <forward name="pbq_grow_boolean" path="/growBoolean.do"/>
     </action>
@@ -111,7 +111,7 @@
       type="org.gusdb.wdk.controller.action.GrowBooleanAction"
       scope="session"
       name="booleanQuestionForm"
-      input="/booleanQuestion.jsp">
+      input="/startBoolean.do">
       <forward name="grow_boolean" path="/booleanQuestion.jsp"/>
     </action>
     <action
@@ -119,7 +119,7 @@
       type="org.gusdb.wdk.controller.action.GetBooleanAnswerAction"
       scope="session"
       name="booleanQuestionForm"
-      input="/booleanQuestion.jsp">
+      input="/startBoolean.do">
       <forward name="get_boolean_answer" path="/summary.jsp"/>
     </action>
     <action
@@ -164,7 +164,7 @@
       path="/processBooleanExpression"
       type="org.gusdb.wdk.controller.action.ProcessBooleanExpressionAction"
       name="booleanExpressionForm"
-      input="/queryHistory.jsp"
+      input="/showQueryHistory.do"
       scope="request">
       <forward name="process_boolean_expression" path="/showSummary.do"/>
     </action>
