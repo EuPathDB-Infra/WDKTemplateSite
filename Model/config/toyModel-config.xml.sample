@@ -11,7 +11,8 @@
              maxActive="20"
              maxIdle="3"
              minIdle="3"
-             maxWait="500"authenticationLogin="yourAuthenticationDBLogin"
+             maxWait="500"
+             authenticationLogin="yourAuthenticationDBLogin"
              authenticationPassword="yourAuthenticationDBPassword"
              authenticationConnectionUrl="yourLoginServerConnectionString"
              authenticationPlatformClass="org.gusdb.wdk.model.implementation.Oracle"
@@ -39,4 +40,4 @@
                       ]]>
                  </emailContent>
     
-</modelConfig>/>
+</modelConfig>
