@@ -2,6 +2,7 @@
 ooooooooooooooooooooooooooo  WDKToySite Version 1.12  ooooooooooooooooooooooooooooooo
 ------------------------------------------------------------------------------
 (Out of sync. will be updated in the next public release)
+For up-to-date information, please refer to the documentation of PlasmoDbWebsite
 
 ------------------------------------------------------------------------------
 ooooooooooooooooooooooooooo  WDKToySite Version 1.11  ooooooooooooooooooooooooooooooo
