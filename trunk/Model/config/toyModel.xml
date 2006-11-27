@@ -1,0 +1,992 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wdkModel name="toyModel" displayName="GUS Web Development Kit Demo">
+
+    <!-- ******************* -->
+    <!-- model introduction  -->
+    <!-- ******************* -->
+    <introduction>
+        Welcome to WDKToySite, a sample website driven by the GUS Web Development Kit.
+        You are invited to explore this site to find out about the core functionalities of WDK.
+        Enjoy the surfing!
+    </introduction>
+
+
+    <!-- ************ -->
+    <!-- questionSets -->
+    <!-- ************ -->
+    
+    <!-- 
+    A question is "a query that returns a list of records."  (Regular queries 
+    return columns and rows.)  They are formed by pairing a query with a
+    record class.  The query must be one that returns one column containing
+    a list of primary keys.  The record class must be one that expects as
+    a primary key the type of key returned by the query.
+    
+    A question set is a grouping of questions.  It may be used in the
+    user interface to present the enclosed questions in one choice box.  
+    -->
+
+
+    <!-- questions that return RNA records -->
+
+
+    <questionSet name="RnaQuestions"
+                 displayName="Queries to find RNAs">
+
+        <description>
+          These queries find RNAs
+        </description>
+
+        <question name="ByNumSeqs" 
+                  displayName="Find RNAs by number of assembly sequences" 
+                  queryRef="RnaIds.ByNumSeqs"
+                  summaryAttributesList="assembly_consistency,contains_mrna,overview,sequence,taxonLink,score"
+                  recordClassRef="RnaRecordClasses.RnaRecordClass">
+            <description>
+                Find RNAs from a given organism that contain more than a 
+                specified number of ESTs in their assembly.
+            </description>
+            <dynamicAttributes>
+              <columnAttribute name="score" displayName="Blast score"/>
+              <linkAttribute name="taxonLink2" displayName="Taxon2" 
+                            visible="$$taxon_name$$">
+                 <url>
+                    <![CDATA[@TAXON_URL@]]>
+                 </url>
+              </linkAttribute>
+
+              <textAttribute name="overview2" displayName="Overview2" truncateTo="80">
+                <text>
+                    RNA $$primaryKey$$ is from $$taxon_name$$.
+                </text>
+              </textAttribute>
+
+            </dynamicAttributes>
+        </question>
+
+        <question name="ByDbESTLib" 
+                  displayName="Find RNAs by number of EST libs"
+                  queryRef="RnaIds.ByDbESTLib" 
+                  recordClassRef="RnaRecordClasses.RnaRecordClass">
+            <description>
+                Find RNAs with required assembly consistency score that
+                contain ESTs from more than a specified number of libraries.
+            </description>
+        </question>
+
+    </questionSet>
+
+    <!-- questions that return EST records -->
+    <questionSet name="EstQuestions"
+                 displayName="Queries to find ESTs">
+
+        <description>
+          These queries find ESTs
+        </description>
+
+        <question name="ByEstLib" 
+                  displayName="Find ESTs by originating library" 
+                  queryRef="EstIds.ByEstLib" 
+                  recordClassRef="EstRecordClasses.EstRecordClass">
+            <description>
+                Find ESTs from a given library
+            </description>
+        </question>
+
+        <question name="EstNullAttributes" 
+                  displayName="Question that will return some controversial ESTs!"
+                  queryRef="EstIds.NullAttributeEsts" 
+                  recordClassRef="EstRecordClasses.EstRecordClass">
+
+             <description>
+                  Question that will return ESTs, some of which have null values for their atttributes
+             </description>
+        </question>
+
+    </questionSet>
+
+    <!-- questions for testing dynamic attributes -->
+    <questionSet name="DynamicAttributeQuestions" 
+                 displayName="Questions for use in Dynamic Attributes test">
+
+        <description>
+          These queries find RNAs by BLAST similarities
+        </description>
+                 
+        <question name="BySimilarity"
+                  displayName="Find RNAs by blast similarity to input sequences" 
+                  summaryAttributesList="na_sequence_id,overview,sequence,Header,TabularRow,Alignment,Footer,taxon_name"
+                  queryRef="RnaIds.BySimilarity"
+                  recordClassRef="RnaRecordClasses.RnaRecordClass">
+            <description>
+                Find RNAs by similarity to input sequence.
+            </description>
+            <dynamicAttributes>
+              <columnAttribute name="na_sequence_id" displayName="RNA Id"/>
+              <columnAttribute name="TabularRow" displayName="Blast summary"/>
+              <columnAttribute name="Alignment" displayName="Blast alignment"/>
+              <columnAttribute name="Header" displayName="Blast header"/>
+              <columnAttribute name="Footer" displayName="Blast footer"/>
+            </dynamicAttributes>
+        </question>
+    </questionSet>
+
+    <!-- questions for use in nestedRecords and nestedRecordLists -->
+    <questionSet name="NestedRecordQuestions" 
+                 displayName="Questions for use in NestedRecords" 
+                 internal="true">
+        
+         <question name="RNA" 
+                   queryRef="RnaIds.EstParent" 
+                   recordClassRef="RnaRecordClasses.RnaRecordClass" 
+                   displayName="Nested Record RNA">
+              <description> Question that returns the RNA that belongs to the given EST; for use in a Nested Record </description>
+         </question>
+
+         <question name="ESTs" queryRef="RnaTables.SimpleEstIds" recordClassRef="EstRecordClasses.EstRecordClass" displayName="Nested Record ESTs">
+              <description> Question that returns ESTs that belong to the given RNA; for use in a Nested Record List </description>
+         </question>
+
+    </questionSet>
+
+    <!-- questions for use in data dumps -->
+    <questionSet displayName="Questions for use in data dumps" 
+                 internal="true" 
+                 name="DataDumpQuestions">
+
+        <description>
+            These questions are for data dumps
+        </description>
+
+        <question displayName="Find all RNAs" 
+                  name="RnaGff" 
+                  queryRef="DataDumpQueries.RnaGff" 
+                  recordClassRef="DataDumpRecordClasses.RnaGff">
+            <description>This question find all RNAs to dump in GFF format</description>
+        </question>
+
+    </questionSet>
+
+
+    <!-- questions that return Zip records -->
+    <questionSet name="ZipQuestions"
+                 displayName="Queries to find Zips"
+                 internal="true">
+
+        <description>
+          These queries find Zips (City, State).
+        </description>
+
+        <question name="ZipByZipCode" 
+                  displayName="Look up Zip by zip code" 
+                  queryRef="ZipIds.ByZipCode" 
+                  recordClassRef="ZipRecordClasses.ZipRecordClass">
+            <description>
+                Look up a zip addresses by their zip code.
+            </description>
+        </question>
+
+        <question name="ZipsByAreaCode" 
+                  displayName="Look up Zips by area code" 
+                  queryRef="ZipIds.ByAreaCode" 
+                  recordClassRef="ZipRecordClasses.ZipRecordClass">
+            <description>
+                Find zip addresses by their area code.
+            </description>
+        </question>
+    </questionSet>
+
+    <!-- Definitions of Xml sources -->
+
+    <!-- xml question sets -->
+    <xmlQuestionSet name="XmlQuestions"
+                    displayName="Data contents from XML data sources">
+
+        <description>
+          Data contents from XML data sources
+        </description>
+
+        <xmlQuestion name="NewsQuestion" 
+                     displayName="Sample News" 
+                     recordClassRef="XmlRecordClasses.NewsRecord"
+                     xmlDataURL="news.xml">
+            <description>
+                Retrieve news from XML data source
+            </description>
+        </xmlQuestion>
+
+        <xmlQuestion name="CNNNewsQuestion" 
+                  displayName="News about PlasmoDB" 
+                  recordClassRef="XmlRecordClasses.NewsRecord"
+                  xmlDataURL="http://rss.cnn.com/rss/cnn_topstories.rss"
+                  xslURL="rss.xsl">
+            <description>
+                Retrieve CNN headline news from XML data source, and converted it on the fly
+            </description>
+        </xmlQuestion>
+ 
+        <xmlQuestion name="ResourceQuestion" 
+                  displayName="Sample Data Sources" 
+                  recordClassRef="XmlRecordClasses.ResourceRecord"
+                  xmlDataURL="sampleResources.xml"
+                  xslURL="resources2records.xsl">
+            <description>
+                Sample Data Sources
+            </description>
+        </xmlQuestion>
+
+    </xmlQuestionSet>
+
+    <!-- xml record class set -->
+    <xmlRecordClassSet name="XmlRecordClasses">
+
+        <xmlRecordClass 
+        	name="NewsRecord" 
+        	type="Toy News"
+        	idPrefix="NEWS."
+        	delimiter="@">
+            <xmlAttribute name="headline"/>  
+            <xmlAttribute name="date"/>  
+            <xmlAttribute name="item"/>
+            <xmlTable name="relatedLinks">
+                <xmlAttribute name="displayName"/>
+                <xmlAttribute name="url"/>
+            </xmlTable>
+         </xmlRecordClass>
+
+
+        <xmlRecordClass name="ResourceRecord" 
+        	type="PlasmoDB Pipeline Resource"
+        	idPrefix="RESOURCE."
+        	delimiter="@">
+            <xmlAttribute name="resource"/>  
+            <xmlAttribute name="version"/>  
+            <xmlAttribute name="publicUrl"/>  
+            <xmlAttribute name="category"/>  
+            <xmlAttribute name="description"/>
+            <xmlTable name="publications">
+               <xmlAttribute name="pmid"/>
+            </xmlTable>  
+         </xmlRecordClass>
+
+    </xmlRecordClassSet>
+
+    <!-- *************** -->
+    <!-- recordClassSets -->
+    <!-- *************** -->
+
+    <!-- 
+    A "record" is an object that gathers together data about an entity in the
+    database.  The entity is defined as data associated with a primary key, 
+    and data in the record is based on that key. The data comes in three forms:
+    attributes, text attributes and tables.  An attribute is a single value
+    that describes the entity, such as "size."  A text attribute is similar,
+    but the value is created by defining a text string and optionally embedding
+    into that string the values of other attributes.  A table is a value
+    in the form of columns and rows, such as a table describing related 
+    publications.
+  
+    A record class is a template for creating records from a given primary key.
+    It includes "attribute queries," "table queries" and "text attributes."  
+
+    An attribute query must have only one parameter, the primary key.  It must
+    return exactly zero or one rows.  The columns in the query are interpreted
+    as attributes of the record.  
+
+    A text attribute has a body of text with the values of other attributes
+    optionally embedded in it.  The other attribute values are referred to
+    as variables of the form "$$name_of_attribute$$".
+
+    A table query must have only one parameter, the primary key.  It may
+    return any number of rows (but typically not a huge number).  The result
+    of the query is interpreted as being a table that 
+    
+    A "record set" is a grouping of records. It is useful in organizing the
+    model xml file.
+
+    The full name of a record is is of the form "set_name.name."
+    --> 
+
+    <!-- RNA recordClasses -->
+    <recordClassSet name="RnaRecordClasses">
+
+        <recordClass idPrefix="TR." name="RnaRecordClass" type="Toy RNA"
+            attributeOrdering="assembly_consistency,contains_mrna,taxon_name">
+            
+            <attributeQueryRef ref="RnaAttributes.GeneAttrs">
+                <columnAttribute name="taxon_name" 
+                                 displayName="Organism"  
+                                 help="The name of the organism" 
+                                 type="String"
+                                 truncateTo="20"
+                                 internal="false" />
+                <columnAttribute name="isoform_count" 
+                                 displayName="Isoform Count" />
+            </attributeQueryRef>  
+            
+            <attributeQueryRef ref="RnaAttributes.AssemblyAttrs">
+                <columnAttribute name="assembly_consistency" 
+                                 displayName="Assembly consistency" />
+                <columnAttribute name="contains_mrna"
+                                 displayName="Contains mRNA" />
+                <columnAttribute name="number_of_contained_sequences"
+                                 displayName="Number contained sequences" />
+                <columnAttribute name="sequence" 
+                                 displayName="Sequence" 
+                                 truncateTo="8" />
+                <textAttribute name="numseqs" 
+                               displayName="Nice Num">
+                    <text>
+                        number of contained seqs is $$number_of_contained_sequences$$.
+                    </text>
+                </textAttribute>
+            </attributeQueryRef>
+            
+            <table name="ConstituentEsts"
+                   displayName="Constituent Ests"
+                   queryRef="RnaTables.ConstituentEsts">
+                <columnAttribute name="est_id"
+                                 displayName="EST Id" />
+                <columnAttribute name="source_id"
+                                 displayName="DoTS RNA Id"
+                                 internal="true" />
+                <columnAttribute name="sequence_start"
+                                 displayName="Sequence Start" />
+                <columnAttribute name="sequence_end"
+                                 displayName="Sequence End" />
+                <columnAttribute name="quality_start"
+                                 displayName="Quality Start" />
+                <columnAttribute name="quality_end"
+                                 displayName="Quality End" />
+                <linkAttribute name="DoTS"
+                               displayName="DoTS RNA" 
+                               visible="$$source_id$$">
+                     <url>
+                         <![CDATA[@DOTS_URL@]]>
+                     </url>
+                </linkAttribute>
+            </table>
+
+            <linkAttribute name="taxonLink" 
+                           displayName="Taxon" 
+                           visible="$$taxon_name$$">
+                 <url>
+                    <![CDATA[@TAXON_URL@]]>
+                 </url>
+            </linkAttribute>
+
+            <textAttribute name="overview" 
+                           displayName="Overview" 
+                           truncateTo="80">
+                <text>
+                    RNA $$primaryKey$$ is from $$taxon_name$$.
+                </text>
+            </textAttribute>
+
+            <nestedRecordList questionRef="NestedRecordQuestions.ESTs"/>
+
+         </recordClass>
+    </recordClassSet>
+
+    <!-- EST recordClasses -->
+    <recordClassSet name="EstRecordClasses">
+    
+        <recordClass name="EstRecordClass"
+                     idPrefix="EST." 
+                     type="EST">
+                     
+            <attributeQueryRef ref="EstAttributes.EstAttrs">  
+                <columnAttribute name="na_sequence_id"
+                                 displayName="AssemblySeqId" 
+                                 internal="true" />
+                <columnAttribute name="source_id" 
+                                 displayName="Accession" 
+                                 internal="true" />
+                <linkAttribute name="EST"
+                               displayName="EST" 
+                               visible="$$source_id$$">
+                    <url>
+                        <![CDATA[@EST_URL@]]>
+                    </url>
+                </linkAttribute>
+            </attributeQueryRef>
+            
+            <attributeQueryRef ref="EstAttributes.LibAttrs">
+                <columnAttribute name="dbest_name"
+                                 displayName="DBEST name" />
+                <columnAttribute name="anatomy_id"
+                                 displayName="Anatomy Id" />
+            </attributeQueryRef>
+            
+            <attributeQueryRef ref="EstAttributes.NullAttrs">
+                <columnAttribute name="assembly_id"
+                                 displayName="AssemblyId" />
+            </attributeQueryRef>
+        
+            <nestedRecord questionRef="NestedRecordQuestions.RNA"/>
+            
+        </recordClass>
+
+    </recordClassSet>
+
+    <!-- recordClasses for data dumping -->
+    <recordClassSet name="DataDumpRecordClasses">
+
+        <recordClass name="RnaGff" 
+                     attributeOrdering="seqid,source,type,fstart,fend,score,strand,phase,attr_id" 
+                     idPrefix="TR." 
+                     type="Toy RNA">
+
+            <attributeQueryRef ref="DataDumpQueries.RnaGffAttrs">
+                <columnAttribute name="seqid" 
+                                 displayName="SeqId" />
+                <columnAttribute name="source" 
+                                 displayName="Data Source" />
+                <columnAttribute name="type" 
+                                 displayName="Feature Type" />
+                <columnAttribute name="fstart" 
+                                 displayName="Start" />
+                <columnAttribute name="fend" 
+                                 displayName="Start" />
+                <columnAttribute name="score" 
+                                 displayName="Score" />
+                <columnAttribute name="strand" 
+                                 displayName="Strand" />
+                <columnAttribute name="phase" 
+                                 displayName="Reading Frame" />
+                <columnAttribute name="attr_id" 
+                                 displayName="ID" />
+                <columnAttribute name="attr_name" 
+                                 displayName="Name" />
+                <columnAttribute name="attr_description" 
+                                 displayName="description" />
+            </attributeQueryRef>
+
+            <table name="RnaEsts"
+                   displayName="RNA Ests"
+                   queryRef="DataDumpQueries.RnaEsts">
+            
+                <columnAttribute name="seqid" 
+                                 displayName="SeqId" />
+                <columnAttribute name="source" 
+                                 displayName="Data Source" />
+                <columnAttribute name="type" 
+                                 displayName="Feature Type" />
+                <columnAttribute name="fstart" 
+                                 displayName="Start" />
+                <columnAttribute name="fend" 
+                                 displayName="End" />
+                <columnAttribute name="score" 
+                                 displayName="Score" />
+                <columnAttribute name="strand" 
+                                 displayName="Strand" />
+                <columnAttribute name="phase" 
+                                 displayName="Reading Frame" />
+                <columnAttribute name="attr_id" 
+                                 displayName="ID" />
+                <columnAttribute name="attr_name" 
+                                 displayName="Name" />
+                <columnAttribute name="attr_parent" 
+                                 displayName="Parent" />
+                <columnAttribute name="attr_description" 
+                                 displayName="description" />
+            
+            </table>
+
+         </recordClass>
+        
+    </recordClassSet>
+
+    <!-- Zip recordClasses -->
+    <recordClassSet name="ZipRecordClasses">
+    
+        <recordClass name="ZipRecordClass"
+                     idPrefix="ZIP." 
+                     type="ZIP">
+                     
+            <attributeQueryRef ref="ZipAttributes.ZipAttrs">  
+                <columnAttribute name="zip_code"
+                                 displayName="Zip Code" 
+                                 internal="true" />
+                <columnAttribute name="city" 
+                                 displayName="City" />
+                <columnAttribute name="state" 
+                                 displayName="State" />
+                <columnAttribute name="area_code" 
+                                 displayName="Area Code" />
+            </attributeQueryRef>
+            
+        </recordClass>
+
+    </recordClassSet>
+
+    <!-- *************** -->
+    <!-- model querySets -->
+    <!-- *************** -->
+
+    <!--
+    A "query" obtains tabular values from a data source.  It has columns
+    and parameters.  So far, only SQL data sources are supported, but others,
+    such as flat files are coming.  
+
+    Queries are used for different purposes: providing primary keys to a 
+    question; providing attributes and tables to a record; and, providing
+    vocabularies to vocabulary parameters.
+
+    A "query set" is a grouping of queries.  It is useful in organizing the
+    model xml file.  
+
+    The full name of a query is of the form "set_name.name."
+    -->
+
+
+    <!-- Queries that return RNA primary keys (for use in questions and nested records.). -->
+
+    <querySet name="RnaIds">
+        <wsQuery name="BySimilarity" displayName="WS Test" 
+                 processName="org.apidb.apicomplexa.wsfplugin.ncbiblast.NcbiBlastPlugin">
+             <paramRef ref="params.Application"/>
+             <paramRef ref="params.Database"/>
+             <paramRef ref="params.Sequence"/>
+             <wsColumn name="na_sequence_id" width="100" wsName="Identifier"/>
+             <wsColumn name="TabularRow" width="1000"/>
+             <wsColumn name="Alignment" width="3000"/>
+             <wsColumn name="Header" width="1000"/>
+             <wsColumn name="Footer" width="1000"/>
+
+       </wsQuery>
+
+        <sqlQuery name="ByNumSeqs" isCacheable="true">
+            <paramRef ref="params.NumSeqs" default="10"/>
+            <paramRef ref="params.ApiTaxon"/>
+            <column name="na_sequence_id"/>
+            <column name="score"/>
+            <sql>
+                <!-- use CDATA because query includes angle brackets -->
+                <![CDATA[
+                    select distinct a.na_sequence_id, a.number_of_contained_sequences as score
+                    from WDKTestAssembly a
+                    where a.number_of_contained_sequences > $$NumSeqs$$
+                    and a.taxon_id in ($$ApiTaxon$$)
+                ]]>
+            </sql>
+        </sqlQuery>  
+      
+        <sqlQuery name="ByDbESTLib">
+            <paramRef ref="params.NumEstLibs" default="2"/>
+            <paramRef ref="params.AssemblyConsistency" default="85"/>
+            <column name="na_sequence_id"/>
+            <sql>
+                <!-- use CDATA because query includes angle brackets -->
+                <![CDATA[
+                    select distinct aseq.assembly_na_sequence_id as na_sequence_id
+                    from WDKTestEst est, WDKTestLibrary lib,
+                         WDKTestAssemblySequence aseq, WDKTestAssembly a
+                    where lib.library_id = est.library_id 
+                    and est.na_sequence_id = aseq.na_sequence_id 
+                    and aseq.assembly_na_sequence_id = a.na_sequence_id
+                    and aseq.assembly_na_sequence_id is not NULL 
+                    and a.assembly_consistency > $$AssemblyConsistency$$
+                    group by aseq.assembly_na_sequence_id 
+                    having count (distinct lib.dbest_id) >= $$NumEstLibs$$
+                ]]>
+            </sql>
+        </sqlQuery>
+
+        <sqlQuery name="EstParent">
+            <paramRef ref="params.na_sequence_id"/>
+            <column name="na_sequence_id"/>
+            <sql>
+                   select a.na_sequence_id
+                   from WDKTestAssembly a, WDKTestAssemblySequence aseq
+                        where aseq.assembly_na_sequence_id = a.na_sequence_id
+                        and aseq.na_sequence_id = $$na_sequence_id$$
+            </sql>
+        </sqlQuery>
+
+    </querySet>
+
+
+    <!-- Queries that return EST primary keys (for use in questions). -->
+
+    <querySet name="EstIds">
+        <sqlQuery name="ByEstLib">
+            <paramRef ref="params.EstLib"/>
+            <column name="est_id"/>
+            <sql>
+               <!-- union with self for federation simulation -->
+               (select distinct e.est_id
+                  from WDKTestEst e, WDkTestLibrary l
+               where e.library_id = l.library_id
+               and l.library_id in ($$EstLib$$))
+               UNION
+               (select distinct e.est_id
+               from WDKTestEst e, WDkTestLibrary l
+               where e.library_id = l.library_id
+               and l.library_id in ($$EstLib$$))
+            </sql>
+        </sqlQuery>  
+    
+        <sqlQuery name="NullAttributeEsts">
+
+            <column name="est_id"/>
+            <sql>
+              <![CDATA[
+               select est_id from WdkTestEst e 
+               where e.est_id > 9644240 and est_id < 9644245
+              ]]>
+            </sql>
+         </sqlQuery>
+    </querySet>
+
+
+    <!-- Queries that return ZIP primary keys (for use in questions). -->
+
+    <querySet name="ZipIds">
+        <sqlQuery name="ByZipCode">
+            <paramRef ref="params.ZipCode"/>
+            <column name="zip_code"/>
+            <sql>
+               select z.zip_code
+               from WDKTestZipCode z
+               where z.zip_code = $$ZipCode$$
+            </sql>
+        </sqlQuery>  
+
+        <sqlQuery name="ByAreaCode">
+            <paramRef ref="params.AreaCode"/>
+            <column name="zip_code"/>
+            <sql>
+               select z.zip_code
+               from WDKTestZipCode z
+               where z.area_code = $$AreaCode$$
+            </sql>
+        </sqlQuery>  
+    </querySet>
+    
+
+    <!-- Queries that retrieve attributes of RNAs -->
+    
+    <querySet name="RnaAttributes">
+
+        <sqlQuery name="GeneAttrs">
+            <paramRef ref="params.primaryKey"/>
+            <column name="na_sequence_id"/>
+            <column name="taxon_name"/>
+            <column name="isoform_count"/>
+            <sql>
+                select taxon_name, isoform_count, tmp.na_sequence_id
+                from (select a.na_sequence_id, tn.name as taxon_name, count(*) as isoform_count
+                      from WDKTestAssembly a, WDKTestTaxonName tn, WDKTestAssemblySequence aseq
+                      where a.taxon_id = tn.taxon_id
+                      and a.na_sequence_id = aseq.assembly_na_sequence_id
+                      group by a.na_sequence_id, tn.name) tmp
+                where tmp.na_sequence_id = $$primaryKey$$ 
+            </sql>
+        </sqlQuery>
+
+        <sqlQuery name="AssemblyAttrs">
+            <paramRef ref="params.primaryKey"/>
+            <column name="na_sequence_id"/>
+            <column name="assembly_consistency"/>
+            <column name="contains_mrna"/>
+            <column name="number_of_contained_sequences"/>
+            <column name="sequence"/>
+            <sql>
+                select a.na_sequence_id,
+                       a.assembly_consistency, 
+                       a.contains_mrna,
+                       a.number_of_contained_sequences,
+                       a.sequence
+                from WDKTestAssembly a, WDKTestTaxonName tn 
+                where a.na_sequence_id = '$$primaryKey$$' 
+                and a.taxon_id = tn.taxon_id 
+            </sql>
+        </sqlQuery>
+    </querySet>
+
+
+    <!-- Queries that retrieve tables belonging to RNAs  -->
+    
+    <querySet name="RnaTables">
+        <sqlQuery name="ConstituentEsts" displayName="Constituent ESTs">
+            <paramRef ref="params.primaryKey"/>
+            <column name="est_id"/>
+            <column name="source_id"/>
+            <column name="sequence_start"/>
+            <column name="sequence_end"/>
+            <column name="quality_start"/>
+            <column name="quality_end" />
+            <sql>
+                select aseq.na_sequence_id as est_id,
+                       'DT.' || a.na_sequence_id as source_id, aseq.sequence_start,
+                       aseq.sequence_end, aseq.quality_start, aseq.quality_end 
+                from WDKTestAssemblySequence aseq, WDKTestAssembly a
+                where a.na_sequence_id = $$primaryKey$$
+                and a.na_sequence_id = aseq.assembly_na_sequence_id
+            </sql>
+        </sqlQuery>
+
+        <sqlQuery name="SimpleEstIds">
+             <paramRef ref="params.primaryKey"/>
+             <column name="est_id"/>
+             
+             <sql>
+                select est.est_id
+                from WDKTestAssemblySequence aseq, WDKTestAssembly a, WDKTestEst est
+                where a.na_sequence_id = $$primaryKey$$
+                and a.na_sequence_id = aseq.assembly_na_sequence_id
+                and est.na_sequence_id = aseq.na_sequence_id
+             </sql>
+        </sqlQuery>
+
+    </querySet>
+    
+
+    <!-- Queries that retrieve attributes of ESTs -->
+    
+    <querySet name="EstAttributes">
+
+        <sqlQuery name="EstAttrs">
+            <paramRef ref="params.primaryKey"/>
+            <column name="est_id"/>
+            <column name="na_sequence_id"/>
+            <column name="source_id"/>
+            <sql>
+                <!-- union with self for federation simulation -->
+                (select e.est_id,
+                        e.accession as source_id, 
+                        e.na_sequence_id
+                from WDKTestEst e
+                where e.est_id = $$primaryKey$$)
+                  UNION
+                (select e.est_id,
+                        e.accession as source_id, 
+                        e.na_sequence_id
+                from WDKTestEst e
+                where e.est_id = $$primaryKey$$)
+            </sql>
+        </sqlQuery>
+
+        <sqlQuery name="NullAttrs">
+            <paramRef ref="params.primaryKey"/>
+            <column name="est_id"/>
+            <column name="assembly_id"/>
+            <sql>
+                select e.est_id,
+                       a.na_sequence_id as assembly_id
+                from WDKTestEst e, WDKTestAssemblySequence aseq, WdkTestAssembly a
+                where e.est_id = $$primaryKey$$ and e.na_sequence_id = aseq.na_sequence_id
+                and aseq.assembly_na_sequence_id = a.na_sequence_id
+            </sql>
+        </sqlQuery>
+
+
+        <sqlQuery name="LibAttrs">
+            <paramRef ref="params.primaryKey"/>
+            <column name="est_id"/>
+            <column name="dbest_name"/>
+            <column name="anatomy_id"/>
+            <sql>
+                select e.est_id,
+                       l.dbest_name, 
+                       l.anatomy_id 
+                from WDKTestEst e, WDKTestLibrary l 
+                where e.est_id = $$primaryKey$$ 
+                and e.library_id = l.library_id 
+            </sql>
+        </sqlQuery>
+    </querySet>
+
+    <!-- Queries that retrieve attributes of ESTs -->
+    
+    <querySet name="ZipAttributes">
+        <sqlQuery name="ZipAttrs">
+            <paramRef ref="params.primaryKey"/>
+            <column name="zip_code"/>
+            <column name="city"/>
+            <column name="state"/>
+            <column name="area_code"/>
+            <sql>
+                select z.zip_code, z.city, z.state, z.area_code 
+                from WDKTestZipCode z
+                where z.zip_code = $$primaryKey$$
+            </sql>
+        </sqlQuery>
+    </querySet>
+
+    <!-- queries that return controlled vocabulary terms -->
+
+    <querySet name="VocabQueries">
+        <!-- a query that returns a list of Apicomplexon taxons -->
+        <sqlQuery name="ApiTaxon">
+            <column name="term"/>
+            <column name="internal"/>
+            <sql>
+                select distinct name as term, taxon_id as internal
+                from WDKTestTaxonName
+                where name in ('Neospora caninum', 'Plasmodium falciparum', 'Eimeria tenella',
+                               'Plasmodium yoelii', 'Sarcocystis neurona', 'Toxoplasma gondii')
+                order by internal desc
+            </sql>
+        </sqlQuery>
+
+        <!-- a query that returns a list of EST Libraries -->
+        <sqlQuery name="EstLib">
+            <column name="term"/>
+            <column name="internal"/>
+            <sql>
+                select distinct dbest_name as term, library_id as internal
+                from WDKTestLibrary where dbest_name like 'N%'
+            </sql>
+        </sqlQuery>
+
+    </querySet>
+
+
+    <!-- Queries that retrieve attributes or tables for data dumping records -->
+    
+    <querySet name="DataDumpQueries">
+
+        <sqlQuery name="RnaGff" isCacheable="true">
+            <column name="na_sequence_id"/>
+            <sql>
+                <!-- use CDATA because query includes angle brackets -->
+                <![CDATA[
+                    select distinct a.na_sequence_id
+                    from WDKTestAssembly a
+                ]]>
+            </sql>
+        </sqlQuery>  
+
+        <sqlQuery name="RnaGffAttrs">
+            <paramRef ref="params.primaryKey"/>
+            <column name="na_sequence_id"/>
+            <column name="seqid"/>
+            <column name="source"/>
+            <column name="type"/>
+            <column name="fstart"/>
+            <column name="fend"/>
+            <column name="score"/>
+            <column name="strand"/>
+            <column name="phase"/>
+            <column name="attr_id"/>
+            <column name="attr_name"/>
+            <column name="attr_description"/>
+            <sql>
+                select a.na_sequence_id,
+                       'ChrNNN' as seqid,
+                       'WDKToy' as source,
+                       'toyRNA' as type,
+                       10  as fstart,
+                       10  + 5 as fend,
+                       '.' as score, '.' as strand, '.' as phase,
+                       a.na_sequence_id as attr_id,
+                       'aToyRna' as attr_name,
+                       'Rna of taxon ' || taxon_id as attr_description
+                from WDKTestAssembly a
+                where a.na_sequence_id = $$primaryKey$$
+            </sql>
+        </sqlQuery>
+
+        <sqlQuery name="RnaEsts" displayName="Constituent ESTs">
+            <paramRef ref="params.primaryKey"/>
+            <column name="seqid"/>
+            <column name="source"/>
+            <column name="type"/>
+            <column name="fstart"/>
+            <column name="fend"/>
+            <column name="score"/>
+            <column name="strand"/>
+            <column name="phase"/>
+            <column name="attr_id"/>
+            <column name="attr_name"/>
+            <column name="attr_parent"/>
+            <column name="attr_description"/>
+            <sql>
+                select 'ChrNNN' as seqid,
+                       'WDKToy' as source,
+                       'toyRNA' as type,
+                       10  as fstart,
+                       10 + 5 as fend,
+                       '.' as score, '.' as strand, '.' as phase,
+                       aseq.na_sequence_id as attr_id,
+                       'aToyEst' as attr_name,
+                       a.na_sequence_id as attr_parent,
+                       aseq.sequence_start || ':' || aseq.sequence_end as attr_description
+                from WDKTestAssemblySequence aseq, WDKTestAssembly a
+                where a.na_sequence_id = $$primaryKey$$
+                and a.na_sequence_id = aseq.assembly_na_sequence_id
+            </sql>
+        </sqlQuery>
+
+    </querySet>
+
+
+    <!-- parameters used by queries -->
+
+    <paramSet name="params">
+
+        <stringParam name="primaryKey" 
+                     prompt="Primary Key" 
+                     help="primary key" />
+
+        <stringParam name="NumSeqs" 
+                     prompt="Number of Contained Sequences" 
+                     help="number of seqs" 
+                     regex="\d+"/>
+
+        <stringParam name="na_sequence_id"
+                     prompt="NestedRecord Param"
+                     help="Only used in a nested record"/>
+
+        <stringParam name="NumEstLibs" 
+                     prompt="Number of EST Libs" 
+                     help="number of distinct libs" 
+                     regex="\d+"
+                     sample="3"/>
+
+        <stringParam name="AssemblyConsistency" 
+                     prompt="Assembly consistency score" 
+                     help="on the scale of 0-100" 
+                     regex="100|\d|\d{2}"
+                     sample="95"/>
+
+        <stringParam name="Application" 
+                     prompt="flavors of blast application" 
+                     help="flavors of blast application" 
+                     sample="blastn"/>
+
+        <stringParam name="Database" 
+                     prompt="Rna Blast Database" 
+                     help="Rna Blast Database" 
+                     sample="RNAs"/>
+
+        <stringParam name="Sequence" 
+                     prompt="Blast Input Sequence" 
+                     help="Blast Input Sequence" 
+                     sample=""/>
+
+        <flatVocabParam name="ApiTaxon" 
+                        prompt="Organism" 
+                        help="Apicomplexon taxons" 
+                        multiPick="true"
+                        queryRef="VocabQueries.ApiTaxon"/>
+        <flatVocabParam name="EstLib" 
+                        prompt="EST Library" 
+                        help="Library from which EST originate" 
+                        queryRef="VocabQueries.EstLib"/>
+
+        <stringParam name="ZipCode" 
+                     prompt="Zip code" 
+                     help="Zip code" 
+                     sample="19104"/>
+
+        <stringParam name="AreaCode"
+                     prompt="Area code" 
+                     help="Area code" 
+                     sample="215"/>
+
+    </paramSet>
+
+</wdkModel>

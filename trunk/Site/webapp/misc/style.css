@@ -1,0 +1,39 @@
+BODY {
+	background: white;
+	color: black;
+        font-family:Arial, helvetica, sans-serif;
+        font-size:12pt
+}
+
+H1 { color: darkblue }
+
+EM {
+    color: red;
+	font-style: italic
+}
+
+HR {
+   border: 1px solid #f00;
+   color: maroon;
+   background-color: #fcd624;
+   height: 4px;
+}
+
+tr.headerRow {
+	background-color: #aeaeff;
+}
+
+tr.rowLight {
+	
+}
+
+tr.rowMedium {
+	background-color: #ffcccc;
+}
+
+tr.rowDark {
+	background-color: #fcd624;
+}
+
+.footer {font-family:Arial, helvetica, sans-serif; font-size:11pt; color:#060606; font-style:italic}
+.fixed {font-family:courier; font-size:12pt; color:#000000;}

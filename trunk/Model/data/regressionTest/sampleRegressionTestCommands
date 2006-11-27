@@ -1,0 +1,15 @@
+name="newCacheTest"
+command="wdkCache -new -noSchemaOutput"
+critical=true
+name="simpleQueryTest"
+command="wdkQuery -query RnaIds.ByDbESTLib -params NumEstLibs 6 AssemblyConsistency 80"
+critical=true
+name="simpleSummaryTest"
+command="wdkSummary -rows 1 2 -question RnaQuestions.ByNumSeqs -params NumSeqs 50 ApiTaxon 'Neospora caninum'"
+critical=true
+name="simpleRecordTest"
+command="wdkRecord -record RnaRecordClasses.RnaRecordClass -primaryKey 92484673"
+critical=true
+name="dropCacheTest"
+command="wdkCache -drop -noSchemaOutput"
+critical=true

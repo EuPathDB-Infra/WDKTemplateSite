@@ -1,0 +1,135 @@
+------------------------------------------------------------------------------
+ooooooooooooooooooooooooooo  WDKToySite Version 1.12  ooooooooooooooooooooooooooooooo
+------------------------------------------------------------------------------
+(Out of sync. will be updated in the next public release)
+For up-to-date information, please refer to the documentation of PlasmoDbWebsite
+
+------------------------------------------------------------------------------
+ooooooooooooooooooooooooooo  WDKToySite Version 1.11  ooooooooooooooooooooooooooooooo
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+oooooooooooooooooooooooo  WDKToySite Version 1.10  oooooooooooooooooooooooooooo
+------------------------------------------------------------------------------
+
+====================  Model - Fixed Bugs ========================
+
+===================== Model - Features ==========================
+
+* removed extraneous dynamic attributes from RnaQuestions.ByNumSeqs
+
+* updated model file to reflect the move of the definition of
+  record attributes from attribute queries up to record itself
+
+* added javascript to be used on reportMaker (aka download) config page
+
+===================== Site - Fixed Bugs =========================
+
+
+===================== Site - Features ===========================
+
+
+------------------------------------------------------------------------------
+oooooooooooooooooooooooo  WDKToySite Version 1.9  oooooooooooooooooooooooooooo
+------------------------------------------------------------------------------
+
+====================  Model - Fixed Bugs ========================
+
+===================== Model - Features ==========================
+
+* Added internal question set for testing dynamic attributes 
+  (eg blast score of similarity search, which can vary with query sequence
+   against the same sequence for a toy RNA record)
+
+===================== Site - Fixed Bugs =========================
+
+
+===================== Site - Features ===========================
+
+
+------------------------------------------------------------------------------
+oooooooooooooooooooooooo  WDKToySite Version 1.8  oooooooooooooooooooooooooooo
+------------------------------------------------------------------------------
+
+====================  Model - Fixed Bugs ========================
+
+===================== Model - Features ==========================
+
+* Added GFF3 data dump questions, queries, and sanity test cases
+
+* Added XmlQuestion test data and sanity test cases
+
+===================== Site - Fixed Bugs =========================
+
+
+===================== Site - Features ===========================
+
+* Added link to data content listing page from the header
+
+
+------------------------------------------------------------------------------
+oooooooooooooooooooooooo  WDKToySite Version 1.7  oooooooooooooooooooooooooooo
+------------------------------------------------------------------------------
+
+====================  Model - Fixed Bugs ========================
+
+===================== Model - Features ==========================
+
+* Added history sanity test cases (toyModel-history.xml)
+
+===================== Site - Fixed Bugs =========================
+
+* Modified header to add link to query history page
+
+* Also added link to questions page from the header
+
+===================== Site - Features ===========================
+
+
+------------------------------------------------------------------------------
+oooooooooooooooooooooooo  WDKToySite Version 1.6  oooooooooooooooooooooooooooo
+------------------------------------------------------------------------------
+
+====================  Model - Fixed Bugs ========================
+
+* included some previously missed out query tests
+
+===================== Model - Features ==========================
+
+* trimmed test data so that it now takes about 15 minutes to load test database
+  instead of hours (note: need to re-create test database after installing this version)
+
+* modified toyModel.xml to reflect test data trimming
+  (note: need to re-create cache after installing this version)
+
+* added test cases for all Questions defined (testing summary)
+
+===================== Site - Fixed Bugs =========================
+
+
+===================== Site - Features ===========================
+
+
+------------------------------------------------------------------------------
+oooooooooooooooooooooooo  WDKToySite Version 1.5  oooooooooooooooooooooooooooo
+------------------------------------------------------------------------------
+
+Model - Fixed Bugs
+
+   * fixed bugs of sanity test model, and it now includes all queries (except
+     special cases) defined in toyModel.xml.
+     
+
+Model - Features
+
+   * added one column, row_project_id, into each of the test table data file
+
+   * provided a new set of configuration files, toyFedModel, which demonstrate the use of
+     federated primary key
+   
+Site - Fixed Bugs
+
+Site - Features
+
+

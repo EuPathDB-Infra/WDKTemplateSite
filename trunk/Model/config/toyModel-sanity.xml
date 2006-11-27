@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sanityModel>
+
+      <sanityQuery ref="RnaIds.ByDbESTLib" minOutputLength="1" maxOutputLength="100">
+           <sanityParam name="NumEstLibs" value="6"/>
+           <sanityParam name="AssemblyConsistency" value="95"/>
+      </sanityQuery>
+
+      <sanityQuery ref="RnaIds.ByNumSeqs" minOutputLength="1" maxOutputLength="100">
+           <sanityParam name="NumSeqs" value="50"/>
+           <sanityParam name="ApiTaxon" value="Neospora caninum"/>
+      </sanityQuery>
+
+      <sanityQuery ref="RnaIds.EstParent" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="na_sequence_id" value="20271566"/>
+      </sanityQuery>
+
+      <sanityQuery ref="EstIds.ByEstLib" minOutputLength="1" maxOutputLength="1000">
+           <sanityParam name="EstLib" value="Nc-1 pZ Tachyzoite cDNA Library"/>
+      </sanityQuery>
+
+      <sanityQuery ref="ZipIds.ByZipCode" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="ZipCode" value="19104"/>
+      </sanityQuery>
+
+      <sanityQuery ref="ZipIds.ByAreaCode" minOutputLength="100" maxOutputLength="200">
+           <sanityParam name="AreaCode" value="215"/>
+      </sanityQuery>
+
+      <sanityQuery ref="EstIds.NullAttributeEsts" minOutputLength="1" maxOutputLength="10">
+      </sanityQuery>
+
+      <sanityQuery ref="VocabQueries.ApiTaxon" minOutputLength="3" maxOutputLength="3"/>
+
+      <sanityQuery ref="VocabQueries.EstLib" minOutputLength="3" maxOutputLength="30"/>
+
+      <sanityQuery ref="RnaAttributes.GeneAttrs" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="primaryKey" value="91618406"/>
+      </sanityQuery>
+
+      <sanityQuery ref="EstAttributes.EstAttrs" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="primaryKey" value="9645058"/>
+      </sanityQuery>
+
+      <sanityQuery ref="ZipAttributes.ZipAttrs" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="primaryKey" value="19104"/>
+      </sanityQuery>
+
+      <sanityQuery ref="EstAttributes.NullAttrs" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="primaryKey" value="9645058"/>
+      </sanityQuery>
+
+      <sanityQuery ref="RnaAttributes.AssemblyAttrs" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="primaryKey" value="91618406"/>
+      </sanityQuery>
+
+      <sanityQuery ref="EstAttributes.LibAttrs" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="primaryKey" value="9645058"/>
+      </sanityQuery>
+
+      <sanityQuery ref="RnaTables.ConstituentEsts" minOutputLength="1" maxOutputLength="100">
+           <sanityParam name="primaryKey" value="91618406"/>
+      </sanityQuery>
+
+      <sanityQuery ref="RnaTables.SimpleEstIds" minOutputLength="1" maxOutputLength="100">
+           <sanityParam name="primaryKey" value="92484486"/>
+      </sanityQuery>
+
+      <sanityQuery ref="DataDumpQueries.RnaGff" minOutputLength="1000" maxOutputLength="2000">
+      </sanityQuery>
+
+      <sanityQuery ref="DataDumpQueries.RnaGffAttrs" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="primaryKey" value="91618406"/>
+      </sanityQuery>
+
+      <sanityQuery ref="DataDumpQueries.RnaEsts" minOutputLength="1" maxOutputLength="1">
+           <sanityParam name="primaryKey" value="91618406"/>
+      </sanityQuery>
+
+      <sanityRecord ref="RnaRecordClasses.RnaRecordClass" primaryKey="91618406" />
+
+      <sanityRecord ref="EstRecordClasses.EstRecordClass" primaryKey="9645058" />
+
+      <sanityRecord ref="ZipRecordClasses.ZipRecordClass" primaryKey="19104" />
+
+      <sanityRecord ref="DataDumpRecordClasses.RnaGff" primaryKey="91618406" />
+
+      <sanityQuestion ref="RnaQuestions.ByNumSeqs" pageStart="1" pageEnd="20"
+          minOutputLength="1" maxOutputLength="100">
+           <sanityParam name="NumSeqs" value="50"/>
+           <sanityParam name="ApiTaxon" value="Neospora caninum"/>           
+      </sanityQuestion>
+
+      <sanityQuestion ref="RnaQuestions.ByNumSeqs" pageStart="18" pageEnd="25"
+          minOutputLength="1" maxOutputLength="100">
+           <sanityParam name="NumSeqs" value="50"/>
+           <sanityParam name="ApiTaxon" value="Neospora caninum"/>           
+      </sanityQuestion>
+
+      <sanityQuestion ref="RnaQuestions.ByDbESTLib" pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="100">
+           <sanityParam name="NumEstLibs" value="6"/>
+           <sanityParam name="AssemblyConsistency" value="95"/>
+      </sanityQuestion>
+
+      <sanityQuestion ref="EstQuestions.ByEstLib" pageStart="2" pageEnd="20"
+         minOutputLength="1" maxOutputLength="1000">
+          <sanityParam name="EstLib" value="Nc-1 pZ Tachyzoite cDNA Library"/>
+      </sanityQuestion>
+
+      <sanityQuestion ref="EstQuestions.EstNullAttributes" pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="10">
+      </sanityQuestion>
+
+      <sanityQuestion ref="ZipQuestions.ZipByZipCode" pageStart="1" pageEnd="1"
+         minOutputLength="1" maxOutputLength="1">
+          <sanityParam name="ZipCode" value="19104"/>
+      </sanityQuestion>
+
+      <sanityQuestion ref="ZipQuestions.ZipsByAreaCode" pageStart="2" pageEnd="4"
+         minOutputLength="100" maxOutputLength="200">
+          <sanityParam name="AreaCode" value="215"/>
+      </sanityQuestion>
+
+      <sanityQuestion ref="NestedRecordQuestions.RNA" pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="1">
+          <sanityParam name="na_sequence_id" value="20271566"/>
+      </sanityQuestion>
+
+      <sanityQuestion ref="NestedRecordQuestions.ESTs" pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="100">
+           <sanityParam name="primaryKey" value="92484486"/>
+      </sanityQuestion>
+
+      <sanityQuestion ref="DataDumpQuestions.RnaGff" pageStart="1" pageEnd="20"
+         minOutputLength="1000" maxOutputLength="2000">
+      </sanityQuestion>
+
+      <sanityXmlQuestion ref="XmlQuestions.NewsQuestion" 
+         pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="100" />
+
+      <sanityXmlQuestion ref="XmlQuestions.NewsQuestion" 
+         pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="100" 
+         xmlData="news.xml" />
+
+      <sanityXmlQuestion ref="XmlQuestions.ResourceQuestion" 
+         pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="100" />
+
+      <sanityXmlQuestion ref="XmlQuestions.CNNNewsQuestion" 
+         pageStart="1" pageEnd="20"
+         minOutputLength="1" maxOutputLength="100" />
+
+</sanityModel>
