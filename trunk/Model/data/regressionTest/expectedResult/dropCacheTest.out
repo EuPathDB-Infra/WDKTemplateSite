@@ -1,5 +1,0 @@
-Attempting to drop 3 results tables
-Succeeded in dropping 3
-Deleting all rows from QueryInstance
-Dropping table QueryInstance
-Dropping sequence QueryInstance_pkseq
