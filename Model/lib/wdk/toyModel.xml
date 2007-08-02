@@ -47,7 +47,7 @@
                 specified number of ESTs in their assembly.
             </description>
 
-            <attributeList summary="assembly_consistency,contains_mrna,overview,sequence,taxonLink,score"
+            <attributesList summary="assembly_consistency,contains_mrna,overview,sequence,taxonLink,score"
                            sorting="score desc"/>
 
             <dynamicAttributes>
@@ -125,7 +125,7 @@
                 Find RNAs by similarity to input sequence.
             </description>
 
-            <attributeList summary="na_sequence_id,overview,sequence,Header,TabularRow,Alignment,Footer,taxon_name"
+            <attributesList summary="na_sequence_id,overview,sequence,Header,TabularRow,Alignment,Footer,taxon_name"
                            sorting="na_sequence_id asc"/>
 
             <dynamicAttributes>
@@ -722,7 +722,7 @@
                        a.number_of_contained_sequences,
                        a.sequence
                 from WDKTestAssembly a, WDKTestTaxonName tn 
-                where a.na_sequence_id = '$$primaryKey$$' 
+                where a.na_sequence_id = $$primaryKey$$ 
                 and a.taxon_id = tn.taxon_id 
             </sql>
         </sqlQuery>
