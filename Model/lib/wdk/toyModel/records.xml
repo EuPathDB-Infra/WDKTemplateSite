@@ -83,32 +83,47 @@
                 <columnRef>project_id</columnRef>
                 <text>
                     <![CDATA[
-                    $$project_id$$:$$source_id$$
+                    $$project_id$$:$$na_sequence_id$$
                     ]]>
                 </text>                
             </primaryKeyAttribute>
-            
-            <summaryTable name="sample_sum"
-                          displayName="Sample Summaries"
-                          rowParamRef="params.sample_sum_row"
-                          columnParamRef="params.sample_sum_column">
+
+
+      <!-- =============================================================== -->
+      <!-- Filters Layouts -->  
+      <!-- =============================================================== -->
+
+            <answerFilterLayout name="Sample"
+                                displayName="Sample Filter Layout">
                 <description>
                     <![CDATA[
-                    A Sample Summary Table
+                      Summary views of results from specific strains.
                     ]]>
                 </description>
                 
-                <view rowTerm="Row A"
-                      columnTerm="Column 2"
-                      summaryQueryRef="SummaryQueries.RnaSummaryQuery"
-                      isBooleanDefault="true">
+                <instanceRef ref="any_instance"   layout="1-1" />
+
+            </answerFilterLayout>
+                                
+
+      <!-- =============================================================== -->
+      <!-- Filters -->  
+      <!-- =============================================================== -->
+            
+            <answerFilter queryRef="SummaryQueries.RnaSummaryQuery">
+                
+                <instance name="any_instance" displayName="Any Instance"
+                          isDefault="true" isBooleanDefault="true">
                     <description>
                         <![CDATA[
                             A Sample Cell
                         ]]>
-                    </description>      
-                </view>
-            </summaryTable>
+                    </description>   
+                    <paramValue name="sample_sum_row">Row A</paramValue>
+                    <paramValue name="sample_sum_column">Column 2</paramValue>
+                </instance>
+                
+            </answerFilter>
 
             <reporter name="tabular" displayName="Summary - Tab delimited"
                       implementation="org.gusdb.wdk.model.report.TabularReporter">
@@ -209,28 +224,6 @@
                     ]]>
                 </text>                
             </primaryKeyAttribute>
-            
-            <summaryTable name="sample_sum"
-                          displayName="Sample Summaries"
-                          rowParamRef="params.sample_sum_row"
-                          columnParamRef="params.sample_sum_column">
-                <description>
-                    <![CDATA[
-                    A Sample Summary Table
-                    ]]>
-                </description>
-                
-                <view rowTerm="Row A"
-                      columnTerm="Column 2"
-                      summaryQueryRef="SummaryQueries.EstSummaryQuery"
-                      isBooleanDefault="true">
-                    <description>
-                        <![CDATA[
-                            A Sample Cell
-                        ]]>
-                    </description>      
-                </view>
-            </summaryTable>
 
             <reporter name="tabular" displayName="Summary - Tab delimited"
                       implementation="org.gusdb.wdk.model.report.TabularReporter">
@@ -289,28 +282,6 @@
                     ]]>
                 </text>                
             </primaryKeyAttribute>
-            
-            <summaryTable name="sample_sum"
-                          displayName="Sample Summaries"
-                          rowParamRef="params.sample_sum_row"
-                          columnParamRef="params.sample_sum_column">
-                <description>
-                    <![CDATA[
-                    A Sample Summary Table
-                    ]]>
-                </description>
-                
-                <view rowTerm="Row A"
-                      columnTerm="Column 2"
-                      summaryQueryRef="SummaryQueries.GffSummaryQuery"
-                      isBooleanDefault="true">
-                    <description>
-                        <![CDATA[
-                            A Sample Cell
-                        ]]>
-                    </description>      
-                </view>
-            </summaryTable>
 
             <reporter name="tabular" displayName="Summary - Tab delimited"
                       implementation="org.gusdb.wdk.model.report.TabularReporter">
@@ -392,28 +363,6 @@
                     ]]>
                 </text>                
             </primaryKeyAttribute>
-            
-            <summaryTable name="sample_sum"
-                          displayName="Sample Summaries"
-                          rowParamRef="params.sample_sum_row"
-                          columnParamRef="params.sample_sum_column">
-                <description>
-                    <![CDATA[
-                    A Sample Summary Table
-                    ]]>
-                </description>
-                
-                <view rowTerm="Row A"
-                      columnTerm="Column 2"
-                      summaryQueryRef="SummaryQueries.ZipSummaryQuery"
-                      isBooleanDefault="true">
-                    <description>
-                        <![CDATA[
-                            A Sample Cell
-                        ]]>
-                    </description>      
-                </view>
-            </summaryTable>
 
             <reporter name="tabular" displayName="Summary - Tab delimited"
                       implementation="org.gusdb.wdk.model.report.TabularReporter">

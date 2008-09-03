@@ -41,11 +41,13 @@
             <paramRef ref="params.NumSeqs" default="10"/>
             <paramRef ref="params.ApiTaxon"/>
             <column name="na_sequence_id"/>
+            <column name="project_id"/>
             <column name="score"/>
             <sql>
                 <!-- use CDATA because query includes angle brackets -->
                 <![CDATA[
-                    select distinct a.na_sequence_id, a.number_of_contained_sequences as score
+                    select distinct a.na_sequence_id, '@project_id@' AS project_id,
+                           a.number_of_contained_sequences as score
                     from WDKTestAssembly a
                     where a.number_of_contained_sequences > $$NumSeqs$$
                     and a.taxon_id in ($$ApiTaxon$$)
@@ -296,7 +298,7 @@
 
     <querySet name="VocabQueries">
         <!-- a query that returns a list of Apicomplexon taxons -->
-        <sqlQuery name="ApiTaxon">
+        <sqlQuery name="ApiTaxon" isCacheable="true">
             <column name="term"/>
             <column name="internal"/>
             <sql>
