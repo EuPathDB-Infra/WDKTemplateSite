@@ -113,7 +113,7 @@
             <answerFilter queryRef="SummaryQueries.RnaSummaryQuery">
                 
                 <instance name="any_instance" displayName="Any Instance"
-                          isDefault="true" isBooleanDefault="true">
+                          default="true" booleanExpansion="true">
                     <description>
                         <![CDATA[
                             A Sample Cell

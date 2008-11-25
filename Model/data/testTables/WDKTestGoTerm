@@ -1,4 +1,4 @@
-row_project_id number(10) not null,	go_term_id number(10) not null,	go_id varchar(16) not null,	name varchar(255)
+project_id number(10) not null,	go_term_id number(10) not null,	go_id varchar(16) not null,	name varchar(255)
 10	380	GO:0000239	pachytene
 10	381	GO:0000240	diplotene
 10	382	GO:0000241	diakinesis

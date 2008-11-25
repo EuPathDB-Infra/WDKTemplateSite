@@ -120,7 +120,6 @@
                            sorting="na_sequence_id asc"/>
 
             <dynamicAttributes>
-              <columnAttribute name="na_sequence_id" displayName="RNA Id"/>
               <columnAttribute name="TabularRow" displayName="Blast summary"/>
               <columnAttribute name="Alignment" displayName="Blast alignment"/>
               <columnAttribute name="Header" displayName="Blast header"/>

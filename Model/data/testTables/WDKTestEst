@@ -1,4 +1,4 @@
-row_project_id number(10) not null,	est_id number(10) not null,	na_sequence_id number(10) not null,	clone_id number(10),	library_id number(5) not null,	dbest_id_est number(12),	accession varchar(20),	quality_start number(12) not null,	quality_stop number(12),	seq_length number(12)
+project_id number(10) not null,	est_id number(10) not null,	na_sequence_id number(10) not null,	clone_id number(10),	library_id number(5) not null,	dbest_id_est number(12),	accession varchar(20),	quality_start number(12) not null,	quality_stop number(12),	seq_length number(12)
 10	9644241	20103105		9602	2398182	AI579851	1	0	0
 10	9644243	20103107		9602	2398184	AI579853	1	0	0
 10	9644244	20103108		9602	2398185	AI579854	1	0	0

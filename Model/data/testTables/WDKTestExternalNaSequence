@@ -1,4 +1,4 @@
-row_project_id number(10) not null,	na_sequence_id number(10) not null,	external_database_release_id number(5),	source_id varchar(255),	secondary_identifier varchar(255),	name varchar(255),	length number(12)
+project_id number(10) not null,	na_sequence_id number(10) not null,	external_database_release_id number(5),	source_id varchar(255),	secondary_identifier varchar(255),	name varchar(255),	length number(12)
 10	20103105	6519	AI579851			591
 10	20103107	6519	AI579853			534
 10	20103108	6519	AI579854			606

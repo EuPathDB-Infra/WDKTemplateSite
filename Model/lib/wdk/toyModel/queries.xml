@@ -23,7 +23,7 @@
 
     <!-- Queries that return RNA primary keys (for use in questions and nested records.). -->
 
-    <querySet name="RnaIds">
+    <querySet name="RnaIds" queryType="id">
         <processQuery name="BySimilarity" displayName="WS Test" 
                  processName="org.apidb.apicomplexa.wsfplugin.ncbiblast.NcbiBlastPlugin">
              <paramRef ref="params.Application"/>
@@ -92,7 +92,7 @@
 
     <!-- Queries that return EST primary keys (for use in questions). -->
 
-    <querySet name="EstIds">
+    <querySet name="EstIds" queryType="id">
         <sqlQuery name="ByEstLib">
             <paramRef ref="params.EstLib"/>
             <column name="est_id"/>
@@ -125,7 +125,7 @@
 
     <!-- Queries that return ZIP primary keys (for use in questions). -->
 
-    <querySet name="ZipIds">
+    <querySet name="ZipIds" queryType="id">
         <sqlQuery name="ByZipCode">
             <paramRef ref="params.ZipCode"/>
             <column name="zip_code"/>
@@ -150,7 +150,7 @@
 
     <!-- Queries that retrieve attributes of RNAs -->
     
-    <querySet name="RnaAttributes">
+    <querySet name="RnaAttributes" queryType="attribute">
 
         <sqlQuery name="GeneAttrs">
             <column name="na_sequence_id"/>
@@ -192,7 +192,7 @@
 
     <!-- Queries that retrieve tables belonging to RNAs  -->
     
-    <querySet name="RnaTables">
+    <querySet name="RnaTables" queryType="table">
         <sqlQuery name="ConstituentEsts" displayName="Constituent ESTs">
             <column name="est_id"/>
             <column name="na_sequence_id"/>
@@ -229,7 +229,7 @@
 
     <!-- Queries that retrieve attributes of ESTs -->
     
-    <querySet name="EstAttributes">
+    <querySet name="EstAttributes" queryType="attribute">
 
         <sqlQuery name="EstAttrs">
             <column name="est_id"/>
@@ -279,7 +279,7 @@
 
     <!-- Queries that retrieve attributes of ESTs -->
     
-    <querySet name="ZipAttributes">
+    <querySet name="ZipAttributes" queryType="attribute">
         <sqlQuery name="ZipAttrs">
             <column name="zip_code"/>
             <column name="project_id"/>
@@ -296,7 +296,7 @@
 
     <!-- queries that return controlled vocabulary terms -->
 
-    <querySet name="VocabQueries">
+    <querySet name="VocabQueries" queryType="vocab">
         <!-- a query that returns a list of Apicomplexon taxons -->
         <sqlQuery name="ApiTaxon" isCacheable="true">
             <column name="term"/>
@@ -325,7 +325,7 @@
 
     <!-- Queries that retrieve attributes or tables for data dumping records -->
     
-    <querySet name="DataDumpQueries">
+    <querySet name="DataDumpQueries" queryType="attribute">
 
         <sqlQuery name="RnaGff" isCacheable="true">
             <column name="na_sequence_id"/>
@@ -402,7 +402,7 @@
     </querySet>
 
     
-    <querySet name="SummaryQueries">
+    <querySet name="SummaryQueries" queryType="summary">
 
         <sqlQuery name="RnaSummaryQuery" isCacheable="false">
             <paramRef ref="params.sample_sum_row"/>
