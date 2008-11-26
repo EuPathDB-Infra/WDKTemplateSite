@@ -80,10 +80,9 @@
             <primaryKeyAttribute name="primary_key"
                                  displayName="RNA ID">
                 <columnRef>na_sequence_id</columnRef>
-                <columnRef>project_id</columnRef>
                 <text>
                     <![CDATA[
-                    $$project_id$$:$$na_sequence_id$$
+                    $$na_sequence_id$$
                     ]]>
                 </text>                
             </primaryKeyAttribute>
