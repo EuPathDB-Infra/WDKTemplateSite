@@ -77,6 +77,10 @@
         <recordClass name="RnaRecordClass" type="Toy RNA"
             attributeOrdering="assembly_consistency,contains_mrna,taxon_name">
             
+            <testParamValues includeProjects="ToyDB">
+               <paramValue name="na_sequence_id">20103113</paramValue>
+            </testParamValues>
+            
             <primaryKeyAttribute name="primary_key"
                                  displayName="RNA ID">
                 <columnRef>na_sequence_id</columnRef>
@@ -213,6 +217,11 @@
         <recordClass name="EstRecordClass"
                      type="EST">
             
+            <testParamValues includeProjects="ToyDB">
+               <paramValue name="est_id">9644248</paramValue>
+               <paramValue name="project_id">ToyDB</paramValue>
+            </testParamValues>
+
             <primaryKeyAttribute name="primary_key"
                                  displayName="RNA ID">
                 <columnRef>est_id</columnRef>

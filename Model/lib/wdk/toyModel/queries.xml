@@ -54,6 +54,20 @@
                 ]]>
             </sql>
         </sqlQuery>  
+
+        <sqlQuery name="Ortholog">
+            <paramRef ref="params.rna_answer" />
+            <column name="na_sequence_id"/>
+            <sql>
+                <!-- use CDATA because query includes angle brackets -->
+                <![CDATA[
+                    select ase.na_sequence_id
+                    from WDKTestAssembly ase, 
+                         $$rna_answer$$ r
+                    where ase.na_sequence_id = r.na_sequence_id
+                ]]>
+            </sql>
+        </sqlQuery>
       
         <sqlQuery name="ByDbESTLib">
             <paramRef ref="params.NumEstLibs" default="2"/>
@@ -77,6 +91,7 @@
         </sqlQuery>
 
         <sqlQuery name="EstParent">
+            <column name="na_sequence_id"/>
             <column name="est_id"/>
             <column name="project_id"/>
             <sql>
@@ -412,9 +427,8 @@
             <sql>
                 <!-- use CDATA because query includes angle brackets -->
                 <![CDATA[
-                    SELECT na_sequence_id, project_id
-                    FROM $$rna_answer$$
-                    WHERE $$rna_answer.condition$$
+                    SELECT na_sequence_id
+                    FROM $$rna_answer$$ a
                 ]]>
             </sql>
         </sqlQuery>  
@@ -429,8 +443,7 @@
                 <!-- use CDATA because query includes angle brackets -->
                 <![CDATA[
                     SELECT est_id, project_id
-                    FROM $$est_answer$$
-                    WHERE $$est_answer.condition$$
+                    FROM $$est_answer$$ a
                 ]]>
             </sql>
         </sqlQuery>  
@@ -445,8 +458,7 @@
                 <!-- use CDATA because query includes angle brackets -->
                 <![CDATA[
                     SELECT zip_code, project_id
-                    FROM $$zip_answer$$
-                    WHERE $$zip_answer.condition$$
+                    FROM $$zip_answer$$ a
                 ]]>
             </sql>
         </sqlQuery>  
@@ -461,8 +473,7 @@
                 <!-- use CDATA because query includes angle brackets -->
                 <![CDATA[
                     SELECT seqid, project_id
-                    FROM $$gff_answer$$
-                    WHERE $$gff_answer.condition$$
+                    FROM $$gff_answer$$ a
                 ]]>
             </sql>
         </sqlQuery>  

@@ -20,20 +20,17 @@
 
     <paramSet name="params">
 
-        <stringParam name="primaryKey" 
-                     prompt="Primary Key">
-            <help>primary key</help>
-        </stringParam>
-
         <stringParam name="NumSeqs" 
                      prompt="Number of Contained Sequences" 
                      regex="\d+">
             <help>number of seqs</help>
+            <suggest default="2" />
         </stringParam>
 
         <stringParam name="na_sequence_id"
                      prompt="NestedRecord Param">
             <help>Only used in a nested record</help>
+            <suggest default="91619386" />
         </stringParam>
 
         <stringParam name="NumEstLibs" 
@@ -65,6 +62,7 @@
         <stringParam name="Sequence" 
                      prompt="Blast Input Sequence">
             <help>Blast Input Sequence</help>
+            <suggest default="AGCAGCACGGAGGGCAACTGAAAATTCTCTGTTTTGTACTCCAAGCCAAGAAACTCCCCTTGTCATTTACGAGGACTGAACCACGGAAGAATAACTGTGTCACT" />
         </stringParam>
 
         <flatVocabParam name="ApiTaxon" 

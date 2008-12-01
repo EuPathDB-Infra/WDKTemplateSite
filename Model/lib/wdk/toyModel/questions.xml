@@ -69,6 +69,15 @@
             </description>
         </question>
 
+        <question name="Ortholog" 
+                  displayName="Find Orthologous RNAs"
+                  queryRef="RnaIds.Ortholog" 
+                  recordClassRef="RnaRecordClasses.RnaRecordClass">
+            <description>
+                Find Orthologous RNAs by a previous query result
+            </description>
+        </question>
+
     </questionSet>
 
     <!-- questions that return EST records -->
@@ -140,7 +149,9 @@
               <description> Question that returns the RNA that belongs to the given EST; for use in a Nested Record </description>
          </question>
 
-         <question name="ESTs" queryRef="RnaTables.SimpleEstIds" recordClassRef="EstRecordClasses.EstRecordClass" displayName="Nested Record ESTs">
+         <question name="ESTs" 
+                   queryRef="RnaTables.SimpleEstIds" 
+                   recordClassRef="EstRecordClasses.EstRecordClass" displayName="Nested Record ESTs">
               <description> Question that returns ESTs that belong to the given RNA; for use in a Nested Record List </description>
          </question>
 
