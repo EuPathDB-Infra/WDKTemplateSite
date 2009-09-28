@@ -46,7 +46,7 @@
             <sql>
                 <!-- use CDATA because query includes angle brackets -->
                 <![CDATA[
-                    select distinct a.na_sequence_id, '@project_id@' AS project_id,
+                    select distinct a.na_sequence_id, '@project_id@' || '' AS project_id,
                            a.number_of_contained_sequences as score
                     from WDKTestAssembly a
                     where a.number_of_contained_sequences > $$NumSeqs$$
@@ -144,7 +144,7 @@
             <paramRef ref="params.ZipCode"/>
             <column name="zip_code"/>
             <sql>
-               select z.zip_code
+               select z.zip_code, '@PROJECT_ID@' || '' AS project_id
                from WDKTestZipCode z
                where z.zip_code = $$ZipCode$$
             </sql>
@@ -154,7 +154,7 @@
             <paramRef ref="params.AreaCode"/>
             <column name="zip_code"/>
             <sql>
-               select z.zip_code
+               select z.zip_code, '@PROJECT_ID@' || '' AS project_id
                from WDKTestZipCode z
                where z.area_code = $$AreaCode$$
             </sql>
@@ -230,6 +230,8 @@
              <column name="est_id"/>
              <column name="na_sequence_id"/>
              <column name="project_id"/>
+             <!-- it's important to has a dymanic string as 'string' || '', 
+                  in order to cast it into text type -->
              <sql>
                 select est.est_id, est.na_sequence_id, '@PROJECT_ID@' || '' AS project_id
                 from WDKTestAssemblySequence aseq, WDKTestAssembly a, WDKTestEst est
@@ -252,7 +254,7 @@
             <column name="source_id"/>
             <sql>
                 <!-- union with self for federation simulation -->
-                select e.est_id, '@PROJECT_ID@',
+                select e.est_id, '@PROJECT_ID@' || '' AS project_id,
                        e.accession as source_id, 
                        e.na_sequence_id
                 from WDKTestEst e
@@ -264,7 +266,7 @@
             <column name="project_id"/>
             <column name="assembly_id"/>
             <sql>
-                select e.est_id, '@PROJECT_ID@',
+                select e.est_id, '@PROJECT_ID@' || '' AS project_id,
                        a.na_sequence_id as assembly_id
                 from WDKTestEst e, 
                      WDKTestAssemblySequence aseq, 
@@ -281,7 +283,7 @@
             <column name="dbest_name"/>
             <column name="anatomy_id"/>
             <sql>
-                select e.est_id, '@PROJECT_ID@',
+                select e.est_id, '@PROJECT_ID@' || '' AS project_id,
                        l.dbest_name, 
                        l.anatomy_id 
                 from WDKTestEst e, 
@@ -301,7 +303,7 @@
             <column name="state"/>
             <column name="area_code"/>
             <sql>
-                select z.zip_code, '@PROJECT_ID@',
+                select z.zip_code, '@PROJECT_ID@' || '' AS project_id,
                        z.city, z.state, z.area_code 
                 from WDKTestZipCode z
             </sql>
@@ -367,8 +369,7 @@
             <column name="attr_name"/>
             <column name="attr_description"/>
             <sql>
-                select a.na_sequence_id, '@PROJECT_ID@',
-                       'ChrNNN' as seqid,
+                select a.na_sequence_id AS seqid, '@PROJECT_ID@' || '' AS project_id,
                        'WDKToy' as source,
                        'toyRNA' as type,
                        10  as fstart,
@@ -397,8 +398,7 @@
             <column name="attr_parent"/>
             <column name="attr_description"/>
             <sql>
-                select a.na_sequence_id, '@PROJECT_ID@',
-                       'ChrNNN' as seqid,
+                select a.na_sequence_id as seqid, '@PROJECT_ID@' || '' AS project_id,
                        'WDKToy' as source,
                        'toyRNA' as type,
                        10  as fstart,

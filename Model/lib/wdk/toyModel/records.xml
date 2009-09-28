@@ -1,40 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wdkModel>
 
-    <!-- xml record class set -->
-    <xmlRecordClassSet name="XmlRecordClasses">
-
-        <xmlRecordClass 
-        	name="NewsRecord" 
-        	type="Toy News"
-        	idPrefix="NEWS."
-        	delimiter="@">
-            <xmlAttribute name="headline"/>  
-            <xmlAttribute name="date"/>  
-            <xmlAttribute name="item"/>
-            <xmlTable name="relatedLinks">
-                <xmlAttribute name="displayName"/>
-                <xmlAttribute name="url"/>
-            </xmlTable>
-         </xmlRecordClass>
-
-
-        <xmlRecordClass name="ResourceRecord" 
-        	type="PlasmoDB Pipeline Resource"
-        	idPrefix="RESOURCE."
-        	delimiter="@">
-            <xmlAttribute name="resource"/>  
-            <xmlAttribute name="version"/>  
-            <xmlAttribute name="publicUrl"/>  
-            <xmlAttribute name="category"/>  
-            <xmlAttribute name="description"/>
-            <xmlTable name="publications">
-               <xmlAttribute name="pmid"/>
-            </xmlTable>  
-         </xmlRecordClass>
-
-    </xmlRecordClassSet>
-
     <!-- *************** -->
     <!-- recordClassSets -->
     <!-- *************** -->
@@ -104,7 +70,7 @@
                     ]]>
                 </description>
                 
-                <instanceRef ref="any_instance"   layout="1-1" />
+                <instanceRef ref="any_instance"/>
 
             </answerFilterLayout>
                                 
@@ -219,16 +185,14 @@
             
             <testParamValues includeProjects="ToyDB">
                <paramValue name="est_id">9644248</paramValue>
-               <paramValue name="project_id">ToyDB</paramValue>
             </testParamValues>
 
             <primaryKeyAttribute name="primary_key"
                                  displayName="RNA ID">
                 <columnRef>est_id</columnRef>
-                <columnRef>project_id</columnRef>
                 <text>
                     <![CDATA[
-                    $$project_id$$:$$source_id$$
+                    $$est_id$$
                     ]]>
                 </text>                
             </primaryKeyAttribute>
@@ -279,6 +243,11 @@
         <recordClass name="RnaGff" 
                      attributeOrdering="seqid,source,type,fstart,fend,score,strand,phase,attr_id" 
                      type="Toy RNA">
+
+            <testParamValues includeProjects="ToyDB">
+               <paramValue name="seqid">91619449</paramValue>
+               <paramValue name="project_id">ToyDB</paramValue>
+            </testParamValues>
             
             <primaryKeyAttribute name="primary_key"
                                  displayName="RNA ID">
@@ -360,6 +329,11 @@
     
         <recordClass name="ZipRecordClass"
                      type="ZIP">
+                     
+            <testParamValues includeProjects="ToyDB">
+               <paramValue name="zip_code">19107</paramValue>
+               <paramValue name="project_id">ToyDB</paramValue>
+            </testParamValues>
             
             <primaryKeyAttribute name="primary_key"
                                  displayName="RNA ID">

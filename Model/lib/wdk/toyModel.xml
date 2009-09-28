@@ -15,6 +15,7 @@
     <import file="toyModel/records.xml" />
     <import file="toyModel/queries.xml" />
     <import file="toyModel/questions.xml" />
+    <import file="toyModel/xmlRecords.xml" />
 
     <!-- parameters used by queries -->
 

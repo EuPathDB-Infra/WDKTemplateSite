@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wdkModel>
+
+    <!-- xml record class set -->
+    <xmlRecordClassSet name="XmlRecordClasses">
+
+        <xmlRecordClass 
+        	name="NewsRecord" 
+        	type="Toy News"
+        	idPrefix="NEWS."
+        	delimiter="@">
+            <xmlAttribute name="headline"/>  
+            <xmlAttribute name="date"/>  
+            <xmlAttribute name="item"/>
+            <xmlTable name="relatedLinks">
+                <xmlAttribute name="displayName"/>
+                <xmlAttribute name="url"/>
+            </xmlTable>
+         </xmlRecordClass>
+
+
+        <xmlRecordClass name="ResourceRecord" 
+        	type="PlasmoDB Pipeline Resource"
+        	idPrefix="RESOURCE."
+        	delimiter="@">
+            <xmlAttribute name="resource"/>  
+            <xmlAttribute name="version"/>  
+            <xmlAttribute name="publicUrl"/>  
+            <xmlAttribute name="category"/>  
+            <xmlAttribute name="description"/>
+            <xmlTable name="publications">
+               <xmlAttribute name="pmid"/>
+            </xmlTable>  
+         </xmlRecordClass>
+
+    </xmlRecordClassSet>
+
+</wdkModel>
+
