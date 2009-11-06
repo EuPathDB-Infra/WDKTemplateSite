@@ -370,13 +370,13 @@
             <column name="attr_description"/>
             <sql>
                 select a.na_sequence_id AS seqid, '@PROJECT_ID@' || '' AS project_id,
-                       'WDKToy' as source,
-                       'toyRNA' as type,
+                       'WDKTemplate' as source,
+                       'templateRNA' as type,
                        10  as fstart,
                        10  + 5 as fend,
                        '.' as score, '.' as strand, '.' as phase,
                        a.na_sequence_id as attr_id,
-                       'aToyRna' as attr_name,
+                       'aTemplateRna' as attr_name,
                        'Rna of taxon ' || taxon_id as attr_description
                 from WDKTestAssembly a
             </sql>
@@ -399,13 +399,13 @@
             <column name="attr_description"/>
             <sql>
                 select a.na_sequence_id as seqid, '@PROJECT_ID@' || '' AS project_id,
-                       'WDKToy' as source,
-                       'toyRNA' as type,
+                       'WDKTemplate' as source,
+                       'templateRNA' as type,
                        10  as fstart,
                        10 + 5 as fend,
                        '.' as score, '.' as strand, '.' as phase,
                        aseq.na_sequence_id as attr_id,
-                       'aToyEst' as attr_name,
+                       'aTemplateEst' as attr_name,
                        a.na_sequence_id as attr_parent,
                        aseq.sequence_start || ':' || aseq.sequence_end as attr_description
                 from WDKTestAssemblySequence aseq, WDKTestAssembly a

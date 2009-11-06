@@ -6,16 +6,16 @@
     <!-- model introduction  -->
     <!-- ******************* -->
     <introduction>
-        Welcome to WDKToySite, a sample website driven by the GUS Web Development Kit.
+        Welcome to WDKTemplateSite, a sample website driven by the GUS Web Development Kit.
         You are invited to explore this site to find out about the core functionalities of WDK.
         Enjoy the surfing!
     </introduction>
     
     <!-- import the pieces -->
-    <import file="toyModel/records.xml" />
-    <import file="toyModel/queries.xml" />
-    <import file="toyModel/questions.xml" />
-    <import file="toyModel/xmlRecords.xml" />
+    <import file="templateModel/records.xml" />
+    <import file="templateModel/queries.xml" />
+    <import file="templateModel/questions.xml" />
+    <import file="templateModel/xmlRecords.xml" />
 
     <!-- parameters used by queries -->
 
