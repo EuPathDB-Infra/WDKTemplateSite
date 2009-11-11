@@ -5,7 +5,7 @@
               description="Value to appear in page's title"
 %>
 <%@ attribute name="banner"
-              required="true"
+              required="false"
               description="Value to appear at top of page"
 %>
 <%@ attribute name="refer" 
