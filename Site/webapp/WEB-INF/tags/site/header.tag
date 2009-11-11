@@ -13,7 +13,7 @@
 <title>
 <c:out value="${title}" default="${banner}" />
 </title>
-<link rel="StyleSheet" href="<c:url value="/misc/style.css" />" type="text/css">
+<link rel="StyleSheet" href="<c:url value="/css/style.css" />" type="text/css">
 
 <SCRIPT TYPE="text/javascript" lang="JavaScript">
 <!--
