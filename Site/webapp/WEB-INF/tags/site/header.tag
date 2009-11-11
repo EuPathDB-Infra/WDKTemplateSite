@@ -8,6 +8,46 @@
               required="true"
               description="Value to appear at top of page"
 %>
+<%@ attribute name="refer" 
+                          type="java.lang.String"
+                          required="false" 
+                          description="Page calling this tag"
+%>
+
+<%-------- OLD set of attributes,  division being used by login and help, banner by many pages   ---------------------%>
+
+<%@ attribute name="parentDivision"
+              required="false"
+%>
+
+<%@ attribute name="parentUrl"
+              required="false"
+%>
+<%@ attribute name="divisionName"
+              required="false"
+%>
+
+<%@ attribute name="division"
+              required="false"
+%>
+
+<%@ attribute name="summary"
+              required="false"
+              description="short text description of the page"
+%>
+
+<%@ attribute name="headElement"
+              required="false"
+              description="additional head elements"
+%>
+
+<%@ attribute name="bodyElement"
+              required="false"
+              description="additional body elements"
+%>
+
+
+
 <html>
 <head>
 <title>
