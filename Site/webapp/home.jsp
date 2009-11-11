@@ -8,9 +8,9 @@
 <!-- get wdkModel name to display as page header -->
 <c:set value="${wdkModel.displayName}" var="wdkModelDispName"/>
 
-<%--
+
 <site:header banner="${wdkModelDispName}" />
---%>
+
 
 <!-- display wdkModel introduction text -->
 <b><jsp:getProperty name="wdkModel" property="introduction"/></b>
@@ -100,7 +100,7 @@
                   <c:set var="anchorQp" value="HELP_${fromAnchorQ}_${pNamKey}"/>
                   <c:set target="${helpQ}" property="${anchorQp}" value="${qP}"/>
                   <a href="#${anchorQp}">
-                  <img src="/assets/images/help.png" border="0" alt="Help!"></a>
+                  <img src="<c:url value="/images/help.png"/>" border="0" alt="Help!"></a>
                 </td>
               </tr>
             </c:forEach>
@@ -121,6 +121,6 @@
 
 </table>
 
-<%--
+
 <site:footer/>
---%>
+
