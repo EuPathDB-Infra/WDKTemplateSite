@@ -28,7 +28,8 @@
         </description>
 
         <question name="ByNumSeqs" 
-                  displayName="Find RNAs by number of assembly sequences" 
+                  displayName="Find RNAs by number of assembly sequences"
+                  shortDisplayName="RNA by assem"
                   queryRef="RnaIds.ByNumSeqs"
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
@@ -61,6 +62,7 @@
 
         <question name="ByDbESTLib" 
                   displayName="Find RNAs by number of EST libs"
+                  shortDisplayName="RNA by ESTs"
                   queryRef="RnaIds.ByDbESTLib" 
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
@@ -71,6 +73,7 @@
 
         <question name="Ortholog" 
                   displayName="Find Orthologous RNAs"
+                  shortDisplayName="Ortholog RNA"
                   queryRef="RnaIds.Ortholog" 
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
@@ -90,6 +93,7 @@
 
         <question name="ByEstLib" 
                   displayName="Find ESTs by originating library" 
+                  shortDisplayName = "EST Library"
                   queryRef="EstIds.ByEstLib" 
                   recordClassRef="EstRecordClasses.EstRecordClass">
             <description>
@@ -99,6 +103,7 @@
 
         <question name="EstNullAttributes" 
                   displayName="Question that will return some controversial ESTs!"
+                  shortDisplayName="EST Null"
                   queryRef="EstIds.NullAttributeEsts" 
                   recordClassRef="EstRecordClasses.EstRecordClass">
 
@@ -118,7 +123,8 @@
         </description>
                  
         <question name="BySimilarity"
-                  displayName="Find RNAs by blast similarity to input sequences" 
+                  displayName="Find RNAs by blast similarity to input sequences"
+                  shortDisplayName="RNA BLAST"
                   queryRef="RnaIds.BySimilarity"
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
@@ -145,13 +151,16 @@
          <question name="RNA" 
                    queryRef="RnaIds.EstParent" 
                    recordClassRef="RnaRecordClasses.RnaRecordClass" 
-                   displayName="Nested Record RNA">
+                   displayName="Nested Record RNA"
+                   shortDisplayName="Nested RNA">
               <description> Question that returns the RNA that belongs to the given EST; for use in a Nested Record </description>
          </question>
 
          <question name="ESTs" 
                    queryRef="RnaTables.SimpleEstIds" 
-                   recordClassRef="EstRecordClasses.EstRecordClass" displayName="Nested Record ESTs">
+                   recordClassRef="EstRecordClasses.EstRecordClass"
+                   displayName="Nested Record ESTs"
+                   shortDisplayName="Nested EST">
               <description> Question that returns ESTs that belong to the given RNA; for use in a Nested Record List </description>
          </question>
 
@@ -167,6 +176,7 @@
         </description>
 
         <question displayName="Find all RNAs" 
+                  shortDisplayName="All RNA"
                   name="RnaGff" 
                   queryRef="DataDumpQueries.RnaGff" 
                   recordClassRef="DataDumpRecordClasses.RnaGff">
@@ -187,6 +197,7 @@
 
         <question name="ZipByZipCode" 
                   displayName="Look up Zip by zip code" 
+                  shortDisplayName="Zip Code"
                   queryRef="ZipIds.ByZipCode" 
                   recordClassRef="ZipRecordClasses.ZipRecordClass">
             <description>
@@ -195,7 +206,8 @@
         </question>
 
         <question name="ZipsByAreaCode" 
-                  displayName="Look up Zips by area code" 
+                  displayName="Look up Zips by area code"
+                  shortDisplayName="Area Code"
                   queryRef="ZipIds.ByAreaCode" 
                   recordClassRef="ZipRecordClasses.ZipRecordClass">
             <description>
