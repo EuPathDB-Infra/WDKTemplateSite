@@ -13,35 +13,30 @@
 
   <!-- Added by Jerric - Display primary key content -->
   <c:set value="${wdkRecord.primaryKey}" var="primaryKey"/>
-  <c:if test="${primaryKey.projectName ne null}">
-  <tr>
-    <td><b>Project</b></td>
-    <td>${primaryKey.projectName}</td>
-  </tr>
-  <tr>
-    <td><b>Local PK</b></td>
-    <td>${primaryKey.recordId}</td>
-  </tr>
-  </c:if>
+  <c:set var="pkValues" value="${primaryKey.values}" />
+  <c:forEach items="${pkValues}" var="pkValue">
+    <tr>
+      <td><b>${pkValue.key}</b></td>
+      <td>${pkValue.value}</td>
+    </tr>
+  </c:forEach>
 
-<c:forEach items="${wdkRecord.attributes}" var="attr">
-<c:if test="${!attr.value.internal}">
-  <tr>
-    <td><b>${attr.value.displayName}</b></td>
-    <td><c:set var="fieldVal" value="${attr.value.value}"/>
-      <!-- need to know if fieldVal should be hot linked -->
-      <c:choose>
-        <c:when test="${fieldVal.class.name eq 'org.gusdb.wdk.model.LinkValue'}">
-          <a href="${fieldVal.url}">${fieldVal.visible}</a>
-        </c:when>
-        <c:otherwise>
-          <font class="fixed"><w:wrap size="60">${fieldVal}</w:wrap></font>
-        </c:otherwise>
-      </c:choose>
-    </td>
-  </tr>
-</c:if>
-</c:forEach>
+  <c:forEach items="${wdkRecord.attributes}" var="attr">
+    <tr>
+      <td><b>${attr.value.displayName}</b></td>
+      <td><c:set var="fieldVal" value="${attr.value.value}"/>
+        <!-- need to know if fieldVal should be hot linked -->
+        <c:choose>
+          <c:when test="${fieldVal.class.name eq 'org.gusdb.wdk.model.LinkValue'}">
+            <a href="${fieldVal.url}">${fieldVal.visible}</a>
+          </c:when>
+          <c:otherwise>
+            <font class="fixed"><w:wrap size="60">${fieldVal}</w:wrap></font>
+          </c:otherwise>
+        </c:choose>
+      </td>
+    </tr>
+  </c:forEach>
 </table>
 
 <!-- show all nested records for record -->
@@ -55,9 +50,9 @@
 
   <!-- create table heading for next nested record -->	
   <c:forEach items="${nextNr.summaryAttributeNames}" var="recAttrName">
-     <c:set value="${nextNr.attributes[recAttrName]}" var="recAttr"/>
-     <c:if test="${!recAttr.internal}">
-	<tr>
+    <c:set value="${nextNr.attributes[recAttrName]}" var="recAttr"/>
+    <c:if test="${!recAttr.internal}">
+ 	<tr>
           <td><b>${recAttr.displayName}</b></td>         
           <c:set var="fieldVal" value="${recAttr.briefValue}"/>
           <td>
@@ -75,7 +70,6 @@
      </c:if>
   </c:forEach>
   </table>
-  
 </c:forEach>
 
 <!-- end nested records -->
@@ -153,7 +147,6 @@
 
 
 <!-- show all tables for record -->
-
 <c:forEach items="${wdkRecord.tables}"  var="tblEntry">
   <c:set var="tbl" value="${tblEntry.value}"/>
   <br>
@@ -185,7 +178,7 @@
         <c:forEach var="rColEntry" items="${row}">
             <c:set var="rCol" value="${rColEntry.value}"/>
 
-            <%-- need to know if value should be hot linked --%>
+            <!-- need to know if value should be hot linked --!>
             <td>
                 <c:choose>
                     <c:when test="${rCol.class.name eq 'org.gusdb.wdk.model.LinkValue'}">
