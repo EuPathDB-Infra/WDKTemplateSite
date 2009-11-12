@@ -4,18 +4,20 @@
 <%@ attribute name="title"
               description="Value to appear in page's title"
 %>
-<%@ attribute name="banner"
-              required="false"
-              description="Value to appear at top of page"
-%>
 <%@ attribute name="refer" 
                           type="java.lang.String"
                           required="false" 
                           description="Page calling this tag"
 %>
 
-<%-------- OLD set of attributes,  division being used by login and help, banner by many pages   ---------------------%>
-
+<%-------- CHECK list below: some are not in use:
+	- division being used by login and help, 
+	- banner by many pages   
+----------------------------------------------------------%>
+<%@ attribute name="banner"
+              required="false"
+              description="Value to appear at top of page"
+%>
 <%@ attribute name="parentDivision"
               required="false"
 %>
@@ -30,7 +32,6 @@
 <%@ attribute name="division"
               required="false"
 %>
-
 <%@ attribute name="summary"
               required="false"
               description="short text description of the page"
@@ -49,24 +50,43 @@
 
 
 <html>
+
+<%--------------------------- HEAD of HTML doc ---------------------%>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>
-<c:out value="${title}" default="${banner}" />
+	<c:out value="${title}" default="WDK ${banner}" />
 </title>
-<link rel="StyleSheet" href="<c:url value="/css/style.css" />" type="text/css">
-<%-- <link rel="stylesheet" href="/assets/css/AllSites.css"           type="text/css" /> --%>
-<link rel="stylesheet" href="wdk/css/jquery-ui-1.7.2.custom.css"           type="text/css" />
-<link rel="stylesheet" href="wdk/css/history.css"            type="text/css"/>
-<link rel="stylesheet" href="wdk/css/dyk.css"            type="text/css"/>
-<link rel="stylesheet" href="wdk/css/Strategy.css"           type="text/css" />
-<link rel="StyleSheet" href="wdk/css/filter_menu.css"        type="text/css"/>
-<link rel="stylesheet" href="wdk/css/flexigrid.css" type="text/css"/>
+
+<wdk:includes /> 
+
+<%-- DECIDE IF ALLSITES IS NEEDED --%>
+<%-- When definitions are in conflict, the next one overrides the previous one  --%>
+<link rel="StyleSheet" href="<c:url value="/css/style.css" />" 		type="text/css">
+<%-- <link rel="stylesheet" href="/assets/css/AllSites.css"           	type="text/css" /> --%>
+<link rel="stylesheet" href="wdk/css/jquery-ui-1.7.2.custom.css" 	type="text/css" />
+<link rel="stylesheet" href="wdk/css/history.css"             type="text/css"/>
+<link rel="stylesheet" href="wdk/css/dyk.css"                 type="text/css"/>
+<link rel="stylesheet" href="wdk/css/Strategy.css"            type="text/css" />
+<link rel="StyleSheet" href="wdk/css/filter_menu.css"         type="text/css"/>
+<link rel="stylesheet" href="wdk/css/flexigrid.css" 	      type="text/css"/>
 <link rel="StyleSheet" href="wdk/css/jquery.autocomplete.css" type="text/css"/>
-<link rel="StyleSheet" href="wdk/css/jquery.multiSelect.css" type="text/css"/>
+<link rel="StyleSheet" href="wdk/css/jquery.multiSelect.css"  type="text/css"/>
+
+<site:jscript refer="${refer}"/>
+
+
+<!--[if lt IE 8]>
+<link rel="stylesheet" href="<c:url value="/css/ie7.css"/>" type="text/css" />
+<![endif]-->
+
+<!--[if lt IE 7]>
+<link rel="stylesheet" href="<c:url value="/css/ie6.css"/>" type="text/css" />
+<![endif]-->
 
 
 
-
+<%-- LETS CHECK WHO IS USING THIS, OR REMOVE ---%>
 <SCRIPT TYPE="text/javascript" lang="JavaScript">
 <!--
 
@@ -96,6 +116,8 @@ function check(all) {
 
 
 </head>
+
+<%--------------------------- BODY of HTML doc ---------------------%>
 <body>
 <table width="100%">
 <tr><td width="15%">
@@ -103,19 +125,19 @@ function check(all) {
           border="0" alt="Site logo"></a></td>
     <td width="85%">
        <table border="0" cellpadding="3" width="100%">
-         <tr><td colspan="2" align="center"><h1>${banner}</h1></td></tr>
+         <tr><td colspan="2" align="center"><h1>WDK ${banner} website</h1></td></tr>
          <tr valign="bottom" align="right">
             <td align="right" valign="bottom">
               [<a href='<c:url value="/showXmlDataList.do" />'> Data Contents</a>]
               [<a href='<c:url value="/" />'> Questions</a>]
 
             </td>
-          </tr>
-	  <tr>
+         </tr>
+	 <tr>
 	    <td>
 		<site:login/>
 	    </td>
-	  </tr>
+	 </tr>
         </table>
     </td>
 </tr>
