@@ -96,7 +96,7 @@ function check(all) {
             <td align="right" valign="bottom">
               [<a href='<c:url value="/showXmlDataList.do" />'> Data Contents</a>]
               [<a href='<c:url value="/" />'> Questions</a>]
-              [<a href='<c:url value="/showQueryHistory.do" />'>Query History</a>]
+
             </td>
           </tr>
 	  <tr>
