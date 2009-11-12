@@ -40,10 +40,6 @@
     <servlet-name>wdkTemplateSite</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
-<servlet-mapping>
-    <servlet-name>wdkTemplateSite</servlet-name>
-    <url-pattern>/webservices/*</url-pattern>
-  </servlet-mapping>
 
 
 <!-- Internal WSF support -->
