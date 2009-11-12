@@ -15,10 +15,6 @@
 <c:if test="${refer == 'customSummary'}">
 	<wdk:strategyScript />
 
-
-<%-- used for tooltips in question page, results etc provided now by WDK --%>
-<script type="text/javascript" src="<c:url value="/wdk/js/htmltooltip.js"/>"></script>
-
 <%-- CHECK IF THIS IS NEEDED ----  javascript provided by site 
 	<script type="text/javascript" src="/assets/js/customStrategy.js"></script>
 	<script type="text/javascript" src="/assets/js/ortholog.js"></script>
