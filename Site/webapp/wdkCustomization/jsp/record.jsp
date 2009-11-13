@@ -77,14 +77,14 @@
 
 <!-- show all nested recordLists for record -->
 <c:forEach items="${wdkRecord.nestedRecordLists}" var="nrlEntry">
-  <br>
+<br>
   <table>
   <tr><td><b>${nrlEntry.key}</b></td></tr>
     
   <c:set var="i" value="0"/>
   <c:forEach items="${nrlEntry.value}" var="nextRecord">
 
-    <c:if test="${i == 0}">
+     <c:if test="${i == 0}">
       <!-- use first record instance to create table heading for nested record list -->	
     
       <c:forEach items="${nextRecord.summaryAttributeNames}" var="recAttrName">
@@ -148,62 +148,7 @@
 
 <!-- show all tables for record -->
 <c:forEach items="${wdkRecord.tables}"  var="tblEntry">
-  <c:set var="tbl" value="${tblEntry.value}"/>
-  <br>
-  <table>
-  <tr>
-    <tr><td valign="top"><b>${tbl.displayName}</b></td></tr>
-    <td>
-      <c:set var="tbl" value="${tblEntry.value}"/>
-
-      <!-- show one table -->
-      <table border="1" cellspacing="0" cellpadding="2">
-        <!-- table header -->
-        <tr class="headerRow">
-          <c:forEach var="hCol" items="${tbl.attributeFields}">
-          <c:if test="${!hCol.internal}">
-            <th align="left">${hCol.displayName}</th>
-          </c:if>
-          </c:forEach>
-        </tr>
-
-        <!-- table rows -->
-    <c:set var="i" value="0"/>
-    <c:forEach var="row" items="${tbl.visibleRows}">
-        <c:choose>
-            <c:when test="${i % 2 == 0}"><tr class="rowLight"></c:when>
-            <c:otherwise><tr class="rowMedium"></c:otherwise>
-        </c:choose>
-
-        <c:forEach var="rColEntry" items="${row}">
-            <c:set var="rCol" value="${rColEntry.value}"/>
-
-            <!-- need to know if value should be hot linked --!>
-            <td>
-                <c:choose>
-                    <c:when test="${rCol.class.name eq 'org.gusdb.wdk.model.LinkValue'}">
-                        <a href="${rCol.url}">${rCol.visible}</a>
-                    </c:when>
-                    <c:when test="${rCol.class.name eq 'org.gusdb.wdk.model.AttributeFieldValue'}">
-                        ${rCol.value}
-                    </c:when>
-                    <c:otherwise>
-                        ${rCol}
-                    </c:otherwise>
-                </c:choose>
-            </td>
-        </c:forEach>
-
-        </tr>
-        <c:set var="i" value="${i +  1}"/>
-        </c:forEach>
-      </table>
-      <!-- close resultList -->
-      <c:set var="junk" value="${tbl.close}"/>
-    </td>
-  </tr>
-  </table>
+  <wdk:wdkTable tblName="${tblEntry.key}" isOpen="true"/>
 </c:forEach>
-
 
 <site:footer/>
