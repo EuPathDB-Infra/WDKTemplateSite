@@ -20015,7 +20015,3 @@ row_project_id number(10) not null,	go_term_id number(10) not null,	go_id varcha
 10	19898	GO:0051559	phlobaphene biosynthesis
 10	19899	GO:0051560	mitochondrial calcium ion homeostasis
 10	19900	GO:0051561	elevation of mitochondrial calcium ion concentration
-10			
-10	20016rows	selected.	
-10			
-10	SQL>exit		
