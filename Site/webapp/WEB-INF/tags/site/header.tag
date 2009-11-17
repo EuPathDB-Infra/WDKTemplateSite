@@ -59,13 +59,15 @@
 	<c:out value="${title}" default="WDK ${banner}" />
 </title>
 
-<wdk:includes /> 
+
 
 <%-- DECIDE IF ALLSITES IS NEEDED --%>
 <%-- When definitions are in conflict, the next one overrides the previous one  --%>
 <link rel="StyleSheet" href="<c:url value="/css/style.css" />" 		type="text/css">
-<link rel="stylesheet" href="/assets/css/AllSites.css"           	type="text/css" />
+<link rel="stylesheet" href="<c:url value="/css/AllSites.css" />"     	type="text/css" />
+<link rel="stylesheet" href="<c:url value="/css/Color.css" />"        	type="text/css" />
 
+<wdk:includes /> 
 
 <site:jscript refer="${refer}"/>
 
