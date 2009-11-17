@@ -6,7 +6,7 @@
 <c:set var="wdkUser" value="${sessionScope.wdkUser}"/>
 <table border="0" cellspacing="5">
 <c:choose>
-  <c:when test="${wdkUser.guest != true}">
+  <c:when test="${wdkUser != null && wdkUser.guest != true}">
 
       <tr>
         <td valign="top">
