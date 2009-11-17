@@ -255,6 +255,15 @@
             </description>
         </xmlQuestion>
 
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <!-- Strategies Help -->
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <xmlQuestion name="StrategiesHelp" 
+                  displayName="Strategies Help"
+                  recordClassRef="XmlRecordClasses.StrategiesHelpRecord"
+                  xmlDataURL="strategiesHelp.xml">
+        </xmlQuestion>
+
     </xmlQuestionSet>
 
 </wdkModel>

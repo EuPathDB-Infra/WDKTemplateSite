@@ -113,7 +113,7 @@ function check(all) {
 <%--------------------------- BODY of HTML doc ---------------------%>
 <body>
   <div id="siteLogo">
-    <a href="<c:url value="/" />"><img src="<c:url value="/images/wdkToySiteLogo.gif" />"
+    <a href="<c:url value="/" />"><img src="<c:url value="/images/strategiesWDK.png" />"
        border="0" alt="Site logo"></a>
   </div>
   <div id="siteBanner">
