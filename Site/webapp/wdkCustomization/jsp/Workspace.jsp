@@ -27,9 +27,6 @@
 
 <site:header refer="customSummary" headElement="${headElement}"/>
 
-<wdk:dyk />
-
-
 <%-- Build URL for sharing strategies --%>
 <c:set var="scheme" value="${pageContext.request.scheme}" />
 <c:set var="serverName" value="${pageContext.request.serverName}" />
@@ -44,6 +41,6 @@
 	exportBaseURL = '${exportBaseUrl}'
 </script>
 
-<wdk:strategyWorkspace />
+<wdk:strategyWorkspace includeDYK="true" />
 
 <site:footer />
