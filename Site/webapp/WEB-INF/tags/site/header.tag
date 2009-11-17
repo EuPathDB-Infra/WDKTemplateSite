@@ -59,15 +59,12 @@
 	<c:out value="${title}" default="WDK ${banner}" />
 </title>
 
-
+<wdk:includes /> 
 
 <%-- DECIDE IF ALLSITES IS NEEDED --%>
 <%-- When definitions are in conflict, the next one overrides the previous one  --%>
 <link rel="StyleSheet" href="<c:url value="/css/style.css" />" 		type="text/css">
-<link rel="stylesheet" href="<c:url value="/css/AllSites.css" />"     	type="text/css" />
 <link rel="stylesheet" href="<c:url value="/css/Color.css" />"        	type="text/css" />
-
-<wdk:includes /> 
 
 <site:jscript refer="${refer}"/>
 
@@ -115,27 +112,18 @@ function check(all) {
 
 <%--------------------------- BODY of HTML doc ---------------------%>
 <body>
-<table width="100%">
-<tr><td width="15%">
-       <a href="<c:url value="/" />"><img src="<c:url value="/images/wdkToySiteLogo.gif" />"
-          border="0" alt="Site logo"></a></td>
-    <td width="85%">
-       <table border="0" cellpadding="3" width="100%">
-         <tr><td colspan="2" align="center"><h1>WDK ${banner} website</h1></td></tr>
-         <tr valign="bottom" align="right">
-            <td align="right" valign="bottom">
-              [<a href='<c:url value="/showXmlDataList.do" />'> Data Contents</a>]
-              [<a href='<c:url value="/" />'> Questions</a>]
-
-            </td>
-         </tr>
-	 <tr>
-	    <td>
-		<site:login/>
-	    </td>
-	 </tr>
-        </table>
-    </td>
-</tr>
-</table>
-<hr>
+  <div id="siteLogo">
+    <a href="<c:url value="/" />"><img src="<c:url value="/images/wdkToySiteLogo.gif" />"
+       border="0" alt="Site logo"></a>
+  </div>
+  <div id="siteBanner">
+    <h1>WDK ${banner} website</h1>
+  </div>
+  <div id="leftLinks">
+    [<a href='<c:url value="/showXmlDataList.do" />'> Data Contents</a>]
+    [<a href='<c:url value="/" />'> Questions</a>]
+  </div>
+  <div id="login">
+    <site:login/>
+  </div>
+  <hr />
