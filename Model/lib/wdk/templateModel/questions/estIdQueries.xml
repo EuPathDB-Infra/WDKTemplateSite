@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wdkModel>
+
+    <!-- *************** -->
+    <!-- model querySets -->
+    <!-- *************** -->
+
+    <!--
+    A "query" obtains tabular values from a data source.  It has columns
+    and parameters.  So far, only SQL data sources are supported, but others,
+    such as flat files are coming.  
+
+    Queries are used for different purposes: providing primary keys to a 
+    question; providing attributes and tables to a record; and, providing
+    vocabularies to vocabulary parameters.
+
+    A "query set" is a grouping of queries.  It is useful in organizing the
+    model xml file.  
+
+    The full name of a query is of the form "set_name.name."
+    -->
+
+
+    <!-- Queries that return EST primary keys (for use in questions). -->
+
+    <querySet name="EstIds" queryType="id">
+        <sqlQuery name="ByEstLib">
+            <paramRef ref="params.EstLib"/>
+            <column name="est_id"/>
+            <sql>
+               <!-- union with self for federation simulation -->
+               (select distinct e.est_id
+                  from WDKTestEst e, WDkTestLibrary l
+               where e.library_id = l.library_id
+               and l.library_id in ($$EstLib$$))
+               UNION
+               (select distinct e.est_id
+               from WDKTestEst e, WDkTestLibrary l
+               where e.library_id = l.library_id
+               and l.library_id in ($$EstLib$$))
+            </sql>
+        </sqlQuery>  
+    
+        <sqlQuery name="NullAttributeEsts">
+
+            <column name="est_id"/>
+            <sql>
+              <![CDATA[
+               select est_id from WdkTestEst e 
+               where e.est_id > 9644240 and est_id < 9644245
+              ]]>
+            </sql>
+         </sqlQuery>
+    </querySet>
+</wdkModel>

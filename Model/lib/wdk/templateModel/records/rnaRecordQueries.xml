@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wdkModel>
+
+    <!-- *************** -->
+    <!-- model querySets -->
+    <!-- *************** -->
+
+    <!--
+    A "query" obtains tabular values from a data source.  It has columns
+    and parameters.  So far, only SQL data sources are supported, but others,
+    such as flat files are coming.  
+
+    Queries are used for different purposes: providing primary keys to a 
+    question; providing attributes and tables to a record; and, providing
+    vocabularies to vocabulary parameters.
+
+    A "query set" is a grouping of queries.  It is useful in organizing the
+    model xml file.  
+
+    The full name of a query is of the form "set_name.name."
+    -->
+    
+
+    <!-- Queries that retrieve attributes of RNAs -->
+    
+    <querySet name="RnaAttributes" queryType="attribute">
+
+        <sqlQuery name="GeneAttrs">
+            <column name="na_sequence_id"/>
+            <column name="project_id"/>
+            <column name="taxon_name"/>
+            <column name="isoform_count"/>
+            <sql>
+                <![CDATA[
+                select a.na_sequence_id, '@PROJECT_ID@' || '' AS project_id,
+                       tn.name as taxon_name, 
+                       count(*) as isoform_count
+                from WDKTestAssembly a, WDKTestTaxonName tn, WDKTestAssemblySequence aseq
+                where a.taxon_id = tn.taxon_id
+                  and a.na_sequence_id = aseq.assembly_na_sequence_id
+                group by a.na_sequence_id, tn.name
+                ]]>
+            </sql>
+        </sqlQuery>
+
+        <sqlQuery name="AssemblyAttrs">
+            <column name="na_sequence_id"/>
+            <column name="project_id"/>
+            <column name="assembly_consistency"/>
+            <column name="contains_mrna"/>
+            <column name="number_of_contained_sequences"/>
+            <column name="sequence"/>
+            <sql>
+                select a.na_sequence_id, '@PROJECT_ID@' || '' AS project_id,
+                       a.assembly_consistency, 
+                       a.contains_mrna,
+                       a.number_of_contained_sequences,
+                       a.sequence
+                from WDKTestAssembly a, WDKTestTaxonName tn 
+                WHERE a.taxon_id = tn.taxon_id 
+            </sql>
+        </sqlQuery>
+    </querySet>
+
+
+    <!-- Queries that retrieve tables belonging to RNAs  -->
+    
+    <querySet name="RnaTables" queryType="table">
+        <sqlQuery name="ConstituentEsts" displayName="Constituent ESTs">
+            <column name="est_id"/>
+            <column name="na_sequence_id"/>
+            <column name="project_id"/>
+            <column name="source_id"/>
+            <column name="sequence_start"/>
+            <column name="sequence_end"/>
+            <column name="quality_start"/>
+            <column name="quality_end" />
+            <sql>
+                select aseq.na_sequence_id, '@PROJECT_ID@' || '' AS project_id,
+                       aseq.na_sequence_id as est_id,
+                       'DT.' || a.na_sequence_id as source_id, aseq.sequence_start,
+                       aseq.sequence_end, aseq.quality_start, aseq.quality_end 
+                from WDKTestAssemblySequence aseq, WDKTestAssembly a
+                where a.na_sequence_id = aseq.assembly_na_sequence_id
+            </sql>
+        </sqlQuery>
+
+        <sqlQuery name="SimpleEstIds">
+             <column name="est_id"/>
+             <column name="na_sequence_id"/>
+             <column name="project_id"/>
+             <!-- it's important to has a dymanic string as 'string' || '', 
+                  in order to cast it into text type -->
+             <sql>
+                select est.est_id, est.na_sequence_id, '@PROJECT_ID@' || '' AS project_id
+                from WDKTestAssemblySequence aseq, WDKTestAssembly a, WDKTestEst est
+                where a.na_sequence_id = aseq.assembly_na_sequence_id
+                  and est.na_sequence_id = aseq.na_sequence_id
+             </sql>
+        </sqlQuery>
+
+    </querySet>
+</wdkModel>

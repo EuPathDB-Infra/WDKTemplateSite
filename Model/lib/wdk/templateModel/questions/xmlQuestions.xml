@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wdkModel>
+
+    <!-- ************ -->
+    <!-- questionSets -->
+    <!-- ************ -->
+    
+    <!-- 
+    A question is "a query that returns a list of records."  (Regular queries 
+    return columns and rows.)  They are formed by pairing a query with a
+    record class.  The query must be one that returns one column containing
+    a list of primary keys.  The record class must be one that expects as
+    a primary key the type of key returned by the query.
+    
+    A question set is a grouping of questions.  It may be used in the
+    user interface to present the enclosed questions in one choice box.  
+    -->
+
+
+    <!-- Definitions of Xml sources -->
+
+    <!-- xml question sets -->
+    <xmlQuestionSet name="XmlQuestions"
+                    displayName="Data contents from XML data sources">
+
+        <description>
+          Data contents from XML data sources
+        </description>
+
+        <xmlQuestion name="NewsQuestion" 
+                     displayName="Sample News" 
+                     recordClassRef="XmlRecordClasses.NewsRecord"
+                     xmlDataURL="news.xml">
+            <description>
+                Retrieve news from XML data source
+            </description>
+        </xmlQuestion>
+
+        <xmlQuestion name="CNNNewsQuestion" 
+                  displayName="News about PlasmoDB" 
+                  recordClassRef="XmlRecordClasses.NewsRecord"
+                  xmlDataURL="http://rss.cnn.com/rss/cnn_topstories.rss"
+                  xslURL="rss.xsl">
+            <description>
+                Retrieve CNN headline news from XML data source, and converted it on the fly
+            </description>
+        </xmlQuestion>
+ 
+        <xmlQuestion name="ResourceQuestion" 
+                  displayName="Sample Data Sources" 
+                  recordClassRef="XmlRecordClasses.ResourceRecord"
+                  xmlDataURL="sampleResources.xml"
+                  xslURL="resources2records.xsl">
+            <description>
+                Sample Data Sources
+            </description>
+        </xmlQuestion>
+
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <!-- Strategies Help -->
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <xmlQuestion name="StrategiesHelp" 
+                  displayName="Strategies Help"
+                  recordClassRef="XmlRecordClasses.StrategiesHelpRecord"
+                  xmlDataURL="strategiesHelp.xml">
+        </xmlQuestion>
+
+    </xmlQuestionSet>
+
+</wdkModel>

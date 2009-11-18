@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wdkModel>
+
+    <!-- *************** -->
+    <!-- model querySets -->
+    <!-- *************** -->
+
+    <!--
+    A "query" obtains tabular values from a data source.  It has columns
+    and parameters.  So far, only SQL data sources are supported, but others,
+    such as flat files are coming.  
+
+    Queries are used for different purposes: providing primary keys to a 
+    question; providing attributes and tables to a record; and, providing
+    vocabularies to vocabulary parameters.
+
+    A "query set" is a grouping of queries.  It is useful in organizing the
+    model xml file.  
+
+    The full name of a query is of the form "set_name.name."
+    -->
+
+
+    <!-- Queries that return ZIP primary keys (for use in questions). -->
+
+    <querySet name="ZipIds" queryType="id">
+        <sqlQuery name="ByZipCode">
+            <paramRef ref="params.ZipCode"/>
+            <column name="zip_code"/>
+            <sql>
+               select z.zip_code, '@PROJECT_ID@' || '' AS project_id
+               from WDKTestZipCode z
+               where z.zip_code = $$ZipCode$$
+            </sql>
+        </sqlQuery>  
+
+        <sqlQuery name="ByAreaCode">
+            <paramRef ref="params.AreaCode"/>
+            <column name="zip_code"/>
+            <sql>
+               select z.zip_code, '@PROJECT_ID@' || '' AS project_id
+               from WDKTestZipCode z
+               where z.area_code = $$AreaCode$$
+            </sql>
+        </sqlQuery>  
+    </querySet>
+</wdkModel>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wdkModel>
+
+    <!-- *************** -->
+    <!-- model querySets -->
+    <!-- *************** -->
+
+    <!--
+    A "query" obtains tabular values from a data source.  It has columns
+    and parameters.  So far, only SQL data sources are supported, but others,
+    such as flat files are coming.  
+
+    Queries are used for different purposes: providing primary keys to a 
+    question; providing attributes and tables to a record; and, providing
+    vocabularies to vocabulary parameters.
+
+    A "query set" is a grouping of queries.  It is useful in organizing the
+    model xml file.  
+
+    The full name of a query is of the form "set_name.name."
+    -->
+
+
+    <!-- Queries that return RNA primary keys (for use in questions and nested records.). -->
+
+    <querySet name="RnaIds" queryType="id">
+        <processQuery name="BySimilarity" displayName="WS Test" 
+                 processName="org.apidb.apicomplexa.wsfplugin.ncbiblast.NcbiBlastPlugin">
+             <paramRef ref="params.Application"/>
+             <paramRef ref="params.Database"/>
+             <paramRef ref="params.Sequence"/>
+             <wsColumn name="na_sequence_id" width="100" wsName="Identifier"/>
+             <wsColumn name="TabularRow" width="1000"/>
+             <wsColumn name="Alignment" width="3000"/>
+             <wsColumn name="Header" width="1000"/>
+             <wsColumn name="Footer" width="1000"/>
+
+       </processQuery>
+
+        <sqlQuery name="ByNumSeqs" isCacheable="true">
+            <paramRef ref="params.NumSeqs" default="10"/>
+            <paramRef ref="params.ApiTaxon"/>
+            <column name="na_sequence_id"/>
+            <column name="project_id"/>
+            <column name="score"/>
+            <sql>
+                <!-- use CDATA because query includes angle brackets -->
+                <![CDATA[
+                    select distinct a.na_sequence_id, '@project_id@' || '' AS project_id,
+                           a.number_of_contained_sequences as score
+                    from WDKTestAssembly a
+                    where a.number_of_contained_sequences > $$NumSeqs$$
+                    and a.taxon_id in ($$ApiTaxon$$)
+                ]]>
+            </sql>
+        </sqlQuery>  
+
+        <sqlQuery name="Ortholog">
+            <paramRef ref="params.rna_answer" />
+            <column name="na_sequence_id"/>
+            <sql>
+                <!-- use CDATA because query includes angle brackets -->
+                <![CDATA[
+                    select ase.na_sequence_id
+                    from WDKTestAssembly ase, 
+                         $$rna_answer$$ r
+                    where ase.na_sequence_id = r.na_sequence_id
+                ]]>
+            </sql>
+        </sqlQuery>
+      
+        <sqlQuery name="ByDbESTLib">
+            <paramRef ref="params.NumEstLibs" default="2"/>
+            <paramRef ref="params.AssemblyConsistency" default="85"/>
+            <column name="na_sequence_id"/>
+            <sql>
+                <!-- use CDATA because query includes angle brackets -->
+                <![CDATA[
+                    select distinct aseq.assembly_na_sequence_id as na_sequence_id
+                    from WDKTestEst est, WDKTestLibrary lib,
+                         WDKTestAssemblySequence aseq, WDKTestAssembly a
+                    where lib.library_id = est.library_id 
+                    and est.na_sequence_id = aseq.na_sequence_id 
+                    and aseq.assembly_na_sequence_id = a.na_sequence_id
+                    and aseq.assembly_na_sequence_id is not NULL 
+                    and a.assembly_consistency > $$AssemblyConsistency$$
+                    group by aseq.assembly_na_sequence_id 
+                    having count (distinct lib.dbest_id) >= $$NumEstLibs$$
+                ]]>
+            </sql>
+        </sqlQuery>
+
+        <sqlQuery name="EstParent">
+            <column name="na_sequence_id"/>
+            <column name="est_id"/>
+            <column name="project_id"/>
+            <sql>
+                   select a.na_sequence_id AS est_id, '@PROJECT_ID@' || '' AS project_id
+                   from WDKTestAssembly a, WDKTestAssemblySequence aseq
+                        where aseq.assembly_na_sequence_id = a.na_sequence_id
+            </sql>
+        </sqlQuery>
+
+    </querySet>
+
+</wdkModel>

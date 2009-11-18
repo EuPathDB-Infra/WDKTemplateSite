@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wdkModel>
+
+    <!-- ************ -->
+    <!-- questionSets -->
+    <!-- ************ -->
+    
+    <!-- 
+    A question is "a query that returns a list of records."  (Regular queries 
+    return columns and rows.)  They are formed by pairing a query with a
+    record class.  The query must be one that returns one column containing
+    a list of primary keys.  The record class must be one that expects as
+    a primary key the type of key returned by the query.
+    
+    A question set is a grouping of questions.  It may be used in the
+    user interface to present the enclosed questions in one choice box.  
+    -->
+
+
+    <!-- questions that return RNA records -->
+
+
+    <questionSet name="RnaQuestions"
+                 displayName="Queries to find RNAs">
+
+        <description>
+          These queries find RNAs
+        </description>
+
+        <question name="ByNumSeqs" 
+                  displayName="Find RNAs by number of assembly sequences"
+                  shortDisplayName="RNA by assem"
+                  queryRef="RnaIds.ByNumSeqs"
+                  recordClassRef="RnaRecordClasses.RnaRecordClass">
+            <description>
+                Find RNAs from a given organism that contain more than a 
+                specified number of ESTs in their assembly.
+            </description>
+
+            <attributesList summary="assembly_consistency,contains_mrna,overview,sequence,taxonLink,score"
+                           sorting="score desc"/>
+
+            <dynamicAttributes>
+              <columnAttribute name="score" displayName="Blast score"/>
+              <linkAttribute name="taxonLink2" displayName="Taxon2">
+                 <displayText>
+                    <![CDATA[$$taxon_name$$]]>
+                 </displayText>
+                 <url>
+                    <![CDATA[@TAXON_URL@]]>
+                 </url>
+              </linkAttribute>
+
+              <textAttribute name="overview2" displayName="Overview2" truncateTo="80">
+                <text>
+                    RNA $$primaryKey$$ is from $$taxon_name$$.
+                </text>
+              </textAttribute>
+
+            </dynamicAttributes>
+        </question>
+
+        <question name="ByDbESTLib" 
+                  displayName="Find RNAs by number of EST libs"
+                  shortDisplayName="RNA by ESTs"
+                  queryRef="RnaIds.ByDbESTLib" 
+                  recordClassRef="RnaRecordClasses.RnaRecordClass">
+            <description>
+                Find RNAs with required assembly consistency score that
+                contain ESTs from more than a specified number of libraries.
+            </description>
+        </question>
+
+        <question name="Ortholog" 
+                  displayName="Find Orthologous RNAs"
+                  shortDisplayName="Ortholog RNA"
+                  queryRef="RnaIds.Ortholog" 
+                  recordClassRef="RnaRecordClasses.RnaRecordClass">
+            <description>
+                Find Orthologous RNAs by a previous query result
+            </description>
+        </question>
+
+    </questionSet>
+
+    <!-- questions for testing dynamic attributes -->
+    <questionSet name="DynamicAttributeQuestions" 
+                 displayName="Questions for use in Dynamic Attributes test">
+
+        <description>
+          These queries find RNAs by BLAST similarities
+        </description>
+                 
+        <question name="BySimilarity"
+                  displayName="Find RNAs by blast similarity to input sequences"
+                  shortDisplayName="RNA BLAST"
+                  queryRef="RnaIds.BySimilarity"
+                  recordClassRef="RnaRecordClasses.RnaRecordClass">
+            <description>
+                Find RNAs by similarity to input sequence.
+            </description>
+
+            <attributesList summary="na_sequence_id,overview,sequence,Header,TabularRow,Alignment,Footer,taxon_name"
+                           sorting="na_sequence_id asc"/>
+
+            <dynamicAttributes>
+              <columnAttribute name="TabularRow" displayName="Blast summary"/>
+              <columnAttribute name="Alignment" displayName="Blast alignment"/>
+              <columnAttribute name="Header" displayName="Blast header"/>
+              <columnAttribute name="Footer" displayName="Blast footer"/>
+            </dynamicAttributes>
+        </question>
+    </questionSet>
+
+</wdkModel>
