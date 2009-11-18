@@ -2,6 +2,8 @@
 <%@ taglib prefix="site" tagdir="/WEB-INF/tags/site" %>
 <%@ taglib prefix="wdk" tagdir="/WEB-INF/tags/wdk" %>
 
+<c:set var="project" value="${applicationScope.wdkModel.displayName}" />
+
 <%@ attribute name="title"
               description="Value to appear in page's title"
 %>
@@ -56,7 +58,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>
-	<c:out value="${title}" default="WDK ${banner}" />
+	<c:out value="${title}" default="WDK ${project}" />
 </title>
 
 <wdk:includes /> 
@@ -112,18 +114,28 @@ function check(all) {
 
 <%--------------------------- BODY of HTML doc ---------------------%>
 <body>
-  <div id="siteLogo">
+  <div id="siteLogoBanner">
     <a href="<c:url value="/" />"><img src="<c:url value="/wdk/images/strategiesWDK.png" />"
        border="0" alt="Site logo"></a>
+  <c:choose>
+  <c:when test="${not empty banner}">
+    <h1>${banner}</h1>
+  </c:when>
+  <c:otherwise>
+    <h1>WDK ${project}</h1>
+  </c:otherwise>
+  </c:choose>
+  <br><br>
   </div>
-  <div id="siteBanner">
-    <h1>WDK ${banner} website</h1>
-  </div>
-  <div id="leftLinks">
+
+<div style="position:relative">
+  <div id="leftLinks" style="position:absolute;left:10pt;top:5pt;font-size:130%">
     [<a href='<c:url value="/showXmlDataList.do" />'> Data Contents</a>]
-    [<a href='<c:url value="/" />'> Questions</a>]
+    [<a href='<c:url value="/" />'> Searches</a>]
   </div>
-  <div id="login">
+  <div id="login" style="position:absolute;right:10pt;top:0;">
     <site:login/>
   </div>
+</div>
+<br><br><br>
   <hr />

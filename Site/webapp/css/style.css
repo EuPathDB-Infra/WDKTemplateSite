@@ -25,3 +25,15 @@ hr {
 	font-family:courier;
 	color:#000000;
 }
+
+
+div {
+	margin:3px;
+}
+
+h1 {
+	position:absolute;
+	top:2em;
+	right:6em;
+	font-size:22px;
+}

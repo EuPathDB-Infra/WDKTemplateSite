@@ -7,15 +7,16 @@
 
 <!-- get wdkModel name to display as page header -->
 <c:set value="${wdkModel.displayName}" var="wdkModelDispName"/>
-<site:header banner="${wdkModelDispName}" />
+<site:header banner="WDK ${wdkModelDispName} Home page" />
 
 <!-- display wdkModel introduction text -->
+<p style="padding-left:1em;">
 <b><jsp:getProperty name="wdkModel" property="introduction"/></b>
-
+</pn>
 <hr>
 
 <!-- show all questionSets in model -->
-<table width="100%">
+<table width="100%" style="margin-left:10px;">
 <c:set value="${wdkModel.questionSets}" var="questionSets"/>
 <c:forEach items="${questionSets}" var="qSet">
   <c:if test="${qSet.internal == false}">
@@ -31,7 +32,7 @@
               <html:option value="${qSetName}.${qName}">${qDispName}</html:option>
             </c:forEach>
           </html:select>
-          <html:submit value="Show Question"/>
+          <html:submit value="Refine Search"/>
           </html:form>
        </td>
    </c:if>
