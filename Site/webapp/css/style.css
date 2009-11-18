@@ -4,36 +4,15 @@ body {
         font-family:Arial, helvetica, sans-serif;
 }
 
-h1 {
-	color: darkblue
-}
-
 em {
 	color: red;
 	font-style: italic
 }
 
 hr {
-	border: 1px solid #f00;
-	color: maroon;
-	background-color: #fcd624;
+	border: 1px solid #000;
+	background-color: #ededed;
 	height: 4px;
-}
-
-tr.headerRow {
-	background-color: #aeaeff;
-}
-
-tr.rowLight {
-	
-}
-
-tr.rowMedium {
-	background-color: #ffcccc;
-}
-
-tr.rowDark {
-	background-color: #fcd624;
 }
 
 .footer {
