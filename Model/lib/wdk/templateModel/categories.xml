@@ -1,0 +1,29 @@
+<wdkModel>
+
+  <!--++++++++++++++++++++++++++++++++++++++++++++++++-->
+  <!-- RNA Questions  -->
+  <!--++++++++++++++++++++++++++++++++++++++++++++++++-->
+  
+    <category name="RnaRecordClasses.RnaRecordClass" displayName="Search for RNAs" />
+    
+    	<category name="rna" displayName="Search for RNAs"
+    	          parentRef="RnaRecordClasses.RnaRecordClass">
+            <questionRef>RnaQuestions.ByNumSeqs</questionRef>
+            <questionRef>RnaQuestions.ByDbESTLib</questionRef>
+     	    <questionRef>DynamicAttributeQuestions.BySimilarity</questionRef>
+        </category>
+     
+  <!--++++++++++++++++++++++++++++++++++++++++++++++++-->
+  <!-- EST Questions  -->
+  <!--++++++++++++++++++++++++++++++++++++++++++++++++-->
+     
+   
+      <category name="EstRecordClasses.EstRecordClass" displayName="Search for Ests" />
+     
+     	<category name="ests" displayName="Search for Ests"
+    	          parentRef="EstRecordClasses.EstRecordClass">
+            <questionRef>EstQuestions.ByEstLib</questionRef>
+            <questionRef>EstQuestions.EstNullAttributes</questionRef>
+        </category>
+     
+</wdkModel>

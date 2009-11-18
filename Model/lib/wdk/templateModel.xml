@@ -137,4 +137,7 @@
 
     </paramSet>
 
+    <!-- Categories for driving menus -->
+    <import file="templateModel/categories.xml"/>
+
 </wdkModel>
