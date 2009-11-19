@@ -27,6 +27,19 @@
           Content from XML data sources
         </description>
 
+
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <!-- Strategies Help -->
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <xmlQuestion name="StrategiesHelp" 
+                  displayName="Strategies Help"
+                  recordClassRef="XmlRecordClasses.StrategiesHelpRecord"
+                  xmlDataURL="strategiesHelp.xml">
+        </xmlQuestion>
+
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <!-- NonSense news  -->
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
         <xmlQuestion name="NewsQuestion" 
                      displayName="Sample News" 
                      recordClassRef="XmlRecordClasses.NewsRecord"
@@ -36,6 +49,9 @@
             </description>
         </xmlQuestion>
 
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <!-- CNN news  -->
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
         <xmlQuestion name="CNNNewsQuestion" 
                   displayName="CNN RSS Feed" 
                   recordClassRef="XmlRecordClasses.NewsRecord"
@@ -47,14 +63,7 @@
         </xmlQuestion>
  
 
-        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-        <!-- Strategies Help -->
-        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-        <xmlQuestion name="StrategiesHelp" 
-                  displayName="Strategies Help"
-                  recordClassRef="XmlRecordClasses.StrategiesHelpRecord"
-                  xmlDataURL="strategiesHelp.xml">
-        </xmlQuestion>
+     
 
     </xmlQuestionSet>
 
