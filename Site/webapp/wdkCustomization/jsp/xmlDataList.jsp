@@ -9,6 +9,8 @@
 <site:header banner="Data Contents" />
 
 <!-- show all xml question sets -->
+	<div id="cirbulletlist">
+
 <UL>
 <c:forEach items="${xmlQSets}" var="qSet">
     <c:set var="qSetName" value="${qSet.name}"/>
@@ -22,5 +24,6 @@
     </c:forEach>
 </c:forEach>
 </UL>
+</div>
 
 <site:footer/>
