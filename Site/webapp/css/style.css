@@ -51,3 +51,9 @@ span.bannerh1 {
 	padding-left: 1em;
 	list-style-position: outside;
 }
+
+
+#strat-instructions-2 img#ns-arrow {
+	left:-64px;
+}
+
