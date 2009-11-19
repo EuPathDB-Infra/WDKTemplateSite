@@ -34,7 +34,7 @@
     <import file="templateModel/queries.xml" />
 
     <!-- Categories for driving menus -->
-    <import file="templateModel/categories.xml"/>
+    <import file="templateModel/questions/categories.xml"/>
 
 
     <!-- parameters used by queries -->
