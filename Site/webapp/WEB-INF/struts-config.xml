@@ -284,6 +284,7 @@
       scope="request"
       name="registerForm">
       <forward name="process_register" path="/processRegister.do"/>
+      <forward name="show_register" path="/register.jsp"/>
     </action>
     <action
       path="/processLogout"
