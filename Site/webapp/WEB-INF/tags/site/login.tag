@@ -39,7 +39,7 @@
           <html:form method="POST" action='/processLogin.do' >
             <b>Email: </b> <input type="text" name="email">
             <b>Password: </b> <input type="password" name="password">
-            <a href="<c:url value='/resetpwd.jsp'/>">forget?</a>
+            <a href="<c:url value='/resetpwd.jsp'/>">forgot?</a>
             <c:if test="${requestScope.refererUrl != null}">
                <input type="hidden" name="refererUrl" value="${requestScope.refererUrl}">
             </c:if>

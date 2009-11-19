@@ -61,15 +61,14 @@
 	<c:out value="${title}" default="WDK ${project}" />
 </title>
 
+<%-- css from WDK  --%>
 <wdk:includes /> 
 
-<%-- DECIDE IF ALLSITES IS NEEDED --%>
 <%-- When definitions are in conflict, the next one overrides the previous one  --%>
 <link rel="StyleSheet" href="<c:url value="/css/style.css" />" 		type="text/css">
 <link rel="stylesheet" href="<c:url value="/css/Color.css" />"        	type="text/css" />
 
 <site:jscript refer="${refer}"/>
-
 
 <!--[if lt IE 8]>
 <link rel="stylesheet" href="<c:url value="/css/ie7.css"/>" type="text/css" />
@@ -119,10 +118,10 @@ function check(all) {
        border="0" alt="Site logo"></a>
   <c:choose>
   <c:when test="${not empty banner}">
-    <h1>${banner}</h1>
+    <span class="bannerh1">${banner}</span>
   </c:when>
   <c:otherwise>
-    <h1>WDK ${project}</h1>
+    <span class="bannerh1">WDK ${project}</span>
   </c:otherwise>
   </c:choose>
   <br><br>
@@ -130,8 +129,8 @@ function check(all) {
 
 <div style="position:relative">
   <div id="leftLinks" style="position:absolute;left:10pt;top:5pt;font-size:130%">
-    [<a href='<c:url value="/showXmlDataList.do" />'> Data Contents</a>]
     [<a href='<c:url value="/" />'> Searches</a>]
+    [<a href='<c:url value="/showXmlDataList.do" />'> Data Contents</a>]
   </div>
   <div id="login" style="position:absolute;right:10pt;top:0;">
     <site:login/>
