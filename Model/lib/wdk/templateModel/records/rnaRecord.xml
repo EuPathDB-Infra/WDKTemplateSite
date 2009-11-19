@@ -47,6 +47,10 @@
                <paramValue name="na_sequence_id">20103113</paramValue>
             </testParamValues>
             
+      <!-- =============================================================== -->
+      <!-- Attributes -->  
+      <!-- =============================================================== -->
+            
             <primaryKeyAttribute name="primaryKey"
                                  displayName="RNA ID">
                 <columnRef>na_sequence_id</columnRef>
@@ -57,55 +61,6 @@
                 </text>                
             </primaryKeyAttribute>
 
-
-      <!-- =============================================================== -->
-      <!-- Filter Layouts -->  
-      <!-- =============================================================== -->
-
-            <answerFilterLayout name="Sample"
-                                displayName="Sample Filter Layout">
-                <description>
-                    <![CDATA[
-                      Summary views of results from specific strains.
-                    ]]>
-                </description>
-                
-                <instanceRef ref="any_instance"/>
-
-            </answerFilterLayout>
-                                
-
-      <!-- =============================================================== -->
-      <!-- Filters -->  
-      <!-- =============================================================== -->
-            
-            <answerFilter queryRef="SummaryQueries.RnaSummaryQuery">
-                
-                <instance name="any_instance" displayName="Any Instance"
-                          default="true" booleanExpansion="true">
-                    <description>
-                        <![CDATA[
-                            A Sample Cell
-                        ]]>
-                    </description>   
-                    <paramValue name="sample_sum_row">Row A</paramValue>
-                    <paramValue name="sample_sum_column">Column 2</paramValue>
-                </instance>
-                
-            </answerFilter>
-
-      <!-- =============================================================== -->
-      <!-- Reporters -->  
-      <!-- =============================================================== -->
-            
-            <reporter name="tabular" displayName="Summary - Tab delimited"
-                      implementation="org.gusdb.wdk.model.report.TabularReporter">
-            </reporter>
-            
-      <!-- =============================================================== -->
-      <!-- Attributes -->  
-      <!-- =============================================================== -->
-            
             <attributeQueryRef ref="RnaAttributes.GeneAttrs">
                 <columnAttribute name="taxon_name" 
                                  displayName="Organism"  
@@ -184,6 +139,50 @@
                 </linkAttribute>
             </table>
 
+      <!-- =============================================================== -->
+      <!-- Filter Layouts -->  
+      <!-- =============================================================== -->
+
+            <answerFilterLayout name="Sample"
+                                displayName="Sample Filter Layout">
+                <description>
+                    <![CDATA[
+                      Summary views of results from specific strains.
+                    ]]>
+                </description>
+                
+                <instanceRef ref="any_instance"/>
+
+            </answerFilterLayout>
+                                
+
+      <!-- =============================================================== -->
+      <!-- Filters -->  
+      <!-- =============================================================== -->
+            
+            <answerFilter queryRef="SummaryQueries.RnaSummaryQuery">
+                
+                <instance name="any_instance" displayName="Any Instance"
+                          default="true" booleanExpansion="true">
+                    <description>
+                        <![CDATA[
+                            A Sample Cell
+                        ]]>
+                    </description>   
+                    <paramValue name="sample_sum_row">Row A</paramValue>
+                    <paramValue name="sample_sum_column">Column 2</paramValue>
+                </instance>
+                
+            </answerFilter>
+
+      <!-- =============================================================== -->
+      <!-- Reporters -->  
+      <!-- =============================================================== -->
+            
+            <reporter name="tabular" displayName="Summary - Tab delimited"
+                      implementation="org.gusdb.wdk.model.report.TabularReporter">
+            </reporter>
+            
             <nestedRecordList questionRef="NestedRecordQuestions.ESTs"/>
 
          </recordClass>
