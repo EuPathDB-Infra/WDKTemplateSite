@@ -21,10 +21,10 @@
 
     <!-- xml question sets -->
     <xmlQuestionSet name="XmlQuestions"
-                    displayName="Data contents from XML data sources">
+                    displayName="Content from XML data sources">
 
         <description>
-          Data contents from XML data sources
+          Content from XML data sources
         </description>
 
         <xmlQuestion name="NewsQuestion" 
@@ -37,7 +37,7 @@
         </xmlQuestion>
 
         <xmlQuestion name="CNNNewsQuestion" 
-                  displayName="News about PlasmoDB" 
+                  displayName="CNN RSS Feed" 
                   recordClassRef="XmlRecordClasses.NewsRecord"
                   xmlDataURL="http://rss.cnn.com/rss/cnn_topstories.rss"
                   xslURL="rss.xsl">
@@ -46,15 +46,6 @@
             </description>
         </xmlQuestion>
  
-        <xmlQuestion name="ResourceQuestion" 
-                  displayName="Sample Data Sources" 
-                  recordClassRef="XmlRecordClasses.ResourceRecord"
-                  xmlDataURL="sampleResources.xml"
-                  xslURL="resources2records.xsl">
-            <description>
-                Sample Data Sources
-            </description>
-        </xmlQuestion>
 
         <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
         <!-- Strategies Help -->

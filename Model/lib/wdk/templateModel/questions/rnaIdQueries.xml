@@ -24,19 +24,6 @@
     <!-- Queries that return RNA primary keys (for use in questions and nested records.). -->
 
     <querySet name="RnaIds" queryType="id">
-        <processQuery name="BySimilarity" displayName="WS Test" 
-                 processName="org.apidb.apicomplexa.wsfplugin.ncbiblast.NcbiBlastPlugin">
-             <paramRef ref="params.Application"/>
-             <paramRef ref="params.Database"/>
-             <paramRef ref="params.Sequence"/>
-             <wsColumn name="na_sequence_id" width="100" wsName="Identifier"/>
-             <wsColumn name="TabularRow" width="1000"/>
-             <wsColumn name="Alignment" width="3000"/>
-             <wsColumn name="Header" width="1000"/>
-             <wsColumn name="Footer" width="1000"/>
-
-       </processQuery>
-
         <sqlQuery name="ByNumSeqs" isCacheable="true">
             <paramRef ref="params.NumSeqs" default="10"/>
             <paramRef ref="params.ApiTaxon"/>
@@ -100,6 +87,19 @@
                         where aseq.assembly_na_sequence_id = a.na_sequence_id
             </sql>
         </sqlQuery>
+
+        <processQuery name="BySimilarity" displayName="WS Test" 
+                 processName="org.apidb.apicomplexa.wsfplugin.ncbiblast.NcbiBlastPlugin">
+             <paramRef ref="params.Application"/>
+             <paramRef ref="params.Database"/>
+             <paramRef ref="params.Sequence"/>
+             <wsColumn name="na_sequence_id" width="100" wsName="Identifier"/>
+             <wsColumn name="TabularRow" width="1000"/>
+             <wsColumn name="Alignment" width="3000"/>
+             <wsColumn name="Header" width="1000"/>
+             <wsColumn name="Footer" width="1000"/>
+
+       </processQuery>
 
     </querySet>
 

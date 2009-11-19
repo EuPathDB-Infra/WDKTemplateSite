@@ -5,17 +5,37 @@
     <!-- ******************* -->
     <!-- model introduction  -->
     <!-- ******************* -->
-    <introduction>
-        Welcome to WDKTemplateSite, a sample website driven by the GUS Web Development Kit.
-        You are invited to explore this site to find out about the core functionalities of WDK.
-        Enjoy the surfing!
-    </introduction>
+    <introduction><![CDATA[
+        Welcome to Strategies WDK Template Site, a sample website driven by the Strategies Web Development Kit.  The site uses sample data and a simple model to demonstrate the core functions of the WDK.  Please see <a href="http://www.gusdb.org/wdk">www.gusdb.org/wdk</a> for more details about the Strategies WDK.]]>
+        </introduction>
     
     <!-- import the pieces -->
-    <import file="templateModel/records.xml" />
-    <import file="templateModel/queries.xml" />
-    <import file="templateModel/questions.xml" />
+    <import file="templateModel/records/rnaRecord.xml" />
+    <import file="templateModel/records/rnaRecordQueries.xml" />
+    <import file="templateModel/questions/rnaQuestions.xml" />
+    <import file="templateModel/questions/rnaIdQueries.xml" />
+
+    <import file="templateModel/records/estRecord.xml" />
+    <import file="templateModel/records/estRecordQueries.xml" />
+    <import file="templateModel/questions/estQuestions.xml" />
+    <import file="templateModel/questions/estIdQueries.xml" />
+
+    <import file="templateModel/records/zipcodeRecord.xml" />
+    <import file="templateModel/records/zipcodeRecordQueries.xml" />
+    <import file="templateModel/questions/zipcodeQuestions.xml" />
+    <import file="templateModel/questions/zipcodeIdQueries.xml" />
+
     <import file="templateModel/xmlRecords.xml" />
+    <import file="templateModel/questions/xmlQuestions.xml" />
+
+
+    <import file="templateModel/questions/nestedQuestions.xml" />
+
+    <import file="templateModel/queries.xml" />
+
+    <!-- Categories for driving menus -->
+    <import file="templateModel/categories.xml"/>
+
 
     <!-- parameters used by queries -->
 
@@ -131,13 +151,6 @@
                      recordClassRef="ZipRecordClasses.ZipRecordClass"
                      prompt="ZIP Answer" />
                              
-        <answerParam name="gff_answer"
-                     recordClassRef="DataDumpRecordClasses.RnaGff"
-                     prompt="ZIP Answer" />
-
     </paramSet>
-
-    <!-- Categories for driving menus -->
-    <import file="templateModel/categories.xml"/>
 
 </wdkModel>

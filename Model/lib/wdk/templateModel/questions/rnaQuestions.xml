@@ -24,12 +24,12 @@
                  displayName="Queries to find RNAs">
 
         <description>
-          These queries find RNAs
+          Search for RNAs
         </description>
 
         <question name="ByNumSeqs" 
-                  displayName="Find RNAs by number of assembly sequences"
-                  shortDisplayName="RNA by assem"
+                  displayName="Number of assembly seqs"
+                  shortDisplayName="Assem seqs"
                   queryRef="RnaIds.ByNumSeqs"
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
@@ -41,7 +41,7 @@
                            sorting="score desc"/>
 
             <dynamicAttributes>
-              <columnAttribute name="score" displayName="Blast score"/>
+              <columnAttribute name="score" displayName="Blast score" align="center"/>
               <linkAttribute name="taxonLink2" displayName="Taxon2">
                  <displayText>
                     <![CDATA[$$taxon_name$$]]>
@@ -61,8 +61,8 @@
         </question>
 
         <question name="ByDbESTLib" 
-                  displayName="Find RNAs by number of EST libs"
-                  shortDisplayName="RNA by ESTs"
+                  displayName="Number of EST libraries"
+                  shortDisplayName="ESTs libs"
                   queryRef="RnaIds.ByDbESTLib" 
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
@@ -72,8 +72,8 @@
         </question>
 
         <question name="Ortholog" 
-                  displayName="Find Orthologous RNAs"
-                  shortDisplayName="Ortholog RNA"
+                  displayName="Orthologous RNAs"
+                  shortDisplayName="Orthologs"
                   queryRef="RnaIds.Ortholog" 
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
@@ -81,23 +81,13 @@
             </description>
         </question>
 
-    </questionSet>
-
-    <!-- questions for testing dynamic attributes -->
-    <questionSet name="DynamicAttributeQuestions" 
-                 displayName="Questions for use in Dynamic Attributes test">
-
-        <description>
-          These queries find RNAs by BLAST similarities
-        </description>
-                 
         <question name="BySimilarity"
-                  displayName="Find RNAs by blast similarity to input sequences"
-                  shortDisplayName="RNA BLAST"
+                  displayName="BLAST"
+                  shortDisplayName="BLAST"
                   queryRef="RnaIds.BySimilarity"
                   recordClassRef="RnaRecordClasses.RnaRecordClass">
             <description>
-                Find RNAs by similarity to input sequence.
+                Find RNAs by BLAST similarity to input sequence.
             </description>
 
             <attributesList summary="na_sequence_id,overview,sequence,Header,TabularRow,Alignment,Footer,taxon_name"

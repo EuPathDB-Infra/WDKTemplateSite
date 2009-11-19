@@ -47,7 +47,7 @@
                <paramValue name="na_sequence_id">20103113</paramValue>
             </testParamValues>
             
-            <primaryKeyAttribute name="primary_key"
+            <primaryKeyAttribute name="primaryKey"
                                  displayName="RNA ID">
                 <columnRef>na_sequence_id</columnRef>
                 <text>
@@ -94,9 +94,17 @@
                 
             </answerFilter>
 
+      <!-- =============================================================== -->
+      <!-- Reporters -->  
+      <!-- =============================================================== -->
+            
             <reporter name="tabular" displayName="Summary - Tab delimited"
                       implementation="org.gusdb.wdk.model.report.TabularReporter">
             </reporter>
+            
+      <!-- =============================================================== -->
+      <!-- Attributes -->  
+      <!-- =============================================================== -->
             
             <attributeQueryRef ref="RnaAttributes.GeneAttrs">
                 <columnAttribute name="taxon_name" 
@@ -106,16 +114,16 @@
                                  truncateTo="20"
                                  internal="false" />
                 <columnAttribute name="isoform_count" 
-                                 displayName="Isoform Count" />
+                                 displayName="Isoform Count"  align="center"/>
             </attributeQueryRef>  
             
             <attributeQueryRef ref="RnaAttributes.AssemblyAttrs">
                 <columnAttribute name="assembly_consistency" 
-                                 displayName="Assembly consistency" />
+                                 displayName="Assembly consistency" align="center" />
                 <columnAttribute name="contains_mrna"
-                                 displayName="Contains mRNA" />
+                                 displayName="Contains mRNA" align="center"/>
                 <columnAttribute name="number_of_contained_sequences"
-                                 displayName="Number contained sequences" />
+                                 displayName="Number contained sequences"  align="center"/>
                 <columnAttribute name="sequence" 
                                  displayName="Sequence" 
                                  truncateTo="8" />
@@ -126,6 +134,28 @@
                     </text>
                 </textAttribute>
             </attributeQueryRef>
+            
+            <linkAttribute name="taxonLink" 
+                           displayName="Taxon">
+                 <displayText>
+                    <![CDATA[$$taxon_name$$]]>
+                 </displayText>
+                 <url>
+                    <![CDATA[@TAXON_URL@]]>
+                 </url>
+            </linkAttribute>
+
+            <textAttribute name="overview" 
+                           displayName="Overview" 
+                           truncateTo="80">
+                <text>
+                    RNA $$primaryKey$$ is from $$taxon_name$$.
+                </text>
+            </textAttribute>
+
+      <!-- =============================================================== -->
+      <!-- Tables -->  
+      <!-- =============================================================== -->
             
             <table name="ConstituentEsts"
                    displayName="Constituent Ests"
@@ -153,24 +183,6 @@
                      </url>
                 </linkAttribute>
             </table>
-
-            <linkAttribute name="taxonLink" 
-                           displayName="Taxon">
-                 <displayText>
-                    <![CDATA[$$taxon_name$$]]>
-                 </displayText>
-                 <url>
-                    <![CDATA[@TAXON_URL@]]>
-                 </url>
-            </linkAttribute>
-
-            <textAttribute name="overview" 
-                           displayName="Overview" 
-                           truncateTo="80">
-                <text>
-                    RNA $$primaryKey$$ is from $$taxon_name$$.
-                </text>
-            </textAttribute>
 
             <nestedRecordList questionRef="NestedRecordQuestions.ESTs"/>
 

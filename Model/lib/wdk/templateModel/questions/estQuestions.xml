@@ -26,8 +26,8 @@
         </description>
 
         <question name="ByEstLib" 
-                  displayName="Find ESTs by originating library" 
-                  shortDisplayName = "EST Library"
+                  displayName="Originating library" 
+                  shortDisplayName = "Library"
                   queryRef="EstIds.ByEstLib" 
                   recordClassRef="EstRecordClasses.EstRecordClass">
             <description>
@@ -36,13 +36,13 @@
         </question>
 
         <question name="EstNullAttributes" 
-                  displayName="Question that will return some controversial ESTs!"
-                  shortDisplayName="EST Null"
+                  displayName="With null values"
+                  shortDisplayName="Nulls"
                   queryRef="EstIds.NullAttributeEsts" 
                   recordClassRef="EstRecordClasses.EstRecordClass">
 
              <description>
-                  Question that will return ESTs, some of which have null values for their atttributes
+                  Find ESTs, some of which have null values for their atttributes
              </description>
         </question>
 
