@@ -43,3 +43,11 @@ span.bannerh1 {
 	right:6em;
 	font-size:22px;
 }
+
+
+#cirbulletlist ul, #cirbulletlist ol {
+	list-style-type: disc;
+	margin-left:  1em;
+	padding-left: 1em;
+	list-style-position: outside;
+}
