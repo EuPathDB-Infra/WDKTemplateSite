@@ -15,11 +15,11 @@
   <tr>
     <td><b>${attr.value.displayName}</b></td>
     <td>
-      <c:set var="fieldVal" value="${attr.value.value}"/>
+      <c:set var="fieldVal" value="${attr.value}"/>
       <!-- need to know if fieldVal should be hot linked -->
       <c:choose>
-        <c:when test="${fieldVal.class.name eq 'org.gusdb.wdk.model.LinkValue'}">
-          <a href="${fieldVal.url}">${fieldVal.visible}</a>
+        <c:when test="${fieldVal.class.name eq 'org.gusdb.wdk.model.LinkAttributeValue'}">
+          <a href="${fieldVal.url}">${fieldVal.displayText}</a>
         </c:when>
         <c:otherwise>
           ${fieldVal}
