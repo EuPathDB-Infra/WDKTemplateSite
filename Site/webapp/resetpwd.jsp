@@ -45,10 +45,10 @@
      <input type="hidden" name="refererUrl" value="${requestScope.refererUrl}">
   </c:if>
 
-  <p>Please type your email, and we will send you an email with a new temporary password. </p>
-  <table width="400">
+
+  <table width="500">
     <tr>
-      <th colspan="2"> Request to reset your password </th>
+      <th colspan="2"> Please type your email, and we will send you an email with a new temporary password</th>
     </tr>
 
     <!-- check if there's an error message to display -->
@@ -61,7 +61,7 @@
     </c:if>
 
     <tr>
-      <td align="right" width="100" nowrap>Your email: </td>
+      <td align="right" width="180" nowrap>Your email: </td>
       <td align="left"><input type="text" name="email"></td>
     </tr>
     <tr>
