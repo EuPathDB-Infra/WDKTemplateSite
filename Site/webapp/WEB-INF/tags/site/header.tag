@@ -127,7 +127,7 @@ function check(all) {
   <br><br>
   </div>
 
-<div style="position:relative">
+<div id="tabsLogin" style="position:relative">
   <div id="leftLinks" style="position:absolute;left:10pt;top:5pt;font-size:130%">
     [<a href='<c:url value="/" />'> Searches</a>]
     [<a href='<c:url value="/showXmlDataList.do" />'> Data Contents</a>]

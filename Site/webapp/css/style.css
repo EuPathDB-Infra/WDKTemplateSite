@@ -19,6 +19,7 @@ hr {
 	font-family:Arial, helvetica, sans-serif;
 	color:#060606;
 	font-style:italic;
+	margin-left:10px;
 }
 
 .fixed {
@@ -27,7 +28,7 @@ hr {
 }
 
 
-div {
+div#siteLogoBanner,div#tabsLogin {
 	margin:3px;
 }
 
