@@ -48,8 +48,12 @@
                <paramValue name="est_id">9644248</paramValue>
             </testParamValues>
 
+      <!-- =============================================================== -->
+      <!-- Attributes -->  
+      <!-- =============================================================== -->
+            
             <primaryKeyAttribute name="primary_key"
-                                 displayName="RNA ID">
+                                 displayName="EST ID">
                 <columnRef>est_id</columnRef>
                 <text>
                     <![CDATA[
@@ -58,10 +62,6 @@
                 </text>                
             </primaryKeyAttribute>
 
-            <reporter name="tabular" displayName="Summary - Tab delimited"
-                      implementation="org.gusdb.wdk.model.report.TabularReporter">
-            </reporter>
-                     
             <attributeQueryRef ref="EstAttributes.EstAttrs">  
                 <columnAttribute name="na_sequence_id"
                                  displayName="AssemblySeqId" 
@@ -69,8 +69,8 @@
                 <columnAttribute name="source_id" 
                                  displayName="Accession" 
                                  internal="true" />
-                <linkAttribute name="EST"
-                               displayName="EST">
+                <linkAttribute name="dbEST ID"
+                               displayName="dbEST ID">
                     <displayText>
                         <![CDATA[$$source_id$$]]>
                     </displayText>
@@ -82,16 +82,24 @@
             
             <attributeQueryRef ref="EstAttributes.LibAttrs">
                 <columnAttribute name="dbest_name"
-                                 displayName="DBEST name" />
+                                 displayName="dbEST name" />
                 <columnAttribute name="anatomy_id"
-                                 displayName="Anatomy Id" />
+                                 displayName="Anatomy Id" align="center"/>
             </attributeQueryRef>
             
             <attributeQueryRef ref="EstAttributes.NullAttrs">
                 <columnAttribute name="assembly_id"
-                                 displayName="AssemblyId" />
+                                 displayName="AssemblyId" align="center"/>
             </attributeQueryRef>
         
+      <!-- =============================================================== -->
+      <!-- Reporters -->  
+      <!-- =============================================================== -->
+            
+            <reporter name="tabular" displayName="Summary - Tab delimited"
+                      implementation="org.gusdb.wdk.model.report.TabularReporter">
+            </reporter>
+                     
             <nestedRecord questionRef="NestedRecordQuestions.RNA"/>
             
         </recordClass>

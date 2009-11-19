@@ -19,10 +19,10 @@
 
     <!-- questions that return EST records -->
     <questionSet name="EstQuestions"
-                 displayName="Queries to find ESTs">
+                 displayName="Questions to find ESTs">
 
         <description>
-          These queries find ESTs
+          Search for ESTs
         </description>
 
         <question name="ByEstLib" 
