@@ -25,7 +25,7 @@
     <import file="templateModel/questions/zipcodeQuestions.xml" />
     <import file="templateModel/questions/zipcodeIdQueries.xml" />
 
-    <import file="templateModel/xmlRecords.xml" />
+    <import file="templateModel/records/xmlRecords.xml" />
     <import file="templateModel/questions/xmlQuestions.xml" />
 
 
