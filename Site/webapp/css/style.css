@@ -13,6 +13,7 @@ hr {
 	border: 1px solid #000;
 	background-color: #ededed;
 	height: 4px;
+        clear: both /* So that it renders below the floated #contentwrapper on strategies page */
 }
 
 .footer {
