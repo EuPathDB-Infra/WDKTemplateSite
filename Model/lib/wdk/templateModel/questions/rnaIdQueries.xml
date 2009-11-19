@@ -88,18 +88,16 @@
             </sql>
         </sqlQuery>
 
-        <processQuery name="BySimilarity" displayName="WS Test" 
-                 processName="org.apidb.apicomplexa.wsfplugin.ncbiblast.NcbiBlastPlugin">
-             <paramRef ref="params.Application"/>
-             <paramRef ref="params.Database"/>
-             <paramRef ref="params.Sequence"/>
-             <wsColumn name="na_sequence_id" width="100" wsName="Identifier"/>
-             <wsColumn name="TabularRow" width="1000"/>
-             <wsColumn name="Alignment" width="3000"/>
-             <wsColumn name="Header" width="1000"/>
-             <wsColumn name="Footer" width="1000"/>
-
-       </processQuery>
+ <processQuery name="ByMotifSearch" 
+             processName="org.apidb.apicomplexa.wsfplugin.motifsearch.MotifSearchPlugin">
+       <paramRef ref="params.motif_expression" quote="false"/>
+       <paramRef ref="params.motif_organism" quote="false" />
+       <wsColumn name="na_sequence_id" width="32" wsName="GeneID"/>
+       <wsColumn name="project_id" width="32" wsName="ProjectId"/>
+       <wsColumn name="Locations" width="3999"/>
+       <wsColumn name="MatchCount" width="10"/>
+       <wsColumn name="Sequence" width="3999"/>
+    </processQuery>
 
     </querySet>
 

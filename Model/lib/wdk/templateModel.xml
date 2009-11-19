@@ -31,13 +31,14 @@
 
     <import file="templateModel/questions/nestedQuestions.xml" />
 
+    <!-- parameter queries     -->
     <import file="templateModel/queries.xml" />
 
     <!-- Categories for driving menus -->
     <import file="templateModel/questions/categories.xml"/>
 
 
-    <!-- parameters used by queries -->
+    <!-- parameters used by primary key queries -->
 
     <paramSet name="params">
 
@@ -150,6 +151,40 @@
         <answerParam name="zip_answer"
                      recordClassRef="ZipRecordClasses.ZipRecordClass"
                      prompt="ZIP Answer" />
+
+ <stringParam name="motif_expression"
+                      prompt="Pattern">
+             <help>Enter a Perl regular expression describing the desired motif.  Example: 'CC6+RK' searches for two consecutive cysteine residues followed by a stretch of hydrophobic amino acids followed by the aminoacids arginine and lysine.</help>
+             <suggest sample="(Example: CC6+RK)"
+                      default="CC6+RK"/>
+         </stringParam>
+
+
+ <enumParam name="motif_organism"
+                 prompt="Target Organism"
+                 multiPick="true">
+      <help>
+             Choose one or more organisms to search with the given motif
+      </help>
+      <enumList>   
+
+        <enumValue>
+          <term>Cryptosporidium parvum</term>
+          <internal>CparvumAnnotatedProteins_CryptoDB.fasta</internal>
+        </enumValue>
+        <enumValue>
+          <term>Cryptosporidium hominis</term>
+          <internal>ChominisAnnotatedProteins_CryptoDB.fasta</internal>
+        </enumValue>
+        <enumValue>
+          <term>Cryptosporidium muris</term>
+          <internal>CmurisAnnotatedProteins_CryptoDB.fasta</internal>
+        </enumValue>
+
+     </enumList>   
+   </enumParam>
+     
+
                              
     </paramSet>
 

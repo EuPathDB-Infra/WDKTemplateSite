@@ -10,7 +10,7 @@
     	          parentRef="RnaRecordClasses.RnaRecordClass">
             <questionRef>RnaQuestions.ByNumSeqs</questionRef>
             <questionRef>RnaQuestions.ByDbESTLib</questionRef>
-     	    <questionRef>RnaQuestions.BySimilarity</questionRef>
+     	    <questionRef>RnaQuestions.ByMotif</questionRef>
         </category>
      
   <!--++++++++++++++++++++++++++++++++++++++++++++++++-->
