@@ -82,7 +82,7 @@
             <column name="est_id"/>
             <column name="project_id"/>
             <sql>
-                   select a.na_sequence_id AS est_id, '@PROJECT_ID@' || '' AS project_id
+                   select a.na_sequence_id, a.na_sequence_id AS est_id, '@PROJECT_ID@' || '' AS project_id
                    from WDKTestAssembly a, WDKTestAssemblySequence aseq
                         where aseq.assembly_na_sequence_id = a.na_sequence_id
             </sql>
