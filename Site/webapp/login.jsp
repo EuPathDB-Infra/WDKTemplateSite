@@ -4,7 +4,7 @@
 <%@ taglib prefix="bean" uri="http://jakarta.apache.org/struts/tags-bean" %>
 
 <site:header title="Login"
-             banner="EuPathDB Account Login"
+             banner="Account Login"
              division="login"/>
 
 
@@ -31,8 +31,8 @@
   </c:otherwise>
 </c:choose>
 
-<h1 align="center">EuPathDB Account Login</h1>
-<div align="center">
+<h1>Account Login</h1>
+<div style="margin-left:25em;">
 <p><b>Login</b> so you can:
 
 <div id="cirbulletlist">
@@ -47,5 +47,7 @@
 
 <site:login />
 </div>
+
+
 <site:footer />
 

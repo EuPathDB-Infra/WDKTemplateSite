@@ -52,7 +52,7 @@ tr.headerrow {
 }
 
 tr.headerrow th, .flexigrid tr.headerrow th#primary_key:hover {
-	background-image: url(../images/EuPathDB/trheader.png);
+	background-image: url(../images/trheader.png);
 }
 
 .flexigrid tr.headerrow th:hover {
