@@ -31,7 +31,7 @@
   </c:otherwise>
 </c:choose>
 
-<h1 align="center">EuPathDB Account Login</div>
+<h1 align="center">EuPathDB Account Login</h1>
 <div align="center">
 <p><b>Login</b> so you can:
 
@@ -45,7 +45,7 @@
 
 <p>
 
-<site:login showError="true" />
+<site:login />
 </div>
 <site:footer />
 
