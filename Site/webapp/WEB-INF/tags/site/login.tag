@@ -3,6 +3,10 @@
 <%@ taglib prefix="logic" uri="http://jakarta.apache.org/struts/tags-logic" %>
 <%@ taglib prefix="bean" uri="http://jakarta.apache.org/struts/tags-bean" %>
 
+<%@ attribute name="showError"
+              required="false"
+%>
+
 <c:set var="wdkUser" value="${sessionScope.wdkUser}"/>
 <table border="0" cellspacing="5">
 <c:choose>
@@ -26,11 +30,13 @@
   </c:when>
 
   <c:otherwise>
-
-     <c:if test="${requestScope.loginError != null}">
+     <c:if test="${showError && sessionScope.loginError != null && sessionScope.loginError != ''}">
+       <c:set var="errorMessage" value="${sessionScope.loginError}"/>
+       <c:remove var="loginError" scope="session"/>
        <tr>
-          <td colspan="2">
-             <font color="red">${requestScope.loginError}</font>
+          <td align="center" colspan="2">
+             <div class="small"><font color="red">${errorMessage}<br>
+             Note email and password are case-sensitive.</font></div>
           </td>
        </tr>
      </c:if>

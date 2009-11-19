@@ -45,7 +45,7 @@
 
 <p>
 
-<site:login />
+<site:login showError="true" />
 </div>
 
 
