@@ -6,7 +6,7 @@
 
 <!-- display page header with recordClass type in banner -->
 <c:set value="${wdkRecord.recordClass.type}" var="recordType"/>
-<site:header banner="${recordType}"/>
+<site:header banner="${recordType}" Record page/>
 
 <EM>This is a customized view for records of type EstRecordClasses.EstRecordClass</EM><br>
 

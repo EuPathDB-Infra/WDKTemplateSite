@@ -8,7 +8,7 @@
 
 <!-- display page header with recordClass type in banner -->
 <c:set value="${wdkRecord.recordClass.type}" var="recordType"/>
-<site:header banner="${recordType}"/>
+<site:header banner="${recordType} Record page"/>
 
 <table width="100%">
 
