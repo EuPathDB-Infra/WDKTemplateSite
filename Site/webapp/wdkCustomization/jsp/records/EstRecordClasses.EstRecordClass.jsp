@@ -8,7 +8,7 @@
 <c:set value="${wdkRecord.recordClass.type}" var="recordType"/>
 <site:header banner="${recordType} Record page"/>
 
-<EM>This is a customized view for records of type EstRecordClasses.EstRecordClass</EM><br>
+<EM style="color:#7cba7c">This is a customized view for records of type EstRecordClasses.EstRecordClass</EM><br>
 
 <table>
 <c:forEach items="${wdkRecord.attributes}" var="attr">
