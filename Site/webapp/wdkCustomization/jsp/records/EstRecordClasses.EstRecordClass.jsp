@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- get wdkRecord from proper scope -->
-<c:set value="${sessionScope.wdkRecord}" var="wdkRecord"/>
+<c:set value="${requestScope.wdkRecord}" var="wdkRecord"/>
 
 <!-- display page header with recordClass type in banner -->
 <c:set value="${wdkRecord.recordClass.type}" var="recordType"/>
