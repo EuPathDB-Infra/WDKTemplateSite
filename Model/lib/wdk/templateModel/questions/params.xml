@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wdkModel>
+
+    <!-- parameters used by primary key queries -->
+
+    <paramSet name="params">
+
+        <stringParam name="NumSeqs" 
+                     prompt="Number of Contained Sequences" 
+                     regex="\d+">
+            <help>number of seqs</help>
+            <suggest default="2" />
+        </stringParam>
+
+        <stringParam name="na_sequence_id"
+                     prompt="NestedRecord Param">
+            <help>Only used in a nested record</help>
+            <suggest default="91619386" />
+        </stringParam>
+
+        <stringParam name="NumEstLibs" 
+                     prompt="Number of EST Libs" 
+                     regex="\d+">
+            <help>number of distinct libs</help>
+            <suggest sample="3" default="3"/>
+        </stringParam>
+
+        <stringParam name="AssemblyConsistency" 
+                     prompt="Assembly consistency score" 
+                     regex="100|\d|\d{2}">
+            <help>on the scale of 0-100</help>
+            <suggest sample="95" default="95"/>
+        </stringParam>
+
+        <stringParam name="Application" 
+                     prompt="flavors of blast application">
+            <help>flavors of blast application</help>
+            <suggest sample="blastn" default="blastn"/>
+        </stringParam>
+
+        <stringParam name="Database" 
+                     prompt="Rna Blast Database">
+            <help>Rna Blast Database</help>
+            <suggest sample="RNAs" default="RNAs"/>
+        </stringParam>
+
+        <stringParam name="Sequence" 
+                     prompt="Blast Input Sequence">
+            <help>Blast Input Sequence</help>
+            <suggest default="AGCAGCACGGAGGGCAACTGAAAATTCTCTGTTTTGTACTCCAAGCCAAGAAACTCCCCTTGTCATTTACGAGGACTGAACCACGGAAGAATAACTGTGTCACT" />
+        </stringParam>
+
+        <flatVocabParam name="ApiTaxon" 
+                        prompt="Organism"
+                        multiPick="true"
+                        queryRef="VocabQueries.ApiTaxon">
+            <help>Apicomplexon taxons</help>
+        </flatVocabParam>
+
+        <flatVocabParam name="EstLib" 
+                        prompt="EST Library" 
+                        queryRef="VocabQueries.EstLib">
+            <help>Library from which EST originate</help>
+        </flatVocabParam>
+
+        <enumParam name="sample_sum_row"
+                   prompt="Rows">
+            <enumList>
+                <enumValue>
+                    <term>Row A</term>
+                    <internal>A</internal>
+                </enumValue>
+                <enumValue>
+                    <term>Row B</term>
+                    <internal>B</internal>
+                </enumValue>
+            </enumList>
+        </enumParam>
+        
+        <enumParam name="sample_sum_column"
+                   prompt="Columns">
+            <enumList>
+                <enumValue>
+                    <term>Column 1</term>
+                    <internal>1</internal>
+                </enumValue>
+                <enumValue>
+                    <term>Column 2</term>
+                    <internal>2</internal>
+                </enumValue>
+            </enumList>
+        </enumParam>
+        
+        <answerParam name="rna_answer"
+                     recordClassRef="RnaRecordClasses.RnaRecordClass"
+                     prompt="RNA Answer" />
+                             
+        <answerParam name="est_answer"
+                     recordClassRef="EstRecordClasses.EstRecordClass"
+                     prompt="EST Answer" />
+                             
+ <stringParam name="motif_expression"
+                      prompt="Pattern">
+             <help>Enter a Perl regular expression describing the desired motif.  Example: 'CC6+RK' searches for two consecutive cysteine residues followed by a stretch of hydrophobic amino acids followed by the aminoacids arginine and lysine.</help>
+             <suggest sample="(Example: CC6+RK)"
+                      default="CC6+RK"/>
+         </stringParam>
+
+
+ <enumParam name="motif_organism"
+                 prompt="Target Organism"
+                 multiPick="true">
+      <help>
+             Choose one or more organisms to search with the given motif
+      </help>
+      <enumList>   
+
+        <enumValue>
+          <term>Elmeria tenella</term>
+          <internal>EtenellaRnaAssemblies.fasta</internal>
+        </enumValue>
+        <enumValue>
+          <term>Neospora caninum</term>
+          <internal>NcaninumRnaAssemblies.fasta</internal>
+        </enumValue>
+        <enumValue>
+          <term>Sarcocistis neurona</term>
+          <internal>SneuronaRnaAssemblies.fasta</internal>
+        </enumValue>
+
+     </enumList>   
+   </enumParam>         
+  </paramSet>
+
+
+  <!-- queries that return controlled vocabulary terms -->
+
+  <querySet name="VocabQueries" queryType="vocab">
+        <!-- a query that returns a list of Apicomplexon taxons -->
+        <sqlQuery name="ApiTaxon" isCacheable="true">
+            <column name="term"/>
+            <column name="internal"/>
+            <sql>
+                select distinct name as term, taxon_id as internal
+                from WDKTestTaxonName
+                where name in ('Neospora caninum', 'Plasmodium falciparum', 'Eimeria tenella',
+                               'Plasmodium yoelii', 'Sarcocystis neurona', 'Toxoplasma gondii')
+                order by internal desc
+            </sql>
+        </sqlQuery>
+
+        <!-- a query that returns a list of EST Libraries -->
+        <sqlQuery name="EstLib">
+            <column name="term"/>
+            <column name="internal"/>
+            <sql>
+                select distinct dbest_name as term, library_id as internal
+                from WDKTestLibrary where dbest_name like 'N%'
+            </sql>
+        </sqlQuery>
+
+    </querySet>
+
+
+
+</wdkModel>

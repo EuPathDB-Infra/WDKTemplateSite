@@ -20,34 +20,6 @@
     The full name of a query is of the form "set_name.name."
     -->
 
-    <!-- queries that return controlled vocabulary terms -->
-
-    <querySet name="VocabQueries" queryType="vocab">
-        <!-- a query that returns a list of Apicomplexon taxons -->
-        <sqlQuery name="ApiTaxon" isCacheable="true">
-            <column name="term"/>
-            <column name="internal"/>
-            <sql>
-                select distinct name as term, taxon_id as internal
-                from WDKTestTaxonName
-                where name in ('Neospora caninum', 'Plasmodium falciparum', 'Eimeria tenella',
-                               'Plasmodium yoelii', 'Sarcocystis neurona', 'Toxoplasma gondii')
-                order by internal desc
-            </sql>
-        </sqlQuery>
-
-        <!-- a query that returns a list of EST Libraries -->
-        <sqlQuery name="EstLib">
-            <column name="term"/>
-            <column name="internal"/>
-            <sql>
-                select distinct dbest_name as term, library_id as internal
-                from WDKTestLibrary where dbest_name like 'N%'
-            </sql>
-        </sqlQuery>
-
-    </querySet>
-
 
     <querySet name="SummaryQueries" queryType="summary">
 
