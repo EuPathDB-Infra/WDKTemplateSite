@@ -32,7 +32,7 @@
               <html:option value="${qSetName}.${qName}">${qDispName}</html:option>
             </c:forEach>
           </html:select>
-          <html:submit value="Refine Search"/>
+          <html:submit value="Run Search"/>
           </html:form>
        </td>
    </c:if>
