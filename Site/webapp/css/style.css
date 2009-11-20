@@ -16,15 +16,22 @@ hr {
         clear: both /* So that it renders below the floated #contentwrapper on strategies page */
 }
 
-.footer {
+#footer {
+	text-align:center;
+}
+
+#footer span {
 	font-family:Arial, helvetica, sans-serif;
 	color:#060606;
 	font-style:italic;
-	margin-left:10px;
+}
+
+#footer img {
+	padding: 5px;
 }
 
 .fixed {
-	font-family:fixed;
+	font-family:monospace;
 	color:#000000;
 }
 
