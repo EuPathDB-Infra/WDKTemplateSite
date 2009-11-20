@@ -10,8 +10,8 @@ em {
 }
 
 hr {
-	border: 1px solid #7cba7c;   /*colors in logo: green --49b749;*/  
-   	background-color: #e5f199;   /*colors in logo: yellow --ffffa0; */
+	border: 1px solid #Ac4040;   /*colors in logo: green --49b749;*/  
+   	background-color: #ffffa0;   /*colors in logo: yellow --ffffa0; */
 	height: 4px;
         clear: both /* So that it renders below the floated #contentwrapper on strategies page */
 }
