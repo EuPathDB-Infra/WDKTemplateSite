@@ -41,6 +41,23 @@
             </sql>
         </sqlQuery>  
     
+        <sqlQuery name="AssembyMembership">
+            <paramRef ref="params.est_answer" />
+            <column name="est_id"/>
+            <sql>
+                    select distinct est2.est_id
+                    from WDKTestAssemblySequence assemSeq1,
+                         WDKTestAssemblySequence assemSeq2, 
+                         WDKTestEst est1,
+                         WDKTestEst est2,
+                         $$est_answer$$ answer
+                    where est1.est_id = answer.est_id
+                      and assemSeq1.na_sequence_id = est1.na_sequence_id
+                      and assemSeq2.assembly_na_sequence_id = assemSeq1.assembly_na_sequence_id
+                      and est2.na_sequence_id = assemSeq2.na_sequence_id
+            </sql>
+        </sqlQuery>
+      
         <sqlQuery name="NullAttributeEsts">
 
             <column name="est_id"/>

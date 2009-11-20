@@ -42,17 +42,6 @@
             </sql>
         </sqlQuery>  
 
-        <sqlQuery name="Ortholog">
-            <paramRef ref="params.rna_answer" />
-            <column name="na_sequence_id"/>
-            <sql>
-                    select ase.na_sequence_id
-                    from WDKTestAssembly ase, 
-                         $$rna_answer$$ r
-                    where ase.na_sequence_id = r.na_sequence_id
-            </sql>
-        </sqlQuery>
-      
         <sqlQuery name="ByDbESTLib">
             <paramRef ref="params.NumEstLibs" default="2"/>
             <paramRef ref="params.AssemblyConsistency" default="85"/>

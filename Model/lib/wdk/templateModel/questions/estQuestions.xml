@@ -46,6 +46,16 @@
              </description>
         </question>
 
+        <question name="ByAssemblyMembership" 
+                  displayName="Assembly Membership"
+                  shortDisplayName="Assem Mems"
+                  queryRef="EstIds.AssembyMembership" 
+                  recordClassRef="EstRecordClasses.EstRecordClass">
+            <description>
+                Find ESTs that are members of the same assemblies as ESTs from a previous search.
+            </description>
+        </question>
+
     </questionSet>
 
 

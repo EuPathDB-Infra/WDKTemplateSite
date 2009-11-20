@@ -71,16 +71,6 @@
             </description>
         </question>
 
-        <question name="Ortholog" 
-                  displayName="Orthologous RNAs"
-                  shortDisplayName="Orthologs"
-                  queryRef="RnaIds.Ortholog" 
-                  recordClassRef="RnaRecordClasses.RnaRecordClass">
-            <description>
-                Find Orthologous RNAs by a previous query result
-            </description>
-        </question>
-
 
  <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <!-- Motif search -->
