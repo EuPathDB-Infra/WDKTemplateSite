@@ -46,13 +46,10 @@
             <paramRef ref="params.rna_answer" />
             <column name="na_sequence_id"/>
             <sql>
-                <!-- use CDATA because query includes angle brackets -->
-                <![CDATA[
                     select ase.na_sequence_id
                     from WDKTestAssembly ase, 
                          $$rna_answer$$ r
                     where ase.na_sequence_id = r.na_sequence_id
-                ]]>
             </sql>
         </sqlQuery>
       

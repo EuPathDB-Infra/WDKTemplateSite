@@ -81,20 +81,5 @@
             </sql>
         </sqlQuery>  
 
-        <sqlQuery name="ZipSummaryQuery" isCacheable="false">
-            <paramRef ref="params.sample_sum_row"/>
-            <paramRef ref="params.sample_sum_column"/>
-            <paramRef ref="params.zip_answer"/>
-            <column name="zip_code"/>
-            <column name="project_id"/>
-            <sql>
-                <!-- use CDATA because query includes angle brackets -->
-                <![CDATA[
-                    SELECT zip_code, project_id
-                    FROM $$zip_answer$$ a
-                ]]>
-            </sql>
-        </sqlQuery>  
-
     </querySet>
 </wdkModel>

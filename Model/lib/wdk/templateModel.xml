@@ -20,11 +20,6 @@
     <import file="templateModel/questions/estQuestions.xml" />
     <import file="templateModel/questions/estIdQueries.xml" />
 
-    <import file="templateModel/records/zipcodeRecord.xml" />
-    <import file="templateModel/records/zipcodeRecordQueries.xml" />
-    <import file="templateModel/questions/zipcodeQuestions.xml" />
-    <import file="templateModel/questions/zipcodeIdQueries.xml" />
-
     <import file="templateModel/records/xmlRecords.xml" />
     <import file="templateModel/questions/xmlQuestions.xml" />
 
@@ -100,18 +95,6 @@
             <help>Library from which EST originate</help>
         </flatVocabParam>
 
-        <stringParam name="ZipCode" 
-                     prompt="Zip code">
-            <help>Zip code</help>
-            <suggest sample="19104" default="19104"/>
-        </stringParam>
-
-        <stringParam name="AreaCode"
-                     prompt="Area code">
-            <help>Area code</help>
-            <suggest sample="215" default="215"/>
-        </stringParam>
-        
         <enumParam name="sample_sum_row"
                    prompt="Rows">
             <enumList>
@@ -148,10 +131,6 @@
                      recordClassRef="EstRecordClasses.EstRecordClass"
                      prompt="EST Answer" />
                              
-        <answerParam name="zip_answer"
-                     recordClassRef="ZipRecordClasses.ZipRecordClass"
-                     prompt="ZIP Answer" />
-
  <stringParam name="motif_expression"
                       prompt="Pattern">
              <help>Enter a Perl regular expression describing the desired motif.  Example: 'CC6+RK' searches for two consecutive cysteine residues followed by a stretch of hydrophobic amino acids followed by the aminoacids arginine and lysine.</help>
