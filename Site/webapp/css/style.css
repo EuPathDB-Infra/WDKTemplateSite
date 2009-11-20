@@ -10,8 +10,8 @@ em {
 }
 
 hr {
-	border: 1px solid #000;
-	background-color: #ededed;
+	border: 1px solid #7cba7c;   /*colors in logo: green --49b749;*/  
+   	background-color: #e5f199;   /*colors in logo: yellow --ffffa0; */
 	height: 4px;
         clear: both /* So that it renders below the floated #contentwrapper on strategies page */
 }
@@ -58,3 +58,12 @@ span.bannerh1 {
 	left:-64px;
 }
 
+div#leftLinks td {
+	text-align:center;
+	border-top:3px solid #e5f199;  /* yellow */
+	border-left:3px solid #e5f199; 
+	border-right:3px solid #7cba7c;   /* green */
+	border-bottom:3px solid #7cba7c; 
+	padding:5px;
+	vertical-align:middle;
+}

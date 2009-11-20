@@ -8,17 +8,19 @@
 %>
 
 <c:set var="wdkUser" value="${sessionScope.wdkUser}"/>
-<table border="0" cellspacing="5">
+
+<table>
 <c:choose>
   <c:when test="${wdkUser != null && wdkUser.guest != true}">
-
       <tr>
-        <td valign="top">
+        <td valign="top" colspan="2" style="font-size:130%">
            <c:set var="firstName" value="${wdkUser.firstName}"/>
 	   Welcome: ${firstName}! 
         </td>
+     </tr>
+     <tr>
         <td valign="top">
-           <a href="<c:url value='/profile.jsp'/>">Profile</a>
+           <a href="<c:url value='/profile.jsp'/>">Your Profile</a>
         </td>
         <td>
 	   <html:form method="POST" action='/processLogout.do' >
@@ -43,18 +45,25 @@
      <tr>
        <td align="left">
           <html:form method="POST" action='/processLogin.do' >
-            <b>Email: </b> <input type="text" name="email">
-            <b>Password: </b> <input type="password" name="password">
-            <a href="<c:url value='/resetpwd.jsp'/>">forgot?</a>
+<table><tr><td>
+	            <b>Email: </b> <input type="text" name="email" size="10%">
+	    </td>
+  	    <td>
+        	    <b>Password: </b> <input type="password" name="password" size="10%">
+            		<a href="<c:url value='/resetpwd.jsp'/>">forgot?</a>
+	    </td>
+	</tr>
+
             <c:if test="${requestScope.refererUrl != null}">
                <input type="hidden" name="refererUrl" value="${requestScope.refererUrl}">
             </c:if>
-            <input type="submit" value="Log In">
+	<tr><td colspan="2" >
+             <input type="submit" value="Log In">&nbsp;&nbsp;     
+		     <a href="<c:url value='/register.jsp'/>">.....or Register/Subscribe</a>
+	</td></tr>
+</table>
+
           </html:form>
-       </td>
-       <td valign="top">
-           &nbsp;|&nbsp;
-           <a href="<c:url value='/register.jsp'/>">Register</a>
        </td>
     </tr>
 

@@ -128,13 +128,14 @@ function check(all) {
   </div>
 
 <div id="tabsLogin" style="position:relative">
-  <div id="leftLinks" style="position:absolute;left:10pt;top:5pt;font-size:130%">
-    [<a href='<c:url value="/" />'>New Search</a>]
-    [<a href='<c:url value="/showApplication.do" />'>My Strategies</a>]
-    [<a href='<c:url value="/showXmlDataContent.do?name=XmlQuestions.StrategiesHelp" />'>Strategy Tips</a>]
-    [<a href='<c:url value="/showXmlDataList.do" />'>Data Contents</a>]
+  <div id="leftLinks" style="position:absolute;top:-4pt;left:8pt;font-size:130%">
+    <table><tr><td>
+    <a href='<c:url value="/" />'>New Search</a></td><td>
+    <a href='<c:url value="/showApplication.do" />'>My Strategies</a></td><td>
+    <a href='<c:url value="/showXmlDataContent.do?name=XmlQuestions.StrategiesHelp" />'>Strategy Tips</a></td><td>
+    <a href='<c:url value="/showXmlDataList.do" />'>News</a></td></tr></table>
   </div>
-  <div id="login" style="position:absolute;right:10pt;top:0;">
+  <div id="login" style="position:absolute;right:10pt;top:-16pt;">
     <site:login/>
   </div>
 </div>

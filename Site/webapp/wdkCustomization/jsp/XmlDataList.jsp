@@ -6,7 +6,7 @@
 <!-- get wdkXmlQuestionSets saved in request scope -->
 <c:set var="xmlQSets" value="${requestScope.wdkXmlQuestionSets}"/>
 
-<site:header banner="Data Contents" />
+<site:header banner="News" />
 
 <!-- show all xml question sets -->
 	<div id="cirbulletlist">
@@ -20,7 +20,9 @@
     <c:set var="xqs" value="${qSet.questions}"/>
     <c:forEach items="${xqs}" var="q">
         <c:set var="qName" value="${q.name}"/>
-        <LI><a href="showXmlDataContent.do?name=${qSetName}.${qName}">${q.displayName}</a></LI>
+	<c:if test="${qName ne 'StrategiesHelp'}">  <%-- This content is available in top menu --%>
+        	<LI><a href="showXmlDataContent.do?name=${qSetName}.${qName}">${q.displayName}</a></LI>
+	</c:if>
     </c:forEach>
 </c:forEach>
 </UL>

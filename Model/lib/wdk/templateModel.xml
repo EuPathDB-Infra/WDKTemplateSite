@@ -169,16 +169,16 @@
       <enumList>   
 
         <enumValue>
-          <term>Cryptosporidium parvum</term>
-          <internal>CparvumAnnotatedProteins_CryptoDB.fasta</internal>
+          <term>Elmeria tenella</term>
+          <internal>EtenellaRnaAssemblies.fasta</internal>
         </enumValue>
         <enumValue>
-          <term>Cryptosporidium hominis</term>
-          <internal>ChominisAnnotatedProteins_CryptoDB.fasta</internal>
+          <term>Neospora caninum</term>
+          <internal>NcaninumRnaAssemblies.fasta</internal>
         </enumValue>
         <enumValue>
-          <term>Cryptosporidium muris</term>
-          <internal>CmurisAnnotatedProteins_CryptoDB.fasta</internal>
+          <term>Sarcocistis neurona</term>
+          <internal>SneuronaRnaAssemblies.fasta</internal>
         </enumValue>
 
      </enumList>   
