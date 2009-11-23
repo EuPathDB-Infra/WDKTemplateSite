@@ -101,9 +101,9 @@
                              
  <stringParam name="motif_expression"
                       prompt="Pattern">
-             <help>Enter a Perl regular expression describing the desired motif.  Example: 'CC6+RK' searches for two consecutive cysteine residues followed by a stretch of hydrophobic amino acids followed by the aminoacids arginine and lysine.</help>
-             <suggest sample="(Example: CC6+RK)"
-                      default="CC6+RK"/>
+             <help>Enter a Perl regular expression describing the desired motif.  Example: 'CC6+GA' searches for two consecutive cysteine residues followed by a stretch of GA.</help>
+             <suggest sample="(Example: CC6+GA)"
+                      default="CC6+GA"/>
          </stringParam>
 
 
