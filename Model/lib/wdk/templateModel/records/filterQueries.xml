@@ -21,14 +21,11 @@
     -->
 
 
-    <querySet name="SummaryQueries" queryType="summary">
+    <querySet name="FilterQueries" queryType="summary">
 
-        <sqlQuery name="RnaSummaryQuery" isCacheable="false">
-            <paramRef ref="params.sample_sum_row"/>
-            <paramRef ref="params.sample_sum_column"/>
+        <sqlQuery name="RnaAnyQuery" isCacheable="false">
             <paramRef ref="params.rna_answer"/>
             <column name="na_sequence_id"/>
-            <column name="project_id"/>
             <sql>
                 <!-- use CDATA because query includes angle brackets -->
                 <![CDATA[
@@ -37,6 +34,23 @@
                 ]]>
             </sql>
         </sqlQuery>  
+
+        <sqlQuery name="RnaByTaxonFilter" isCacheable="false">
+            <paramRef ref="params.taxon_name"/>
+            <paramRef ref="params.rna_answer"/>
+            <column name="na_sequence_id"/>
+            <sql>
+                <!-- use CDATA because query includes angle brackets -->
+                <![CDATA[
+                SELECT DISTINCT r.na_sequence_id
+                FROM WDKTestAssembly a, WDKTestTaxonName tn, $$rna_answer$$ r
+                WHERE a.taxon_id = tn.taxon_id  
+                  AND tn.name = $$taxon_name$$
+                  AND a.na_sequence_id = r.na_sequence_id
+                ]]>
+            </sql>
+        </sqlQuery>
+
 
         <sqlQuery name="EstSummaryQuery" isCacheable="false">
             <paramRef ref="params.sample_sum_row"/>

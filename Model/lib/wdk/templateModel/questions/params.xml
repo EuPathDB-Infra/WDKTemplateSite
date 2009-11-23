@@ -106,6 +106,13 @@
                       default="CC6+GA"/>
          </stringParam>
 
+         <stringParam name="taxon_name"
+                      prompt="Taxon Name">
+             <help>The taxon name</help>
+             <suggest sample="Neospora caninum"
+                      default="Neospora caninum"/>
+         </stringParam>
+
 
  <enumParam name="motif_organism"
                  prompt="Target Organism"

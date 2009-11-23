@@ -152,6 +152,9 @@
                 </description>
                 
                 <instanceRef ref="any_instance"/>
+                <instanceRef ref="by_neospora_caninum"/>
+                <instanceRef ref="by_eimeria_tenella"/>
+                <instanceRef ref="by_sarcocystis_neurona"/>
 
             </answerFilterLayout>
                                 
@@ -160,20 +163,42 @@
       <!-- Filters -->  
       <!-- =============================================================== -->
             
-            <answerFilter queryRef="SummaryQueries.RnaSummaryQuery">
+            <answerFilter queryRef="FilterQueries.RnaAnyQuery">
                 
                 <instance name="any_instance" displayName="Any Instance"
-                          default="true" booleanExpansion="true">
+                          default="true" booleanExpansion="false">
                     <description>
                         <![CDATA[
-                            A Sample Cell
+                            do not filter the result
                         ]]>
                     </description>   
-                    <paramValue name="sample_sum_row">Row A</paramValue>
-                    <paramValue name="sample_sum_column">Column 2</paramValue>
                 </instance>
                 
             </answerFilter>
+
+            <answerFilter queryRef="FilterQueries.RnaByTaxonFilter">
+
+                <instance name="by_neospora_caninum" displayName="Neospora caninum">
+                    <description>
+                        <![CDATA[ Filter the results by Neospora caninum ]]>
+                    </description>
+                    <paramValue name="taxon_name">Neospora caninum</paramValue>
+                </instance>
+                <instance name="by_eimeria_tenella" displayName="Eimeria tenella">
+                    <description>
+                        <![CDATA[ Filter the results by Eimeria tenella ]]>
+                    </description>
+                    <paramValue name="taxon_name">Eimeria tenella</paramValue>
+                </instance>
+                <instance name="by_sarcocystis_neurona" displayName="Sarcocystis neurona">
+                    <description>
+                        <![CDATA[ Filter the results by Sarcocystis neurona ]]>
+                    </description>
+                    <paramValue name="taxon_name">Sarcocystis neurona</paramValue>
+                </instance>
+
+            </answerFilter>
+
 
       <!-- =============================================================== -->
       <!-- Reporters -->  
