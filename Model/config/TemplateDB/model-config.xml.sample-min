@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
-<modelConfig modelName="toyModel"
-             webServiceUrl="http://localhost:8080/toysite/services/WsfService"
+<modelConfig modelName="templateModel"
+             webServiceUrl="http://localhost:8080/wdk/services/WsfService"
              smtpServer="127.0.0.1"
              supportEmail="support@your-site.com"
              >
@@ -24,14 +24,14 @@
 
     <emailSubject>
       <![CDATA[
-          Your WDK Toy Site Password
+          Your Strategies WDK Template Site Password
       ]]>
     </emailSubject>
     <emailContent>
       <![CDATA[
-          <p>Thank you for registering at WDK Toy Site.</p>
+          <p>Thank you for registering at Strategies WDK Template Site.</p>
           <p>Your temporary password is: $$PASSWORD$$</p>
-          <p>You may now login to <a href="http://localhost:8080/wdktoy">WDK Toy Site</a>.</p>
+          <p>You may now login to <a href="http://localhost:8080/wdk">Strategies WDK Template</a>.</p>
           <p>Thanks,</p>
           <p>WDK Development Team</p>
       ]]>
