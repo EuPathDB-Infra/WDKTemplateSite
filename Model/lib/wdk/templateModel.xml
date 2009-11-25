@@ -27,9 +27,6 @@
     <import file="templateModel/questions/nestedQuestions.xml" />
     <import file="templateModel/questions/params.xml" />
 
-    <!-- filter queries     -->
-    <import file="templateModel/records/filterQueries.xml" />
-
     <!-- Categories for driving menus -->
     <import file="templateModel/questions/categories.xml"/>
 
