@@ -44,7 +44,7 @@
         <recordClass name="EstRecordClass"
                      type="EST">
             
-            <testParamValues includeProjects="ToyDB">
+            <testParamValues>
                <paramValue name="est_id">9644248</paramValue>
             </testParamValues>
 

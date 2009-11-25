@@ -24,6 +24,14 @@
     
     <querySet name="EstAttributes" queryType="attribute">
 
+       <defaultTestParamValues>
+            <paramValue name="est_id">9644248</paramValue>
+       </defaultTestParamValues>
+
+        <testRowCountSql>
+            SELECT count(*) FROM WDKTestEst
+        </testRowCountSql>
+
         <sqlQuery name="EstAttrs">
             <column name="est_id"/>
             <column name="project_id"/>

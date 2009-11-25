@@ -44,7 +44,7 @@
             attributeOrdering="assembly_consistency,contains_mrna,taxon_name">
             
             <testParamValues>
-               <paramValue name="na_sequence_id">20103113</paramValue>
+               <paramValue name="na_sequence_id">92484277</paramValue>
             </testParamValues>
             
       <!-- =============================================================== -->
@@ -144,10 +144,10 @@
       <!-- =============================================================== -->
 
             <answerFilterLayout name="Sample"
-                                displayName="Sample Filter Layout">
+                                displayName="Filter by Organism">
                 <description>
                     <![CDATA[
-                      Summary views of results from specific strains.
+                      Summary views of results from specific organisms.
                     ]]>
                 </description>
                 
@@ -165,11 +165,11 @@
             
             <answerFilter queryRef="FilterQueries.RnaAnyQuery">
                 
-                <instance name="any_instance" displayName="Any Instance"
+                <instance name="any_instance" displayName="All organisms"
                           default="true" booleanExpansion="false">
                     <description>
                         <![CDATA[
-                            do not filter the result
+                            Do not filter the result
                         ]]>
                     </description>   
                 </instance>

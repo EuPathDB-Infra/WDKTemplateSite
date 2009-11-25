@@ -25,6 +25,14 @@
     
     <querySet name="RnaAttributes" queryType="attribute">
 
+        <defaultTestParamValues>
+             <paramValue name="na_sequence_id">92484277</paramValue>
+        </defaultTestParamValues>
+
+        <testRowCountSql>
+            SELECT count(*) FROM WDKTestAssembly a
+        </testRowCountSql>
+
         <sqlQuery name="GeneAttrs">
             <column name="na_sequence_id"/>
             <column name="project_id"/>
@@ -97,6 +105,39 @@
                 where a.na_sequence_id = aseq.assembly_na_sequence_id
                   and est.na_sequence_id = aseq.na_sequence_id
              </sql>
+        </sqlQuery>
+
+    </querySet>
+
+
+    <querySet name="FilterQueries" queryType="summary">
+
+        <sqlQuery name="RnaAnyQuery" isCacheable="false">
+            <paramRef ref="params.rna_answer"/>
+            <column name="na_sequence_id"/>
+            <sql>
+                <!-- use CDATA because query includes angle brackets -->
+                <![CDATA[
+                    SELECT na_sequence_id
+                    FROM $$rna_answer$$ a
+                ]]>
+            </sql>
+        </sqlQuery>  
+
+        <sqlQuery name="RnaByTaxonFilter" isCacheable="false">
+            <paramRef ref="params.taxon_name"/>
+            <paramRef ref="params.rna_answer"/>
+            <column name="na_sequence_id"/>
+            <sql>
+                <!-- use CDATA because query includes angle brackets -->
+                <![CDATA[
+                SELECT DISTINCT r.na_sequence_id
+                FROM WDKTestAssembly a, WDKTestTaxonName tn, $$rna_answer$$ r
+                WHERE a.taxon_id = tn.taxon_id  
+                  AND tn.name = $$taxon_name$$
+                  AND a.na_sequence_id = r.na_sequence_id
+                ]]>
+            </sql>
         </sqlQuery>
 
     </querySet>
