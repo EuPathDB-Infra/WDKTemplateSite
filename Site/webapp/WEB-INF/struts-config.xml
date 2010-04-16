@@ -50,6 +50,39 @@
 
   <action-mappings>
     <action
+      path="/showFavorite"
+      type="org.gusdb.wdk.controller.action.ShowFavoriteAction"
+      scope="request"
+      validate="false">
+      <forward name="showFavorite" path="/wdkCustomization/jsp/Favorite.jsp"/>
+    </action>
+    <action
+      path="/processFavorite"
+      type="org.gusdb.wdk.controller.action.ProcessFavoriteAction"
+      scope="request"
+      validate="false">
+    </action>
+    <action
+      path="/processBasketQuestion"
+      type="org.gusdb.wdk.controller.action.ProcessBasketQuestionAction"
+      scope="request"
+      validate="false">
+      <forward name="processQuestion" path="/processFilter.do"/>
+    </action>
+    <action
+      path="/showBasket"
+      type="org.gusdb.wdk.controller.action.ShowBasketAction"
+      scope="request"
+      validate="false">
+      <forward name="showBasket" path="/showSummary.do"/>
+    </action>
+    <action
+      path="/processBasket"
+      type="org.gusdb.wdk.controller.action.ProcessBasketAction"
+      scope="request"
+      validate="false">
+    </action>
+    <action
       path="/expandStep"
       type="org.gusdb.wdk.controller.action.ExpandStepAction"
       scope="request"
