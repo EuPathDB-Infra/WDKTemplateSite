@@ -7,45 +7,45 @@
 
         <stringParam name="NumSeqs" 
                      prompt="Number of Contained Sequences" 
-                     regex="\d+">
+                     number="true">
             <help>number of seqs</help>
             <suggest default="2" />
         </stringParam>
 
         <stringParam name="na_sequence_id"
-                     prompt="NestedRecord Param">
+                     prompt="NestedRecord Param" number="false">
             <help>Only used in a nested record</help>
             <suggest default="91619386" />
         </stringParam>
 
         <stringParam name="NumEstLibs" 
                      prompt="Number of EST Libs" 
-                     regex="\d+">
+                     number="true">
             <help>number of distinct libs</help>
             <suggest sample="3" default="3"/>
         </stringParam>
 
         <stringParam name="AssemblyConsistency" 
                      prompt="Assembly consistency score" 
-                     regex="100|\d|\d{2}">
+                     number="true">
             <help>on the scale of 0-100</help>
             <suggest sample="95" default="95"/>
         </stringParam>
 
         <stringParam name="Application" 
-                     prompt="flavors of blast application">
+                     prompt="flavors of blast application" number="false">
             <help>flavors of blast application</help>
             <suggest sample="blastn" default="blastn"/>
         </stringParam>
 
         <stringParam name="Database" 
-                     prompt="Rna Blast Database">
+                     prompt="Rna Blast Database" number="false">
             <help>Rna Blast Database</help>
             <suggest sample="RNAs" default="RNAs"/>
         </stringParam>
 
         <stringParam name="Sequence" 
-                     prompt="Blast Input Sequence">
+                     prompt="Blast Input Sequence" number="false">
             <help>Blast Input Sequence</help>
             <suggest default="AGCAGCACGGAGGGCAACTGAAAATTCTCTGTTTTGTACTCCAAGCCAAGAAACTCCCCTTGTCATTTACGAGGACTGAACCACGGAAGAATAACTGTGTCACT" />
         </stringParam>
@@ -100,14 +100,14 @@
                      prompt="EST Answer" />
                              
  <stringParam name="motif_expression"
-                      prompt="Pattern">
+                      prompt="Pattern" number="false">
              <help>Enter a Perl regular expression describing the desired motif.  Example: 'CC6+GA' searches for two consecutive cysteine residues followed by a stretch of GA.</help>
              <suggest sample="(Example: CC6+GA)"
                       default="CC6+GA"/>
          </stringParam>
 
          <stringParam name="taxon_name"
-                      prompt="Taxon Name">
+                      prompt="Taxon Name" number="false">
              <help>The taxon name</help>
              <suggest sample="Neospora caninum"
                       default="Neospora caninum"/>
