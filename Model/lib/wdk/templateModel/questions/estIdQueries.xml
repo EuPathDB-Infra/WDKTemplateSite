@@ -44,8 +44,9 @@
         <sqlQuery name="AssembyMembership">
             <paramRef ref="params.est_answer" />
             <column name="est_id"/>
+            <column name="wdk_weight"/>
             <sql>
-                    select distinct est2.est_id
+                    select distinct est2.est_id, answer.wdk_weight
                     from WDKTestAssemblySequence assemSeq1,
                          WDKTestAssemblySequence assemSeq2, 
                          WDKTestEst est1,
