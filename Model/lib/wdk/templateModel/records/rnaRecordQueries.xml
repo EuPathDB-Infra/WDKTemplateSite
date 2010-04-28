@@ -133,7 +133,7 @@
             <sql>
                 <!-- use CDATA because query includes angle brackets -->
                 <![CDATA[
-                SELECT DISTINCT r.na_sequence_idi r.wdk_weight
+                SELECT DISTINCT r.na_sequence_id, r.wdk_weight
                 FROM WDKTestAssembly a, WDKTestTaxonName tn, $$rna_answer$$ r
                 WHERE a.taxon_id = tn.taxon_id  
                   AND tn.name = $$taxon_name$$
