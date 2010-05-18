@@ -11,7 +11,7 @@
 
 <!-- display wdkModel introduction text -->
 <p style="padding-left:1em;">
-<b><jsp:getProperty name="wdkModel" property="introduction"/></b>
+<b>${wdkModel.introduction}</b>
 </pn>
 <hr>
 
@@ -20,7 +20,7 @@
 <c:set value="${wdkModel.questionSets}" var="questionSets"/>
 <c:forEach items="${questionSets}" var="qSet">
   <c:if test="${qSet.internal == false}">
-  <tr><td bgcolor="lightblue"><jsp:getProperty name="qSet" property="description"/></td></tr>
+  <tr><td bgcolor="lightblue">${qSet.description}</td></tr>
   <tr><td><!-- list of questions in a questionSet -->
           <html:form method="get" action="/showQuestion.do">
           <html:select property="questionFullName">
