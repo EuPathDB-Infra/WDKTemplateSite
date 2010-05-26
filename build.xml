@@ -1,4 +1,4 @@
-<project name="WDKToySite" default="Installation" basedir=".">
+<project name="WDKTemplateSite" default="Installation" basedir=".">
 
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooooo  Dependencies  oooooooooooooooooooooooooo -->
