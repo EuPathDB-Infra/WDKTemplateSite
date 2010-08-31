@@ -331,7 +331,7 @@
       type="org.gusdb.wdk.controller.action.ProcessProfileAction"
       scope="session"
       name="profileForm">
-      <forward name="process_profile" path="/processProfile.do" redirect="false"/>
+      <forward name="show_profile" path="/showProfile.do"/>
     </action>
     <action
       path="/processPassword"
