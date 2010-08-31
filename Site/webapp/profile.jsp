@@ -101,7 +101,7 @@ function validateFields(e)
 
     <tr>
       <td colspan="2" align="right">
-         <a href="<c:url value='/showPassword.do'/>"><img border="0" src="<c:url value='/images/change_pwd.gif'/>"></a>
+         <a href="<c:url value='/showPassword.do'/>"><img border="0" src="<c:url value='/wdk/images/change_pwd.gif'/>"></a>
       </td>
     </tr>
 
@@ -136,12 +136,6 @@ function validateFields(e)
        <td colspan="2" align="left"><hr><b>Preferences:</b></td>
     </tr>
     <tr>
-      <td align="right" valign="top" width="50%" nowrap>
-          Send me email alerts about: 
-      </td>
-
-    </tr>
-    <tr>
        <td align="right">Items in the query result page:</td>
        <td>
           <select name="preference_global_items_per_page">
@@ -156,7 +150,7 @@ function validateFields(e)
     <tr>
        <td colspan="2" align="right">
            <a href="#" onclick="return validateFields();">
-             <img  border="0" src="<c:url value='/images/update_profile.gif'/>"/>
+             <img  border="0" src="<c:url value='/wdk/images/update_profile.gif'/>"/>
            </a>
        </td>
     </tr>

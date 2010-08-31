@@ -156,12 +156,6 @@ function validateFields(e)
       <td align="left"><input type="text" name="organization" value="${requestScope.organization}" size="50"></td>
     </tr>
     <tr>
-    <td align="right" width="50%" nowrap>
-          Send me email alerts about: 
-    </td>
-  
-    </tr>
-    <tr>
        <td colspan="2" align="center">
            <input type="submit" name="registerButton" value="Submit"  onclick="return validateFields();" />
        </td>
