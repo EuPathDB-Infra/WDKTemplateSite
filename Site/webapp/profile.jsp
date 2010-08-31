@@ -101,7 +101,7 @@ function validateFields(e)
 
     <tr>
       <td colspan="2" align="right">
-         <a href="<c:url value='/showPassword.do'/>"><img border="0" src="<c:url value='/wdk/images/change_pwd.gif'/>"></a>
+         <a href="<c:url value='/showPassword.do'/>"><img border="0" src="<c:url value='/images/change_pwd.gif'/>"></a>
       </td>
     </tr>
 
@@ -150,7 +150,7 @@ function validateFields(e)
     <tr>
        <td colspan="2" align="right">
            <a href="#" onclick="return validateFields();">
-             <img  border="0" src="<c:url value='/wdk/images/update_profile.gif'/>"/>
+             <img  border="0" src="<c:url value='/images/update_profile.gif'/>"/>
            </a>
        </td>
     </tr>
