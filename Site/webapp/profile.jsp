@@ -136,12 +136,6 @@ function validateFields(e)
        <td colspan="2" align="left"><hr><b>Preferences:</b></td>
     </tr>
     <tr>
-      <td align="right" valign="top" width="50%" nowrap>
-          Send me email alerts about: 
-      </td>
-
-    </tr>
-    <tr>
        <td align="right">Items in the query result page:</td>
        <td>
           <select name="preference_global_items_per_page">

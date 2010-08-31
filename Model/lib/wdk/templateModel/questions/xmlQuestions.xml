@@ -37,34 +37,6 @@
                   xmlDataURL="strategiesHelp.xml">
         </xmlQuestion>
 
-        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-        <!-- NonSense news  -->
-        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-        <xmlQuestion name="NewsQuestion" 
-                     displayName="Sample News" 
-                     recordClassRef="XmlRecordClasses.NewsRecord"
-                     xmlDataURL="news.xml">
-            <description>
-                Retrieve news from XML data source
-            </description>
-        </xmlQuestion>
-
-        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-        <!-- CNN news  -->
-        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-        <xmlQuestion name="CNNNewsQuestion" 
-                  displayName="CNN RSS Feed" 
-                  recordClassRef="XmlRecordClasses.NewsRecord"
-                  xmlDataURL="http://rss.cnn.com/rss/cnn_topstories.rss"
-                  xslURL="rss.xsl">
-            <description>
-                Retrieve CNN headline news from XML data source, and converted it on the fly
-            </description>
-        </xmlQuestion>
- 
-
-     
-
     </xmlQuestionSet>
 
 </wdkModel>
