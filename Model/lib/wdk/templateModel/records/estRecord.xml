@@ -42,7 +42,8 @@
     <recordClassSet name="EstRecordClasses">
     
         <recordClass name="EstRecordClass"
-                     type="EST">
+                     type="EST"
+                     allRecordsQueryRef="EstAttributes.AllEsts">
             
             <testParamValues>
                <paramValue name="est_id">9644248</paramValue>

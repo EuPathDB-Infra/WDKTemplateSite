@@ -76,6 +76,16 @@
                 where e.library_id = l.library_id 
             </sql>
         </sqlQuery>
+
+
+        <sqlQuery name="AllEsts">
+            <column name="est_id"/>
+            <column name="project_id"/>
+            <sql>
+                select e.est_id, '@PROJECT_ID@' || '' AS project_id
+                from WDKTestEst e 
+            </sql>
+        </sqlQuery>
     </querySet>
 
 </wdkModel>
