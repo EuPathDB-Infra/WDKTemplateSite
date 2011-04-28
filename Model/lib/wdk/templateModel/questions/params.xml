@@ -91,13 +91,13 @@
             </enumList>
         </enumParam>
         
-        <answerParam name="rna_answer"
-                     recordClassRef="RnaRecordClasses.RnaRecordClass"
-                     prompt="RNA Answer" />
+        <answerParam name="rna_answer" prompt="RNA Answer">
+			<recordClass ref="RnaRecordClasses.RnaRecordClass" />
+		</answerParam>
                              
-        <answerParam name="est_answer"
-                     recordClassRef="EstRecordClasses.EstRecordClass"
-                     prompt="EST Answer" />
+        <answerParam name="est_answer" prompt="EST Answer">
+			<recordClass ref="EstRecordClasses.EstRecordClass" />
+		</answerParam>
                              
  <stringParam name="motif_expression"
                       prompt="Pattern" number="false">
