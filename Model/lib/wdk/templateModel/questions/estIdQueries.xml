@@ -65,7 +65,7 @@
             <sql>
               <![CDATA[
                select est_id from WdkTestEst e 
-               where e.est_id > 9644240 and est_id < 9644245
+               where cast(e.est_id as numeric) > 9644240 and cast(e.est_id as numeric) < 9644245
               ]]>
             </sql>
          </sqlQuery>

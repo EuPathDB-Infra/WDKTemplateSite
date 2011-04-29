@@ -1,20 +1,20 @@
-row_project_id number(10) not null,	library_id number(5) not null,	anatomy_id number(4),	dbest_id number(12),	dbest_name varchar(120),	normalized varchar(1)
-10	9422		1786	EtH1	
-10	9423		1871	Eimeria S5-2 Sporozoite stage	
-10	9424		1872	Eimeria M5-6 Merozoite stage	
-10	9425		4916	Eimeria M5-6 Merozoite stage subtracted	
-10	9426		8661	Eimeria tenella M5-6 cDNA Neg Selected	
-10	9427		8662	Eimeria tenella S5-2 cDNA Neg Selected	
-10	9428		8942	EtH11	
-10	9429		13013	Eimeria tenella S5-2 Excised cDNA	
-10	9430		13753	Eimeria tenella M5-6 Excised cDNA	
-10	9602		1699	Nc-1Tachyzoite cDNA	
-10	9603		2487	Neospora caninum Lambda Zap cDNA library	
-10	9604		7105	Nc 1314 Tachyzoite cDNA	
-10	9605		12342	Nc-1 pZ Tachyzoite cDNA Library	
-10	9606		13847	Nc-1 Tachyzoite cDNA Library	
-10	9607		14207	Nc-LIV Tachyzoite cDNA Library	
-10	9608		14503	Nc-1 Tachyzoite cDNA Library 2	
-10	9822		5119	cSn.1 S. neurona cDNA	
-10	9823		5572	cSn 1 S neurona invitro merozoite cDNA	
-10	9824		11031	cSn 1 3 S neurona subtracted cDNA	
+project_id varchar(30) not null,	library_id number(5) not null,	anatomy_id number(4),	dbest_id number(12),	dbest_name varchar(120),	normalized varchar(1)
+TemplateDB	9422		1786	EtH1	
+TemplateDB	9423		1871	Eimeria S5-2 Sporozoite stage	
+TemplateDB	9424		1872	Eimeria M5-6 Merozoite stage	
+TemplateDB	9425		4916	Eimeria M5-6 Merozoite stage subtracted	
+TemplateDB	9426		8661	Eimeria tenella M5-6 cDNA Neg Selected	
+TemplateDB	9427		8662	Eimeria tenella S5-2 cDNA Neg Selected	
+TemplateDB	9428		8942	EtH11	
+TemplateDB	9429		13013	Eimeria tenella S5-2 Excised cDNA	
+TemplateDB	9430		13753	Eimeria tenella M5-6 Excised cDNA	
+TemplateDB	9602		1699	Nc-1Tachyzoite cDNA	
+TemplateDB	9603		2487	Neospora caninum Lambda Zap cDNA library	
+TemplateDB	9604		7105	Nc 1314 Tachyzoite cDNA	
+TemplateDB	9605		12342	Nc-1 pZ Tachyzoite cDNA Library	
+TemplateDB	9606		13847	Nc-1 Tachyzoite cDNA Library	
+TemplateDB	9607		14207	Nc-LIV Tachyzoite cDNA Library	
+TemplateDB	9608		14503	Nc-1 Tachyzoite cDNA Library 2	
+TemplateDB	9822		5119	cSn.1 S. neurona cDNA	
+TemplateDB	9823		5572	cSn 1 S neurona invitro merozoite cDNA	
+TemplateDB	9824		11031	cSn 1 3 S neurona subtracted cDNA	
