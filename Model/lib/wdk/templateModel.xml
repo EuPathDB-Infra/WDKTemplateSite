@@ -6,7 +6,7 @@
     <!-- model introduction  -->
     <!-- ******************* -->
     <introduction><![CDATA[
-        Welcome to Strategies WDK Template Site, a sample website driven by the Strategies Web Development Kit.  The site uses sample data and a simple model to demonstrate the core functions of the WDK.  Please see <a href="http://www.gusdb.org/wdk">www.gusdb.org/wdk</a> for more details about the Strategies WDK.]]>
+        Welcome to Strategies WDK Template Site.  It uses <a href="https://www.cbil.upenn.edu/svn/gus/WDKTemplateSite/trunk/Model/data/">sample data</a>, a <a href="https://www.cbil.upenn.edu/svn/gus/WDKTemplateSite/trunk/Model/lib/wdk/">simple model</a>, and <a href="https://www.cbil.upenn.edu/svn/gus/WDKTemplateSite/trunk/Site/">simple view customization</a> to illustrate the core functionality of the WDK. It is can also be used as a template for installing a real WDK site. Please see the <a href="http://code.google.com/p/strategies-wdk/">project home</a> for more details.]]>
         </introduction>
     
     <!-- import the pieces -->
