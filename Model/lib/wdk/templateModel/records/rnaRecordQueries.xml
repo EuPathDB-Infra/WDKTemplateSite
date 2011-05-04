@@ -33,6 +33,18 @@
             SELECT count(*) FROM WDKTestAssembly a
         </testRowCountSql>
 
+        <sqlQuery name="AllRnaIds">
+            <column name="na_sequence_id"/>
+            <column name="project_id"/>
+            <sql>
+                <![CDATA[
+                select distinct a.na_sequence_id, '@PROJECT_ID@' || '' AS project_id
+                from WDKTestAssembly a, WDKTestAssemblySequence aseq
+                where a.na_sequence_id = aseq.assembly_na_sequence_id
+                ]]>
+            </sql>
+        </sqlQuery>
+
         <sqlQuery name="GeneAttrs">
             <column name="na_sequence_id"/>
             <column name="project_id"/>

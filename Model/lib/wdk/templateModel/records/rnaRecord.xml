@@ -41,6 +41,7 @@
     <recordClassSet name="RnaRecordClasses">
 
         <recordClass name="RnaRecordClass" type="RNA"
+            allRecordsQueryRef="RnaAttributes.AllRnaIds"
             attributeOrdering="assembly_consistency,contains_mrna,taxon_name">
             
             <testParamValues>

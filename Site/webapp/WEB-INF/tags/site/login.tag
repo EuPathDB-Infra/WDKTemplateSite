@@ -50,7 +50,7 @@
 	    </td>
   	    <td>
         	    <b>Password: </b> <input type="password" name="password" size="10%">
-            		<a href="<c:url value='/resetpwd.jsp'/>">forgot?</a>
+            		<a href="<c:url value='/showResetPassword.do'/>">forgot?</a>
 	    </td>
 	</tr>
 
@@ -59,7 +59,7 @@
             </c:if>
 	<tr><td colspan="2" >
              <input type="submit" value="Log In">&nbsp;&nbsp;     
-		     <a href="<c:url value='/register.jsp'/>">.....or Register/Subscribe</a>
+		     <a href="<c:url value='/showRegister.do'/>">.....or Register/Subscribe</a>
 	</td></tr>
 </table>
 
