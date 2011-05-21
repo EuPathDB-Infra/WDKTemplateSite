@@ -59,7 +59,7 @@
             </c:if>
 	<tr><td colspan="2" >
              <input type="submit" value="Log In">&nbsp;&nbsp;     
-		     <a href="<c:url value='/showRegister.do'/>">.....or Register/Subscribe</a>
+		     <a href="<c:url value='/showRegister.do'/>">.....or Register</a>
 	</td></tr>
 </table>
 

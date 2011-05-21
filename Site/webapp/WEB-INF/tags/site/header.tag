@@ -132,10 +132,11 @@ function check(all) {
     <table><tr><td>
     <a href='<c:url value="/" />'>New Search</a></td><td>
     <a href='<c:url value="/showApplication.do" />'>My Strategies</a></td><td>
-    <a href='<c:url value="/showXmlDataContent.do?name=XmlQuestions.StrategiesHelp" />'>Strategy Tips</a></td><td>
-    <a href='<c:url value="/showXmlDataList.do" />'>News</a></td></tr></table>
+    <a href='<c:url value="/showXmlDataContent.do?name=XmlQuestions.StrategiesHelp" />'>Strategy Tips</a></td>
+<%--	<td><a href='<c:url value="/showXmlDataList.do" />'>News</a></td>  --%>
+   </tr></table>  
   </div>
-  <div id="login" style="position:absolute;right:10pt;top:-16pt;">
+  <div id="login" style="position:absolute;right:10pt;top:-5pt;">
     <site:login/>
   </div>
 </div>

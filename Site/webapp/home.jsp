@@ -11,7 +11,7 @@
 
 <!-- display wdkModel introduction text -->
 <p style="padding-left:1em;">
-<b>${wdkModel.introduction}</b>
+<b><i>${wdkModel.introduction}</i></b>
 </pn>
 <hr>
 
@@ -34,6 +34,7 @@
           </html:select>
           <html:submit value="Select Search"/>
           </html:form>
+	<br>
        </td>
    </c:if>
 </c:forEach>
