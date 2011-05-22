@@ -37,7 +37,7 @@
                 specified number of ESTs in their assembly.
             </description>
 
-            <attributesList summary="assembly_consistency,contains_mrna,overview,sequence,taxonLink,score"
+            <attributesList summary="taxon_name,assembly_consistency,contains_mrna,overview,sequence,score"
                            sorting="score desc"/>
 
             <dynamicAttributes>
@@ -69,13 +69,16 @@
                 Find RNAs with required assembly consistency score that
                 contain ESTs from more than a specified number of libraries.
             </description>
+
+  <attributesList summary="taxon_name,assembly_consistency,contains_mrna,overview"
+                  />
         </question>
 
 
  <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <!-- Motif search -->
   <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-
+<!--
     <question name="ByMotifSearch"
          displayName="RNA Motif Pattern"
          shortDisplayName="RNA Motif"
@@ -84,7 +87,7 @@
 
         <attributesList
          summary="Locations,MatchCount,Sequence"
-         sorting="project asc,organism asc,MatchCount desc,location_text asc"
+         sorting="MatchCount desc,location_text asc"
         /> 
 
         <summary>
@@ -106,7 +109,7 @@
 
     </question>
 
-
+-->
     </questionSet>
 
 </wdkModel>

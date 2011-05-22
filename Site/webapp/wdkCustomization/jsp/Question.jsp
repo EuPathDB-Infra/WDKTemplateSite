@@ -29,7 +29,7 @@ ${Question_Header}
 </c:forEach>
 
 <c:if test="${hideTitle == false}">
-	<h1>Identify ${recordType}s based on ${wdkQuestion.displayName}</h1>
+	<center><h1 style="font-size:140%">Identify ${recordType}s based on ${wdkQuestion.displayName}</h1></center><br>
 </c:if>
 
 <html:form styleId="form_question" method="post" enctype='multipart/form-data' action="/processQuestion.do">
