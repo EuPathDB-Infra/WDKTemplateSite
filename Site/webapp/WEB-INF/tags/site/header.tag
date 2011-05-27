@@ -61,6 +61,10 @@
 	<c:out value="${title}" default="WDK ${project}" />
 </title>
 
+<!-- for IE and other beowsers -->
+<link rel="icon" type="image/png" href="<c:url value="/images/favicon.ico" /> "> 
+<link rel="shortcut icon" href="<c:url value="/images/favicon.ico" /> ">
+
 <%-- css from WDK  --%>
 <wdk:includes /> 
 
