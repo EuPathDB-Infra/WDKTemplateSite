@@ -27,9 +27,11 @@
             <c:set value="${qSet.name}" var="qSetName"/>
             <c:set value="${qSet.questions}" var="questions"/>
             <c:forEach items="${questions}" var="q">
-              <c:set value="${q.name}" var="qName"/>
-              <c:set value="${q.displayName}" var="qDispName"/>
-              <html:option value="${qSetName}.${qName}">${qDispName}</html:option>
+              <c:if test="${q.isCombined == false}">
+                <c:set value="${q.name}" var="qName"/>
+                <c:set value="${q.displayName}" var="qDispName"/>
+                <html:option value="${qSetName}.${qName}">${qDispName}</html:option>
+              </c:if>
             </c:forEach>
           </html:select>
           <html:submit value="Select Search"/>
