@@ -4,26 +4,26 @@
   <!-- RNA Questions  -->
   <!--++++++++++++++++++++++++++++++++++++++++++++++++-->
   
-    <category name="RnaRecordClasses.RnaRecordClass" displayName="Search for RNAs" />
+    <searchCategory name="RnaRecordClasses.RnaRecordClass" displayName="Search for RNAs" />
     
-    	<category name="rna" displayName="Search for RNAs"
+    	<searchCategory name="rna" displayName="Search for RNAs"
     	          parentRef="RnaRecordClasses.RnaRecordClass">
             <questionRef>RnaQuestions.ByNumSeqs</questionRef>
             <questionRef>RnaQuestions.ByDbESTLib</questionRef>
      	    <questionRef>RnaQuestions.ByMotif</questionRef>
-        </category>
+        </searchCategory>
      
   <!--++++++++++++++++++++++++++++++++++++++++++++++++-->
   <!-- EST Questions  -->
   <!--++++++++++++++++++++++++++++++++++++++++++++++++-->
      
    
-      <category name="EstRecordClasses.EstRecordClass" displayName="Search for Ests" />
+      <searchCategory name="EstRecordClasses.EstRecordClass" displayName="Search for Ests" />
      
-     	<category name="ests" displayName="Search for Ests"
+     	<searchCategory name="ests" displayName="Search for Ests"
     	          parentRef="EstRecordClasses.EstRecordClass">
             <questionRef>EstQuestions.ByEstLib</questionRef>
             <questionRef>EstQuestions.EstNullAttributes</questionRef>
-        </category>
+        </searchCategory>
      
 </wdkModel>
