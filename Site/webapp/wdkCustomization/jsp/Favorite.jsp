@@ -1,5 +1,5 @@
-<%@ taglib prefix="site" tagdir="/WEB-INF/tags/site" %>
-<%@ taglib prefix="wdk" tagdir="/WEB-INF/tags/wdk" %>
+<%@ taglib prefix="imp" tagdir="/WEB-INF/tags/imp" %>
+<%@ taglib prefix="imp" tagdir="/WEB-INF/tags/imp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="w" uri="http://www.servletsuite.com/servlets/wraptag" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -7,7 +7,7 @@
 <c:set var="wdkUser" value="${sessionScope.wdkUser}"/>
 
 <!-- display page header with recordClass type in banner -->
-<site:header banner="Favorite page"/>
+<imp:header banner="Favorite page"/>
 
 <c:set var="allFavorites" value="${wdkUser.favorites}" /><%-- a map of (RecordClass, List<Favorite>) --%>
 <c:choose>
@@ -64,4 +64,4 @@
     </c:otherwise> <%-- END has favorites --%>
 </c:choose>
 
-<site:footer/>
+<imp:footer/>

@@ -1,11 +1,11 @@
-<%@ taglib prefix="site" tagdir="/WEB-INF/tags/site" %>
-<%@ taglib prefix="wdk" tagdir="/WEB-INF/tags/wdk" %>
+<%@ taglib prefix="imp" tagdir="/WEB-INF/tags/imp" %>
+<%@ taglib prefix="imp" tagdir="/WEB-INF/tags/imp" %>
 
-<site:header banner="Unexpected Error" />
+<imp:header banner="Unexpected Error" />
 
 <EM>Sorry, an unexpected error has occurred. 
 Please notify the webmaster, and please include the error message below:</EM>
 
-<wdk:errors/>
+<imp:errors/>
 
-<site:footer/>
+<imp:footer/>

@@ -1,4 +1,4 @@
-<%@ taglib prefix="site" tagdir="/WEB-INF/tags/site" %>
+<%@ taglib prefix="imp" tagdir="/WEB-INF/tags/imp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="html" uri="http://jakarta.apache.org/struts/tags-html" %>
 
@@ -7,7 +7,7 @@
 
 <!-- get wdkModel name to display as page header -->
 <c:set value="${wdkModel.displayName}" var="wdkModelDispName"/>
-<site:header banner="WDK ${wdkModelDispName} Home page" />
+<imp:header banner="WDK ${wdkModelDispName} Home page" />
 
 <!-- display wdkModel introduction text -->
 <p style="padding-left:1em;">
@@ -42,4 +42,4 @@
 </c:forEach>
 </table>
 
-<site:footer/>
+<imp:footer/>

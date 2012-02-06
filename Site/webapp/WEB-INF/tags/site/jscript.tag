@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="wdk" tagdir="/WEB-INF/tags/wdk" %>
+<%@ taglib prefix="imp" tagdir="/WEB-INF/tags/imp" %>
 
 <%@ attribute name="refer" 
  	      type="java.lang.String"
@@ -13,7 +13,7 @@
 
 <%-- JQuery library is included by WDK --%>
 <c:if test="${refer == 'customSummary'}">
-	<wdk:strategyScript />
+	<imp:strategyScript />
 
 <%-- CHECK IF THIS IS NEEDED ----  javascript provided by site 
 	<script type="text/javascript" src="/assets/js/customStrategy.js"></script>
@@ -23,7 +23,7 @@
 </c:if>
 
 <c:if test="${refer == 'customSummary' || refer == 'customQuestion'}">
-	<wdk:parameterScript />
+	<imp:parameterScript />
 <%-- REMOVE
 	<script type="text/javascript" src="/assets/js/orthologpattern.js"></script>
 	<script type="text/javascript" src="/assets/js/blast.js"></script>

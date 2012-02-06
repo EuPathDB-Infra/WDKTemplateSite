@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="site" tagdir="/WEB-INF/tags/site" %>
-<%@ taglib prefix="wdk" tagdir="/WEB-INF/tags/wdk" %>
+<%@ taglib prefix="imp" tagdir="/WEB-INF/tags/imp" %>
+<%@ taglib prefix="imp" tagdir="/WEB-INF/tags/imp" %>
 
 <c:set var="project" value="${applicationScope.wdkModel.displayName}" />
 
@@ -66,13 +66,13 @@
 <link rel="shortcut icon" href="<c:url value="/images/favicon.ico" /> ">
 
 <%-- css from WDK  --%>
-<wdk:includes /> 
+<imp:includes /> 
 
 <%-- When definitions are in conflict, the next one overrides the previous one  --%>
 <link rel="StyleSheet" href="<c:url value="/css/style.css" />" 		type="text/css">
 <link rel="stylesheet" href="<c:url value="/css/Color.css" />"        	type="text/css" />
 
-<site:jscript refer="${refer}"/>
+<imp:jscript refer="${refer}"/>
 
 <!--[if lt IE 8]>
 <link rel="stylesheet" href="<c:url value="/css/ie7.css"/>" type="text/css" />
@@ -141,7 +141,7 @@ function check(all) {
    </tr></table>  
   </div>
   <div id="login" style="position:absolute;right:10pt;top:-5pt;">
-    <site:login/>
+    <imp:login/>
   </div>
 </div>
 <br><br><br>
