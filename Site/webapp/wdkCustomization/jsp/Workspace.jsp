@@ -25,7 +25,7 @@
 
 <c:set var="headElement"></c:set>
 
-<imp:header refer="customSummary" headElement="${headElement}"/>
+<imp:header refer="summary" headElement="${headElement}"/>
 
 <%-- Build URL for sharing strategies --%>
 <c:set var="scheme" value="${pageContext.request.scheme}" />
@@ -35,11 +35,6 @@
 <c:set var="request_uri" value="${fn:substringBefore(request_uri, '/')}" />
 <c:set var="exportBaseUrl" value = "${scheme}://${serverName}/${request_uri}/im.do?s=" />
 
-<%-- set guestUser flag and sharing URL for javascript --%>
-<script type="text/javascript" language="javascript">
-        var guestUser = '${wdkUser.guest}'; 
-	exportBaseURL = '${exportBaseUrl}'
-</script>
 
 <imp:strategyWorkspace includeDYK="true" />
 

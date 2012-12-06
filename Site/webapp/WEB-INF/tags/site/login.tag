@@ -50,7 +50,7 @@
 	    </td>
   	    <td>
         	    <b>Password: </b> <input type="password" name="password" size="10%">
-            		<a href="<c:url value='/showResetPassword.do'/>">forgot?</a>
+                    <input class="button" type="submit" value="Log In">
 	    </td>
 	</tr>
 
@@ -58,8 +58,8 @@
                <input type="hidden" name="refererUrl" value="${requestScope.refererUrl}">
             </c:if>
 	<tr><td colspan="2" >
-             <input type="submit" value="Log In">&nbsp;&nbsp;     
-		     <a href="<c:url value='/showRegister.do'/>">.....or Register</a>
+             <a class="button" href="<c:url value='/showResetPassword.do'/>">Forgot password?</a>
+             <a class="button" href="<c:url value='/showRegister.do'/>">Register</a>
 	</td></tr>
 </table>
 

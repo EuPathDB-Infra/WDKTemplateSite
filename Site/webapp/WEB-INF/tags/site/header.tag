@@ -66,7 +66,7 @@
 <link rel="shortcut icon" href="<c:url value="/images/favicon.ico" /> ">
 
 <%-- css from WDK  --%>
-<imp:includes /> 
+<imp:includes refer="${refer}" /> 
 
 <%-- When definitions are in conflict, the next one overrides the previous one  --%>
 <link rel="StyleSheet" href="<c:url value="/css/style.css" />" 		type="text/css">
@@ -118,6 +118,10 @@ function check(all) {
 <%--------------------------- BODY of HTML doc ---------------------%>
 <body>
   <div id="siteLogoBanner">
+    <div id="login" class="ui-state-default ui-corner-all">
+      <imp:login/>
+    </div>
+
     <a href="<c:url value="/" />"><img src="<c:url value="/wdk/images/strategiesWDK.png" />"
        border="0" alt="Site logo"></a>
   <c:choose>
@@ -125,7 +129,7 @@ function check(all) {
     <span class="bannerh1">${banner}</span>
   </c:when>
   <c:otherwise>
-    <span class="bannerh1">WDK ${project}</span>
+    <span class="bannerh1">${project}</span>
   </c:otherwise>
   </c:choose>
   <br><br>
@@ -139,9 +143,6 @@ function check(all) {
     <a href='<c:url value="/showXmlDataContent.do?name=XmlQuestions.StrategiesHelp" />'>Strategy Tips</a></td>
 <%--	<td><a href='<c:url value="/showXmlDataList.do" />'>News</a></td>  --%>
    </tr></table>  
-  </div>
-  <div id="login" style="position:absolute;right:10pt;top:-5pt;">
-    <imp:login/>
   </div>
 </div>
 <br><br><br>
