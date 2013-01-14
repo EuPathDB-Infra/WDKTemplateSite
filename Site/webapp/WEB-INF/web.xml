@@ -27,6 +27,12 @@
     <listener-class>org.gusdb.wdk.controller.ApplicationInitListener</listener-class>
   </listener>
 
+  <!-- The Apache file upload library starts a cleanup thread to remove temporary files -->
+  <!--    This listener destroys that thread when the webapp is unloaded.               -->
+  <listener>
+    <listener-class>org.apache.commons.fileupload.servlet.FileCleanerCleanup</listener-class>
+  </listener>
+
   <servlet>
     <servlet-name>wdkTemplateSite</servlet-name>
     <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
