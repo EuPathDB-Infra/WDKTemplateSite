@@ -23,8 +23,8 @@
 
     <!-- Queries that return RNA primary keys (for use in questions and nested records.). -->
 
-    <querySet name="RnaIds" queryType="id">
-        <sqlQuery name="ByNumSeqs" isCacheable="true">
+    <querySet name="RnaIds" queryType="id" isCacheable="true">
+        <sqlQuery name="ByNumSeqs">
             <paramRef ref="params.NumSeqs" default="10"/>
             <paramRef ref="params.ApiTaxon"/>
             <column name="na_sequence_id"/>

@@ -23,7 +23,7 @@
 
     <!-- Queries that return EST primary keys (for use in questions). -->
 
-    <querySet name="EstIds" queryType="id">
+    <querySet name="EstIds" queryType="id" isCacheable="true">
         <sqlQuery name="ByEstLib">
             <paramRef ref="params.EstLib"/>
             <column name="est_id"/>

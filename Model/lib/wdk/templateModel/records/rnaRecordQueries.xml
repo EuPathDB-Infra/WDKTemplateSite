@@ -23,7 +23,7 @@
 
     <!-- Queries that retrieve attributes of RNAs -->
     
-    <querySet name="RnaAttributes" queryType="attribute">
+    <querySet name="RnaAttributes" queryType="attribute" isCacheable="false">
 
         <defaultTestParamValues>
              <paramValue name="na_sequence_id">92484277</paramValue>
@@ -85,7 +85,7 @@
 
     <!-- Queries that retrieve tables belonging to RNAs  -->
     
-    <querySet name="RnaTables" queryType="table">
+    <querySet name="RnaTables" queryType="table" isCacheable="false">
         <sqlQuery name="ConstituentEsts" displayName="Constituent ESTs">
             <column name="est_id"/>
             <column name="na_sequence_id"/>
@@ -122,9 +122,9 @@
     </querySet>
 
 
-    <querySet name="FilterQueries" queryType="summary">
+    <querySet name="FilterQueries" queryType="summary" isCacheable="false">
 
-        <sqlQuery name="RnaAnyQuery" isCacheable="false">
+        <sqlQuery name="RnaAnyQuery">
             <paramRef ref="params.rna_answer"/>
             <column name="na_sequence_id"/>
             <column name="wdk_weight" />
@@ -137,7 +137,7 @@
             </sql>
         </sqlQuery>  
 
-        <sqlQuery name="RnaByTaxonFilter" isCacheable="false">
+        <sqlQuery name="RnaByTaxonFilter">
             <paramRef ref="params.taxon_name"/>
             <paramRef ref="params.rna_answer"/>
             <column name="na_sequence_id"/>

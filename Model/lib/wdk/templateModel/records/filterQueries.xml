@@ -21,9 +21,9 @@
     -->
 
 
-    <querySet name="FilterQueries" queryType="summary">
+    <querySet name="FilterQueries" queryType="summary" isCacheable="false">
 
-        <sqlQuery name="RnaAnyQuery" isCacheable="false">
+        <sqlQuery name="RnaAnyQuery">
             <paramRef ref="params.rna_answer"/>
             <column name="na_sequence_id"/>
             <column name="wdk_weight"/>
@@ -36,7 +36,7 @@
             </sql>
         </sqlQuery>  
 
-        <sqlQuery name="RnaByTaxonFilter" isCacheable="false">
+        <sqlQuery name="RnaByTaxonFilter">
             <paramRef ref="params.taxon_name"/>
             <paramRef ref="params.rna_answer"/>
             <column name="na_sequence_id"/>
@@ -54,7 +54,7 @@
         </sqlQuery>
 
 
-        <sqlQuery name="EstSummaryQuery" isCacheable="false">
+        <sqlQuery name="EstSummaryQuery">
             <paramRef ref="params.sample_sum_row"/>
             <paramRef ref="params.sample_sum_column"/>
             <paramRef ref="params.est_answer"/>

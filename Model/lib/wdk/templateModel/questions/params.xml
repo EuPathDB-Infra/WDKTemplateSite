@@ -142,9 +142,9 @@
 
   <!-- queries that return controlled vocabulary terms -->
 
-  <querySet name="VocabQueries" queryType="vocab">
+  <querySet name="VocabQueries" queryType="vocab" isCacheable="true">
         <!-- a query that returns a list of Apicomplexon taxons -->
-        <sqlQuery name="ApiTaxon" isCacheable="true">
+        <sqlQuery name="ApiTaxon">
             <column name="term"/>
             <column name="internal"/>
             <sql>

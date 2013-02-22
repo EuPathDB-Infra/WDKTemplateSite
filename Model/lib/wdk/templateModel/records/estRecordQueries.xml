@@ -22,7 +22,7 @@
 
     <!-- Queries that retrieve attributes of ESTs -->
     
-    <querySet name="EstAttributes" queryType="attribute">
+    <querySet name="EstAttributes" queryType="attribute" isCacheable="false">
 
        <defaultTestParamValues>
             <paramValue name="est_id">9644248</paramValue>
