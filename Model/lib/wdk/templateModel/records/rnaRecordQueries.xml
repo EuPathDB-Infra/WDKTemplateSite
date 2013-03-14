@@ -26,7 +26,7 @@
     <querySet name="RnaAttributes" queryType="attribute" isCacheable="false">
 
         <defaultTestParamValues>
-             <paramValue name="na_sequence_id">92484277</paramValue>
+             <paramValue name="na_sequence_id">92484271</paramValue>
         </defaultTestParamValues>
 
         <testRowCountSql>
@@ -112,7 +112,7 @@
              <!-- it's important to has a dymanic string as 'string' || '', 
                   in order to cast it into text type -->
              <sql>
-                select est.est_id, est.na_sequence_id, '@PROJECT_ID@' || '' AS project_id
+                select est.est_id, a.na_sequence_id, '@PROJECT_ID@' || '' AS project_id
                 from WDKTestAssemblySequence aseq, WDKTestAssembly a, WDKTestEst est
                 where a.na_sequence_id = aseq.assembly_na_sequence_id
                   and est.na_sequence_id = aseq.na_sequence_id

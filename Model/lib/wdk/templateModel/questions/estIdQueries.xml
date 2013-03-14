@@ -41,8 +41,8 @@
             </sql>
         </sqlQuery>  
     
-        <sqlQuery name="AssembyMembership">
-            <paramRef ref="params.est_answer" />
+        <sqlQuery name="AssembyMembership" doNotTest="true">
+            <paramRef ref="params.est_answer"/>
             <column name="est_id"/>
             <column name="wdk_weight"/>
             <sql>

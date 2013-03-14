@@ -29,13 +29,13 @@
               <description> Question that returns the RNA that belongs to the given EST; for use in a Nested Record </description>
          </question>
 
-         <question name="ESTs" 
+         <!-- question name="ESTs" 
                    queryRef="RnaTables.SimpleEstIds" 
                    recordClassRef="EstRecordClasses.EstRecordClass"
                    displayName="Nested Record ESTs"
                    shortDisplayName="Nested EST">
               <description> Question that returns ESTs that belong to the given RNA; for use in a Nested Record List </description>
-         </question>
+         </question -->
 
     </questionSet>
 
