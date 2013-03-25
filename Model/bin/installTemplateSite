@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# check that we have all we need
+
+echo "testing sudo"
+sudo echo "sudo test successful"
+
+echo "still here; dollar-question = $?"
+

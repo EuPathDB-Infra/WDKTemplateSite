@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <web-app version="2.4" 
-         xmlns="http://java.sun.com/xml/ns/j2ee" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
-                             http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	 xmlns="http://java.sun.com/xml/ns/j2ee" 
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+			     http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
   <context-param>
     <param-name>GUS_HOME</param-name>
@@ -19,16 +19,12 @@
     <param-name>wdkAlwaysGoToSummary_param</param-name>
     <param-value>yes</param-value>
   </context-param>
-  <context-param>
-    <param-name>wdkCustomViewDir_param</param-name>
-    <param-value>/customPages/</param-value>
-  </context-param>
   <listener>
     <listener-class>org.gusdb.wdk.controller.ApplicationInitListener</listener-class>
   </listener>
 
   <servlet>
-    <servlet-name>wdkTemplateSite</servlet-name>
+    <servlet-name>wdkTemplateDB</servlet-name>
     <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
     <init-param>
       <param-name>config</param-name>
@@ -36,13 +32,18 @@
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  
   <servlet-mapping>
-    <servlet-name>wdkTemplateSite</servlet-name>
+    <servlet-name>wdkTemplateDB</servlet-name>
+    <url-pattern>/webservices/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>wdkTemplateDB</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 
-
-<!-- Internal WSF support -->
+  <!-- Internal WSF support -->
   <context-param>
     <param-name>wsfConfigDir_param</param-name>
     <param-value>/WEB-INF/wdk-model/config/</param-value>
@@ -52,14 +53,14 @@
     <servlet-name>AxisServlet</servlet-name>
     <display-name>Apache-Axis Servlet</display-name>
     <servlet-class>
-        org.apache.axis.transport.http.AxisServlet
+      org.apache.axis.transport.http.AxisServlet
     </servlet-class>
   </servlet>
   <servlet>
     <servlet-name>AdminServlet</servlet-name>
     <display-name>Axis Admin Servlet</display-name>
     <servlet-class>
-        org.apache.axis.transport.http.AdminServlet
+      org.apache.axis.transport.http.AdminServlet
     </servlet-class>
     <load-on-startup>100</load-on-startup>
   </servlet>
@@ -67,7 +68,7 @@
     <servlet-name>SOAPMonitorService</servlet-name>
     <display-name>SOAPMonitorService</display-name>
     <servlet-class>
-        org.apache.axis.monitor.SOAPMonitorService
+      org.apache.axis.monitor.SOAPMonitorService
     </servlet-class>
     <init-param>
       <param-name>SOAPMonitorPort</param-name>
@@ -91,11 +92,11 @@
     <servlet-name>SOAPMonitorService</servlet-name>
     <url-pattern>/SOAPMonitor</url-pattern>
   </servlet-mapping>
-<!-- End Internal WSF support -->
+  <!-- End Internal WSF support -->
 
   <!-- The Welcome File List -->
   <welcome-file-list>
-     <welcome-file>home.jsp</welcome-file>
+    <welcome-file>home.jsp</welcome-file>
   </welcome-file-list>
 
   <!-- Error Page Mappings -->
@@ -112,31 +113,65 @@
     <location>/wdkCustomization/jsp/Error.jsp</location>
   </error-page>
 
+  <error-page>
+    <error-code>404</error-code>
+    <location>/404.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>400</error-code>
+    <location>/404.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/500.jsp</location>
+  </error-page>
+
   <jsp-config>
-  <taglib>
-    <taglib-uri>/WEB-INF/tld-third-party/struts-html.tld</taglib-uri>
-    <taglib-location>/WEB-INF/tld-third-party/struts-html.tld</taglib-location>
-  </taglib>
+    <taglib>
+      <taglib-uri>/WEB-INF/tld-third-party/struts-html.tld</taglib-uri>
+      <taglib-location>/WEB-INF/tld-third-party/struts-html.tld</taglib-location>
+    </taglib>
 
-  <taglib>
-    <taglib-uri>/WEB-INF/tld-third-party/pager-taglib.tld</taglib-uri>
-    <taglib-location>/WEB-INF/tld-third-party/pager-taglib.tld</taglib-location>
-  </taglib>
+    <taglib>
+      <taglib-uri>/WEB-INF/tld-third-party/pager-taglib.tld</taglib-uri>
+      <taglib-location>/WEB-INF/tld-third-party/pager-taglib.tld</taglib-location>
+    </taglib>
 
-  <taglib>
-    <taglib-uri>http://jakarta.apache.org/taglibs/random-1.0</taglib-uri>
-    <taglib-location>/WEB-INF/tld-third-party/taglibs-random.tld</taglib-location>
-  </taglib>
+    <taglib>
+      <taglib-uri>http://jakarta.apache.org/taglibs/random-1.0</taglib-uri>
+      <taglib-location>/WEB-INF/tld-third-party/taglibs-random.tld</taglib-location>
+    </taglib>
   </jsp-config>
- 
+
   <filter>
     <filter-name>CheckLoginFilter</filter-name>
     <filter-class>org.gusdb.wdk.controller.CheckLoginFilter</filter-class>
   </filter>
-  
+    
   <filter-mapping>
     <filter-name>CheckLoginFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
+  <!-- UNCOMMENT THIS SECTION TO ADD A PASSWORD CHECK TO THE WEBAPPLICATION -->
+  <!--  <security-constraint>
+       <web-resource-collection>
+       <web-resource-name>
+       Entire TemplateDB Webapplication
+       </web-resource-name>
+       <url-pattern>/*</url-pattern>
+       </web-resource-collection>
+       <auth-constraint>
+       <role-name>templatedb-guest</role-name>
+       </auth-constraint>
+       </security-constraint>
+       <login-config>
+       <auth-method>BASIC</auth-method>
+       <realm-name>TemplateDB Beta Site</realm-name>
+       </login-config> 
+       <security-role>
+       <role-name>templatedb-guest</role-name>
+       </security-role> -->
 
 </web-app>

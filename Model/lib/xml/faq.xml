@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE xml [
+  <!ENTITY nbsp "&#160;"> 
+  <!ENTITY lt   "&#60;"> 
+  <!ENTITY gt   "&#62;">
+  <!ENTITY sl   "&#47;">
+]>
+
+<xmlAnswer>
+   <record>     
+     <attribute name="question">What is a Strategy?</attribute>
+     <attribute name="answer"><![CDATA[Strategies are a graphical user interface (GUI) designed to make advanced searching and set operations (e.g., AND, OR, NOT) on search results easy for all users.  The use of strategies facilitates the exploration of relationships across related datasets through the use of Venn Diagrams to detail a strategy's flow.  For more details on the Strategy Framework, see  <a href="http://www.ncbi.nlm.nih.gov/pubmed/21705364" target="_blank">Fischer et al. (2011). Database.</a>.
+     ]]></attribute>
+     <attribute name="tag">strategy_introduction</attribute>
+     <attribute name="category">Search Strategies</attribute>
+   </record>
+
+   <record>
+     <attribute name="question">In what format should a gene list be provided in a search, either in a text box or uploaded file?</attribute>
+     <attribute name="answer"><![CDATA[If a search allows a list of genes to be entered in a text box or uploaded from a file, the list may be separated by commas, semicolons or new-lines. For uploaded files tab separators work as well.]]></attribute>
+     <attribute name="tag">fileFormat</attribute>
+     <attribute name="category">Searching TemplateDB</attribute>
+   </record>
+
+   <record>     
+     <attribute name="question">How can I view more information in the summary result table?</attribute>
+     <attribute name="answer"><![CDATA[On the "My Strategies" page, above the table containing the results of your search, you will find a "Select Columns" button.  Clicking this button will open a pop-up window that will allow you to select additional information about each gene.]]></attribute>
+     <attribute name="tag">addColumns</attribute>
+     <attribute name="category">Search Strategies</attribute>
+   </record>
+
+   <record>
+     <attribute name="question">How can I download a search result?</attribute>
+       <attribute name="answer"><![CDATA[On the "My Strategies" page, above the table containing the results of your search, you will find a "Download..." link. If you follow this, you will be prompted to choose the format of the report and the columns to include.]]></attribute>
+       <attribute name="tag">download</attribute>
+       <attribute name="category">Search Strategies</attribute>
+       <attribute name="tip">you can download your search results.</attribute>
+       <attribute name="showTipAsDidYouKnow">true</attribute>
+   </record>
+
+</xmlAnswer>

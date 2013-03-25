@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="Create" name="GenereateResources">
+
+  <description>Stolen from install project build ant script to populate imp in Eclipse</description>
+ 
+  <property name="tag.location" value="Site/webapp/WEB-INF/tags"/>
+  <property name="wdktag.location" value="../../WDK/View/webapp/WEB-INF/tags/wdk"/>
+  
+  <target name="Create">
+    <echo>Copying default and custom tags...</echo>
+    <mkdir dir="${tag.location}/imp"/>
+    <!--  remove all tags first -->
+    <delete>
+      <fileset dir="${tag.location}/imp" includes="*.tag"/>
+    </delete>
+    <!-- need to copy the default tags from WDK first -->
+    <copy todir="${tag.location}/imp">
+      <fileset dir="${wdktag.location}">
+        <include name="*.tag"/>
+      </fileset>
+    </copy>
+    <!-- lastly, copy custom tags from site, and overwrite existing ones -->
+    <copy todir="${tag.location}/imp" overwrite="true">
+      <fileset dir="${tag.location}/site">
+        <include name="*.tag"/>
+      </fileset>
+    </copy>
+  </target>
+  
+</project>

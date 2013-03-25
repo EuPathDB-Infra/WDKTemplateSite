@@ -36,6 +36,17 @@
                   recordClassRef="XmlRecordClasses.StrategiesHelpRecord"
                   xmlDataURL="strategiesHelp.xml">
         </xmlQuestion>
+        
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<!-- WdkVerbiage -->
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+      <xmlQuestion name="WdkVerbiage"
+                 displayName="Verbiage"
+                 recordClassRef="XmlRecordClasses.WdkVerbiageRecord"
+                 xmlDataURL="verbiage.xml">
+       </xmlQuestion>
+        
 
     </xmlQuestionSet>
 

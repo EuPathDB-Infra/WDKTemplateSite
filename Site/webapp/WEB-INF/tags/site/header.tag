@@ -66,7 +66,7 @@
 <link rel="shortcut icon" href="<c:url value="/images/favicon.ico" /> ">
 
 <%-- css from WDK  --%>
-<imp:includes /> 
+<imp:includes refer="${refer}"/>
 
 <%-- When definitions are in conflict, the next one overrides the previous one  --%>
 <link rel="StyleSheet" href="<c:url value="/css/style.css" />" 		type="text/css">
@@ -117,6 +117,10 @@ function check(all) {
 
 <%--------------------------- BODY of HTML doc ---------------------%>
 <body>
+
+  <!-- helper divs with generic information used by javascript -->
+  <imp:siteInfo />
+
   <div id="siteLogoBanner">
     <a href="<c:url value="/" />"><img src="<c:url value="/wdk/images/strategiesWDK.png" />"
        border="0" alt="Site logo"></a>
@@ -141,7 +145,7 @@ function check(all) {
    </tr></table>  
   </div>
   <div id="login" style="position:absolute;right:10pt;top:-5pt;">
-    <imp:login/>
+    <imp:login title="WDK Template Site"/>
   </div>
 </div>
 <br><br><br>

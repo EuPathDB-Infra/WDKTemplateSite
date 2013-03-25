@@ -47,6 +47,19 @@
             <xmlAttribute name="showTipAsDidYouKnow"/>
             <xmlAttribute name="body"/>
           </xmlRecordClass>
+          
+           <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+   <!-- WdkVerbiage -->
+   <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+        <xmlRecordClass
+          name="WdkVerbiageRecord"
+          type="Verbiage"
+          idPrefix="Verb."
+          delimiter="@">
+            <xmlAttribute name="title"/>
+            <xmlAttribute name="content"/>
+         </xmlRecordClass>
 
     </xmlRecordClassSet>
 
