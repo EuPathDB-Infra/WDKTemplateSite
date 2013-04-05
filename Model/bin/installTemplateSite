@@ -1,9 +1,192 @@
 #!/bin/bash
 
-# check that we have all we need
+# installTemplateSite
+#
+# Install the WDK Template Site, a demo for the Strategies WDK and a
+# starting point for people who want to develop their own Strategies WDK site
+#
+# https://code.google.com/p/strategies-wdk/
 
-echo "testing sudo"
-sudo echo "sudo test successful"
+# IMPORTANT: edit the "configuration" section to match your own install
+#  before running this script
 
-echo "still here; dollar-question = $?"
+######################################################################
+# configuration
+
+BASE_DIRECTORY=/www/wdktemplate
+WEBAPP_NAME=wdktemplate
+DB_VENDOR=Postgres
+DB_DSN=DBI:Pg:dbname=myinstance13;host=localhost
+DB_JDBC_DSN=jdbc:postgresql://localhost/myinstance13
+DB_USER=siteuser
+DB_PASSWORD=abc123
+TOMCAT_HOME=/usr/share/tomcat6
+ORACLE_JARFILE=ojdbc5.jar
+MODEL_NAME=TemplateDB
+
+######################################################################
+# check prerequisites
+
+echo -e "\nThis script ($0) will install the WDK Template Site."
+SEPARATOR=`echo -e "\n--------------------------------------------------\n " `
+
+# check that we can write to the install directory
+touch ${BASE_DIRECTORY}/foo 2>/dev/null
+rm ${BASE_DIRECTORY}/foo 2>/dev/null
+if [ $? -ne 0 ]; then
+  echo "${SEPARATOR}"
+  echo "ERROR: can't write to ${BASE_DIRECTORY}; check config variable \$BASE_DIRECTORY"
+fi
+
+# check that Tomcat allows a symbolic link to a webapp
+ls ${TOMCAT_HOME}/conf/server.xml > /dev/null
+if [ $? -ne 0 ]; then
+  echo "${SEPARATOR}"
+  echo "ERROR: can't find Tomcat's server.xml file (\$TOMCAT_HOME is set to ${TOMCAT_HOME})"
+else
+  grep 'allowLinking="true"' ${TOMCAT_HOME}/conf/server.xml > /dev/null
+  if [ $? -ne 0 ]; then
+    echo "${SEPARATOR}"
+    echo "ERROR: Tomcat's server.xml file (${TOMCAT_HOME}/conf/server.xml) doesn't set allowLinking=\"true\". "
+    echo The '<Context>' element in server.xml must contain the attribute \'allowLinking=\"true\"\'. 
+  fi
+fi
+
+# Java
+echo "${SEPARATOR}"
+echo check version of Java \(`which java`\):
+java -version
+echo "\$LD_LIBRARY_PATH = \"${LD_LIBRARY_PATH}\""
+
+# Subversion
+echo "${SEPARATOR}"
+echo check version of Subversion \(`which svn`\):
+svn --version | head -1
+
+# Ant
+echo "${SEPARATOR}"
+echo check version of Ant \(`which ant`\):
+ant -version
+
+# Oracle jarfile (needed for PostgreSQL installs too [why?] )
+ls ${ORACLE_JARFILE} > /dev/null
+if [ $? -ne 0 ]; then
+  echo "${SEPARATOR}"
+  echo "ERROR: can't find Oracle driver jarfile (\$ORACLE_JARFILE is set to ${ORACLE_JARFILE})"
+
+  if [ "${DB_VENDOR}" != "Oracle" ]; then
+    echo "*** Note that this file is required even in installs that don't use Oracle."
+  fi
+
+  echo "Download this file from Oracle.com and point the \$ORACLE_JARFILE variable at it."
+fi
+
+
+# DBMS
+echo "${SEPARATOR}"
+if [ "${DB_VENDOR}" = "Postgres" ]; then
+
+  # PostgreSQL-specific checks
+  echo check version of psql \(`which psql`\):
+  psql -V
+elif [ "${DB_VENDOR}" = "Oracle" ]; then
+
+  # Oracle-specific checks
+  echo check version of sqlplus \(`which sqlplus`\):
+  sqlplus -v
+else
+  echo "${SEPARATOR}"
+  echo "ERROR: \$DB_VENDOR must be set to either \"Postgres\" or \"Oracle\""
+fi
+
+echo "${SEPARATOR}"
+echo -n 'proceed with install? (y/n) > '
+read response
+responseStart=`echo $response | cut -c1 `
+if  [ "${responseStart}" != "y" ]; then
+    echo exiting
+    exit
+fi
+
+
+######################################################################
+# installation
+
+echo "\ninstalling WDK template site"
+
+# create directories
+cd ${BASE_DIRECTORY}
+mkdir cgi-bin
+mkdir cgi-lig
+mkdir conf
+mkdir etc
+mkdir gus_home
+mkdir htdocs
+mkdir logs; chmod 777 logs
+mkdir project_home
+
+# check out the Subversion project of the template site, along with the others it depends on
+cd ${BASE_DIRECTORY}/project_home
+svn checkout https://www.cbil.upenn.edu/svn/cbil/WDKTemplate/api-build-16/WDKTemplateWebsite/ WDKTemplateSite
+svn checkout https://www.cbil.upenn.edu/svn/gus/FgpUtil/branches/api-build-16 FgpUtil
+svn checkout https://www.cbil.upenn.edu/svn/gus/install/branches/api-build-16 install
+svn checkout https://www.cbil.upenn.edu/svn/gus/WDK/branches/api-build-16 WDK
+svn checkout https://www.cbil.upenn.edu/svn/gus/WSF/branches/api-build-16 WSF
+
+# set $GUS_HOME, $PROJECT_HOME
+cd ${BASE_DIRECTORY}
+source project_home/install/bin/gusEnv.bash
+
+# augment PATH so we can use substitute
+PATH=${PATH}:${PROJECT_HOME}/WDKTemplateSite/Model/bin
+
+# GUS config file
+mkdir -p $(GUS_HOME)/config
+cat $PROJECT_HOME/install/gus.config.sample | \
+substitute '<dbVendor>' "${DB_VENDOR}" | \
+substitute '<dbiDsn>' "${DB_DSN}" | \
+substitute '<jdbcDsn>' "${DB_JDBC_DSN}" | \
+substitute '<dbLogin>' "${DB_USER}" | \
+substitute '<dbPassword>' "${DB_PASSWORD}" | \
+cat  > $(GUS_HOME)/config/gus.config
+
+mkdir -p $(GUS_HOME)/lib/java/db_driver
+cp ${ORACLE_JARFILE} $(GUS_HOME)/lib/java/db_driver
+bld WDK
+bld WDKTemplateSite
+
+# model-config
+cd $GUS_HOME/config/${MODEL_NAME}
+cp model.prop.sample model.prop
+cp model-config.xml.sample-min model-config.xml
+# edit model-config.xml to populate the login, password, and connectionUrl
+#   attributes of the <appDb> and <userDb> elements
+
+# install WDK's "persistent tables"
+cd /www/wdktemplate/project_home/WDK/Model/data/
+psql <instance-name>
+\i persistent_tables_postgres.sql
+\q
+
+wdkCache -model ${MODEL_NAME} -new
+
+# insert test data (fodder for model queries)
+wdkTestDb -model ${MODEL_NAME}  -new
+
+# webinstall
+cp /www/wdktemplate/project_home/WDK/Controller/config/webapp.prop.sample /www/wdktemplate/conf/webapp.prop
+bldw WDKTemplateSite /www/wdktemplate/conf/webapp.prop
+
+# log4j configuration
+cd /www/wdktemplate/; cp gus_home/config/log4j.xml.sample webapp/WEB-INF/classes/log4j.xml
+
+# database driver:
+sudo ln -s /www/wdktemplate/gus_home/lib/java/db_driver/postgresql-8.3-603.jdbc3.jar /usr/share/tomcat6/lib/postgresql-8.3-603.jdbc3.jar
+
+# create tomcat.xml, make a symbolic link to it that Tomcat can see, and cycle Tomcat
+cd $GUS_HOME//config
+cp wdk-context.xml.sample wdk-context.xml
+sudo ln -s /www/wdktemplate/gus_home/config/wdk-context.xml /usr/share/tomcat6/conf/Catalina/localhost/wdktemplate.xml
+
+
 
