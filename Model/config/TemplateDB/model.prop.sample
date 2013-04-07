@@ -2,7 +2,8 @@
 # Project Identifiers
 #----------------------------------------------------------
 
-PROJECT_ID=TemplateDB
+# PROJECT_ID is set to the model name, such as "TemplateDB"
+PROJECT_ID=<modelName>
 SERVER_NAME=localhost:8080
 
 #----------------------------------------------------------
