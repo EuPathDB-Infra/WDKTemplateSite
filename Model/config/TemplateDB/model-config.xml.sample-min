@@ -6,17 +6,17 @@
              supportEmail="support@your-site.com"
              >
 
-    <appDb login="db_login"
-           password="db_password"
-           connectionUrl="jdbc:postgresql:your_db"
-           platform="PostgreSQL"
+    <appDb login="<dbLogin>"
+           password="<dbPassword>"
+           connectionUrl="<jdbcDsn>"
+           platform="<dbVendor>"
            userDbLink=""
            />
            
-    <userDb login="db_login"
-            password="db_password"
-            connectionUrl="jdbc:postgresql:your_db"
-            platform="PostgreSQL"
+    <userDb login="<db_login>"
+            password="<dbPassword>"
+            connectionUrl="<jdbcDsn>"
+            platform="<dbVendor>"
             userSchema="wdkuser."
             wdkEngineSchema="wdkengine."
             />
