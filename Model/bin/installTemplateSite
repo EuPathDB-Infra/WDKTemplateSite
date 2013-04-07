@@ -13,22 +13,43 @@
 ######################################################################
 # configuration
 
-BASE_DIRECTORY=/www/wdktemplate
-WEBAPP_NAME=wdktemplate
-DB_VENDOR=Postgres
-DB_DSN=DBI:Pg:dbname=myinstance13;host=localhost
-DB_JDBC_DSN=jdbc:postgresql://localhost/myinstance13
-DB_USER=siteuser
-DB_PASSWORD=abc123
+# not rewritten in samples
 TOMCAT_HOME=/usr/share/tomcat6
 ORACLE_JARFILE=ojdbc5.jar
+# rewritten in samples
+BASE_DIRECTORY=/www/wdktemplate
+WEBAPP_NAME=wdktemplate
 MODEL_NAME=TemplateDB
+DB_VENDOR='Postgres or Oracle'
+DB_DSN=DBI:Pg:dbname=your_db;host=localhost
+DB_JDBC_DSN=jdbc:postgresql:your_db
+DB_USER=siteuser
+DB_PASSWORD=abc123
+
+# my local stuff, for testing -- don't check the file in with this
+BASE_DIRECTORY=/www/niagads
+WEBAPP_NAME=niagads
+DB_DSN=DBI:Pg:dbname=niagads13;host=localhost
+DB_JDBC_DSN=jdbc:postgresql://localhost/niagads13
+DB_USER=iodice
+DB_PASSWORD=bldN1agads
+DB_VENDOR=Postgres
 
 ######################################################################
 # check prerequisites
 
 echo -e "\nThis script ($0) will install the WDK Template Site."
 SEPARATOR=`echo -e "\n--------------------------------------------------\n " `
+
+function check {
+  echo "${SEPARATOR}"
+  whither=`which $1 2>/dev/null`
+  if [ $? -ne 0 ]; then
+    echo "ERROR: can't find command \"$1\""
+  else
+    echo check version of $1 \(${whither}\):
+  fi
+}
 
 # check that we can write to the install directory
 touch ${BASE_DIRECTORY}/foo 2>/dev/null
@@ -53,23 +74,22 @@ else
 fi
 
 # Java
-echo "${SEPARATOR}"
-echo check version of Java \(`which java`\):
+check java
 java -version
+
+echo "${SEPARATOR}"
 echo "\$LD_LIBRARY_PATH = \"${LD_LIBRARY_PATH}\""
 
 # Subversion
-echo "${SEPARATOR}"
-echo check version of Subversion \(`which svn`\):
+check svn
 svn --version | head -1
 
 # Ant
-echo "${SEPARATOR}"
-echo check version of Ant \(`which ant`\):
+check ant
 ant -version
 
 # Oracle jarfile (needed for PostgreSQL installs too [why?] )
-ls ${ORACLE_JARFILE} > /dev/null
+ls ${ORACLE_JARFILE} > /dev/null 2>&1
 if [ $? -ne 0 ]; then
   echo "${SEPARATOR}"
   echo "ERROR: can't find Oracle driver jarfile (\$ORACLE_JARFILE is set to ${ORACLE_JARFILE})"
@@ -83,17 +103,26 @@ fi
 
 
 # DBMS
-echo "${SEPARATOR}"
 if [ "${DB_VENDOR}" = "Postgres" ]; then
 
   # PostgreSQL-specific checks
-  echo check version of psql \(`which psql`\):
+  check psql
   psql -V
+
+  # persistent tables, PostgreSQL-style
+  svn export https://www.cbil.upenn.edu/svn/gus/WDK/branches/api-build-16/Model/data/persistent_tables_postgres.sql > /dev/null
+  echo; echo "NOTE: if you haven't already, run the script persistent_tables_postgres.sql (which has just been saved in `pwd`) to create tables needed by the WDK."
+
 elif [ "${DB_VENDOR}" = "Oracle" ]; then
 
   # Oracle-specific checks
-  echo check version of sqlplus \(`which sqlplus`\):
+  check sqlplus
   sqlplus -v
+
+  # persistent tables, Oracle-style
+  svn export https://www.cbil.upenn.edu/svn/gus/WDK/branches/api-build-16/Model/data/persistent_tables_oracle.sql > /dev/null
+  echo; echo "NOTE: if you haven't already, run the script persistent_tables_oracle.sql (which has just been saved in `pwd`) to create tables needed by the WDK."
+
 else
   echo "${SEPARATOR}"
   echo "ERROR: \$DB_VENDOR must be set to either \"Postgres\" or \"Oracle\""
@@ -104,7 +133,7 @@ echo -n 'proceed with install? (y/n) > '
 read response
 responseStart=`echo $response | cut -c1 `
 if  [ "${responseStart}" != "y" ]; then
-    echo exiting
+    echo exiting without installing
     exit
 fi
 
@@ -113,6 +142,21 @@ fi
 # installation
 
 echo "\ninstalling WDK template site"
+
+function rewrite {
+  # given input and output files, copy contents using the "substitute" command
+  # to instantiate variables
+
+cat $1 | \
+substitute '<dbVendor>' "${DB_VENDOR}" | \
+substitute '<dbiDsn>' "${DB_DSN}" | \
+substitute '<jdbcDsn>' "${DB_JDBC_DSN}" | \
+substitute '<dbLogin>' "${DB_USER}" | \
+substitute '<dbPassword>' "${DB_PASSWORD}" | \
+substitute '<modelName>' "${MODEL_NAME}" | \
+substitute '<baseDirectory>' "${BASE_DIRECTORY}" | \
+cat  > $2
+}
 
 # create directories
 cd ${BASE_DIRECTORY}
@@ -142,13 +186,7 @@ PATH=${PATH}:${PROJECT_HOME}/WDKTemplateSite/Model/bin
 
 # GUS config file
 mkdir -p $(GUS_HOME)/config
-cat $PROJECT_HOME/install/gus.config.sample | \
-substitute '<dbVendor>' "${DB_VENDOR}" | \
-substitute '<dbiDsn>' "${DB_DSN}" | \
-substitute '<jdbcDsn>' "${DB_JDBC_DSN}" | \
-substitute '<dbLogin>' "${DB_USER}" | \
-substitute '<dbPassword>' "${DB_PASSWORD}" | \
-cat  > $(GUS_HOME)/config/gus.config
+rewrite $PROJECT_HOME/install/gus.config.sample $(GUS_HOME)/config/gus.config
 
 mkdir -p $(GUS_HOME)/lib/java/db_driver
 cp ${ORACLE_JARFILE} $(GUS_HOME)/lib/java/db_driver
@@ -157,36 +195,38 @@ bld WDKTemplateSite
 
 # model-config
 cd $GUS_HOME/config/${MODEL_NAME}
-cp model.prop.sample model.prop
-cp model-config.xml.sample-min model-config.xml
+rewrite model.prop.sample model.prop
+rewrite model-config.xml.sample-min model-config.xml
 # edit model-config.xml to populate the login, password, and connectionUrl
 #   attributes of the <appDb> and <userDb> elements
 
-# install WDK's "persistent tables"
-cd /www/wdktemplate/project_home/WDK/Model/data/
-psql <instance-name>
-\i persistent_tables_postgres.sql
-\q
-
+echo "${SEPARATOR}"
+echo "creating WDK cache"
 wdkCache -model ${MODEL_NAME} -new
 
 # insert test data (fodder for model queries)
 wdkTestDb -model ${MODEL_NAME}  -new
 
 # webinstall
-cp /www/wdktemplate/project_home/WDK/Controller/config/webapp.prop.sample /www/wdktemplate/conf/webapp.prop
-bldw WDKTemplateSite /www/wdktemplate/conf/webapp.prop
+rewrite ${PROJECT_HOME}/WDK/Controller/config/webapp.prop.sample ${BASE_DIRECTORY}/conf/webapp.prop
+bldw WDKTemplateSite ${BASE_DIRECTORY}/conf/webapp.prop
 
 # log4j configuration
-cd /www/wdktemplate/; cp gus_home/config/log4j.xml.sample webapp/WEB-INF/classes/log4j.xml
+rewrite ${GUS_HOME}/config/log4j.xml.sample ${BASE_DIRECTORY{/webapp/WEB-INF/classes/log4j.xml
 
 # database driver:
-sudo ln -s /www/wdktemplate/gus_home/lib/java/db_driver/postgresql-8.3-603.jdbc3.jar /usr/share/tomcat6/lib/postgresql-8.3-603.jdbc3.jar
+sudo ln -s ${GUS_HOME}/lib/java/db_driver/postgresql-8.3-603.jdbc3.jar ${TOMCAT_HOME}/lib/postgresql-8.3-603.jdbc3.jar
 
 # create tomcat.xml, make a symbolic link to it that Tomcat can see, and cycle Tomcat
-cd $GUS_HOME//config
-cp wdk-context.xml.sample wdk-context.xml
-sudo ln -s /www/wdktemplate/gus_home/config/wdk-context.xml /usr/share/tomcat6/conf/Catalina/localhost/wdktemplate.xml
+cd $GUS_HOME/config
+rewrite wdk-context.xml.sample wdk-context.xml
 
-
-
+echo "To complete the installation of the WDK template site, perform the following two steps."
+echo "(They may have to be done by a system administrator, or with the use of the \"sudo\" command.)"
+echo
+echo "First, make a symbolic link to the new site's Context XML file from Tomcat's localhost dir:"
+echo "sudo ln -s ${GUS_HOME}/config/wdk-context.xml ${TOMCAT_HOME}/conf/Catalina/localhost/${WEBAPP_NAME}.xml"
+echo
+echo "Next, cycle Tomcat:"
+echo "sudo /etc/init.d/tomcat6 stop"
+echo "sudo /etc/init.d/tomcat6 start"
