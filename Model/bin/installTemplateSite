@@ -90,6 +90,7 @@ if [ $? -ne 0 ]; then
   echo "Download this file from Oracle.com and point the \$ORACLE_JARFILE variable at it."
 fi
 
+DB_PLATFORM=$DB_VENDOR
 
 # DBMS
 if [ "${DB_VENDOR}" = "Postgres" ]; then
@@ -100,7 +101,11 @@ if [ "${DB_VENDOR}" = "Postgres" ]; then
 
   # persistent tables, PostgreSQL-style
   svn export https://www.cbil.upenn.edu/svn/gus/WDK/branches/api-build-16/Model/data/persistent_tables_postgres.sql > /dev/null
-  echo; echo "NOTE: if you haven't already, run the script persistent_tables_postgres.sql (which has just been saved in `pwd`) to create tables needed by the WDK."
+  echo; echo "NOTE: if you haven't already, run the script persistent_tables_postgres.sql"
+  echo " (which has just been saved in `pwd`) to create tables needed by the WDK."
+
+  DB_DRIVER_FILE=postgresql-8.3-603.jdbc3.jar
+  DB_PLATFORM='PostgreSQL'   # GUS says "Postgres", but WDK says "PostgreSQL". Potato, potahto.
 
 elif [ "${DB_VENDOR}" = "Oracle" ]; then
 
@@ -112,6 +117,7 @@ elif [ "${DB_VENDOR}" = "Oracle" ]; then
   svn export https://www.cbil.upenn.edu/svn/gus/WDK/branches/api-build-16/Model/data/persistent_tables_oracle.sql > /dev/null
   echo; echo "NOTE: if you haven't already, run the script persistent_tables_oracle.sql (which has just been saved in `pwd`) to create tables needed by the WDK."
 
+  DB_DRIVER_FILE=ojdbc5.jar
 else
   echo "${SEPARATOR}"
   echo "ERROR: \$DB_VENDOR must be set to either \"Postgres\" or \"Oracle\""
@@ -132,21 +138,6 @@ fi
 
 echo "\ninstalling WDK template site"
 
-function rewrite {
-  # given input and output files, copy contents using the "substitute" command
-  # to instantiate variables
-
-cat $1 | \
-substitute '<dbVendor>' "${DB_VENDOR}" | \
-substitute '<dbiDsn>' "${DB_DSN}" | \
-substitute '<jdbcDsn>' "${DB_JDBC_DSN}" | \
-substitute '<dbLogin>' "${DB_USER}" | \
-substitute '<dbPassword>' "${DB_PASSWORD}" | \
-substitute '<modelName>' "${MODEL_NAME}" | \
-substitute '<baseDirectory>' "${BASE_DIRECTORY}" | \
-cat  > $2
-}
-
 # create directories
 cd ${BASE_DIRECTORY}
 mkdir cgi-bin
@@ -160,7 +151,7 @@ mkdir project_home
 
 # check out the Subversion project of the template site, along with the others it depends on
 cd ${BASE_DIRECTORY}/project_home
-svn checkout https://www.cbil.upenn.edu/svn/cbil/WDKTemplate/api-build-16/WDKTemplateWebsite/ WDKTemplateSite
+svn checkout https://www.cbil.upenn.edu/svn/gus/WDKTemplateSite/branches/api-build-16 WDKTemplateSite
 svn checkout https://www.cbil.upenn.edu/svn/gus/FgpUtil/branches/api-build-16 FgpUtil
 svn checkout https://www.cbil.upenn.edu/svn/gus/install/branches/api-build-16 install
 svn checkout https://www.cbil.upenn.edu/svn/gus/WDK/branches/api-build-16 WDK
@@ -173,17 +164,34 @@ source project_home/install/bin/gusEnv.bash
 # augment PATH so we can use substitute
 PATH=${PATH}:${PROJECT_HOME}/WDKTemplateSite/Model/bin
 
-# GUS config file
-mkdir -p $(GUS_HOME)/config
-rewrite $PROJECT_HOME/install/gus.config.sample $(GUS_HOME)/config/gus.config
+function rewrite {
+  # given input and output files, copy contents, using the "substitute" command
+  # to instantiate variables
 
-mkdir -p $(GUS_HOME)/lib/java/db_driver
-cp ${ORACLE_JARFILE} $(GUS_HOME)/lib/java/db_driver
+cat $1 | \
+substitute '<webappName>' "${WEBAPP_NAME}" | \
+substitute '<dbVendor>' "${DB_VENDOR}" | \
+substitute '<dbPlatform>' "${DB_PLATFORM}" | \
+substitute '<dbiDsn>' "${DB_DSN}" | \
+substitute '<jdbcDsn>' "${DB_JDBC_DSN}" | \
+substitute '<dbLogin>' "${DB_USER}" | \
+substitute '<dbPassword>' "${DB_PASSWORD}" | \
+substitute '<modelName>' "${MODEL_NAME}" | \
+substitute '<baseDirectory>' "${BASE_DIRECTORY}" | \
+cat  > $2
+}
+
+# GUS config file
+mkdir -p ${GUS_HOME}/config
+rewrite $PROJECT_HOME/install/config/gus.config.sample ${GUS_HOME}/config/gus.config
+
+mkdir -p ${GUS_HOME}/lib/java/db_driver
+cp ${ORACLE_JARFILE} ${GUS_HOME}/lib/java/db_driver
 bld WDK
 bld WDKTemplateSite
 
 # model-config
-cd $GUS_HOME/config/${MODEL_NAME}
+cd ${GUS_HOME}/config/${MODEL_NAME}
 rewrite model.prop.sample model.prop
 rewrite model-config.xml.sample-min model-config.xml
 # edit model-config.xml to populate the login, password, and connectionUrl
@@ -192,6 +200,7 @@ rewrite model-config.xml.sample-min model-config.xml
 echo "${SEPARATOR}"
 echo "creating WDK cache"
 wdkCache -model ${MODEL_NAME} -new
+wdkCache -model ${MODEL_NAME} -reset
 
 # insert test data (fodder for model queries)
 wdkTestDb -model ${MODEL_NAME}  -new
@@ -201,21 +210,23 @@ rewrite ${PROJECT_HOME}/WDK/Controller/config/webapp.prop.sample ${BASE_DIRECTOR
 bldw WDKTemplateSite ${BASE_DIRECTORY}/conf/webapp.prop
 
 # log4j configuration
-rewrite ${GUS_HOME}/config/log4j.xml.sample ${BASE_DIRECTORY{/webapp/WEB-INF/classes/log4j.xml
+rewrite ${GUS_HOME}/config/log4j.xml.sample ${BASE_DIRECTORY}/webapp/WEB-INF/classes/log4j.xml
 
-# database driver:
-sudo ln -s ${GUS_HOME}/lib/java/db_driver/postgresql-8.3-603.jdbc3.jar ${TOMCAT_HOME}/lib/postgresql-8.3-603.jdbc3.jar
-
-# create tomcat.xml, make a symbolic link to it that Tomcat can see, and cycle Tomcat
-cd $GUS_HOME/config
+# Tomcat Context XML
+cd ${GUS_HOME}/config
 rewrite wdk-context.xml.sample wdk-context.xml
 
-echo "To complete the installation of the WDK template site, perform the following two steps."
-echo "(They may have to be done by a system administrator, or with the use of the \"sudo\" command.)"
+echo; echo; echo;
+echo "# The last steps of the install require the assistance of a system administrator, "
+echo "# or the use of the \"sudo\" command (as shown in these examples)"
 echo
-echo "First, make a symbolic link to the new site's Context XML file from Tomcat's localhost dir:"
+echo "# First, make a symbolic link to the new site's Context XML file from Tomcat's localhost dir:"
 echo "sudo ln -s ${GUS_HOME}/config/wdk-context.xml ${TOMCAT_HOME}/conf/Catalina/localhost/${WEBAPP_NAME}.xml"
 echo
-echo "Next, cycle Tomcat:"
+echo "# Next, make a link to the database-driver jarfile in Tomcat's lib directory,"
+echo "# so that Tomcat doesn't load a separate copy for each webapp:"
+echo "sudo ln -s ${GUS_HOME}/lib/java/db_driver/${DB_DRIVER_FILE} ${TOMCAT_HOME}/lib/${DB_DRIVER_FILE}"
+echo
+echo "# Finally, cycle Tomcat:"
 echo "sudo /etc/init.d/tomcat6 stop"
 echo "sudo /etc/init.d/tomcat6 start"
