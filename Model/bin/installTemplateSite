@@ -28,6 +28,7 @@ ORACLE_JARFILE=ojdbc5.jar # needed even for a PostgreSQL install
 # check prerequisites
 
 echo -e "\nThis script ($0) will install the WDK Template Site."
+echo "NOTE: You must edit its \"configuration\" section before running it."
 SEPARATOR=`echo -e "\n--------------------------------------------------\n " `
 
 function check {
