@@ -13,7 +13,7 @@
            userDbLink=""
            />
            
-    <userDb login="<db_login>"
+    <userDb login="<dbLogin>"
             password="<dbPassword>"
             connectionUrl="<jdbcDsn>"
             platform="<dbPlatform>"
