@@ -22,7 +22,7 @@ DB_JDBC_DSN=jdbc:postgresql:your_db
 DB_USER=siteuser
 DB_PASSWORD=abc123
 TOMCAT_HOME=/usr/share/tomcat6
-ORACLE_JARFILE=ojdbc5.jar
+ORACLE_JARFILE=ojdbc5.jar # needed even for a PostgreSQL install
 
 ######################################################################
 # check prerequisites
@@ -117,7 +117,8 @@ elif [ "${DB_VENDOR}" = "Oracle" ]; then
   svn export https://www.cbil.upenn.edu/svn/gus/WDK/branches/api-build-16/Model/data/persistent_tables_oracle.sql > /dev/null
   echo; echo "NOTE: if you haven't already, run the script persistent_tables_oracle.sql (which has just been saved in `pwd`) to create tables needed by the WDK."
 
-  DB_DRIVER_FILE=ojdbc5.jar
+  # use the Orace jarfile
+  DB_DRIVER_FILE=${ORACLE_JARFILE}
 else
   echo "${SEPARATOR}"
   echo "ERROR: \$DB_VENDOR must be set to either \"Postgres\" or \"Oracle\""
