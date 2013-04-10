@@ -208,7 +208,7 @@
                       implementation="org.gusdb.wdk.model.report.TabularReporter">
             </reporter>
             
-            <nestedRecordList questionRef="NestedRecordQuestions.ESTs"/>
+            <!-- nestedRecordList questionRef="NestedRecordQuestions.ESTs"/ -->
 
          </recordClass>
     </recordClassSet>
