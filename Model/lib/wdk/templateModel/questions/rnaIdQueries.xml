@@ -27,6 +27,10 @@
         <sqlQuery name="ByNumSeqs">
             <paramRef ref="params.NumSeqs" default="10"/>
             <paramRef ref="params.ApiTaxon"/>
+            <paramRef ref="params.country"/>
+            <paramRef ref="params.colors"/>
+            <paramRef ref="params.car"/>
+            <paramRef ref="params.truck"/>
             <column name="na_sequence_id"/>
             <column name="project_id"/>
             <column name="score"/>

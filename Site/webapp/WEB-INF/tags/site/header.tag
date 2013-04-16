@@ -66,7 +66,7 @@
 <link rel="shortcut icon" href="<c:url value="/images/favicon.ico" /> ">
 
 <%-- css from WDK  --%>
-<imp:includes refer="${refer}" /> 
+<imp:head refer="${refer}" /> 
 
 <%-- When definitions are in conflict, the next one overrides the previous one  --%>
 <link rel="StyleSheet" href="<c:url value="/css/style.css" />" 		type="text/css">

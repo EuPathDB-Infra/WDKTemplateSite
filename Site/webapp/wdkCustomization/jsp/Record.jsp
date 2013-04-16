@@ -7,8 +7,7 @@
 <c:set value="${requestScope.wdkRecord}" var="wdkRecord"/>
 
 <!-- display page header with recordClass type in banner -->
-<c:set value="${wdkRecord.recordClass.type}" var="recordType"/>
-<imp:header banner="${recordType} Record page" refer="record"/>
+<imp:header banner="${{wdkRecord.recordClass.displayName} Record page" refer="record"/>
 
 <table width="100%">
 
