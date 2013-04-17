@@ -117,6 +117,9 @@ function check(all) {
 
 <%--------------------------- BODY of HTML doc ---------------------%>
 <body>
+
+  <imp:siteInfo/>
+
   <div id="siteLogoBanner">
     <div id="login" class="ui-state-default ui-corner-all">
       <imp:login/>
