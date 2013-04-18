@@ -45,7 +45,7 @@
 
 <p>
 
-<imp:login showError="true" />
+<imp:loginForm showError="true" showCancel="false"/>
 </div>
 
 

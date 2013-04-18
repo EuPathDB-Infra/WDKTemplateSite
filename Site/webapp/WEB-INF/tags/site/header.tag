@@ -145,7 +145,7 @@ function check(all) {
    </tr></table>  
   </div>
   <div id="login" style="position:absolute;right:10pt;top:-5pt;">
-    <imp:login title="WDK Template Site"/>
+    <imp:smallMenu/>
   </div>
 </div>
 <br><br><br>
