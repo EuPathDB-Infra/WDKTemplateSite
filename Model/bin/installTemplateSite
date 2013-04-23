@@ -23,6 +23,8 @@ DB_USER=siteuser
 DB_PASSWORD=abc123
 TOMCAT_HOME=/usr/share/tomcat6
 ORACLE_JARFILE=ojdbc5.jar # needed even for a PostgreSQL install
+SERVER_NAME=localhost:8080
+SUPPORT_EMAIL=help@wdktemplate.org
 
 ######################################################################
 # check prerequisites
@@ -180,6 +182,8 @@ substitute '<dbLogin>' "${DB_USER}" | \
 substitute '<dbPassword>' "${DB_PASSWORD}" | \
 substitute '<modelName>' "${MODEL_NAME}" | \
 substitute '<baseDirectory>' "${BASE_DIRECTORY}" | \
+substitute '<serverName>' "${SERVER_NAME}" | \
+substitute '<supportEmail>' "${SUPPORT_EMAIL}" | \
 cat  > $2
 }
 
