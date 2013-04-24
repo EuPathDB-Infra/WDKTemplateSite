@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="imp" tagdir="/WEB-INF/tags/imp" %>
-<%@ taglib prefix="imp" tagdir="/WEB-INF/tags/imp" %>
 
 <c:set var="project" value="${applicationScope.wdkModel.displayName}" />
 
@@ -122,7 +121,7 @@ function check(all) {
 
   <div id="siteLogoBanner">
     <div id="login" class="ui-state-default ui-corner-all">
-      <imp:login/>
+      <imp:smallMenu/>
     </div>
 
     <a href="<c:url value="/" />"><img src="<c:url value="/wdk/images/strategiesWDK.png" />"
