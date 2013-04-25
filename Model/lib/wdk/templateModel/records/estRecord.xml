@@ -63,6 +63,8 @@
             </primaryKeyAttribute>
 
             <attributeQueryRef ref="EstAttributes.EstAttrs">  
+                <columnAttribute name="est_id"
+                                 internal="true" />
                 <columnAttribute name="na_sequence_id"
                                  displayName="AssemblySeqId" 
                                  internal="true" />

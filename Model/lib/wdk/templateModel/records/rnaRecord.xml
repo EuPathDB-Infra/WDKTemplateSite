@@ -62,6 +62,8 @@
             </primaryKeyAttribute>
 
             <attributeQueryRef ref="RnaAttributes.GeneAttrs">
+                <columnAttribute name="na_sequence_id"
+                                 internal="false"/>
                 <columnAttribute name="taxon_name" 
                                  displayName="Organism"  
                                  help="The name of the organism" 
