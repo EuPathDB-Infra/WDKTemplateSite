@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="imp" tagdir="/WEB-INF/tags/imp" %>
-<%@ taglib prefix="imp" tagdir="/WEB-INF/tags/imp" %>
 
 <c:set var="project" value="${applicationScope.wdkModel.displayName}" />
 
@@ -66,7 +65,7 @@
 <link rel="shortcut icon" href="<c:url value="/images/favicon.ico" /> ">
 
 <%-- css from WDK  --%>
-<imp:includes refer="${refer}" /> 
+<imp:head refer="${refer}" /> 
 
 <%-- When definitions are in conflict, the next one overrides the previous one  --%>
 <link rel="StyleSheet" href="<c:url value="/css/style.css" />" 		type="text/css">
@@ -117,9 +116,12 @@ function check(all) {
 
 <%--------------------------- BODY of HTML doc ---------------------%>
 <body>
+
+  <imp:siteInfo/>
+
   <div id="siteLogoBanner">
     <div id="login" class="ui-state-default ui-corner-all">
-      <imp:login/>
+      <imp:smallMenu/>
     </div>
 
     <a href="<c:url value="/" />"><img src="<c:url value="/wdk/images/strategiesWDK.png" />"

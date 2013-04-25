@@ -15,7 +15,6 @@
                  division="profile"/>
 
 <!-- display page header with recordClass type in banner -->
-<c:set value="${wdkRecord.recordClass.type}" var="recordType"/>
 <div align="center">
 
 <!-- display the success information, if the user registered successfully -->

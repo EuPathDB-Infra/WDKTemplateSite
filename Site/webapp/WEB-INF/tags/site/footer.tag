@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="imp" tagdir="/WEB-INF/tags/imp" %>
 
   <hr />
 
@@ -8,5 +8,8 @@
     <br />
     <a href="http://gusdb.org/wdk/"><img src="<c:url value='/wdk/images/wdkFooter-transparent.png' />" alt="Powered by StrategiesWDK" /></a>
   </div>
+
+  <%-- have to include this tag here, otherwise the popups such as login form will not work --%>
+  <imp:dialogs />
 </body>
 </html>

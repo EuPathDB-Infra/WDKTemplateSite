@@ -7,13 +7,13 @@
 <%-- partial is used for internal questions in queryList4.tag --%>
 <c:set var="Question_Header" scope="request">
   <c:if test="${requestScope.partial != 'true'}">
-    <imp:header title="Search for ${wdkQuestion.recordClass.type}s by ${wdkQuestion.displayName}" refer="question" />
+    <imp:header title="Search for ${wdkQuestion.recordClass.displayNamePlural} by ${wdkQuestion.displayName}" refer="question" />
   </c:if>
 </c:set>
 
 ${Question_Header}
 
-<c:set var="recordType" value="${wdkQuestion.recordClass.type}"/>
+<c:set var="recordType" value="${wdkQuestion.recordClass.fullName}"/>
 
 <c:set var="webProps" value="${wdkQuestion.propertyLists['websiteProperties']}" />
 <c:set var="hideOperation" value="${false}" />
@@ -29,7 +29,7 @@ ${Question_Header}
 </c:forEach>
 
 <c:if test="${hideTitle == false}">
-	<center><h1 style="font-size:140%">Identify ${recordType}s based on ${wdkQuestion.displayName}</h1></center><br>
+	<center><h1 style="font-size:140%">Identify ${wdkQuestion.recordClass.displayNamePlural}s based on ${wdkQuestion.displayName}</h1></center><br>
 </c:if>
 
 <html:form styleId="form_question" method="post" enctype='multipart/form-data' action="/processQuestion.do">

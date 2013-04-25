@@ -8,12 +8,11 @@
 %>
 
 
-
+<imp:wdkJavascripts refer="${refer}"/>
 
 
 <%-- JQuery library is included by WDK --%>
 <c:if test="${refer == 'customSummary'}">
-	<imp:strategyScript />
 
 <%-- CHECK IF THIS IS NEEDED ----  javascript provided by site 
 	<script type="text/javascript" src="/assets/js/customStrategy.js"></script>

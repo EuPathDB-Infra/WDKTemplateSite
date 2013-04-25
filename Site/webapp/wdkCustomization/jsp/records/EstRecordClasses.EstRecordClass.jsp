@@ -5,7 +5,7 @@
 <c:set value="${requestScope.wdkRecord}" var="wdkRecord"/>
 
 <!-- display page header with recordClass type in banner -->
-<c:set value="${wdkRecord.recordClass.type}" var="recordType"/>
+<c:set value="${wdkRecord.recordClass.fullName}" var="recordType"/>
 <imp:header banner="${recordType} Record page"/>
 
 <EM style="color:#7cba7c">This is a customized view for records of type EstRecordClasses.EstRecordClass</EM><br>

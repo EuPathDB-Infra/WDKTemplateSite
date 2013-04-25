@@ -137,13 +137,94 @@
 
      </enumList>   
    </enumParam>         
+
+    <enumParam name="country" multiPick="false">
+      <enumList>
+        <enumValue>
+          <display>United States</display><term>us</term><internal>us</internal>
+        </enumValue>
+        <enumValue default="true">
+          <display>Japan</display><term>jp</term><internal>jp</internal>
+        </enumValue>
+      </enumList>
+    </enumParam>
+
+    <flatVocabParam name="colors" multiPick="true" queryRef="VocabQueries.Colors">
+      <suggest default="red" />
+    </flatVocabParam>
+ 
+    <enumParam name="car" multiPick="true" dependedParamRef="params.country,params.colors">
+      <enumList>
+        <enumValue>
+          <term>Ford</term><internal>ford</internal>
+          <dependedValue><![CDATA[ containsAny( params.colors, [ 'red', 'green' ] ) && params.country == 'us'  ]]></dependedValue>
+        </enumValue>
+        <enumValue>
+          <term>GM</term><internal>gm</internal>
+          <dependedValue><![CDATA[ containsAny( params.colors, [ 'blue' ] ) && params.country == 'us'  ]]></dependedValue>
+        </enumValue>
+        <enumValue default="true">
+          <term>Toyota</term><internal>toyota</internal>
+          <dependedValue><![CDATA[ containsAny( params.colors, [ 'red', 'blue' ] ) && params.country == 'jp'  ]]></dependedValue>
+        </enumValue>
+      </enumList>
+    </enumParam>
+
+    <flatVocabParam name="truck" multiPick="false" queryRef="VocabQueries.Truck"
+                    dependedParamRef="params.country,params.colors">
+      <suggest default="Honda" />
+    </flatVocabParam>
+
   </paramSet>
 
 
   <!-- queries that return controlled vocabulary terms -->
 
   <querySet name="VocabQueries" queryType="vocab" isCacheable="true">
-        <!-- a query that returns a list of Apicomplexon taxons -->
+
+       <sqlQuery name="Colors">
+            <column name="term"/>
+            <column name="internal"/>
+            <sql>
+              SELECT 'red' AS term, 'red' AS internal FROM dual
+              UNION
+              SELECT 'green' AS term, 'green' AS internal FROM dual
+              UNION
+              SELECT 'blue' AS term, 'blue' AS internal FROM dual
+            </sql>
+        </sqlQuery>
+
+
+
+       <sqlQuery name="Truck">
+            <paramRef ref="params.colors" />
+            <paramRef ref="params.country" /> 
+            <column name="term"/>
+            <column name="internal"/>
+            <sql>
+              SELECT 'Ford' AS term, 'form' AS internal FROM dual
+              WHERE 'red' IN ($$colors$$) AND $$country$$ = 'us'
+              UNION
+              SELECT 'Nissan' AS term, 'nissan' AS internal FROM dual
+              WHERE 'green' IN ($$colors$$) AND $$country$$ = 'jp'
+              UNION
+              SELECT 'Honda' AS term, 'honda' AS internal FROM dual
+              WHERE 'red' IN ($$colors$$) AND $$country$$ = 'jp'
+              UNION
+              SELECT 'Toyota' AS term, 'toyota' AS internal FROM dual
+              WHERE 'blue' IN ($$colors$$) AND $$country$$ = 'jp'
+              UNION
+              SELECT 'Dodge' AS term, 'gm' AS internal FROM dual
+              WHERE 'blue' IN ($$colors$$) AND $$country$$ = 'us'
+              UNION
+              SELECT 'GM' AS term, 'gm' AS internal FROM dual
+              WHERE 'green' IN ($$colors$$) AND $$country$$ = 'us'
+            </sql>
+        </sqlQuery>
+
+
+        <!-- a query that returns a list of 
+             Apicomplexon taxons -->
         <sqlQuery name="ApiTaxon">
             <column name="term"/>
             <column name="internal"/>
