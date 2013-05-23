@@ -25,6 +25,7 @@ TOMCAT_HOME=/usr/share/tomcat6
 ORACLE_JARFILE=ojdbc5.jar # needed even for a PostgreSQL install
 SERVER_NAME=localhost:8080
 SUPPORT_EMAIL=help@wdktemplate.org
+LOAD_TEMPLATE_DATA=true
 
 ######################################################################
 # check prerequisites
@@ -140,7 +141,7 @@ fi
 ######################################################################
 # installation
 
-echo "\ninstalling WDK template site"
+echo  -e "\ninstalling WDK template site"
 
 # create directories
 cd ${BASE_DIRECTORY}
@@ -189,19 +190,21 @@ cat  > $2
 
 # GUS config file
 mkdir -p ${GUS_HOME}/config
-rewrite $PROJECT_HOME/install/config/gus.config.sample ${GUS_HOME}/config/gus.config
+rewrite ${PROJECT_HOME}/install/config/gus.config.sample ${GUS_HOME}/config/gus.config
 
 mkdir -p ${GUS_HOME}/lib/java/db_driver
 cp ${ORACLE_JARFILE} ${GUS_HOME}/lib/java/db_driver
-bld WDK
-bld WDKTemplateSite
+mkdir -p ${GUS_HOME}/config/${MODEL_NAME}
 
 # model-config
 cd ${GUS_HOME}/config/${MODEL_NAME}
-rewrite model.prop.sample model.prop
-rewrite model-config.xml.sample-min model-config.xml
-# edit model-config.xml to populate the login, password, and connectionUrl
-#   attributes of the <appDb> and <userDb> elements
+rewrite ${PROJECT_HOME}/WDK/Model/config/model.prop.sample ${GUS_HOME}/config/${MODEL_NAME}/model.prop
+rewrite ${PROJECT_HOME}/WDK/Model/config/model-config.xml.sample-min ${GUS_HOME}/config/${MODEL_NAME}/model-config.xml
+
+
+# webinstall
+rewrite ${PROJECT_HOME}/WDK/Controller/config/webapp.prop.sample ${BASE_DIRECTORY}/conf/webapp.prop
+bldw WDKTemplateSite ${BASE_DIRECTORY}/conf/webapp.prop
 
 echo "${SEPARATOR}"
 echo "creating WDK cache"
@@ -209,11 +212,10 @@ wdkCache -model ${MODEL_NAME} -new
 wdkCache -model ${MODEL_NAME} -reset
 
 # insert test data (fodder for model queries)
-wdkTestDb -model ${MODEL_NAME}  -new
-
-# webinstall
-rewrite ${PROJECT_HOME}/WDK/Controller/config/webapp.prop.sample ${BASE_DIRECTORY}/conf/webapp.prop
-bldw WDKTemplateSite ${BASE_DIRECTORY}/conf/webapp.prop
+if [ "${LOAD_TEMPLATE_DATA}" = "true" ]; then
+  echo 'loading template-site data into database'
+  wdkTestDb -model ${MODEL_NAME}  -new
+fi
 
 # log4j configuration
 rewrite ${GUS_HOME}/config/log4j.xml.sample ${BASE_DIRECTORY}/webapp/WEB-INF/classes/log4j.xml
@@ -236,3 +238,7 @@ echo
 echo "# Finally, cycle Tomcat:"
 echo "sudo /etc/init.d/tomcat6 stop"
 echo "sudo /etc/init.d/tomcat6 start"
+echo
+echo 
+echo "# for ongoing development, define your interactive environment with this command line:"
+echo "cd ${BASE_DIRECTORY}; source project_home/install/bin/gusEnv.bash"
