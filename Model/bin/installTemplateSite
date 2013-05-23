@@ -103,7 +103,7 @@ if [ "${DB_VENDOR}" = "Postgres" ]; then
   psql -V
 
   # persistent tables, PostgreSQL-style
-  svn export https://www.cbil.upenn.edu/svn/gus/WDK/branches/api-build-16/Model/data/persistent_tables_postgres.sql > /dev/null
+  svn export https://www.cbil.upenn.edu/svn/gus/WDK/trunk/Model/data/persistent_tables_postgres.sql > /dev/null
   echo; echo "NOTE: if you haven't already, run the script persistent_tables_postgres.sql"
   echo " (which has just been saved in `pwd`) to create tables needed by the WDK."
 
@@ -117,7 +117,7 @@ elif [ "${DB_VENDOR}" = "Oracle" ]; then
   sqlplus -v
 
   # persistent tables, Oracle-style
-  svn export https://www.cbil.upenn.edu/svn/gus/WDK/branches/api-build-16/Model/data/persistent_tables_oracle.sql > /dev/null
+  svn export https://www.cbil.upenn.edu/svn/gus/WDK/trunk/Model/data/persistent_tables_oracle.sql > /dev/null
   echo; echo "NOTE: if you haven't already, run the script persistent_tables_oracle.sql (which has just been saved in `pwd`) to create tables needed by the WDK."
 
   # use the Orace jarfile
@@ -155,11 +155,11 @@ mkdir project_home
 
 # check out the Subversion project of the template site, along with the others it depends on
 cd ${BASE_DIRECTORY}/project_home
-svn checkout https://www.cbil.upenn.edu/svn/gus/WDKTemplateSite/branches/api-build-16 WDKTemplateSite
-svn checkout https://www.cbil.upenn.edu/svn/gus/FgpUtil/branches/api-build-16 FgpUtil
-svn checkout https://www.cbil.upenn.edu/svn/gus/install/branches/api-build-16 install
-svn checkout https://www.cbil.upenn.edu/svn/gus/WDK/branches/api-build-16 WDK
-svn checkout https://www.cbil.upenn.edu/svn/gus/WSF/branches/api-build-16 WSF
+svn checkout https://www.cbil.upenn.edu/svn/gus/WDKTemplateSite/trunk WDKTemplateSite
+svn checkout https://www.cbil.upenn.edu/svn/gus/FgpUtil/trunk FgpUtil
+svn checkout https://www.cbil.upenn.edu/svn/gus/install/trunk install
+svn checkout https://www.cbil.upenn.edu/svn/gus/WDK/trunk WDK
+svn checkout https://www.cbil.upenn.edu/svn/gus/WSF/trunk WSF
 
 # set $GUS_HOME, $PROJECT_HOME
 cd ${BASE_DIRECTORY}
