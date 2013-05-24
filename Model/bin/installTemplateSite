@@ -190,7 +190,7 @@ cat  > $2
 
 # GUS config file
 mkdir -p ${GUS_HOME}/config
-rewrite ${PROJECT_HOME}/install/config/gus.config.sample ${GUS_HOME}/config/gus.config
+rewrite ${PROJECT_HOME}/install/gus.config.sample ${GUS_HOME}/config/gus.config
 
 mkdir -p ${GUS_HOME}/lib/java/db_driver
 cp ${ORACLE_JARFILE} ${GUS_HOME}/lib/java/db_driver
