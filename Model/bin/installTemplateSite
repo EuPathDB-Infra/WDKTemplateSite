@@ -105,8 +105,11 @@ if [ "${DB_VENDOR}" = "Postgres" ]; then
 
   # persistent tables, PostgreSQL-style
   svn export https://www.cbil.upenn.edu/svn/gus/WDK/trunk/Model/data/persistent_tables_postgres.sql > /dev/null
-  echo; echo "NOTE: if you haven't already, run the script persistent_tables_postgres.sql"
-  echo " (which has just been saved in `pwd`) to create tables needed by the WDK."
+  # also, give PostgreSQL an Oracle-style DUAL table
+  svn export https://www.cbil.upenn.edu/svn/gus/WDKTemplateSite/trunk/Model/lib/sql/dual.sql > /dev/null
+
+  echo; echo "NOTE: if you haven't already, run the scripts persistent_tables_postgres.sql and dual.xml"
+  echo " (which have just been saved in `pwd`) to create tables needed by the WDK and template site."
 
   DB_DRIVER_FILE=postgresql-8.3-603.jdbc3.jar
   DB_PLATFORM='PostgreSQL'   # GUS says "Postgres", but WDK says "PostgreSQL". Potato, potahto.
