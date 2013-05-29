@@ -26,6 +26,7 @@ ORACLE_JARFILE=ojdbc5.jar # needed even for a PostgreSQL install
 SERVER_NAME=localhost:8080
 SUPPORT_EMAIL=help@wdktemplate.org
 LOAD_TEMPLATE_DATA=true
+SVN_EXTRACT_CMD=export
 
 ######################################################################
 # check prerequisites
@@ -159,11 +160,11 @@ mkdir project_home
 
 # check out the Subversion project of the template site, along with the others it depends on
 cd ${BASE_DIRECTORY}/project_home
-svn checkout https://www.cbil.upenn.edu/svn/gus/WDKTemplateSite/trunk WDKTemplateSite
-svn checkout https://www.cbil.upenn.edu/svn/gus/FgpUtil/trunk FgpUtil
-svn checkout https://www.cbil.upenn.edu/svn/gus/install/trunk install
-svn checkout https://www.cbil.upenn.edu/svn/gus/WDK/trunk WDK
-svn checkout https://www.cbil.upenn.edu/svn/gus/WSF/trunk WSF
+svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/WDKTemplateSite/trunk WDKTemplateSite
+svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/FgpUtil/trunk FgpUtil
+svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/install/trunk install
+svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/WDK/trunk WDK
+svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/WSF/trunk WSF
 
 # set $GUS_HOME, $PROJECT_HOME
 cd ${BASE_DIRECTORY}
