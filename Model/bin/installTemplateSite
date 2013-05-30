@@ -4,11 +4,15 @@
 #
 # Install the WDK Template Site, a demo for the Strategies WDK and a
 # starting point for people who want to develop their own Strategies WDK site
+# usage:
+# installTemplateSite [ <propfile> ]
 #
 # https://code.google.com/p/strategies-wdk/
 
 # IMPORTANT: edit the "configuration" section to match your own install
-#  before running this script
+# before running this script, or override prop definitions in a separate
+# propfile, and supply that on the command line.
+#
 
 ######################################################################
 # configuration
@@ -28,11 +32,18 @@ SUPPORT_EMAIL=help@wdktemplate.org
 LOAD_TEMPLATE_DATA=true
 SVN_EXTRACT_CMD=export
 
+# read local configuration file, if one is supplied on the command line
+if [ -n "$1" ]
+then
+  source $1
+fi
+
 ######################################################################
 # check prerequisites
 
 echo -e "\nThis script ($0) will install the WDK Template Site."
-echo "NOTE: You must edit its \"configuration\" section before running it."
+echo "NOTE: You must edit its \"configuration\" section (or create a separate propfile) before running it."
+echo -e "usage:\n $0 [ <propfile> ] "
 SEPARATOR=`echo -e "\n--------------------------------------------------\n " `
 
 function check {
@@ -211,8 +222,9 @@ rewrite ${PROJECT_HOME}/WDK/Controller/config/webapp.prop.sample ${BASE_DIRECTOR
 bldw WDKTemplateSite ${BASE_DIRECTORY}/conf/webapp.prop
 
 echo "${SEPARATOR}"
-echo "creating WDK cache"
+echo "creating WDK cache (this will generate errors if the cache already exists from a previous install)"
 wdkCache -model ${MODEL_NAME} -new
+echo -e "\nresetting cache"
 wdkCache -model ${MODEL_NAME} -reset
 
 # insert test data (fodder for model queries)
