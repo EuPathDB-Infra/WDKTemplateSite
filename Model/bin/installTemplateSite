@@ -116,9 +116,9 @@ if [ "${DB_VENDOR}" = "Postgres" ]; then
   psql -V
 
   # persistent tables, PostgreSQL-style
-  svn export https://www.cbil.upenn.edu/svn/gus/WDK/trunk/Model/data/persistent_tables_postgres.sql > /dev/null
+  svn export https://www.cbil.upenn.edu/svn/gus/WDK/branches/api-build-18/Model/data/persistent_tables_postgres.sql > /dev/null
   # also, give PostgreSQL an Oracle-style DUAL table
-  svn export https://www.cbil.upenn.edu/svn/gus/WDKTemplateSite/trunk/Model/lib/sql/dual.sql > /dev/null
+  svn export https://www.cbil.upenn.edu/svn/gus/WDKTemplateSite/branches/api-build-18/Model/lib/sql/dual.sql > /dev/null
 
   echo; echo "NOTE: if you haven't already, run the scripts persistent_tables_postgres.sql and dual.xml"
   echo " (which have just been saved in `pwd`) to create tables needed by the WDK and template site."
@@ -133,7 +133,7 @@ elif [ "${DB_VENDOR}" = "Oracle" ]; then
   sqlplus -v
 
   # persistent tables, Oracle-style
-  svn export https://www.cbil.upenn.edu/svn/gus/WDK/trunk/Model/data/persistent_tables_oracle.sql > /dev/null
+  svn export https://www.cbil.upenn.edu/svn/gus/WDK/branches/api-build-18/Model/data/persistent_tables_oracle.sql > /dev/null
   echo; echo "NOTE: if you haven't already, run the script persistent_tables_oracle.sql (which has just been saved in `pwd`) to create tables needed by the WDK."
 
   # use the Orace jarfile
@@ -171,11 +171,11 @@ mkdir project_home
 
 # check out the Subversion project of the template site, along with the others it depends on
 cd ${BASE_DIRECTORY}/project_home
-svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/WDKTemplateSite/trunk WDKTemplateSite
-svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/FgpUtil/trunk FgpUtil
-svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/install/trunk install
-svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/WDK/trunk WDK
-svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/WSF/trunk WSF
+svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/WDKTemplateSite/branches/api-build-18 WDKTemplateSite
+svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/FgpUtil/branches/api-build-18 FgpUtil
+svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/install/branches/api-build-18 install
+svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/WDK/branches/api-build-18 WDK
+svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/WSF/branches/api-build-18 WSF
 
 # set $GUS_HOME, $PROJECT_HOME
 cd ${BASE_DIRECTORY}
