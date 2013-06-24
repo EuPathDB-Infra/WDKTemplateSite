@@ -65,13 +65,11 @@
 <link rel="shortcut icon" href="<c:url value="/images/favicon.ico" /> ">
 
 <%-- css from WDK  --%>
-<imp:head refer="${refer}" /> 
+<imp:wdkStylesheets refer="${refer}" /> 
 
 <%-- When definitions are in conflict, the next one overrides the previous one  --%>
 <link rel="StyleSheet" href="<c:url value="/css/style.css" />" 		type="text/css">
 <link rel="stylesheet" href="<c:url value="/css/Color.css" />"        	type="text/css" />
-
-<imp:jscript refer="${refer}"/>
 
 <!--[if lt IE 8]>
 <link rel="stylesheet" href="<c:url value="/css/ie7.css"/>" type="text/css" />
@@ -80,6 +78,9 @@
 <!--[if lt IE 7]>
 <link rel="stylesheet" href="<c:url value="/css/ie6.css"/>" type="text/css" />
 <![endif]-->
+
+<%-- wdkJavascripts is included here --%>
+<imp:jscript refer="${refer}"/>
 
 
 
