@@ -22,26 +22,26 @@
                      prompt="Number of EST Libs" 
                      number="true">
             <help>number of distinct libs</help>
-            <suggest sample="3" default="3"/>
+            <suggest default="3"/>
         </stringParam>
 
         <stringParam name="AssemblyConsistency" 
                      prompt="Assembly consistency score" 
                      number="true">
             <help>on the scale of 0-100</help>
-            <suggest sample="95" default="95"/>
+            <suggest default="95"/>
         </stringParam>
 
         <stringParam name="Application" 
                      prompt="flavors of blast application" number="false">
             <help>flavors of blast application</help>
-            <suggest sample="blastn" default="blastn"/>
+            <suggest default="blastn"/>
         </stringParam>
 
         <stringParam name="Database" 
                      prompt="Rna Blast Database" number="false">
             <help>Rna Blast Database</help>
-            <suggest sample="RNAs" default="RNAs"/>
+            <suggest default="RNAs"/>
         </stringParam>
 
         <stringParam name="Sequence" 
@@ -102,15 +102,13 @@
  <stringParam name="motif_expression"
                       prompt="Pattern" number="false">
              <help>Enter a Perl regular expression describing the desired motif.  Example: 'CC6+GA' searches for two consecutive cysteine residues followed by a stretch of GA.</help>
-             <suggest sample="(Example: CC6+GA)"
-                      default="CC6+GA"/>
+             <suggest default="CC6+GA"/>
          </stringParam>
 
          <stringParam name="taxon_name"
                       prompt="Taxon Name" number="false">
              <help>The taxon name</help>
-             <suggest sample="Neospora caninum"
-                      default="Neospora caninum"/>
+             <suggest default="Neospora caninum"/>
          </stringParam>
 
 
