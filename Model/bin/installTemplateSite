@@ -64,20 +64,6 @@ if [ $? -ne 0 ]; then
   echo "ERROR: can't write to ${BASE_DIRECTORY}; check config variable \$BASE_DIRECTORY"
 fi
 
-# check that Tomcat allows a symbolic link to a webapp
-ls ${TOMCAT_HOME}/conf/server.xml > /dev/null
-if [ $? -ne 0 ]; then
-  echo "${SEPARATOR}"
-  echo "ERROR: can't find Tomcat's server.xml file (\$TOMCAT_HOME is set to ${TOMCAT_HOME})"
-else
-  grep 'allowLinking="true"' ${TOMCAT_HOME}/conf/server.xml > /dev/null
-  if [ $? -ne 0 ]; then
-    echo "${SEPARATOR}"
-    echo "ERROR: Tomcat's server.xml file (${TOMCAT_HOME}/conf/server.xml) doesn't set allowLinking=\"true\". "
-    echo The '<Context>' element in server.xml must contain the attribute \'allowLinking=\"true\"\'. 
-  fi
-fi
-
 # Java
 check java
 java -version
@@ -87,7 +73,7 @@ echo "\$LD_LIBRARY_PATH = \"${LD_LIBRARY_PATH}\""
 
 # Subversion
 check svn
-svn --version | head -1
+svn --version 2>/dev/null | head -1
 
 # Ant
 check ant
@@ -251,7 +237,7 @@ echo "# Next, make a link to the database-driver jarfile in Tomcat's lib directo
 echo "# so that Tomcat doesn't load a separate copy for each webapp:"
 echo "sudo ln -s ${GUS_HOME}/lib/java/db_driver/${DB_DRIVER_FILE} ${TOMCAT_HOME}/lib/${DB_DRIVER_FILE}"
 echo
-echo "# Finally, cycle Tomcat:"
+echo "# Finally, cycle Tomcat. The following commands may be the way to do that (or not, depending on how Tomcat is installed):"
 echo "sudo /etc/init.d/tomcat6 stop"
 echo "sudo /etc/init.d/tomcat6 start"
 echo
