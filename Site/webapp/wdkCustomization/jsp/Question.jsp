@@ -29,7 +29,7 @@ ${Question_Header}
 </c:forEach>
 
 <c:if test="${hideTitle == false}">
-	<center><h1 style="font-size:140%">Identify ${wdkQuestion.recordClass.displayNamePlural}s based on ${wdkQuestion.displayName}</h1></center><br>
+	<center><h1 style="font-size:140%">Identify ${wdkQuestion.recordClass.displayNamePlural} based on ${wdkQuestion.displayName}</h1></center><br>
 </c:if>
 
 <html:form styleId="form_question" method="post" enctype='multipart/form-data' action="/processQuestion.do">
