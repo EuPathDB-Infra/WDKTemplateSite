@@ -10,6 +10,9 @@
 
 <imp:wdkJavascripts refer="${refer}"/>
 
+<link rel="stylesheet" type="text/css" href="<c:url value='/wdkCustomization/css/main.css' />">
+
+
 
 <%-- JQuery library is included by WDK --%>
 <c:if test="${refer == 'customSummary'}">
