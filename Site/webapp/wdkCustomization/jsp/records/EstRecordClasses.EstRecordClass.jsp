@@ -18,7 +18,7 @@
       <c:set var="fieldVal" value="${attr.value}"/>
       <!-- need to know if fieldVal should be hot linked -->
       <c:choose>
-        <c:when test="${fieldVal.class.name eq 'org.gusdb.wdk.model.LinkAttributeValue'}">
+        <c:when test="${fieldVal.class.name eq 'org.gusdb.wdk.model.record.attribute.LinkAttributeValue'}">
           <a href="${fieldVal.url}">${fieldVal.displayText}</a>
         </c:when>
         <c:otherwise>
