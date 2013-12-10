@@ -4,22 +4,53 @@
 # This section provides required meta-config properties.  They are used to configure the masterConfig.yaml file.
 # The values here are subsituted into macros in masterConfig.yaml file (not directly into the template files)
 required:
+
+  # The name of your project
   project: TemplateDB
+
+  # User name for the application database
   appDb.login: whatever
+
+  # Password for the applucation database
   appDb.password: dontknow
+
+  # Instance name of application database
   appDb.instance: tmpl019n
-  appDB.userDbLink: dontknow
+
+  # Database link for user database
+  appDB.userDbLink: blah
+
+  # User name for user database
   userDb.login: api_fed
+
+  # Password for user database
   userDb.password: dontknow
+
+  # Instance name of user database
   userDb.instance: apicommDevN
-  commentDb.login: yoohoo
-  commentDb.password: lala
-  commentDb.instance: apicommDevN
+
+  # URL for WSF instance
   webServiceUrl: http://qa.plasmodb.org/plasmo/services/WsfService
+
+  # Path to $GUS_HOME - in most cases you just want `$ENV{GUS_HOME}`
   gushome: $ENV{GUS_HOME}
 
-sections: []
 
-# This section overrides all key/values in masterConfig.yaml.  It lets you make a non-standard configuration as needed.
+# This section is used to specify sections to use, other than `default`,
+# from masterConfig.yaml. If no other sections are necessary, you can simply
+# make this an empty array:
+#
+#     sections: []
+#
+sections:
+  - templatedb
+
+
+# This section overrides all key/values in masterConfig.yaml. It lets you make a
+# non-standard configuration as needed. For instance, you might want to override
+# the WDK engine schema. You can do that here with the following example:
+#
+#     custom:
+#       wdkEngineSchema: wdkenginedev.
+#
 custom:
-  modelName: TemplateDB

@@ -70,4 +70,5 @@ default:
   webServiceMirror: /var/www/Common/apiSiteFilesMirror/webServices/
   webServiceUrl: ${webServiceUrl}
 
-templatedb: {}
+templatedb:
+  modelName: TemplateDB
