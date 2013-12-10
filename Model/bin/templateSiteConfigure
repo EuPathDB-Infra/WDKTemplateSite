@@ -1,0 +1,41 @@
+#!/usr/bin/perl
+
+use strict;
+use File::Basename;
+
+my ($lit1,$project,$lit2,$metaConfigFile) = @ARGV;
+my $scriptName = basename($0);
+
+my $configTemplateFiles = <<END;
+$ENV{PROJECT_HOME}/WDKTemplateSite/Model/config/model-config.xml.tmpl	$ENV{GUS_HOME}/config/\${project}/model-config.xml
+$ENV{PROJECT_HOME}/WDKTemplateSite/Model/config/model.prop.tmpl	$ENV{GUS_HOME}/config/\${project}/model.prop
+END
+
+$configTemplateFiles =~ s/^\s*|\s*$//g;
+
+usage($configTemplateFiles) unless scalar(@ARGV) == 4;
+
+my $cmd = "echo -e '$configTemplateFiles' | generateFilesFromTemplates $ENV{GUS_HOME}/lib/yaml/masterConfig.yaml $metaConfigFile";
+
+print STDERR "\n$cmd\n\n";
+system($cmd);
+exit ($? >> 8);
+
+sub usage {
+  my ($configTemplateFiles) = @_;
+  die "
+
+Configure a WDK Template website by reading the provided meta config file, and subsituting values from there into config templates:
+$configTemplateFiles
+
+Usage: $scriptName -model TemplateDB -filename meta_config_file
+
+Where:
+  -model is the website(project name, model name) you want to generate config files for (eg.:PlasmoDB)
+  -filename is the meta file where you include the specific information for this website (database, logins etc).
+   See \$PROJECT_HOME/WDKTemplateSite/Model/lib/yaml/metaConfig.yaml.sample for an example.
+
+To fully understand this command, get the usage for the generateFilesFromTemplates command.
+
+";
+}
