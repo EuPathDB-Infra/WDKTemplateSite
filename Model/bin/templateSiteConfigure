@@ -7,8 +7,8 @@ my ($lit1,$project,$lit2,$metaConfigFile) = @ARGV;
 my $scriptName = basename($0);
 
 my $configTemplateFiles = <<END;
-$ENV{PROJECT_HOME}/WDKTemplateSite/Model/config/model-config.xml.tmpl	$ENV{GUS_HOME}/config/\${project}/model-config.xml
-$ENV{PROJECT_HOME}/WDKTemplateSite/Model/config/model.prop.tmpl	$ENV{GUS_HOME}/config/\${project}/model.prop
+$ENV{PROJECT_HOME}/WDKTemplateSite/Model/config/model-config.xml.tmpl	$ENV{GUS_HOME}/config/${project}/model-config.xml
+$ENV{PROJECT_HOME}/WDKTemplateSite/Model/config/model.prop.tmpl	$ENV{GUS_HOME}/config/${project}/model.prop
 END
 
 $configTemplateFiles =~ s/^\s*|\s*$//g;

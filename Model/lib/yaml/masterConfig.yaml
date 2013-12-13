@@ -44,7 +44,7 @@ default:
   # 2. View DB connection information in Melody (if we turn it on by adding a file to gus_home/config)
   # Otherwise entry can be ommitted.
 
-  appDb.driverInitClass: org.eupathdb.common.db.EuPathDbDriverInitializer
+  # appDb.driverInitClass: org.eupathdb.common.db.EuPathDbDriverInitializer
 
   # apicomm (user) replicated database
 
@@ -72,3 +72,4 @@ default:
 
 templatedb:
   modelName: TemplateDB
+
