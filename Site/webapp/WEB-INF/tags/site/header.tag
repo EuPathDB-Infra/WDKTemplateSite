@@ -125,8 +125,7 @@ function check(all) {
       <imp:smallMenu/>
     </div>
 
-    <a href="<c:url value="/" />"><img src="<c:url value="/wdk/images/strategiesWDK.png" />"
-       border="0" alt="Site logo"></a>
+    <a href="<c:url value="/" />"><imp:image src="/wdk/images/strategiesWDK.png" border="0" alt="Site logo"/></a>
   <c:choose>
   <c:when test="${not empty banner}">
     <span class="bannerh1">${banner}</span>
