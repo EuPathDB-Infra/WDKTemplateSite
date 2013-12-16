@@ -17,7 +17,7 @@ default:
   appDb.login: ${appDb.login}
   appDb.password: ${appDb.password}
   appDb.instance: ${appDb.instance}
-  appDb.userDbLink: ${appDB.userDbLink}
+  appDb.userDbLink: ${appDb.userDbLink}
   appDb.platform: PostgreSQL
 
   # we should use 10 for live sites, and 1 for all dev, integrate, and qa
