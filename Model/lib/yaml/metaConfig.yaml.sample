@@ -30,7 +30,7 @@ required:
   userDb.instance: apicommDevN
 
   # URL for WSF instance
-  webServiceUrl: http://qa.plasmodb.org/plasmo/services/WsfService
+  webServiceUrl: http://localhost/services/WsfService
 
   # Path to $GUS_HOME - in most cases you just want `$ENV{GUS_HOME}`
   gushome: $ENV{GUS_HOME}
