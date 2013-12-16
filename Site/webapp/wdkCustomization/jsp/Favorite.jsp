@@ -35,7 +35,7 @@
                                         <span key="${pk_item.key}">${pk_item.value}</span>
                                     </c:forEach>
                                 </div>
-                                <img class="clickable" src="<c:url value='/wdk/images/favorite_color.gif'/>" 
+                                <imp:image class="clickable" src="/wdk/images/favorite_color.gif" 
                                      title="Click to remove this item from the Favorite."
                                      onClick="updateFavorite(this, 'remove')"/>
                             </td>
