@@ -4,29 +4,9 @@
   <!-- oooooooooooooooooooooooooo  Dependencies  oooooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
 
-  <target name="WDK-Installation">
-    <ant antfile="../WDK/build.xml" target="WDK-Installation">
-      <property name="project" value="WDK"/>
-      <property name="version" value="WDK_version_2-0"/>
-    </ant>
-  </target>  
+  <import file="${projectsDir}/WDK/build.xml" />
 
-  <target name="WDK-WebInstallation">
-    <ant antfile="../WDK/build.xml" target="WDK-WebInstallation">
-      <property name="project" value="WDK"/>
-      <property name="version" value="WDK_version_2-0"/>
-    </ant>
-  </target>  
 
-  <target name="WDK-Checkout" unless="WDK.present"> 
-    <ant target="defaultProjectCheckout" inheritAll="false">
-      <property name="svnurl" value="https://www.cbil.upenn.edu/svn/gus/WDK" />
-      <property name="project" value="WDK"/>
-      <property name="version" value="WDK_version_2-0"/>
-    </ant>
-  </target>  
-
-  
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooooo    Checkout    oooooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
@@ -35,6 +15,14 @@
     <available file="../WDK" type="dir" property="WDK.present" />
     <antcall target="WDK-Checkout" />
   </target>
+
+  <target name="WDK-Checkout" unless="WDK.present"> 
+    <ant target="defaultProjectCheckout" inheritAll="false">
+      <property name="svnurl" value="https://www.cbil.upenn.edu/svn/gus/WDK" />
+      <property name="project" value="WDK"/>
+      <property name="version" value="WDK_version_2-0"/>
+    </ant>
+  </target>  
   
   
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
@@ -54,7 +42,9 @@
   <target name="WDKTemplateSite-Installation" depends="WDK-Installation,
                                                   WDKTemplateSite/Model-Installation" >
 
-    <ant target="defaultProjectInstall"/>
+    <ant target="defaultProjectInstall">
+      <property name="project" value="WDKTemplateSite"/>
+    </ant>
   </target>
 
 
