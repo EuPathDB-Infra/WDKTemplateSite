@@ -165,12 +165,9 @@ svn checkout https://www.cbil.upenn.edu/svn/gus/WSF/branches/api-build-16 WSF
 cd ${BASE_DIRECTORY}
 source project_home/install/bin/gusEnv.bash
 
-# augment PATH so we can use substitute
-PATH=${PATH}:${PROJECT_HOME}/WDKTemplateSite/Model/bin
-
 function rewrite {
-  # given input and output files, copy contents, using the "substitute" command
-  # to instantiate variables
+  # given input and output files, copy contents, using the "substitute" command,
+  # which lives in install/bin, to instantiate variables
 
 cat $1 | \
 substitute '<webappName>' "${WEBAPP_NAME}" | \
