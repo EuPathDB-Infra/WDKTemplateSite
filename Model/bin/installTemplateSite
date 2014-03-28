@@ -147,7 +147,7 @@ echo  -e "\ninstalling WDK template site"
 # create directories
 cd ${BASE_DIRECTORY}
 mkdir cgi-bin
-mkdir cgi-lig
+mkdir cgi-lib
 mkdir conf
 mkdir etc
 mkdir gus_home
@@ -167,12 +167,9 @@ svn ${SVN_EXTRACT_CMD} https://www.cbil.upenn.edu/svn/gus/WSF/trunk WSF
 cd ${BASE_DIRECTORY}
 source project_home/install/bin/gusEnv.bash
 
-# augment PATH so we can use substitute
-PATH=${PATH}:${PROJECT_HOME}/WDKTemplateSite/Model/bin
-
 function rewrite {
-  # given input and output files, copy contents, using the "substitute" command
-  # to instantiate variables
+  # given input and output files, copy contents, using the "substitute" command,
+  # which lives in install/bin/, to instantiate variables
 
 cat $1 | \
 substitute '<webappName>' "${WEBAPP_NAME}" | \
