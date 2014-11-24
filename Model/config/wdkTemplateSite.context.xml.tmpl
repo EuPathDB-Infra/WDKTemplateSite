@@ -1,0 +1,9 @@
+<!-- context file for deploying webapp into Tomcat -->
+
+<Context path="/wdkTemplateSite"
+    docBase="<baseDirectory>/webapp"
+    privileged="false"
+    swallowOutput="true"
+    allowLinking="true">
+    <Parameter name="model" value="TemplateDB"/>
+</Context>

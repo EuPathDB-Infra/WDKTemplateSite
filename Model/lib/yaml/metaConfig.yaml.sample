@@ -34,7 +34,7 @@ required:
   webServiceUrl: http://localhost/services/WsfService
 
   # URL for this webapp
-  myURL: <template_site_url>
+  myURL: <template_site_host>/wdkTemplateSite
 
   # Path to $GUS_HOME - in most cases you just want `$ENV{GUS_HOME}`
   gushome: $ENV{GUS_HOME}
