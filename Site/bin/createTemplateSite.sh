@@ -63,6 +63,7 @@ createTemplateSite() {
       7)
         buildAllButDb $2 $3
         buildDatabase
+        ;;
       8)
         buildAllButDb $2 $3
         ;;
