@@ -96,7 +96,7 @@ runSql() {
 
 configureSite() {
   echo "Configuring Site"
-  sed "s|<db_password>|$1|g" $PROJECT_HOME/WDKTemplateSite/Model/lib/yaml/metaConfig.yaml.sample | sed "s|<template_site_url>|$2|g" - > $SITE_DIR/metaConfig.yaml
+  sed "s|<db_password>|$1|g" $PROJECT_HOME/WDKTemplateSite/Model/lib/yaml/metaConfig.yaml.sample | sed "s|<template_site_host>|$2|g" - > $SITE_DIR/metaConfig.yaml
   templateSiteConfigure -model $PROJECT_ID -filename $SITE_DIR/metaConfig.yaml > $SITE_DIR/logs/siteConfig.log
 }
 
@@ -130,6 +130,8 @@ configureWebappProp() {
   echo "Configuring Build"
   echo "  Generating $SITE_DIR/webapp.prop"
   sed "s|<baseDirectory>|$SITE_DIR|g" $PROJECT_HOME/WDK/Controller/config/webapp.prop.sample > $SITE_DIR/webapp.prop
+  echo "  Generating $SITE_DIR/wdkTemplateSite.context.xml"
+  sed "s|<baseDirectory>|$SITE_DIR|g" $PROJECT_HOME/WDKTemplateSite/Model/config/wdkTemplateSite.context.xml.tmpl > $SITE_DIR/wdkTemplateSite.context.xml
 }
 
 checkOutProjects() {
@@ -173,7 +175,10 @@ buildSiteFramework() {
 }
 
 if [[ "$#" != "3" ]]; then
-  echo "USAGE: createTemplateSite.sh <install_dir> <db_password> <template_site_url>"
+  echo "USAGE: createTemplateSite.sh <install_dir> <db_password> <template_site_host>"
+  echo "   install_dir: This is a directory where the site will be installed.  This directory should be created by the script; specify the dir to create, not its parent"
+  echo "   db_password: Assuming you followed the steps above, but with a different password, pass your wdktemplatedb user's password here"
+  echo "   template_site_host: This is the host at which the webapp will live.  For testing, this might be 'http://localhost:8080' or similar"
   exit 1
 fi
 
