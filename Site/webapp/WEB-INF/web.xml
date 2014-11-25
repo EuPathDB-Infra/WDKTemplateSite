@@ -107,20 +107,16 @@
 
   <!-- The Welcome File List -->
   <welcome-file-list>
-     <welcome-file>home.jsp</welcome-file>
+    <welcome-file>home.jsp</welcome-file>
   </welcome-file-list>
 
   <!-- Error Page Mappings -->
   <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/wdkCustomization/jsp/Error.jsp</location>
+  </error-page>
+  <error-page>
     <exception-type>java.lang.RuntimeException</exception-type>
-    <location>/wdkCustomization/jsp/Error.jsp</location>
-  </error-page>
-  <error-page>
-    <exception-type>java.lang.IOException</exception-type>
-    <location>/wdkCustomization/jsp/Error.jsp</location>
-  </error-page>
-  <error-page>
-    <exception-type>javax.servlet.ServletException</exception-type>
     <location>/wdkCustomization/jsp/Error.jsp</location>
   </error-page>
 
@@ -129,12 +125,10 @@
       <taglib-uri>/WEB-INF/tld-third-party/struts-html.tld</taglib-uri>
       <taglib-location>/WEB-INF/tld-third-party/struts-html.tld</taglib-location>
     </taglib>
-
     <taglib>
       <taglib-uri>/WEB-INF/tld-third-party/pager-taglib.tld</taglib-uri>
       <taglib-location>/WEB-INF/tld-third-party/pager-taglib.tld</taglib-location>
     </taglib>
-
     <taglib>
       <taglib-uri>http://jakarta.apache.org/taglibs/random-1.0</taglib-uri>
       <taglib-location>/WEB-INF/tld-third-party/taglibs-random.tld</taglib-location>
