@@ -29,7 +29,7 @@ createTemplateSite() {
     echo "Select:"
     echo "  1: Build basic directory structure"
     echo "  2: Check out source code from Subversion"
-    echo "  3: Configure webapp.prop"
+    echo "  3: Configure webapp.prop and context.xml files"
     echo "  4: Compile source code"
     echo "  5: Build meta yaml file and configure site"
     echo "  6: Build initial database tables (UserDB and AppDB)"
@@ -131,7 +131,7 @@ configureWebappProp() {
   echo "  Generating $SITE_DIR/webapp.prop"
   sed "s|<baseDirectory>|$SITE_DIR|g" $PROJECT_HOME/WDK/Controller/config/webapp.prop.sample > $SITE_DIR/webapp.prop
   echo "  Generating $SITE_DIR/wdkTemplateSite.context.xml"
-  sed "s|<baseDirectory>|$SITE_DIR|g" $PROJECT_HOME/WDKTemplateSite/Model/config/wdkTemplateSite.context.xml.tmpl > $SITE_DIR/wdkTemplateSite.context.xml
+  sed "s|<baseDirectory>|$SITE_DIR|g" $PROJECT_HOME/WDKTemplateSite/Model/config/wdkTemplateSite.xml.tmpl > $SITE_DIR/wdkTemplateSite.xml
 }
 
 checkOutProjects() {
