@@ -19,7 +19,7 @@ required:
   appDb.instance: wdktemplatedb
 
   # Database link for user database
-  appDb.userDbLink:
+  appDb.userDbLink: ""
 
   # User name for user database
   userDb.login: wdktemplatedb
