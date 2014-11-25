@@ -32,9 +32,9 @@ createTemplateSite() {
     echo "  3: Configure webapp.prop and context.xml files"
     echo "  4: Compile source code"
     echo "  5: Build meta yaml file and configure site"
-    echo "  6: Build initial database tables (UserDB and AppDB)"
-    echo "  7: Run all the above operations, in order"
-    echo "  8: Run all in order EXCEPT #6: Database"
+    echo "  6: Build initial database tables (UserDB, AppDB, WdkCache)"
+    echo "  7: Run all the above, in order, EXCEPT #6: Database"
+    echo "  8: Run all the above, in order, including #6"
     echo "  0: Exit"
     echo -n "> "
     read selection
@@ -62,10 +62,10 @@ createTemplateSite() {
         ;;
       7)
         buildAllButDb $2 $3
-        buildDatabase
         ;;
       8)
         buildAllButDb $2 $3
+        buildDatabase
         ;;
     esac
   done
@@ -86,6 +86,8 @@ buildDatabase() {
   runSql $PROJECT_HOME/WDKTemplateSite/Model/lib/sql/dual.sql dualTable.log
   echo "  Building TemplateDB data model tables"
   fgpJava org.gusdb.wdk.model.test.TestDBManager -model TemplateDB -new > appDbTables.log
+  echo "  Building WDK Cache"
+  wdkCache -model TemplateDB --new
 }
 
 runSql() {
