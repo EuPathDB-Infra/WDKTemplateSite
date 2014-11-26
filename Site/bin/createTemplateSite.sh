@@ -85,7 +85,7 @@ nextStepsMessage() {
   echo "  1. Download the PostgreSQL JDBC database driver and install in Tomcat"
   echo "    a. Download from: http://jdbc.postgresql.org/download.html"
   echo "    b. Place in \$CATALINA_HOME/lib"
-  echo "  2. Copy the template sites context.xml file to Tomcat"
+  echo "  2. Copy the template site context.xml file to Tomcat"
   echo "    a. cp $SITE_DIR/etc/wdkTemplateSite.xml \$CATALINA_HOME/conf/Catalina/localhost"
   echo "  3. Set the environment and restart Tomcat"
   echo "    a. \$CATALINA_HOME/bin/shutdown.sh"
