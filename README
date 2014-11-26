@@ -1,8 +1,13 @@
+
+===========================================
 WDK Template Site Setup Notes
+===========================================
 
 Congratulations on making the Strategies WDK part of your data access tools.  Installing and using WDK can be difficult, so we've provided a template site to get you started.  Once you get it working you can gradually tweak it to meet your needs.  It exhibits a number of features you may want to use; by providing examples we hope you will more easily take advantage of those features.
 
-Prerequisites (successfully tested):
+===========================================
+Prerequisites (successfully tested)
+===========================================
 
  - Unix-like OS (tested LinuxMint 17)
  - Subversion 1.8.8
@@ -15,7 +20,9 @@ Prerequisites (successfully tested):
  - Tomcat 7 (Note: 8 will NOT work for now)
  - PostgreSQL 8+ (used 9.3)
 
-Database Setup:
+===========================================
+Database Setup
+===========================================
 
 It's most convenient to have your database set up in advance of installing the WDK template site.  Our setup script assumes you are running PostgreSQL on localhost:5432 (the default postgres port).  It also assumes you can create a role, and database owned by that role, both named "wdktemplatedb".  This database will store both user data (so users of your site can save and share strategies), and application data (the data you want to search).  Later, you can change the AppDB to point to your own data store; the template site data can remain, or you can delete it.  On to the setup:
 
@@ -33,7 +40,9 @@ Assume using local PostgreSQL (9.3) with the following DB objects:
 5. Create database above
    postgres=# create database wdktemplatedb owner wdktemplatedb;
 
+===========================================
 Installing the WDK Template Site
+===========================================
 
 Now that your database is ready, you can install the WDK source code, build the site, and create the required tables in your database.  There is a handy script to do so here:
 
@@ -51,7 +60,9 @@ The script tests for required prerequisites.  If it fails, install the identifie
 
 The menu will show you the steps involved in creating a site.  To run all the steps, select the 'All' option.  If you've already created the database tables but this is a new template site, select the 'All Except DB' option.  To go one step at a time, use the other options.
 
+===========================================
 Follow-up Steps
+===========================================
 
 If you select one of the 'All' options in the script , you will receive the following message:
 
@@ -68,3 +79,4 @@ There are three more steps to running the WDK Template Site
     c. $CATALINA_HOME/bin/startup.sh
 
 Completing these steps should complete the installation process.  The template site should not be available in your Tomcat instance under the webapp 'wdkTemplateSite'.
+
