@@ -21,11 +21,14 @@ createSiteDir() {
 }
 
 createTemplateSite() {
+  echo ""
+  echo "Initializing..."
   createSiteDir $1
   checkPrereqs
+  echo "  NOTE: Please check detail logs for success, available in: $SITE_DIR/logs"
   selection=
   while [ "$selection" != "0" ]; do
-    echo "Detail logs available in: $SITE_DIR/logs"
+    echo ""
     echo "Select:"
     echo "  1: Build basic directory structure"
     echo "  2: Check out source code from Subversion"
@@ -38,6 +41,7 @@ createTemplateSite() {
     echo "  0: Exit"
     echo -n "> "
     read selection
+    echo ""
     case "$selection" in
       0)
         exit 0
@@ -62,13 +66,31 @@ createTemplateSite() {
         ;;
       7)
         buildAllButDb $2 $3
+        nextStepsMessage
         ;;
       8)
         buildAllButDb $2 $3
         buildDatabase
+        nextStepsMessage
         ;;
     esac
   done
+}
+
+nextStepsMessage() {
+  echo "All steps complete."
+  echo ""
+  echo "Please check logs for errors in $SITE_DIR/logs"
+  echo "There are three more steps to running the WDK Template Site"
+  echo "  1. Download the PostgreSQL JDBC database driver and install in Tomcat"
+  echo "    a. Download from: http://jdbc.postgresql.org/download.html"
+  echo "    b. Place in \$CATALINA_HOME/lib"
+  echo "  2. Copy the template sites context.xml file to Tomcat"
+  echo "    a. cp $SITE_DIR/etc/wdkTemplateSite.xml \$CATALINA_HOME/conf/Catalina/localhost"
+  echo "  3. Set the environment and restart Tomcat"
+  echo "    a. \$CATALINA_HOME/bin/shutdown.sh"
+  echo "    b. source $SITE_DIR/etc/$SETUP_FILE"
+  echo "    c. \$CATALINA_HOME/bin/startup.sh"
 }
 
 buildAllButDb() {
@@ -81,9 +103,9 @@ buildAllButDb() {
 
 buildDatabase() {
   echo "Building TemplateDB database tables"
-  runSql $PROJECT_HOME/WDK/Model/data/persistent_tables_postgres.sql userDbTables.log
+  runSql $PROJECT_HOME/WDK/Model/data/persistent_tables_postgres.sql userDbTables.log persistent_tables_postgres.sql
   # also, give PostgreSQL an Oracle-style DUAL table
-  runSql $PROJECT_HOME/WDKTemplateSite/Model/lib/sql/dual.sql dualTable.log
+  runSql $PROJECT_HOME/WDKTemplateSite/Model/lib/sql/dual.sql dualTable.log dual.sql
   echo "  Building TemplateDB data model (AppDb) and inserting test data"
   echo "    Note: This can take some time.  Please be patient."
   fgpJava org.gusdb.wdk.model.test.TestDBManager -model TemplateDB -new &> $SITE_DIR/logs/appDbTables.log
@@ -93,13 +115,15 @@ buildDatabase() {
 
 runSql() {
   cmd="fgpJava org.gusdb.wdk.model.WdkSqlScriptRunner TemplateDB APP $1 true false"
-  echo "  Running: $cmd"
+  echo "  Running SQL: $3"
   $cmd &> $SITE_DIR/logs/$2
 }
 
 configureSite() {
   echo "Configuring Site"
+  echo "  Generating $SITE_DIR/etc/metaConfig.yaml"
   sed "s|<db_password>|$1|g" $PROJECT_HOME/WDKTemplateSite/Model/lib/yaml/metaConfig.yaml.sample | sed "s|<template_site_host>|$2|g" - > $SITE_DIR/etc/metaConfig.yaml
+  echo "  Running templateSiteConfigure"
   templateSiteConfigure -model $PROJECT_ID -filename $SITE_DIR/etc/metaConfig.yaml &> $SITE_DIR/logs/siteConfig.log
 }
 
@@ -125,16 +149,23 @@ checkPrereqs() {
 buildSite() {
   echo "Building and Installing Code"
   # clean jar files and webapp
-  rm -rf $GUS_HOME/lib/java/*
+  echo "  Cleaning last build (if any)"
+  rm -rf $GUS_HOME/bin
+  rm -rf $GUS_HOME/data
+  rm -rf $GUS_HOME/doc
+  rm -rf $GUS_HOME/lib
+  rm -rf $GUS_HOME/test
   rm -rf $SITE_DIR/webapp
-  bldw WDKTemplateSite $SITE_DIR/etc/webapp.prop &> $SITE_DIR/logs/build.log
+  cmd="bldw WDKTemplateSite $SITE_DIR/etc/webapp.prop"
+  echo "  Running $cmd"
+  $cmd &> $SITE_DIR/logs/build.log
 }
 
 configureWebappProp() {
   echo "Configuring Build"
   echo "  Generating $SITE_DIR/etc/webapp.prop"
   sed "s|<baseDirectory>|$SITE_DIR|g" $PROJECT_HOME/WDK/Controller/config/webapp.prop.sample > $SITE_DIR/etc/webapp.prop
-  echo "  Generating $SITE_DIR/wdkTemplateSite.xml"
+  echo "  Generating $SITE_DIR/etc/wdkTemplateSite.xml"
   sed "s|<baseDirectory>|$SITE_DIR|g" $PROJECT_HOME/WDKTemplateSite/Model/config/wdkTemplateSite.xml.tmpl > $SITE_DIR/etc/wdkTemplateSite.xml
 }
 
@@ -172,9 +203,9 @@ buildSiteFramework() {
   echo -n "  "; mkdir -v -p gus_home/config/$PROJECT_ID
   perlPath=$(which perl)
   bashPath=$(which bash)
-  echo "  Creating basic gus_home/config/gus.config"
+  echo "  Generating $SITE_DIR/gus_home/config/gus.config"
   echo "perl=$perlPath" > gus_home/config/gus.config
-  echo "  Creating $SETUP_FILE"
+  echo "  Generating $SITE_DIR/etc/$SETUP_FILE"
   echo "#$bashPath" > etc/$SETUP_FILE
   echo "export GUS_HOME=$SITE_DIR/gus_home" >> etc/$SETUP_FILE
   echo "export PROJECT_HOME=$SITE_DIR/project_home" >> etc/$SETUP_FILE
