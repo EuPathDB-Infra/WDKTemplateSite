@@ -15,8 +15,8 @@ createSiteDir() {
   echo "  \$SITE_DIR set to $SITE_DIR"
   # source env file if exists; if not,
   #   will be created and sourced later
-  if [ -e $SITE_DIR/$SETUP_FILE ]; then
-    source $SITE_DIR/$SETUP_FILE
+  if [ -e $SITE_DIR/etc/$SETUP_FILE ]; then
+    source $SITE_DIR/etc/$SETUP_FILE
   fi
 }
 
@@ -84,22 +84,23 @@ buildDatabase() {
   runSql $PROJECT_HOME/WDK/Model/data/persistent_tables_postgres.sql userDbTables.log
   # also, give PostgreSQL an Oracle-style DUAL table
   runSql $PROJECT_HOME/WDKTemplateSite/Model/lib/sql/dual.sql dualTable.log
-  echo "  Building TemplateDB data model tables"
-  fgpJava org.gusdb.wdk.model.test.TestDBManager -model TemplateDB -new > appDbTables.log
+  echo "  Building TemplateDB data model (AppDb) and inserting test data"
+  echo "    Note: This can take some time.  Please be patient."
+  fgpJava org.gusdb.wdk.model.test.TestDBManager -model TemplateDB -new &> $SITE_DIR/logs/appDbTables.log
   echo "  Building WDK Cache"
-  wdkCache -model TemplateDB --new
+  wdkCache -model TemplateDB --new &> $SITE_DIR/logs/wdkCache.log
 }
 
 runSql() {
   cmd="fgpJava org.gusdb.wdk.model.WdkSqlScriptRunner TemplateDB APP $1 true false"
   echo "  Running: $cmd"
-  $cmd > $SITE_DIR/logs/$2
+  $cmd &> $SITE_DIR/logs/$2
 }
 
 configureSite() {
   echo "Configuring Site"
-  sed "s|<db_password>|$1|g" $PROJECT_HOME/WDKTemplateSite/Model/lib/yaml/metaConfig.yaml.sample | sed "s|<template_site_host>|$2|g" - > $SITE_DIR/metaConfig.yaml
-  templateSiteConfigure -model $PROJECT_ID -filename $SITE_DIR/metaConfig.yaml > $SITE_DIR/logs/siteConfig.log
+  sed "s|<db_password>|$1|g" $PROJECT_HOME/WDKTemplateSite/Model/lib/yaml/metaConfig.yaml.sample | sed "s|<template_site_host>|$2|g" - > $SITE_DIR/etc/metaConfig.yaml
+  templateSiteConfigure -model $PROJECT_ID -filename $SITE_DIR/etc/metaConfig.yaml &> $SITE_DIR/logs/siteConfig.log
 }
 
 checkPrereqs() {
@@ -123,34 +124,37 @@ checkPrereqs() {
 
 buildSite() {
   echo "Building and Installing Code"
-  # clean jar files
+  # clean jar files and webapp
   rm -rf $GUS_HOME/lib/java/*
-  bldw WDKTemplateSite $SITE_DIR/webapp.prop > $SITE_DIR/logs/build.log
+  rm -rf $SITE_DIR/webapp
+  bldw WDKTemplateSite $SITE_DIR/etc/webapp.prop &> $SITE_DIR/logs/build.log
 }
 
 configureWebappProp() {
   echo "Configuring Build"
-  echo "  Generating $SITE_DIR/webapp.prop"
-  sed "s|<baseDirectory>|$SITE_DIR|g" $PROJECT_HOME/WDK/Controller/config/webapp.prop.sample > $SITE_DIR/webapp.prop
-  echo "  Generating $SITE_DIR/wdkTemplateSite.context.xml"
-  sed "s|<baseDirectory>|$SITE_DIR|g" $PROJECT_HOME/WDKTemplateSite/Model/config/wdkTemplateSite.xml.tmpl > $SITE_DIR/wdkTemplateSite.xml
+  echo "  Generating $SITE_DIR/etc/webapp.prop"
+  sed "s|<baseDirectory>|$SITE_DIR|g" $PROJECT_HOME/WDK/Controller/config/webapp.prop.sample > $SITE_DIR/etc/webapp.prop
+  echo "  Generating $SITE_DIR/wdkTemplateSite.xml"
+  sed "s|<baseDirectory>|$SITE_DIR|g" $PROJECT_HOME/WDKTemplateSite/Model/config/wdkTemplateSite.xml.tmpl > $SITE_DIR/etc/wdkTemplateSite.xml
 }
 
 checkOutProjects() {
   echo "Downloading Source Code"
+  # clear log
+  rm -f $SITE_DIR/logs/codeCheckout.log
   cd $PROJECT_HOME
   checkout install
   checkout FgpUtil
   checkout WSF
   checkout WDK
   checkout WDKTemplateSite
-  cd -
+  cd - &> /dev/null
 }
 
 checkout() {
   baseSvn=https://www.cbil.upenn.edu/svn/gus
   echo "  Checking out ${1}..."
-  svn co $baseSvn/$1/trunk $1 > $SITE_DIR/logs/codeCheckout.log
+  svn co $baseSvn/$1/trunk $1 >> $SITE_DIR/logs/codeCheckout.log
   if [[ ! -e $PROJECT_HOME/$1 ]]; then
     echo "Error: could not check out project $1"
     exit 1
@@ -158,7 +162,9 @@ checkout() {
 }
 
 buildSiteFramework() {
+  cd $SITE_DIR
   echo "Building Site Framework"
+  echo -n "  "; mkdir -v -p etc
   echo -n "  "; mkdir -v -p logs
   echo -n "  "; mkdir -v -p project_home
   echo -n "  "; mkdir -v -p gus_home
@@ -169,11 +175,12 @@ buildSiteFramework() {
   echo "  Creating basic gus_home/config/gus.config"
   echo "perl=$perlPath" > gus_home/config/gus.config
   echo "  Creating $SETUP_FILE"
-  echo "#$bashPath" > $SETUP_FILE
-  echo "export GUS_HOME=$SITE_DIR/gus_home" >> $SETUP_FILE
-  echo "export PROJECT_HOME=$SITE_DIR/project_home" >> $SETUP_FILE
-  echo "export PATH=\$GUS_HOME/bin:\$PROJECT_HOME/install/bin:\$PATH" >> $SETUP_FILE
-  source $SETUP_FILE
+  echo "#$bashPath" > etc/$SETUP_FILE
+  echo "export GUS_HOME=$SITE_DIR/gus_home" >> etc/$SETUP_FILE
+  echo "export PROJECT_HOME=$SITE_DIR/project_home" >> etc/$SETUP_FILE
+  echo "export PATH=\$GUS_HOME/bin:\$PROJECT_HOME/install/bin:\$PATH" >> etc/$SETUP_FILE
+  source etc/$SETUP_FILE
+  cd - &> /dev/null
 }
 
 if [[ "$#" != "3" ]]; then
