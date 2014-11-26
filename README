@@ -20,7 +20,7 @@ Database Setup:
 It's most convenient to have your database set up in advance of installing the WDK template site.  Our setup script assumes you are running PostgreSQL on localhost:5432 (the default postgres port).  It also assumes you can create a role, and database owned by that role, both named "wdktemplatedb".  This database will store both user data (so users of your site can save and share strategies), and application data (the data you want to search).  Later, you can change the AppDB to point to your own data store; the template site data can remain, or you can delete it.  On to the setup:
 
 Assume using local PostgreSQL (9.3) with the following DB objects:
-  User/Role: wdktemplatedb/7yuABCDy
+  User/Role: wdktemplatedb/<db_password>
   Database: wdktemplatedb
 
 1. Install PostgreSQL (ideally via apt, etc.) and start the server
