@@ -42,7 +42,8 @@
     <recordClassSet name="EstRecordClasses">
     
         <recordClass name="EstRecordClass"
-                     displayName="EST">
+                     displayName="EST"
+                     urlName="est">
             
             <testParamValues>
                <paramValue name="est_id">9644248</paramValue>

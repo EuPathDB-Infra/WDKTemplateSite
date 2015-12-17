@@ -40,7 +40,7 @@
     <!-- RNA recordClasses -->
     <recordClassSet name="RnaRecordClasses">
 
-        <recordClass name="RnaRecordClass" displayName="RNA"
+        <recordClass name="RnaRecordClass" displayName="RNA" urlName="rna"
             attributeOrdering="assembly_consistency,contains_mrna,taxon_name">
             
             <testParamValues>
