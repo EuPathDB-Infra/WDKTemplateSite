@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <modelConfig modelName="${modelName}"
-             webAppUrl="${myURL}"
              webServiceUrl="${webServiceUrl}"
              smtpServer="${smtpServer}"
              supportEmail="${supportEmail}"
@@ -20,7 +19,7 @@
          the cache tables will be resized to the specified value. optional, default is 150 -->    
     <appDb  login="${appDb.login}"
             password="${appDb.password}"
-            connectionUrl="jdbc:postgresql:${appDb.instance}"
+            connectionUrl="jdbc:postgresql://${appDb.instance}"
             platform="${appDb.platform}"
             maxActive="${appDb.maxActive}"
             maxIdle="${appDb.maxIdle}"
@@ -34,7 +33,7 @@
              
     <userDb login="${userDb.login}"
             password="${userDb.password}"
-            connectionUrl="jdbc:postgresql:${userDb.instance}"
+            connectionUrl="jdbc:postgresql://${userDb.instance}"
             platform="${userDb.platform}"
             maxActive="${userDb.maxActive}"
             maxIdle="${userDb.maxIdle}"

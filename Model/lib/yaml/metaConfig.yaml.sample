@@ -2,39 +2,35 @@
 # To fully understand this file run the generateFilesFromTemplates command with no arguments
 
 # This section provides required meta-config properties.  They are used to configure the masterConfig.yaml file.
-# The values here are substituted into macros in masterConfig.yaml file (not directly into the template files)
-
+# The values here are subsituted into macros in masterConfig.yaml file (not directly into the template files)
 required:
 
   # The name of your project
   project: TemplateDB
 
   # User name for the application database
-  appDb.login: wdktemplatedb
+  appDb.login: whatever
 
-  # Password for the application database
-  appDb.password: <db_password>
+  # Password for the applucation database
+  appDb.password: dontknow
 
   # Instance name of application database
-  appDb.instance: wdktemplatedb
+  appDb.instance: tmpl019n
 
   # Database link for user database
-  appDb.userDbLink: ""
+  appDb.userDbLink: blah
 
   # User name for user database
-  userDb.login: wdktemplatedb
+  userDb.login: api_fed
 
   # Password for user database
-  userDb.password: <db_password>
+  userDb.password: dontknow
 
   # Instance name of user database
-  userDb.instance: wdktemplatedb
+  userDb.instance: apicommDevN
 
   # URL for WSF instance
   webServiceUrl: http://localhost/services/WsfService
-
-  # URL for this webapp
-  myURL: <template_site_host>/wdkTemplateSite
 
   # Path to $GUS_HOME - in most cases you just want `$ENV{GUS_HOME}`
   gushome: $ENV{GUS_HOME}

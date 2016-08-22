@@ -13,6 +13,7 @@ default:
   queryMonitor.baseline: 0.1
   queryMonitor.slow: 5
 
+
   appDb.login: ${appDb.login}
   appDb.password: ${appDb.password}
   appDb.instance: ${appDb.instance}
@@ -68,7 +69,6 @@ default:
   siteAdminEmail: sfischer@pcbi.upenn.edu, jerric@pcbi.upenn.edu, aurreco@uga.edu, mheiges@uga.edu, rdoherty@pcbi.upenn.edu, dfalke@uga.edu
   webServiceMirror: /var/www/Common/apiSiteFilesMirror/webServices/
   webServiceUrl: ${webServiceUrl}
-  myURL: ${myURL}
 
 templatedb:
   modelName: TemplateDB

@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="imp" tagdir="/WEB-INF/tags/imp" %>
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
+<%@ taglib prefix="html" uri="http://jakarta.apache.org/struts/tags-html" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
@@ -32,7 +32,7 @@ ${Question_Header}
 	<center><h1 style="font-size:140%">Identify ${wdkQuestion.recordClass.displayNamePlural} based on ${wdkQuestion.displayName}</h1></center><br>
 </c:if>
 
-<html:form method="post" enctype='multipart/form-data' action="/processQuestion.do">
+<html:form styleId="form_question" method="post" enctype='multipart/form-data' action="/processQuestion.do">
 
 <imp:questionForm />
 
