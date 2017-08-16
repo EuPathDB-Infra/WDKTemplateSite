@@ -1,0 +1,42 @@
+# $SourceFileURL$
+---
+
+_topleveldomain: org
+
+modelconfig_modelName: TemplateDB
+
+modelconfig_webServiceUrl: local
+modelconfig_webAppUrl: =c=
+modelconfig_smtpServer: 127.0.0.1
+modelconfig_supportEmail: 'help@{{ project|lower }}.{{ _topleveldomain }}'
+modelconfig_wdkTempDir: /var/tmp/wdk
+
+modelconfig_appDb_login: =c=
+modelconfig_appDb_password: =c=
+modelconfig_appDb_connectionUrl: =c=
+modelconfig_appDb_platform: PostgreSQL
+modelconfig_appDb_userDbLink: ''
+
+modelconfig_userDb_login: =c=
+modelconfig_userDb_password: =c=
+modelconfig_userDb_connectionUrl: =c=
+modelconfig_userDb_platform: Postgres
+modelconfig_userDb_userSchema: userlogins5
+
+modelconfig_accountDb_login: =c=
+modelconfig_accountDb_password: =c=
+modelconfig_accountDb_connectionUrl: =c=
+modelconfig_accountDb_platform: Postgres
+modelconfig_accountDb_accountSchema: useraccounts
+
+modelconfig_emailSubject: >
+  <![CDATA[
+    Your {{ project }}/EuPathDB Password
+  ]]>
+
+modelconfig_emailContent: >
+  <![CDATA[
+    <p>Thank you for registering at {{ project }}.{{ _topleveldomain }}.
+    <p>Your temporary password is: $$PASSWORD$$</p>
+    <p>You may now login to <a href="http://{{ project|lower }}.{{ _topleveldomain }}">{{ project }}</a>.</p>
+  ]]>
