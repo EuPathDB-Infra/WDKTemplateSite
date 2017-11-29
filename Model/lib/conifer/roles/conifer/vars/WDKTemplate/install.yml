@@ -1,0 +1,2 @@
+dependencies:
+  - '{{ project_home }}/WDK/Model/lib/conifer'
