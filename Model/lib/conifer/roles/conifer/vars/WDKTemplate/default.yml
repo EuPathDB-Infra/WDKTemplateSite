@@ -2,6 +2,7 @@
 ---
 
 _topleveldomain: org
+_self_url_scheme: http
 
 # short convenience names for most common user-defined vars
 accountDb_connectionUrl: =c= e.g. jdbc:postgresql://127.0.0.1/acctdb
@@ -49,5 +50,5 @@ modelconfig_emailContent: >
   <![CDATA[
     <p>Thank you for registering at {{ project }}.{{ _topleveldomain }}.
     <p>Your temporary password is: $$PASSWORD$$</p>
-    <p>You may now login to <a href="http://{{ project|lower }}.{{ _topleveldomain }}">{{ project }}</a>.</p>
+    <p>You may now login to <a href="{{ _self_url_scheme }}://{{ project|lower }}.{{ _topleveldomain }}">{{ project }}</a>.</p>
   ]]>
