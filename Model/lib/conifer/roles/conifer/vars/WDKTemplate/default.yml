@@ -14,11 +14,13 @@ appDb_password: =c= password for application database
 userDb_connectionUrl: =c= e.g. jdbc:postgresql://127.0.0.1/userdb
 userDb_login: =c= username for user database
 userDb_password: =c= password for user database
+appDb_userDbLink: =c= database link from application database to user database, or ''
+appDb_acctDbLink: =c= database link from application database to account database, or ''
 
 modelconfig_modelName: TemplateDB
 
 modelconfig_webServiceUrl: local
-modelconfig_webAppUrl: =c=
+modelconfig_webAppUrl: =c= e.g. {% raw %}'https://{{ hostname }}/{{ webapp_ctx }}'{% endraw %} (no trailing slash)
 modelconfig_smtpServer: 127.0.0.1
 modelconfig_supportEmail: 'help@{{ project|lower }}.{{ _topleveldomain }}'
 modelconfig_wdkTempDir: /var/tmp/wdk
@@ -27,7 +29,8 @@ modelconfig_appDb_login: '{{ appDb_login }}'
 modelconfig_appDb_password: "{{ appDb_password }}"
 modelconfig_appDb_connectionUrl: '{{ appDb_connectionUrl }}'
 modelconfig_appDb_platform: PostgreSQL
-modelconfig_appDb_userDbLink: ''
+modelconfig_appDb_userDbLink: '{{ appDb_userDbLink }}'
+modelconfig_appDb_acctDbLink: '{{ appDb_acctDbLink }}'
 
 modelconfig_userDb_login: '{{ userDb_login }}'
 modelconfig_userDb_password: '{{ userDb_password }}'
