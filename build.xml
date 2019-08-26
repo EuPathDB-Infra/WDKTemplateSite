@@ -6,54 +6,25 @@
 
   <import file="${projectsDir}/WDK/build.xml" />
 
-
-  <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
-  <!-- oooooooooooooooooooooooooo    Checkout    oooooooooooooooooooooooooo -->
-  <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
-
-  <target name="WDKTemplateSite-ChildCheckout">
-    <available file="../WDK" type="dir" property="WDK.present" />
-    <antcall target="WDK-Checkout" />
-  </target>
-
-  <target name="WDK-Checkout" unless="WDK.present"> 
-    <ant target="defaultProjectCheckout" inheritAll="false">
-      <property name="svnurl" value="https://www.cbil.upenn.edu/svn/gus/WDK" />
-      <property name="project" value="WDK"/>
-      <property name="version" value="WDK_version_2-0"/>
-    </ant>
-  </target>  
-  
-  
-  <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
-  <!-- oooooooooooooooooooooooooo    Update    oooooooooooooooooooooooooo -->
-  <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
-
-  <target name="WDKTemplateSite-ChildUpdate" >
-    <ant target="defaultProjectUpdate">
-      <property name="project" value="WDK"/>
-    </ant>
-  </target>
-
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooooo  Installation  oooooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
 
   <target name="WDKTemplateSite-Installation" depends="WDK-Installation,
-                                                  WDKTemplateSite/Model-Installation" >
+                                                  WDKTemplateSite/Model-Installation">
 
     <ant target="defaultProjectInstall">
-      <property name="project" value="WDKTemplateSite"/>
+      <property name="project" value="WDKTemplateSite" />
     </ant>
   </target>
 
 
- <!-- ooooooooooooooooooooooo  Install Components  ooooooooooooooooooooooo -->
+  <!-- ooooooooooooooooooooooo  Install Components  ooooooooooooooooooooooo -->
 
   <target name="WDKTemplateSite/Model-Installation" depends="ProjectTree">
     <ant target="defaultComponentInstall">
-      <property name="project" value="WDKTemplateSite"/>
-      <property name="component" value="Model"/>
+      <property name="project" value="WDKTemplateSite" />
+      <property name="component" value="Model" />
     </ant>
   </target>
 
@@ -64,12 +35,12 @@
   <target name="WDKTemplateSite-WebInstallation" depends="WDKTemplateSite-Installation,
                                                      WDK-WebInstallation,
                                                      WDKTemplateSite/Site-WebInstallation">
- </target>
+  </target>
 
   <target name="WDKTemplateSite/Site-WebInstallation" depends="ProjectTree">
     <ant target="defaultWebComponentInstall">
-      <property name="project" value="WDKTemplateSite"/>
-      <property name="component" value="Site"/>
+      <property name="project" value="WDKTemplateSite" />
+      <property name="component" value="Site" />
     </ant>
   </target>
 
@@ -78,11 +49,11 @@
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
 
   <target name="WDKTemplateSite-Release">
-    
+
     <ant target="defaultProjectRelease">
-      <property name="cvsroot" value=":ext:cvs.sanger.ac.uk:/cvsroot/GUS"/>
+      <property name="cvsroot" value=":ext:cvs.sanger.ac.uk:/cvsroot/GUS" />
     </ant>
-  </target>  
+  </target>
 
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooooo  Distributable  ooooooooooooooooooooooooo -->
@@ -91,12 +62,11 @@
   <target name="WDKTemplateSite-Distributable" depends="ProjectTree">
 
     <copy todir="${targetDir}">
-      <fileset dir="${projectsDir}" >
+      <fileset dir="${projectsDir}">
         <exclude name="**/CVS/*" />
       </fileset>
-    </copy>  
-  </target>  
-
+    </copy>
+  </target>
 
 
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
@@ -104,8 +74,8 @@
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
 
   <target name="ProjectTree" if="${checkout}">
-    <ant target="projectCheckOut"/>
-  </target>  
+    <ant target="projectCheckOut" />
+  </target>
 
 </project>
 
