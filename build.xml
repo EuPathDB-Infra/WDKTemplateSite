@@ -1,4 +1,4 @@
-<project name="WDKTemplateSite" default="Installation" basedir=".">
+<project name="WDKTemplateSite" basedir=".">
 
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
   <!-- oooooooooooooooooooooooooo  Dependencies  oooooooooooooooooooooooooo -->
@@ -11,17 +11,15 @@
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
 
   <target name="WDKTemplateSite-Installation" depends="WDK-Installation,
-                                                  WDKTemplateSite/Model-Installation">
-
+                                                       WDKTemplateSite/Model-Installation">
     <ant target="defaultProjectInstall">
       <property name="project" value="WDKTemplateSite" />
     </ant>
   </target>
 
-
   <!-- ooooooooooooooooooooooo  Install Components  ooooooooooooooooooooooo -->
 
-  <target name="WDKTemplateSite/Model-Installation" depends="ProjectTree">
+  <target name="WDKTemplateSite/Model-Installation">
     <ant target="defaultComponentInstall">
       <property name="project" value="WDKTemplateSite" />
       <property name="component" value="Model" />
@@ -33,50 +31,14 @@
   <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
 
   <target name="WDKTemplateSite-WebInstallation" depends="WDKTemplateSite-Installation,
-                                                     WDK-WebInstallation,
-                                                     WDKTemplateSite/Site-WebInstallation">
-  </target>
+                                                          WDK-WebInstallation,
+                                                          WDKTemplateSite/Site-WebInstallation"/>
 
-  <target name="WDKTemplateSite/Site-WebInstallation" depends="ProjectTree">
+  <target name="WDKTemplateSite/Site-WebInstallation">
     <ant target="defaultWebComponentInstall">
       <property name="project" value="WDKTemplateSite" />
       <property name="component" value="Site" />
     </ant>
   </target>
 
-  <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
-  <!-- oooooooooooooooooooooooooooo  Release  ooooooooooooooooooooooooooooo -->
-  <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
-
-  <target name="WDKTemplateSite-Release">
-
-    <ant target="defaultProjectRelease">
-      <property name="cvsroot" value=":ext:cvs.sanger.ac.uk:/cvsroot/GUS" />
-    </ant>
-  </target>
-
-  <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
-  <!-- oooooooooooooooooooooooooo  Distributable  ooooooooooooooooooooooooo -->
-  <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
-
-  <target name="WDKTemplateSite-Distributable" depends="ProjectTree">
-
-    <copy todir="${targetDir}">
-      <fileset dir="${projectsDir}">
-        <exclude name="**/CVS/*" />
-      </fileset>
-    </copy>
-  </target>
-
-
-  <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
-  <!-- oooooooooooooooooooooooooo  ProjectTree  ooooooooooooooooooooooooooo -->
-  <!-- oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
-
-  <target name="ProjectTree" if="${checkout}">
-    <ant target="projectCheckOut" />
-  </target>
-
 </project>
-
-
